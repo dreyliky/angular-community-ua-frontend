@@ -1,0 +1,39 @@
+{
+  "extends": "stylelint-config-sass-guidelines",
+  "plugins": ["stylelint-prettier"],
+  "rules": {
+    "prettier/prettier": true,
+    "indentation": 4,
+    "max-nesting-depth": 6,
+    "selector-max-compound-selectors": 6,
+    "scss/at-import-partial-extension-blacklist": "off",
+    "scss/at-extend-no-missing-placeholder": null,
+    "selector-no-qualifying-type": null,
+    "order/properties-alphabetical-order": null,
+    "order/order": null,
+    "property-no-vendor-prefix": [
+      true,
+      {
+        "ignoreProperties": ["box-orient"]
+      }
+    ],
+    "value-no-vendor-prefix": [
+      true,
+      {
+        "ignoreValues": ["box"]
+      }
+    ],
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": ["ng-deep"]
+      }
+    ],
+    "selector-class-pattern": [
+      "^([a-z][a-z]*)(-[a-z]+)*(__([a-z][a-z]*)(-[a-z]+)*)*(_([a-z][a-z]*)(-[a-z]+)*)*$",
+      {
+        "resolveNestedSelectors": true
+      }
+    ]
+  }
+}

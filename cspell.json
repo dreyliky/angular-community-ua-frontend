@@ -1,0 +1,14 @@
+{
+    "version": "0.2",
+    "ignorePaths": [
+        "**/*.scss",
+        "**/*.json"
+    ],
+    "dictionaryDefinitions": [],
+    "dictionaries": [],
+    "words": [],
+    "ignoreWords": [
+        "nrwl"
+    ],
+    "import": []
+}

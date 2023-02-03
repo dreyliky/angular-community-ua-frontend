@@ -1,0 +1,10 @@
+{
+  "*.scss": [
+    "stylelint --fix",
+    "git add"
+  ],
+  "./**/*.ts": [
+    "eslint **/*.ts --ignore-pattern \"/apps/*\" --fix",
+    "git add"
+  ]
+}
