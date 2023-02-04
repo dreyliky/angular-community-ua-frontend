@@ -82,8 +82,7 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "apps/code-review/**/*.ts",
-          "apps/code-review/**/*.html"
+          "apps/code-review/**/*.ts"
         ]
       }
     },

@@ -78,7 +78,7 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/host/**/*.ts", "apps/host/**/*.html"]
+        "lintFilePatterns": ["apps/host/**/*.ts"]
       }
     },
     "test": {

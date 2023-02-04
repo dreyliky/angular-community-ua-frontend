@@ -2,19 +2,19 @@ name: Node Continuous Integration
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [ dev ]
 
 
 jobs:
-  test_pull_request:
+  pull_request_processing:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v1
         with:
           node-version: 18
       - run: npm ci
-      - run: nx test host
-      - run: nx test code-review
-      - run: nx run host:build:production
-      - run: nx run code-review:build:production
+      - uses: mansagroup/nrwl-nx-action@v3
+        with:
+          targets: lint,test,build
+          all: 'true'
