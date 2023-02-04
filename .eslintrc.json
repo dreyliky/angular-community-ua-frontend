@@ -252,6 +252,17 @@
             "rules": {
                 "max-lines-per-function": "off"
             }
+        },
+        {
+            "files": ["*.scss"],
+            "rules": {
+                "prettier/prettier": [
+                    "error",
+                    {
+                        "endOfLine": "auto"
+                    }
+                ]
+            }
         }
     ]
 }

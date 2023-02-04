@@ -2,7 +2,6 @@
   "extends": "stylelint-config-sass-guidelines",
   "plugins": ["stylelint-prettier"],
   "rules": {
-    "prettier/prettier": true,
     "indentation": 4,
     "max-nesting-depth": 6,
     "selector-max-compound-selectors": 6,

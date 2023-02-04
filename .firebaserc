@@ -1,13 +1,29 @@
 {
   "projects": {
-    "default": "angular-community-ua"
+    "default": "angular-community-ua",
+    "dev": "dev-acua"
   },
   "targets": {
     "angular-community-ua": {
       "hosting": {
-        "host": ["angular-community-ua"],
-        "code-review": ["acua-code-review"]
+        "host": [
+          "angular-community-ua"
+        ],
+        "code-review": [
+          "acua-code-review"
+        ]
+      }
+    },
+    "dev-acua": {
+      "hosting": {
+        "host": [
+          "dev-acua"
+        ],
+        "code-review": [
+          "dev-acua-code-review"
+        ]
       }
     }
-  }
+  },
+  "etags": {}
 }
