@@ -23,5 +23,9 @@
     "eslint.validate": [
         "javascript",
         "typescript",
+    ],
+    "stylelint.config": null,
+    "stylelint.validate": [
+        "scss"
     ]
 }

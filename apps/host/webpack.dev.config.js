@@ -4,6 +4,6 @@ const config = require('./module-federation.config');
 module.exports = withModuleFederation({
   ...config,
   remotes: [
-    ['code-review', 'https://acua-code-review.web.app']
+    ['code-review', 'https://dev-acua-code-review.web.app']
   ]
 });
