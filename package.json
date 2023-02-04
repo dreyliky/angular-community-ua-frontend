@@ -3,8 +3,6 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint **/*.ts",
-    "lint:fix": "eslint **/*.ts --fix",
     "prepare": "husky install"
   },
   "private": true,

@@ -1,3 +1,0 @@
-e2e
-apps/*-e2e/**/*
-jest.config.ts
