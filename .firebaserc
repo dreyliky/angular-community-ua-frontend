@@ -1,5 +1,13 @@
 {
   "projects": {
     "default": "angular-community-ua"
+  },
+  "targets": {
+    "angular-community-ua": {
+      "hosting": {
+        "host": ["angular-community-ua"],
+        "code-review": ["acua-code-review"]
+      }
+    }
   }
 }
