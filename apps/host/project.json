@@ -51,6 +51,17 @@
                     "customWebpackConfig": {
                         "path": "apps/host/webpack.dev.config.js"
                     }
+                },
+                "local": {
+                    "buildOptimizer": false,
+                    "optimization": false,
+                    "vendorChunk": true,
+                    "extractLicenses": false,
+                    "sourceMap": true,
+                    "namedChunks": true,
+                    "customWebpackConfig": {
+                        "path": "apps/host/webpack.config.js"
+                    }
                 }
             },
             "defaultConfiguration": "production"
@@ -62,7 +73,7 @@
                     "browserTarget": "host:build:production"
                 },
                 "development": {
-                    "browserTarget": "host:build:development"
+                    "browserTarget": "host:build:local"
                 }
             },
             "defaultConfiguration": "development",
