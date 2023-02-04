@@ -47,101 +47,10 @@
                     "vendorChunk": true,
                     "extractLicenses": false,
                     "sourceMap": true,
-                    "namedChunks": true
-                }
-            },
-            "defaultConfiguration": "production"
-        },
-        "build-dev": {
-            "executor": "@nrwl/angular:webpack-browser",
-            "outputs": ["{options.outputPath}"],
-            "options": {
-                "outputPath": "dist/apps/host",
-                "index": "apps/host/src/index.html",
-                "main": "apps/host/src/main.ts",
-                "polyfills": ["zone.js"],
-                "tsConfig": "apps/host/tsconfig.app.json",
-                "inlineStyleLanguage": "scss",
-                "assets": ["apps/host/src/favicon.ico", "apps/host/src/assets"],
-                "styles": ["apps/host/src/styles.scss"],
-                "scripts": [],
-                "customWebpackConfig": {
-                    "path": "apps/host/webpack.config.js"
-                }
-            },
-            "configurations": {
-                "production": {
-                    "budgets": [
-                        {
-                            "type": "initial",
-                            "maximumWarning": "500kb",
-                            "maximumError": "1mb"
-                        },
-                        {
-                            "type": "anyComponentStyle",
-                            "maximumWarning": "2kb",
-                            "maximumError": "4kb"
-                        }
-                    ],
-                    "outputHashing": "all",
+                    "namedChunks": true,
                     "customWebpackConfig": {
                         "path": "apps/host/webpack.dev.config.js"
                     }
-                },
-                "development": {
-                    "buildOptimizer": false,
-                    "optimization": false,
-                    "vendorChunk": true,
-                    "extractLicenses": false,
-                    "sourceMap": true,
-                    "namedChunks": true
-                }
-            },
-            "defaultConfiguration": "production"
-        },
-        "build-prod": {
-            "executor": "@nrwl/angular:webpack-browser",
-            "outputs": ["{options.outputPath}"],
-            "options": {
-                "outputPath": "dist/apps/host",
-                "index": "apps/host/src/index.html",
-                "main": "apps/host/src/main.ts",
-                "polyfills": ["zone.js"],
-                "tsConfig": "apps/host/tsconfig.app.json",
-                "inlineStyleLanguage": "scss",
-                "assets": ["apps/host/src/favicon.ico", "apps/host/src/assets"],
-                "styles": ["apps/host/src/styles.scss"],
-                "scripts": [],
-                "customWebpackConfig": {
-                    "path": "apps/host/webpack.prod.config.js"
-                }
-            },
-            "configurations": {
-                "production": {
-                    "budgets": [
-                        {
-                            "type": "initial",
-                            "maximumWarning": "500kb",
-                            "maximumError": "1mb"
-                        },
-                        {
-                            "type": "anyComponentStyle",
-                            "maximumWarning": "2kb",
-                            "maximumError": "4kb"
-                        }
-                    ],
-                    "outputHashing": "all",
-                    "customWebpackConfig": {
-                        "path": "apps/host/webpack.prod.config.js"
-                    }
-                },
-                "development": {
-                    "buildOptimizer": false,
-                    "optimization": false,
-                    "vendorChunk": true,
-                    "extractLicenses": false,
-                    "sourceMap": true,
-                    "namedChunks": true
                 }
             },
             "defaultConfiguration": "production"
