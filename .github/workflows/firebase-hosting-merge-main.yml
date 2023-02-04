@@ -14,8 +14,9 @@ jobs:
       - run: npm ci
       - uses: mansagroup/nrwl-nx-action@v3
         with:
-          targets: build-prod
+          targets: build
           all: 'true'
+          args: '--configuration="production"'
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'

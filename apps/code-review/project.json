@@ -1,121 +1,119 @@
 {
-  "name": "code-review",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "projectType": "application",
-  "sourceRoot": "apps/code-review/src",
-  "prefix": "acua",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/angular:webpack-browser",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/apps/code-review",
-        "index": "apps/code-review/src/index.html",
-        "main": "apps/code-review/src/main.ts",
-        "polyfills": ["zone.js"],
-        "tsConfig": "apps/code-review/tsconfig.app.json",
-        "inlineStyleLanguage": "scss",
-        "assets": [
-          "apps/code-review/src/favicon.ico",
-          "apps/code-review/src/assets"
-        ],
-        "styles": ["apps/code-review/src/styles.scss"],
-        "scripts": [],
-        "customWebpackConfig": {
-          "path": "apps/code-review/webpack.config.js"
-        }
-      },
-      "configurations": {
-        "production": {
-          "budgets": [
-            {
-              "type": "initial",
-              "maximumWarning": "500kb",
-              "maximumError": "1mb"
+    "name": "code-review",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "application",
+    "sourceRoot": "apps/code-review/src",
+    "prefix": "acua",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:webpack-browser",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/apps/code-review",
+                "index": "apps/code-review/src/index.html",
+                "main": "apps/code-review/src/main.ts",
+                "polyfills": ["zone.js"],
+                "tsConfig": "apps/code-review/tsconfig.app.json",
+                "inlineStyleLanguage": "scss",
+                "assets": [
+                    "apps/code-review/src/favicon.ico",
+                    "apps/code-review/src/assets"
+                ],
+                "styles": ["apps/code-review/src/styles.scss"],
+                "scripts": [],
+                "customWebpackConfig": {
+                    "path": "apps/code-review/webpack.config.js"
+                }
             },
-            {
-              "type": "anyComponentStyle",
-              "maximumWarning": "2kb",
-              "maximumError": "4kb"
+            "configurations": {
+                "production": {
+                    "budgets": [
+                        {
+                            "type": "initial",
+                            "maximumWarning": "500kb",
+                            "maximumError": "1mb"
+                        },
+                        {
+                            "type": "anyComponentStyle",
+                            "maximumWarning": "2kb",
+                            "maximumError": "4kb"
+                        }
+                    ],
+                    "outputHashing": "all",
+                    "customWebpackConfig": {
+                        "path": "apps/code-review/webpack.prod.config.js"
+                    }
+                },
+                "development": {
+                    "buildOptimizer": false,
+                    "optimization": false,
+                    "vendorChunk": true,
+                    "extractLicenses": false,
+                    "sourceMap": true,
+                    "namedChunks": true
+                }
+            },
+            "defaultConfiguration": "production"
+        },
+        "serve": {
+            "executor": "@nrwl/angular:webpack-dev-server",
+            "configurations": {
+                "production": {
+                    "browserTarget": "code-review:build:production"
+                },
+                "development": {
+                    "browserTarget": "code-review:build:development"
+                }
+            },
+            "defaultConfiguration": "development",
+            "options": {
+                "port": 4201,
+                "publicHost": "http://localhost:4201"
             }
-          ],
-          "outputHashing": "all",
-          "customWebpackConfig": {
-            "path": "apps/code-review/webpack.prod.config.js"
-          }
         },
-        "development": {
-          "buildOptimizer": false,
-          "optimization": false,
-          "vendorChunk": true,
-          "extractLicenses": false,
-          "sourceMap": true,
-          "namedChunks": true
-        }
-      },
-      "defaultConfiguration": "production"
-    },
-    "serve": {
-      "executor": "@nrwl/angular:webpack-dev-server",
-      "configurations": {
-        "production": {
-          "browserTarget": "code-review:build:production"
+        "extract-i18n": {
+            "executor": "@angular-devkit/build-angular:extract-i18n",
+            "options": {
+                "browserTarget": "code-review:build"
+            }
         },
-        "development": {
-          "browserTarget": "code-review:build:development"
-        }
-      },
-      "defaultConfiguration": "development",
-      "options": {
-        "port": 4201,
-        "publicHost": "http://localhost:4201"
-      }
-    },
-    "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
-      "options": {
-        "browserTarget": "code-review:build"
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "apps/code-review/**/*.ts"
-        ]
-      }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "apps/code-review/jest.config.ts",
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
-      }
-    },
-    "serve-static": {
-      "executor": "@nrwl/angular:file-server",
-      "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "code-review:build",
-        "port": 4201
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "code-review:build:development"
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["apps/code-review/**/*.ts"]
+            }
         },
-        "production": {
-          "buildTarget": "code-review:build:production"
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "apps/code-review/jest.config.ts",
+                "passWithNoTests": true
+            },
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
+            }
+        },
+        "serve-static": {
+            "executor": "@nrwl/angular:file-server",
+            "defaultConfiguration": "development",
+            "options": {
+                "buildTarget": "code-review:build",
+                "port": 4201
+            },
+            "configurations": {
+                "development": {
+                    "buildTarget": "code-review:build:development"
+                },
+                "production": {
+                    "buildTarget": "code-review:build:production"
+                }
+            }
         }
-      }
-    }
-  },
-  "tags": []
+    },
+    "tags": []
 }
