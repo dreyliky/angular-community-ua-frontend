@@ -14,7 +14,10 @@ jobs:
         with:
           node-version: 18
       - run: npm ci
-      - run: npm run build
+      - uses: mansagroup/nrwl-nx-action@v3
+        with:
+          targets: build
+          projects: host
       - uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
