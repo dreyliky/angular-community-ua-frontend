@@ -1,9 +1,19 @@
 import { Route } from '@angular/router';
+import { AppRouteEnum } from './core/enums/app-route.enum';
 
 export const appRoutes: Route[] = [
     {
-        path: 'code-review',
+        path: AppRouteEnum.Home,
         loadChildren: () =>
-            import('code-review/Module').then((m) => m.RemoteEntryModule)
+            import('./pages/home/home.module').then((m) => m.HomeModule)
+    },
+    {
+        path: AppRouteEnum.Auth,
+        loadChildren: () =>
+            import('./pages/auth/auth.module').then((m) => m.AuthModule)
+    },
+    {
+        path: '**',
+        redirectTo: AppRouteEnum.Home
     }
 ];
