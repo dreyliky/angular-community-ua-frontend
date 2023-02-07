@@ -2,7 +2,7 @@ import { HomeComponent } from './acua-home.component';
 import { Routes } from '@angular/router';
 import { AppRouteEnum } from '../../core/enums/app-route.enum';
 
-export const homeRoutes: Routes = [
+export const HOME_ROUTES: Routes = [
     {
         path: '',
         component: HomeComponent,

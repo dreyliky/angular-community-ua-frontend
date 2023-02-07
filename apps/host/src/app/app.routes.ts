@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
 import { AppRouteEnum } from './core/enums/app-route.enum';
 
-export const appRoutes: Route[] = [
+export const APP_ROUTES: Route[] = [
     {
         path: AppRouteEnum.Home,
         loadChildren: () =>

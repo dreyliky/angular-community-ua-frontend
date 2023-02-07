@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { appRoutes } from './app.routes';
+import { APP_ROUTES } from './app.routes';
 
 @NgModule({
     declarations: [
@@ -10,7 +10,7 @@ import { appRoutes } from './app.routes';
     ],
     imports: [
         BrowserModule,
-        RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' })
+        RouterModule.forRoot(APP_ROUTES, { initialNavigation: 'enabledBlocking' })
     ],
     bootstrap: [
         AppComponent
