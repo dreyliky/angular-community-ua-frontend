@@ -38,8 +38,7 @@
     "@nrwl/angular:component": {
       "style": "scss",
       "changeDetection": "OnPush",
-      "skipTests": true,
-      "prefix": "acua"
+      "skipTests": true
     },
     "@nrwl/angular:scam-pipe": {
       "skipTests": true
