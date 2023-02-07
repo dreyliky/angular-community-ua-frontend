@@ -1,6 +1,5 @@
 import { HomeComponent } from './acua-home.component';
 import { Routes } from '@angular/router';
-import { HomeRouteEnum } from './enums/home-route.enum';
 import { AppRouteEnum } from '../../core/enums/app-route.enum';
 
 export const homeRoutes: Routes = [
@@ -14,7 +13,15 @@ export const homeRoutes: Routes = [
                     import('code-review/Module').then(
                         (m) => m.RemoteEntryModule
                     )
+            },
+            {
+                path: '**',
+                redirectTo: AppRouteEnum.CodeReview
             }
         ]
+    },
+    {
+        path: '**',
+        redirectTo: ''
     }
 ];

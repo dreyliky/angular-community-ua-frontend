@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     selector: 'acua-auth',
     templateUrl: './acua-auth.component.html',
-    styleUrls: ['./acua-auth.component.css']
+    styleUrls: ['./acua-auth.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AuthComponent {
-
-}
+export class AuthComponent {}
