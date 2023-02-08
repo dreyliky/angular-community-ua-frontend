@@ -1,31 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+
 import { AppComponent } from './app.component';
+import { APP_ROUTES } from './app.routes';
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
+    declarations: [AppComponent],
     imports: [
         BrowserModule,
-        BrowserAnimationsModule,
-        RouterModule.forRoot(
-            [
-                {
-                    path: '',
-                    loadChildren: () =>
-                        import('./remote-entry/entry.module').then(
-                            (m) => m.RemoteEntryModule
-                        )
-                }
-            ],
-            { initialNavigation: 'enabledBlocking' }
-        )
+        RouterModule.forRoot(APP_ROUTES, { initialNavigation: 'enabledBlocking' })
     ],
-    bootstrap: [
-        AppComponent
-    ]
+    bootstrap: [AppComponent]
 })
 export class AppModule {}
