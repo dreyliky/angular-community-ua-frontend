@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { ListComponent } from './list.component';
-import { LIST_ROUTES } from './list.routing';
+import { LIST_ROUTES } from './list.routes';
 
 @NgModule({
     declarations: [ListComponent],

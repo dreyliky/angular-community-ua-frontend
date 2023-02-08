@@ -1,6 +1,5 @@
 export enum AppRouteEnum {
-    HOME = '',
-    REQUEST = 'request',
-    OVERVIEW = 'overview',
-    LIST = 'list'
+    Request = 'request',
+    Overview = 'overview',
+    List = 'list'
 }

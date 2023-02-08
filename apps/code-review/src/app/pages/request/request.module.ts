@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { RequestComponent } from './request.component';
-import { REQUEST_ROUTES } from './request.routing';
+import { REQUEST_ROUTES } from './request.routes';
 
 @NgModule({
     declarations: [RequestComponent],

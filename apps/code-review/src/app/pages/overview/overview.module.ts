@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { OverviewComponent } from './overview.component';
-import { OVERVIEW_ROUTES } from './overview.routing';
+import { OVERVIEW_ROUTES } from './overview.routes';
 
 @NgModule({
     declarations: [OverviewComponent],
