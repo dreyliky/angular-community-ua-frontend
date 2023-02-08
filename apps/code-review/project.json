@@ -124,5 +124,5 @@
         }
     },
     "tags": [],
-    "implicitDependencies": []
+    "implicitDependencies": ["shared", "assets"]
 }

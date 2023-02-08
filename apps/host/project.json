@@ -123,5 +123,5 @@
         }
     },
     "tags": [],
-    "implicitDependencies": ["code-review"]
+    "implicitDependencies": ["code-review", "shared", "assets"]
 }
