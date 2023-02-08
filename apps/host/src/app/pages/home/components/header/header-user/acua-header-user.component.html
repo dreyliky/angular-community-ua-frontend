@@ -1,0 +1,7 @@
+<div (click)="onToggleHeaderMenu()" class="user">
+    <img src="https://miro.medium.com/fit/c/40/40/1*dmbNkD5D-u45r44go_cf0g.png" alt="user">
+</div>
+
+<ng-container *ngIf="isHeaderMenuActive">
+    <acua-header-menu (clickEmitter)="onToggleHeaderMenu()"></acua-header-menu>
+</ng-container>

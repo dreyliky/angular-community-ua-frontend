@@ -1,0 +1,14 @@
+:host {
+    position: relative;
+
+    .user {
+        cursor: pointer;
+    
+        img {
+            border-radius: 50%;
+            border: 1px solid rgb(211, 211, 211);
+            max-width: 32px;
+            max-height: 32px;
+        }
+    }
+}
