@@ -1,0 +1,8 @@
+<button class="user-button" mat-mini-fab [matMenuTriggerFor]="menu">
+    <mat-icon>person</mat-icon>
+</button>
+
+<mat-menu #menu="matMenu">
+    <button [routerLink]="codeReviewLink" mat-menu-item>Код-ревью</button>
+    <button mat-menu-item>Вийти з акаунту</button>
+</mat-menu>
