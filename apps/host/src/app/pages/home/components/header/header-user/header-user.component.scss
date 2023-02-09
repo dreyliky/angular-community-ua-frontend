@@ -1,3 +1,29 @@
-.user-button {
-    background: transparent;
+:host {
+    .user-button {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        cursor: pointer;
+
+        img {
+            pointer-events: none;
+            border: 50%;
+            border-radius: 50%;
+            border: 1px solid rgb(211, 211, 211);
+            max-width: 40px;
+            max-height: 40px;
+        }
+    }
+}
+
+button {
+    border: 0;
+    outline: none;
+    background-color: transparent;
+}
+
+svg {
+    fill: hsla(0, 0%, 80%, 0.587);
+    width: 12px;
+    height: 12px;
 }

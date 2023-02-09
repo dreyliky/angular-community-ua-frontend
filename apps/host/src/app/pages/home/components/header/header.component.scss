@@ -4,20 +4,26 @@
     header {
         display: flex;
         justify-content: space-between;
-        min-height: 64px;
-        height: 64px;
+        min-height: 57px;
+        height: 57px;
         padding: 0 10px;
         align-items: center;
-        background-color: #fff;
+        background-color: hsl(220 10% 20%);
+        border-bottom: 1px solid hsl(220 10% 14%);
 
         .logo {
             display: flex;
             align-items: center;
             font-size: 20px;
+            font-weight: 900;
+
+            a {
+                margin-right: 8px;
+            }
 
             img {
-                max-height: 50px;
-                max-width: 70px;
+                max-height: 40px;
+                max-width: 40px;
             }
         }
     }
