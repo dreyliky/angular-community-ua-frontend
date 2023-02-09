@@ -1,14 +1,14 @@
 :host {
-    min-height: 64px;
-    height: 64px;
     width: 100%;
-
+    
     header {
         display: flex;
         justify-content: space-between;
-        background-color: #fff;
-        align-items: center;
+        min-height: 64px;
+        height: 64px;
         padding: 0 10px;
+        align-items: center;
+        background-color: #fff;
 
         .logo {
             display: flex;
