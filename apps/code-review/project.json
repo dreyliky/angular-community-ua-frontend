@@ -17,9 +17,17 @@
                 "inlineStyleLanguage": "scss",
                 "assets": [
                     "apps/code-review/src/favicon.ico",
-                    "apps/code-review/src/assets"
+                    "apps/code-review/src/assets",
+                    {
+                        "input": "libs/assets/src/lib",
+                        "glob": "**/*",
+                        "output": "assets"
+                    }
                 ],
-                "styles": ["apps/code-review/src/styles.scss"],
+                "styles": [
+                    "apps/code-review/src/styles.scss",
+                    "@angular/material/prebuilt-themes/deeppurple-amber.css"
+                ],
                 "scripts": [],
                 "customWebpackConfig": {
                     "path": "apps/code-review/webpack.config.js"
@@ -115,5 +123,6 @@
             }
         }
     },
-    "tags": []
+    "tags": [],
+    "implicitDependencies": ["shared", "assets"]
 }
