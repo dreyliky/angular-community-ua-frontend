@@ -5,7 +5,7 @@
         align-items: center;
         cursor: pointer;
 
-        img {
+        .user-avatar-image {
             pointer-events: none;
             border: 50%;
             border-radius: 50%;
@@ -20,10 +20,4 @@ button {
     border: 0;
     outline: none;
     background-color: transparent;
-}
-
-svg {
-    fill: hsla(0, 0%, 80%, 0.587);
-    width: 12px;
-    height: 12px;
 }
