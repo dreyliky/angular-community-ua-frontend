@@ -1,1 +1,3 @@
-export class HomeRouteEnum {}
+export enum HomeRouteEnum {
+    CodeReview = 'code-review'
+}

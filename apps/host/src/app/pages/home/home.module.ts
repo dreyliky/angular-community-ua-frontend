@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './acua-home.component';
-import { HeaderModule } from './components/header/header.module';
+import { HeaderModule } from './components/header';
 import { HOME_ROUTES } from './home.routes';
 
 @NgModule({

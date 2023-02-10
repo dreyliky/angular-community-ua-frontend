@@ -20,19 +20,6 @@
                 "plugin:@angular-eslint/recommended--extra"
             ],
             "rules": {
-                "@nrwl/nx/enforce-module-boundaries": [
-                    "error",
-                    {
-                        "enforceBuildableLibDependency": true,
-                        "allow": [],
-                        "depConstraints": [
-                            {
-                                "sourceTag": "*",
-                                "onlyDependOnLibsWithTags": ["*"]
-                            }
-                        ]
-                    }
-                ],
                 "max-len": [
                     "error",
                     {
