@@ -1,154 +1,140 @@
 {
-  "name": "host",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "projectType": "application",
-  "sourceRoot": "apps/host/src",
-  "prefix": "acua",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/angular:webpack-browser",
-      "outputs": [
-        "{options.outputPath}"
-      ],
-      "options": {
-        "outputPath": "dist/apps/host",
-        "index": "apps/host/src/index.html",
-        "main": "apps/host/src/main.ts",
-        "polyfills": [
-          "zone.js"
-        ],
-        "tsConfig": "apps/host/tsconfig.app.json",
-        "inlineStyleLanguage": "scss",
-        "assets": [
-          "apps/host/src/favicon.ico",
-          "apps/host/src/assets",
-          {
-            "input": "libs/assets/src/lib",
-            "glob": "**/*",
-            "output": "assets"
-          }
-        ],
-        "styles": [
-          "apps/host/src/styles.scss",
-          "@angular/material/prebuilt-themes/purple-green.css",
-          "libs/assets/src/lib/styles/variables.scss"
-        ],
-        "scripts": [],
-        "customWebpackConfig": {
-          "path": "apps/host/webpack.config.js"
-        },
-        "aot": true
-      },
-      "configurations": {
-        "production": {
-          "budgets": [
-            {
-              "type": "initial",
-              "maximumWarning": "500kb",
-              "maximumError": "1mb"
+    "name": "host",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "application",
+    "sourceRoot": "apps/host/src",
+    "prefix": "acua",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:webpack-browser",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/apps/host",
+                "index": "apps/host/src/index.html",
+                "main": "apps/host/src/main.ts",
+                "polyfills": ["zone.js"],
+                "tsConfig": "apps/host/tsconfig.app.json",
+                "inlineStyleLanguage": "scss",
+                "assets": [
+                    "apps/host/src/favicon.ico",
+                    "apps/host/src/assets",
+                    {
+                        "input": "libs/assets/src/lib",
+                        "glob": "**/*",
+                        "output": "assets"
+                    }
+                ],
+                "styles": [
+                    "apps/host/src/styles.scss",
+                    "@angular/material/prebuilt-themes/purple-green.css",
+                    "libs/assets/src/lib/styles/variables.scss"
+                ],
+                "scripts": [],
+                "customWebpackConfig": {
+                    "path": "apps/host/webpack.config.js"
+                },
+                "aot": true
             },
-            {
-              "type": "anyComponentStyle",
-              "maximumWarning": "2kb",
-              "maximumError": "4kb"
-            }
-          ],
-          "outputHashing": "all",
-          "customWebpackConfig": {
-            "path": "apps/host/webpack.prod.config.js"
-          }
+            "configurations": {
+                "production": {
+                    "budgets": [
+                        {
+                            "type": "initial",
+                            "maximumWarning": "500kb",
+                            "maximumError": "1mb"
+                        },
+                        {
+                            "type": "anyComponentStyle",
+                            "maximumWarning": "2kb",
+                            "maximumError": "4kb"
+                        }
+                    ],
+                    "outputHashing": "all",
+                    "customWebpackConfig": {
+                        "path": "apps/host/webpack.prod.config.js"
+                    }
+                },
+                "development": {
+                    "buildOptimizer": false,
+                    "optimization": false,
+                    "vendorChunk": true,
+                    "extractLicenses": false,
+                    "sourceMap": true,
+                    "namedChunks": true,
+                    "customWebpackConfig": {
+                        "path": "apps/host/webpack.dev.config.js"
+                    },
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/host/src/environments/environment.ts",
+                            "with": "apps/host/src/environments/environment.development.ts"
+                        }
+                    ]
+                },
+                "local": {
+                    "buildOptimizer": false,
+                    "optimization": false,
+                    "vendorChunk": true,
+                    "extractLicenses": false,
+                    "sourceMap": true,
+                    "namedChunks": true,
+                    "customWebpackConfig": {
+                        "path": "apps/host/webpack.config.js"
+                    },
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/host/src/environments/environment.ts",
+                            "with": "apps/host/src/environments/environment.local.ts"
+                        }
+                    ]
+                }
+            },
+            "defaultConfiguration": "production"
         },
-        "development": {
-          "buildOptimizer": false,
-          "optimization": false,
-          "vendorChunk": true,
-          "extractLicenses": false,
-          "sourceMap": true,
-          "namedChunks": true,
-          "customWebpackConfig": {
-            "path": "apps/host/webpack.dev.config.js"
-          },
-          "fileReplacements": [
-            {
-              "replace": "apps/host/src/environments/environment.ts",
-              "with": "apps/host/src/environments/environment.development.ts"
+        "serve": {
+            "executor": "@nrwl/angular:module-federation-dev-server",
+            "configurations": {
+                "production": {
+                    "browserTarget": "host:build:production"
+                },
+                "development": {
+                    "browserTarget": "host:build:local"
+                }
+            },
+            "defaultConfiguration": "development",
+            "options": {
+                "port": 4200,
+                "publicHost": "http://localhost:4200"
             }
-          ]
         },
-        "local": {
-          "buildOptimizer": false,
-          "optimization": false,
-          "vendorChunk": true,
-          "extractLicenses": false,
-          "sourceMap": true,
-          "namedChunks": true,
-          "customWebpackConfig": {
-            "path": "apps/host/webpack.config.js"
-          },
-          "fileReplacements": [
-            {
-              "replace": "apps/host/src/environments/environment.ts",
-              "with": "apps/host/src/environments/environment.local.ts"
+        "extract-i18n": {
+            "executor": "@angular-devkit/build-angular:extract-i18n",
+            "options": {
+                "browserTarget": "host:build"
             }
-          ]
-        }
-      },
-      "defaultConfiguration": "production"
-    },
-    "serve": {
-      "executor": "@nrwl/angular:module-federation-dev-server",
-      "configurations": {
-        "production": {
-          "browserTarget": "host:build:production"
         },
-        "development": {
-          "browserTarget": "host:build:local"
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["apps/host/**/*.ts"]
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "apps/host/jest.config.ts",
+                "passWithNoTests": true
+            },
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
+            }
         }
-      },
-      "defaultConfiguration": "development",
-      "options": {
-        "port": 4200,
-        "publicHost": "http://localhost:4200"
-      }
     },
-    "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
-      "options": {
-        "browserTarget": "host:build"
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
-      "options": {
-        "lintFilePatterns": [
-          "apps/host/**/*.ts"
-        ]
-      }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
-      "options": {
-        "jestConfig": "apps/host/jest.config.ts",
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
-      }
-    }
-  },
-  "tags": [],
-  "implicitDependencies": [
-    "code-review",
-    "shared",
-    "assets"
-  ]
+    "tags": [],
+    "implicitDependencies": ["code-review", "shared", "assets"]
 }
