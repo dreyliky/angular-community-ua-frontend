@@ -7,6 +7,9 @@ import { OVERVIEW_ROUTES } from './overview.routes';
 
 @NgModule({
     declarations: [OverviewComponent],
-    imports: [CommonModule, RouterModule.forChild(OVERVIEW_ROUTES)]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(OVERVIEW_ROUTES)
+    ]
 })
 export class OverviewModule { }
