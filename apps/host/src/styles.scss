@@ -6,4 +6,6 @@ body {
 body {
     margin: 0;
     font-family: Roboto, 'Helvetica Neue', sans-serif;
+    background-color: rgb(var(--background-color));
+    color: rgb(var(--text-color));
 }

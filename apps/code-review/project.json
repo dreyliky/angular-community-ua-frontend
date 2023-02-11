@@ -26,7 +26,7 @@
                 ],
                 "styles": [
                     "apps/code-review/src/styles.scss",
-                    "@angular/material/prebuilt-themes/deeppurple-amber.css"
+                    "@angular/material/prebuilt-themes/purple-green.css"
                 ],
                 "scripts": [],
                 "customWebpackConfig": {
