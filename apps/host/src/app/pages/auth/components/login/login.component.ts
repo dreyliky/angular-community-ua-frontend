@@ -14,6 +14,6 @@ export class LoginComponent {
         'data-telegram-login': 'acua_dev_bot',
         'data-size': 'large',
         'data-request-access': 'write',
-        'data-onauth': LoginWidgetEnum.BotCallback
+        'data-onauth': `${LoginWidgetEnum.BotCallbackName}(user)`
     };
 }

@@ -3,6 +3,7 @@ import {
     Component, Input
 } from '@angular/core';
 import { LoginWidgetConfig } from '../../interfaces/login-widget.interface';
+import { User } from '../../interfaces/user.interface';
 
 @Component({
     selector: 'acua-login-widget',
@@ -14,7 +15,7 @@ export class LoginWidgetComponent {
     @Input()
     public widgetConfig!: LoginWidgetConfig;
 
-    public onTelegramLogin(event: any): void {
+    public onTelegramLogin(event: User): void {
         console.log(event);
     }
 }

@@ -1,14 +1,15 @@
 import { DOCUMENT } from '@angular/common';
 import {
-  AfterViewInit,
-  Directive,
-  ElementRef,
-  EventEmitter,
-  Inject,
-  Input,
-  NgZone,
-  Output
+    AfterViewInit,
+    Directive,
+    ElementRef,
+    EventEmitter,
+    Inject,
+    Input,
+    NgZone,
+    Output
 } from '@angular/core';
+import { LoginWidgetEnum } from '../enums/login-widget.enum';
 import { LoginWidgetConfig } from './../interfaces/login-widget.interface';
 import { User } from './../interfaces/user.interface';
 
@@ -45,9 +46,8 @@ export class LoginWidgetDirective implements AfterViewInit {
             script.setAttribute(key, value);
         }
 
-        const callbackName = this.widgetConfig['data-onauth'] as any;
         // eslint-disable-next-line max-len
-        this.window[callbackName] = (data: any) => this.ngZone.run(() => this.loginChange.emit(data));
+        this.window[LoginWidgetEnum.BotCallbackName] = (data: User) => this.ngZone.run(() => this.loginChange.emit(data));
         this.scriptContainer.nativeElement.innerHTML = '';
         this.scriptContainer.nativeElement.appendChild(script);
         console.log(this.scriptContainer.nativeElement);
