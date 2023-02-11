@@ -10,8 +10,8 @@ import {
     Output
 } from '@angular/core';
 import { LoginWidgetEnum } from '../enums/login-widget.enum';
-import { LoginWidgetConfig } from './../interfaces/login-widget.interface';
-import { User } from './../interfaces/user.interface';
+import { LoginWidgetConfig } from '../interfaces/login-widget.interface';
+import { User } from '../interfaces/user.interface';
 
 @Directive({
     selector: '[acuaLoginWidget]'

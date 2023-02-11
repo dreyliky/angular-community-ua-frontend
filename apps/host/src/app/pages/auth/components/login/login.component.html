@@ -1,3 +1,5 @@
-<acua-login-widget
-  [widgetConfig]="widgetConfig">
-</acua-login-widget>
+<div
+    acuaLoginWidget
+    [widgetConfig]="widgetConfig"
+    (loginChange)="onTelegramLogin($event)">
+</div>

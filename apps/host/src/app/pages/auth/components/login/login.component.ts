@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LoginWidgetEnum } from '@host/features/login/enums/login-widget.enum';
-import { LoginWidgetConfig } from '@host/features/login/interfaces/login-widget.interface';
+import { LoginWidgetEnum } from '@host/enums/login-widget.enum';
+import { LoginWidgetConfig } from '@host/interfaces/login-widget.interface';
+import { User } from '@host/interfaces/user.interface';
 import { environment } from 'apps/host/src/environments/environment';
 
 @Component({
@@ -17,4 +18,8 @@ export class LoginComponent {
         'data-request-access': 'write',
         'data-onauth': `${LoginWidgetEnum.BotCallbackName}(user)`
     };
+
+    public onTelegramLogin(user: User): void {
+        console.log(user);
+    }
 }
