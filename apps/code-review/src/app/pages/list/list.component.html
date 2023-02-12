@@ -1,12 +1,12 @@
 <div class="tab-list">
-    <mat-tab-group animationDuration="0ms">
-        <mat-tab label="Всі">
+    <mat-tab-group [animationDuration]="'0ms'">
+        <mat-tab [label]="'Всі'">
             <acua-all-requests></acua-all-requests>
         </mat-tab>
-        <mat-tab label="Мої">
+        <mat-tab [label]="'Мої'">
             <acua-my-requests></acua-my-requests>
         </mat-tab>
-        <mat-tab label="Історія">
+        <mat-tab [label]="'Історія'">
             <acua-historical-requests></acua-historical-requests>
         </mat-tab>
     </mat-tab-group>

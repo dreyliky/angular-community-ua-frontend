@@ -3,11 +3,11 @@ import { NgModule } from '@angular/core';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTabsModule } from '@angular/material/tabs';
 import { RouterModule } from '@angular/router';
-import { AllRequestsComponent } from './all-requests';
-import { HistoricalRequestsComponent } from './historical-requests';
+import { AllRequestsComponent } from './components/all-requests';
+import { HistoricalRequestsComponent } from './components/historical-requests';
 import { ListComponent } from './list.component';
 import { LIST_ROUTES } from './list.routes';
-import { MyRequestsComponent } from './my-requests';
+import { MyRequestsComponent } from './components/my-requests';
 
 @NgModule({
     declarations: [
