@@ -7,11 +7,12 @@
     "dictionaryDefinitions": [],
     "dictionaries": [],
     "words": [
-        "onauth"
+        "Історія"
     ],
     "ignoreWords": [
         "nrwl",
-        "acua"
+        "acua",
+        "onauth"
     ],
     "import": []
 }
