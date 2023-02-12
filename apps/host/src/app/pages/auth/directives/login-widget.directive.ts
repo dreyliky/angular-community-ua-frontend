@@ -9,9 +9,9 @@ import {
     NgZone,
     Output
 } from '@angular/core';
-import { LoginWidgetEnum } from '../enums/login-widget.enum';
-import { LoginWidgetConfig } from '../interfaces/login-widget.interface';
-import { User } from '../interfaces/user.interface';
+import { AcuaWindow } from '@host/core/interfaces';
+import { WINDOW } from '@host/core/tokens';
+import { LoginWidgetConfig, TelegramLoginResponse } from '@host/interfaces';
 
 @Directive({
     selector: '[acuaLoginWidget]'
@@ -21,18 +21,15 @@ export class LoginWidgetDirective implements AfterViewInit {
     public widgetConfig!: LoginWidgetConfig;
 
     @Output()
-    public loginChange: EventEmitter<User> = new EventEmitter<User>();
-
-    private readonly document: Document;
-    private readonly window: any;
+    public login: EventEmitter<TelegramLoginResponse> = new EventEmitter<TelegramLoginResponse>();
 
     constructor(
-      @Inject(DOCUMENT) document: any,
+      @Inject(DOCUMENT) private readonly document: Document,
+      @Inject(WINDOW)
+      private readonly window: AcuaWindow,
       private scriptContainer: ElementRef,
       private ngZone: NgZone
     ) {
-        this.document = document;
-        this.window = window;
     }
 
     public ngAfterViewInit(): void {
@@ -47,9 +44,7 @@ export class LoginWidgetDirective implements AfterViewInit {
         }
 
         // eslint-disable-next-line max-len
-        this.window[LoginWidgetEnum.BotCallbackName] = (data: User) => this.ngZone.run(() => this.loginChange.emit(data));
-        this.scriptContainer.nativeElement.innerHTML = '';
+        this.window['onTelegramLogin'] = (data: TelegramLoginResponse) => this.ngZone.run(() => this.login.emit(data));
         this.scriptContainer.nativeElement.appendChild(script);
-        console.log(this.scriptContainer.nativeElement);
     }
 }
