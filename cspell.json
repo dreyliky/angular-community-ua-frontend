@@ -6,7 +6,9 @@
     ],
     "dictionaryDefinitions": [],
     "dictionaries": [],
-    "words": [],
+    "words": [
+        "onauth"
+    ],
     "ignoreWords": [
         "nrwl",
         "acua"
