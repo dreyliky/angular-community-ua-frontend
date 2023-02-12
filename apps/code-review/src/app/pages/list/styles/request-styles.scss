@@ -1,0 +1,15 @@
+:host {
+    .request-list {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+
+        .request {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border: 1px solid #fff;
+            padding: 15px;
+        }
+    }
+}
