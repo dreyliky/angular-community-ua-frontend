@@ -63,7 +63,13 @@
                     "namedChunks": true,
                     "customWebpackConfig": {
                         "path": "apps/host/webpack.dev.config.js"
-                    }
+                    },
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/host/src/environments/environment.ts",
+                            "with": "apps/host/src/environments/environment.development.ts"
+                        }
+                    ]
                 },
                 "local": {
                     "buildOptimizer": false,
@@ -74,7 +80,13 @@
                     "namedChunks": true,
                     "customWebpackConfig": {
                         "path": "apps/host/webpack.config.js"
-                    }
+                    },
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/host/src/environments/environment.ts",
+                            "with": "apps/host/src/environments/environment.local.ts"
+                        }
+                    ]
                 }
             },
             "defaultConfiguration": "production"

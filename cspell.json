@@ -11,7 +11,8 @@
     ],
     "ignoreWords": [
         "nrwl",
-        "acua"
+        "acua",
+        "onauth"
     ],
     "import": []
 }
