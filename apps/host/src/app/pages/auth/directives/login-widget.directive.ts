@@ -43,8 +43,8 @@ export class LoginWidgetDirective implements AfterViewInit {
             script.setAttribute(key, value);
         }
 
-        // eslint-disable-next-line max-len
-        this.window['onTelegramLogin'] = (data: TelegramLoginResponse) => this.ngZone.run(() => this.login.emit(data));
+        this.window['onTelegramLogin'] =
+            (data: any) => this.ngZone.run(() => this.login.emit(data));
         this.scriptContainer.nativeElement.appendChild(script);
     }
 }
