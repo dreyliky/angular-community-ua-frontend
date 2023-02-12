@@ -4,22 +4,18 @@ import {
     Directive,
     ElementRef,
     EventEmitter,
-    Inject,
-    Input,
-    NgZone,
+    Inject, NgZone,
     Output
 } from '@angular/core';
 import { AcuaWindow } from '@host/core/interfaces';
-import { WINDOW } from '@host/core/tokens';
-import { LoginWidgetConfig, TelegramLoginResponse } from '@host/interfaces';
+import { ENVIRONMENT, WINDOW } from '@host/core/tokens';
+import { TelegramLoginResponse } from '@host/interfaces';
+import { environment } from 'apps/host/src/environments/environment';
 
 @Directive({
     selector: '[acuaLoginWidget]'
 })
 export class LoginWidgetDirective implements AfterViewInit {
-    @Input()
-    public widgetConfig!: LoginWidgetConfig;
-
     @Output()
     public login: EventEmitter<TelegramLoginResponse> = new EventEmitter<TelegramLoginResponse>();
 
@@ -27,8 +23,10 @@ export class LoginWidgetDirective implements AfterViewInit {
       @Inject(DOCUMENT) private readonly document: Document,
       @Inject(WINDOW)
       private readonly window: AcuaWindow,
-      private scriptContainer: ElementRef,
-      private ngZone: NgZone
+      @Inject(ENVIRONMENT)
+      private readonly env: typeof environment,
+      private readonly hostRef: ElementRef<HTMLElement>,
+      private readonly ngZone: NgZone
     ) {
     }
 
@@ -39,12 +37,14 @@ export class LoginWidgetDirective implements AfterViewInit {
     private createScript(): void {
         const script = this.document.createElement('script');
 
-        for (const [key, value] of Object.entries(this.widgetConfig)) {
-            script.setAttribute(key, value);
-        }
+        script.setAttribute('src', 'https://telegram.org/js/telegram-widget.js?21');
+        script.setAttribute('data-telegram-login', this.env['BotLoginName']);
+        script.setAttribute('data-size', 'large');
+        script.setAttribute('data-request-access', 'write');
+        script.setAttribute('data-onauth', 'onTelegramLogin(user)');
 
         this.window['onTelegramLogin'] =
             (data: any) => this.ngZone.run(() => this.login.emit(data));
-        this.scriptContainer.nativeElement.appendChild(script);
+        this.hostRef.nativeElement.appendChild(script);
     }
 }

@@ -1,1 +1,1 @@
-export * from './acua-windoiw.interface';
+export * from './acua-window.interface';
