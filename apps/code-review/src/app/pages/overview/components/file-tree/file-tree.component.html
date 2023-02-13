@@ -1,0 +1,4 @@
+<div [style]="'width:' + width + ';height:' + height" [class]="'monaco-tree ' + theme">
+
+    <acua-file-tree-node (contextMenuClick)="handleClickContextMenu($event)" (clickFile)="handleClickFile($event)" [theme]="theme" *ngFor="let row of tree" [name]="row.name" [content]="row.content" [depth]="0" [hide]="false"></acua-file-tree-node>
+</div>
