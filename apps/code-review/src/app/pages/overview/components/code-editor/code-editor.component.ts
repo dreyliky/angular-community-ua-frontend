@@ -2,30 +2,34 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
-    ElementRef,
-    ViewChild
+    ElementRef
 } from '@angular/core';
-
-import sdk from '@stackblitz/sdk';
-
-const STACK_BLITZ_ID = 'angular-community-project';
+import * as monaco from 'monaco-editor';
 
 @Component({
     selector: 'acua-code-editor',
-    templateUrl: './code-editor.component.html',
+    template: '',
     styleUrls: ['./code-editor.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CodeEditorComponent implements AfterViewInit {
-  @ViewChild('stackblitzEditor') public stackblitzEditor!: ElementRef;
-  public ngAfterViewInit(): void {
-      this._initStackBlitzProject();
-  }
+    public editorOptions: monaco.editor.IStandaloneEditorConstructionOptions = {
+        theme: 'vs-dark',
+        language: 'typescript',
+        fontSize: 16
+    };
 
-  private _initStackBlitzProject(): void {
-      sdk.embedProjectId(this.stackblitzEditor.nativeElement, STACK_BLITZ_ID, {
-          width: '98%',
-          height: '80%'
-      });
-  }
+    private editor!: monaco.editor.IStandaloneCodeEditor;
+
+    constructor(
+        private readonly hostRef: ElementRef<HTMLElement>
+    ) {}
+
+    public ngAfterViewInit(): void {
+        this.editor = monaco.editor.create(this.hostRef.nativeElement, this.editorOptions);
+    }
+
+    public setValue(code: string): void {
+        this.editor.setValue(code);
+    }
 }

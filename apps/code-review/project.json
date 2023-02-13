@@ -16,7 +16,6 @@
                 "tsConfig": "apps/code-review/tsconfig.app.json",
                 "inlineStyleLanguage": "scss",
                 "assets": [
-                    "apps/code-review/src/favicon.ico",
                     "apps/code-review/src/assets",
                     {
                         "input": "libs/assets/src/lib",
@@ -48,10 +47,7 @@
                             "maximumError": "4kb"
                         }
                     ],
-                    "outputHashing": "all",
-                    "customWebpackConfig": {
-                        "path": "apps/code-review/webpack.prod.config.js"
-                    }
+                    "outputHashing": "all"
                 },
                 "development": {
                     "buildOptimizer": false,
