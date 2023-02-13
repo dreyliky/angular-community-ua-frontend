@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 
-import { AppRouteEnum } from '../core/enums/app-route-enum';
+import { AppRouteEnum } from '@code-review/core';
 import { RemoteEntryComponent } from './entry.component';
 
 export const REMOTE_ROUTES: Route[] = [
@@ -14,7 +14,7 @@ export const REMOTE_ROUTES: Route[] = [
                     import('../pages/list/list.module').then((m) => m.ListModule)
             },
             {
-                path:  AppRouteEnum.Overview,
+                path:  `${AppRouteEnum.Overview}/:id`,
                 loadChildren: () =>
                     import('../pages/overview/overview.module').then((m) => m.OverviewModule)
             },
