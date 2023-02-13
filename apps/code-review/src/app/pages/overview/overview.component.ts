@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import { CodeEditorComponent } from './components';
 
 @Component({
     selector: 'acua-overview',
@@ -7,8 +8,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class OverviewComponent {
-    public tree = [
+export class OverviewComponent implements AfterViewInit {
+    @ViewChild(CodeEditorComponent)
+    private readonly codeEditor!: CodeEditorComponent;
+
+    // eslint-disable-next-line @typescript-eslint/member-ordering
+    public readonly tree = [
         {
             name: '.vscode',
             content: [{ name: 'settings.json' }]
@@ -64,4 +69,9 @@ export class OverviewComponent {
             name: 'tsconfig.json'
         }
     ];
+
+    public ngAfterViewInit(): void {
+        // FIXME: Replace to real approach
+        this.codeEditor.setValue('export const MY_CODE_HERE = "VALUE";\n');
+    }
 }
