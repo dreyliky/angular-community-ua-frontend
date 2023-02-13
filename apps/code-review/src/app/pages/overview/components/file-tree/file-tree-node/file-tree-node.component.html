@@ -1,7 +1,7 @@
 <div (contextmenu)="handleRightClickFile($event)" (click)="toggle()" [class]="'monaco-tree-row' + (hide ? ' hide ' : ' ') + theme">
     <span [style]="style"></span>
     <i *ngIf="folder" [class]="'monaco-tree-arrow codicon codicon-chevron-down' + (open ? ' open' : '')"></i>
-    <img [src]="'assets/icons/file-tree/'+ icon +'.svg'" class="monaco-tree-icon"/>
+    <img [src]="'./assets/icons/file-tree/'+ icon +'.svg'" class="monaco-tree-icon"/>
     <div class="monaco-tree-name">{{name}}</div>
 </div>
 
