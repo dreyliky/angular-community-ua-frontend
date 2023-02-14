@@ -1,5 +1,5 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
-import { CodeEditorComponent } from './components';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import { MonacoEditorDirective } from './directives';
 
 @Component({
     selector: 'acua-overview',
@@ -8,9 +8,9 @@ import { CodeEditorComponent } from './components';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class OverviewComponent implements AfterViewInit {
-    @ViewChild(CodeEditorComponent)
-    private readonly codeEditor!: CodeEditorComponent;
+export class OverviewComponent {
+    @ViewChild(MonacoEditorDirective)
+    private readonly codeEditor!: MonacoEditorDirective;
 
     // eslint-disable-next-line @typescript-eslint/member-ordering
     public readonly tree = [
@@ -70,7 +70,7 @@ export class OverviewComponent implements AfterViewInit {
         }
     ];
 
-    public ngAfterViewInit(): void {
+    public onMonacoEditorReady(): void {
         // FIXME: Replace to real approach
         this.codeEditor.setValue('export const MY_CODE_HERE = "VALUE";\n');
     }

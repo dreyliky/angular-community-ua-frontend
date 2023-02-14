@@ -3,6 +3,8 @@
     class="file-explorer">
 </acua-file-tree>
 
-<acua-code-editor
-    class="code-editor">
-</acua-code-editor>
+<div
+    acuaMonacoEditor
+    class="code-editor"
+    (monacoReady)="onMonacoEditorReady()">
+</div>
