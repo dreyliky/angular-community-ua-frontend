@@ -1,15 +1,14 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { ContextMenuAction } from '../../data/file-tree-node.type';
-import { MonacoTreeElement } from '../../data/file-tree.type';
+import { MonacoTreeElement } from './types/file-tree.type';
 
 @Component({
-    selector: 'acua-file-tree',
-    templateUrl: './file-tree.component.html',
-    styleUrls: ['./file-tree.component.scss'],
+    selector: 'acua-file-explorer',
+    templateUrl: './file-explorer.component.html',
+    styleUrls: ['./file-explorer.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FileTreeComponent {
+export class FileExplorerComponent {
     @Input()
     public theme: 'vs-dark' | 'vs-light' = 'vs-dark';
 
@@ -25,14 +24,7 @@ export class FileTreeComponent {
 	@Output()
 	public clickFile = new EventEmitter<string>();
 
-	@Output()
-	public clickContextMenu = new EventEmitter<ContextMenuAction>();
-
 	public handleClickFile(path: string): any {
 	    this.clickFile.emit(path);
-	}
-
-	public handleClickContextMenu(event: ContextMenuAction): any {
-	    this.clickContextMenu.emit(event);
 	}
 }

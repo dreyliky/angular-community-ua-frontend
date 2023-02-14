@@ -1,0 +1,19 @@
+<div
+    (contextmenu)="handleRightClickFile($event)" 
+    (click)="onButtonToggle()" 
+    [class]="getClassesAndIfHide">
+    <span [style.margin-left]="marginLeftStyleValue"></span>
+    <i *ngIf="isContent" [class]="getClassesAndIfOpen"></i>
+    <img [src]="fileExplorerImageSrc" class="monaco-tree-icon"/>
+    <div class="monaco-tree-name">{{name}}</div>
+</div>
+
+<acua-file-tree-node 
+    (clickFile)="handleClickFile($event)" 
+    *ngFor="let row of content" 
+    [name]="row.name" 
+    [content]="row.content" 
+    [depth]="depthIncrement" 
+    [hide]="isHide" 
+    [theme]="theme">
+</acua-file-tree-node>
