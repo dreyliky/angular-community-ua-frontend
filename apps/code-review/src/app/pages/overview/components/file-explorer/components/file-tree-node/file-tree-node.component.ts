@@ -97,7 +97,7 @@ export class FileTreeNodeComponent implements OnChanges {
             return this.getFileIconName();
         }
 
-        const extensionIconName = this.getExtensionIconName();
+        const extensionIconName = this.tryGetExtensionIconName();
 
         if (extensionIconName) {
             return extensionIconName;
@@ -130,24 +130,23 @@ export class FileTreeNodeComponent implements OnChanges {
         );
     }
 
-    private getExtensionIconName(): string | void {
+    private tryGetExtensionIconName(): string | null {
         let nameArray = this.name.split('.');
 
         while (nameArray.length > 0) {
-            const possibleExtensionName = nameArray.join('.');
+            const possibleExtensionName = nameArray.join('.') as keyof
+                typeof EXTENSION_ICON_NAME_MAPPER;
 
             if (
-                EXTENSION_ICON_NAME_MAPPER[
-                    possibleExtensionName as keyof typeof EXTENSION_ICON_NAME_MAPPER
-                ]
+                EXTENSION_ICON_NAME_MAPPER[possibleExtensionName]
             ) {
                 return (
-                    EXTENSION_ICON_NAME_MAPPER[
-                        possibleExtensionName as unknown as keyof typeof EXTENSION_ICON_NAME_MAPPER
-                    ]
+                    EXTENSION_ICON_NAME_MAPPER[possibleExtensionName]
                 );
             }
             nameArray = nameArray.slice(1);
         }
+
+        return null;
     }
 }
