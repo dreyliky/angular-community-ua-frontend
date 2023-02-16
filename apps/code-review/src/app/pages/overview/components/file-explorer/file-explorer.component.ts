@@ -1,8 +1,8 @@
 import {
     ChangeDetectionStrategy,
-    Component, Input
+    Component,
+    Input
 } from '@angular/core';
-import { FileExplorerThemeEnum } from './enums/file-explorer-theme.enum';
 import { MonacoTreeElement } from './types/file-tree.type';
 
 @Component({
@@ -13,14 +13,5 @@ import { MonacoTreeElement } from './types/file-tree.type';
 })
 export class FileExplorerComponent {
     @Input()
-    public theme: FileExplorerThemeEnum = FileExplorerThemeEnum.Dark;
-
-    @Input()
     public tree: MonacoTreeElement[] = [];
-
-    @Input()
-    public width = '300px';
-
-    @Input()
-    public height = '500px';
 }

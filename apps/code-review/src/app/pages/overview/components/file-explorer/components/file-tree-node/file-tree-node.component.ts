@@ -1,9 +1,14 @@
 import {
     ChangeDetectionStrategy,
-    Component, Input
+    Component,
+    Input,
+    OnChanges
 } from '@angular/core';
-import { extensions, files, folders } from '../../data';
-import { FileExplorerThemeEnum } from '../../enums/file-explorer-theme.enum';
+import {
+    EXTENSION_ICON_NAME_MAPPER,
+    FILE_ICON_NAME_MAPPER,
+    FOLDERS_ICON_NAME_MAPPER
+} from '../../data';
 import { MonacoTreeElement } from '../../types';
 
 @Component({
@@ -12,7 +17,7 @@ import { MonacoTreeElement } from '../../types';
     styleUrls: ['./file-tree-node.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FileTreeNodeComponent {
+export class FileTreeNodeComponent implements OnChanges {
     @Input()
     public name = '';
 
@@ -23,34 +28,29 @@ export class FileTreeNodeComponent {
     public depth = 0;
 
     @Input()
-    public theme: FileExplorerThemeEnum = FileExplorerThemeEnum.Dark;
-
-    @Input()
     public hide = false;
 
-    public isOpened = false;
-
     public get marginLeftStyleValue(): string {
-        return `${10 * this.depth}px`;
+        return `${this.baseMarginLeft * this.depth}px`;
     }
 
-    public get isContent(): boolean {
+    public get isContentExist(): boolean {
         return this.content !== null && this.content !== undefined;
     }
 
-    public get isHide(): boolean {
+    public get isHidden(): boolean {
         return !this.isOpened || this.hide;
     }
 
-    public get depthIncrement(): number {
+    public get incrementedDepth(): number {
         return this.depth + 1;
     }
 
     public get fileExplorerIconSrc(): string {
-        return `./assets/icons/file-explorer/${this.icon}.svg`;
+        return `/assets/icons/file-explorer/${this.icon}.svg`;
     }
 
-    public get getClassesAndIfOpen(): string {
+    public get arrowCssClassesAsString(): string {
         const CLASSES = 'monaco-tree-arrow codicon codicon-chevron-down';
 
         if (this.isOpened) {
@@ -60,68 +60,94 @@ export class FileTreeNodeComponent {
         return CLASSES;
     }
 
-    public get getClassesAndIfHide(): string {
+    public get rowCssClassesAsString(): string {
         const CLASSES = 'monaco-tree-row';
 
         if (this.hide) {
-            return `${CLASSES} hide ${this.theme}`;
+            return `${CLASSES} hide`;
         }
 
-        return `${CLASSES} ${this.theme}`;
+        return CLASSES;
     }
 
-    private get icon(): string {
-        if (this.isContent) {
-            return this.getDifferentFolders();
-        }
+    public isOpened = false;
 
-        if (Object.keys(files).includes(this.name)) {
-            return this.getFiles();
-        }
+    private readonly baseMarginLeft = 10;
 
-        let nameArray = this.name.split('.');
+    private icon!: string;
 
-        while (nameArray.length > 0) {
-            if (Object.keys(extensions).includes(nameArray.join('.'))) {
-                return this.getExtensions(nameArray.join('.'));
-            }
-            nameArray = nameArray.slice(1);
-        }
-
-        return 'file';
+    public ngOnChanges(): void {
+        this.initializeIcon();
     }
 
     public onButtonToggle(): void {
         this.isOpened = !this.isOpened;
     }
 
-    private getFolders(): string {
-        const icon = folders[this.name as keyof typeof folders];
+    private initializeIcon(): void {
+        this.icon = this.getIcon();
+    }
+
+    private getIcon(): string {
+        if (this.isContentExist) {
+            return this.getFolderIconName();
+        }
+
+        if (FILE_ICON_NAME_MAPPER[this.name as keyof typeof FILE_ICON_NAME_MAPPER]) {
+            return this.getFileIconName();
+        }
+
+        const extensionIconName = this.getExtensionIconName();
+
+        if (extensionIconName) {
+            return extensionIconName;
+        }
+
+        return 'file';
+    }
+
+    private getFolderIconName(): string {
+        let folderName = 'folder';
+
+        if (
+            FOLDERS_ICON_NAME_MAPPER[this.name as keyof typeof FOLDERS_ICON_NAME_MAPPER]
+        ) {
+            folderName = (
+                FOLDERS_ICON_NAME_MAPPER[this.name as keyof typeof FOLDERS_ICON_NAME_MAPPER]
+            );
+        }
 
         if (this.isOpened) {
-            return `${icon}-open`;
+            return `${folderName}-open`;
         }
 
-        return icon;
+        return folderName;
     }
 
-    private getDifferentFolders(): string {
-        if (Object.keys(folders).includes(this.name)) {
-            return this.getFolders();
+    private getFileIconName(): string {
+        return (
+            FILE_ICON_NAME_MAPPER[this.name as keyof typeof FILE_ICON_NAME_MAPPER]
+        );
+    }
+
+    private getExtensionIconName(): string | void {
+        let nameArray = this.name.split('.');
+
+        while (nameArray.length > 0) {
+            const possibleExtensionName = nameArray.join('.');
+
+            if (
+                EXTENSION_ICON_NAME_MAPPER[
+                    possibleExtensionName as keyof typeof EXTENSION_ICON_NAME_MAPPER
+                ]
+            ) {
+                return (
+                    EXTENSION_ICON_NAME_MAPPER[
+                        possibleExtensionName as unknown as keyof typeof EXTENSION_ICON_NAME_MAPPER
+                    ]
+                );
+            }
+            nameArray = nameArray.slice(1);
         }
-
-        if (this.isOpened) {
-            return 'folder-open';
-        }
-
-        return 'folder';
-    }
-
-    private getFiles(): string {
-        return files[this.name as keyof typeof files];
-    }
-
-    private getExtensions(splittedName: string): string {
-        return extensions[splittedName as keyof typeof extensions];
     }
 }

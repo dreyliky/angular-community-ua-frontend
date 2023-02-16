@@ -1,10 +1,7 @@
-<div [style.width]="width" [style.height]="height" [class]="theme">
-    <acua-file-tree-node 
-        [theme]="theme" 
-        *ngFor="let row of tree" 
-        [name]="row.name" 
-        [content]="row.content!" 
-        [depth]="0" 
-        [hide]="false">
-    </acua-file-tree-node>
-</div>
+<acua-file-tree-node 
+    *ngFor="let row of tree"
+    [name]="row.name" 
+    [content]="row.content!" 
+    [depth]="0" 
+    [hide]="false">
+</acua-file-tree-node>
