@@ -1,10 +1,9 @@
 <div [style.width]="width" [style.height]="height" [class]="theme">
     <acua-file-tree-node 
-        (clickFile)="handleClickFile($event)" 
         [theme]="theme" 
         *ngFor="let row of tree" 
         [name]="row.name" 
-        [content]="row.content" 
+        [content]="row.content!" 
         [depth]="0" 
         [hide]="false">
     </acua-file-tree-node>

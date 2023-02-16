@@ -1,5 +1,8 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component, Input
+} from '@angular/core';
+import { FileExplorerThemeEnum } from './enums/file-explorer-theme.enum';
 import { MonacoTreeElement } from './types/file-tree.type';
 
 @Component({
@@ -10,21 +13,14 @@ import { MonacoTreeElement } from './types/file-tree.type';
 })
 export class FileExplorerComponent {
     @Input()
-    public theme: 'vs-dark' | 'vs-light' = 'vs-dark';
+    public theme: FileExplorerThemeEnum = FileExplorerThemeEnum.Dark;
 
     @Input()
     public tree: MonacoTreeElement[] = [];
 
-	@Input()
+    @Input()
     public width = '300px';
 
-	@Input()
-	public height = '500px';
-
-	@Output()
-	public clickFile = new EventEmitter<string>();
-
-	public handleClickFile(path: string): any {
-	    this.clickFile.emit(path);
-	}
+    @Input()
+    public height = '500px';
 }
