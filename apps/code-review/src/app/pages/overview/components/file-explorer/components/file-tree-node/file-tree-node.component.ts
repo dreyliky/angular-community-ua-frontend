@@ -11,6 +11,10 @@ import {
 } from '../../data';
 import { MonacoTreeElement } from '../../types';
 
+type ExtensionName = keyof typeof EXTENSION_ICON_NAME_MAPPER;
+type FileName = keyof typeof FILE_ICON_NAME_MAPPER;
+type FolderName = keyof typeof FOLDERS_ICON_NAME_MAPPER;
+
 @Component({
     selector: 'acua-file-tree-node',
     templateUrl: './file-tree-node.component.html',
@@ -77,15 +81,11 @@ export class FileTreeNodeComponent implements OnChanges {
     private icon!: string;
 
     public ngOnChanges(): void {
-        this.initializeIcon();
+        this.icon = this.getIcon();
     }
 
     public onButtonToggle(): void {
         this.isOpened = !this.isOpened;
-    }
-
-    private initializeIcon(): void {
-        this.icon = this.getIcon();
     }
 
     private getIcon(): string {
@@ -93,7 +93,7 @@ export class FileTreeNodeComponent implements OnChanges {
             return this.getFolderIconName();
         }
 
-        if (FILE_ICON_NAME_MAPPER[this.name as keyof typeof FILE_ICON_NAME_MAPPER]) {
+        if (FILE_ICON_NAME_MAPPER[this.name as FileName]) {
             return this.getFileIconName();
         }
 
@@ -107,13 +107,14 @@ export class FileTreeNodeComponent implements OnChanges {
     }
 
     private getFolderIconName(): string {
+        const NAME_AS_FOLDER_NAME = this.name as FolderName;
         let folderName = 'folder';
 
         if (
-            FOLDERS_ICON_NAME_MAPPER[this.name as keyof typeof FOLDERS_ICON_NAME_MAPPER]
+            FOLDERS_ICON_NAME_MAPPER[NAME_AS_FOLDER_NAME]
         ) {
             folderName = (
-                FOLDERS_ICON_NAME_MAPPER[this.name as keyof typeof FOLDERS_ICON_NAME_MAPPER]
+                FOLDERS_ICON_NAME_MAPPER[NAME_AS_FOLDER_NAME]
             );
         }
 
@@ -125,8 +126,10 @@ export class FileTreeNodeComponent implements OnChanges {
     }
 
     private getFileIconName(): string {
+        const NAME_AS_FILE_NAME = this.name as FileName;
+
         return (
-            FILE_ICON_NAME_MAPPER[this.name as keyof typeof FILE_ICON_NAME_MAPPER]
+            FILE_ICON_NAME_MAPPER[NAME_AS_FILE_NAME]
         );
     }
 
@@ -134,8 +137,7 @@ export class FileTreeNodeComponent implements OnChanges {
         let nameArray = this.name.split('.');
 
         while (nameArray.length > 0) {
-            const possibleExtensionName = nameArray.join('.') as keyof
-                typeof EXTENSION_ICON_NAME_MAPPER;
+            const possibleExtensionName = nameArray.join('.') as ExtensionName;
 
             if (
                 EXTENSION_ICON_NAME_MAPPER[possibleExtensionName]
