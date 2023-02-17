@@ -14,7 +14,7 @@ export const REMOTE_ROUTES: Route[] = [
                     import('../pages/list/list.module').then((m) => m.ListModule)
             },
             {
-                path:  `${AppRouteEnum.Overview}/:id`,
+                path:  AppRouteEnum.Overview,
                 loadChildren: () =>
                     import('../pages/overview/overview.module').then((m) => m.OverviewModule)
             },

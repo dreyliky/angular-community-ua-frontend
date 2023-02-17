@@ -9,6 +9,7 @@ const ELEMENT_DATA = [
     { name: 'Test4', date: new Date(), user: 'Rostyslav' },
     { name: 'Test5', date: new Date(), user: 'Dima' }
 ];
+
 @Component({
     selector: 'acua-requests-table',
     templateUrl: './requests-table.component.html',
@@ -16,12 +17,12 @@ const ELEMENT_DATA = [
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RequestsTableComponent {
-    public dataSource = ELEMENT_DATA;
-    public displayedColumns: string[] = ['name', 'date', 'user'];
+    public readonly dataSource = ELEMENT_DATA;
+    public readonly displayedColumns: string[] = ['name', 'date', 'user'];
 
-    constructor(private readonly _router: Router) {}
+    constructor(private readonly router: Router) {}
 
-    public handleTableRowClick(id: number): void {
-        this._router.navigateByUrl(`/${AppRouteEnum.Overview}/${id}`);
+    public onTableRowClick(id: number): void {
+        this.router.navigateByUrl(`/${AppRouteEnum.Overview}/${id}`);
     }
 }

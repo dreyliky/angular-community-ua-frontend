@@ -16,14 +16,14 @@
     <mat-cell
       mat-cell *matCellDef="let element">
       <acua-user-avatar
-      [userName]="element.user"
-      ></acua-user-avatar>
+        [matTooltipPosition]="'above'"
+        [matTooltip]="element.user"></acua-user-avatar>
     </mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row
-    (click)="handleTableRowClick(1)"
+    (click)="onTableRowClick(1)"
     class="request-table__row"
     matRipple *matRowDef="let row;
     columns: displayedColumns;"></mat-row>

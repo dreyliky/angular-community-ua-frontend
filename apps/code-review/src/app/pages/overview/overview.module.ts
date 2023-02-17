@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { OverviewComponent } from './overview.component';
 import { OVERVIEW_ROUTES } from './overview.routes';
-import { CodeEditorComponent } from './components/code-editor/code-editor.component';
+import { CodeEditorComponent } from '@code-review/pages/overview/components';
 
 @NgModule({
     declarations: [OverviewComponent, CodeEditorComponent],
