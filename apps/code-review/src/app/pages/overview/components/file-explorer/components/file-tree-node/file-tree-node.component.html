@@ -1,0 +1,16 @@
+<div
+    [class]="rowCssClassesAsString"
+    (click)="onButtonToggle()">
+    <span [style.margin-left]="marginLeftStyleValue"></span>
+    <i *ngIf="isContentExist" [class]="arrowCssClassesAsString"></i>
+    <img [src]="fileExplorerIconSrc" class="monaco-tree-icon"/>
+    <div class="monaco-tree-name">{{name}}</div>
+</div>
+
+<acua-file-tree-node 
+    *ngFor="let row of content" 
+    [name]="row.name" 
+    [content]="row.content!" 
+    [depth]="incrementedDepth" 
+    [hide]="isHidden">
+</acua-file-tree-node>

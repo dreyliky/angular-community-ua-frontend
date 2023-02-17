@@ -1,4 +1,4 @@
-export const folders = {
+export const FOLDERS_ICON_NAME_MAPPER = {
     'app': 'folder-app',
     'apps': 'folder-app',
     '.vscode': 'folder-vscode',

@@ -1,4 +1,4 @@
-export const files = {
+export const FILE_ICON_NAME_MAPPER = {
     'favicon.ico': 'favicon',
     'angular-cli.json': 'angular',
     '.angular-cli.json': 'angular',
