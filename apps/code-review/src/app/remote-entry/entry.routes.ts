@@ -25,8 +25,7 @@ export const REMOTE_ROUTES: Route[] = [
             },
             {
                 path: '**',
-                redirectTo: AppRouteEnum.List,
-                pathMatch: 'full'
+                redirectTo: AppRouteEnum.List
             }
         ]
     },
