@@ -9,6 +9,11 @@ export const REMOTE_ROUTES: Route[] = [
         component: RemoteEntryComponent,
         children: [
             {
+                path: AppRouteEnum.Empty,
+                redirectTo: AppRouteEnum.List,
+                pathMatch: 'full'
+            },
+            {
                 path: AppRouteEnum.List,
                 loadChildren: () =>
                     import('../pages/list/list.module').then((m) => m.ListModule)
