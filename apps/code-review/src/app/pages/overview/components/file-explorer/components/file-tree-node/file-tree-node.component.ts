@@ -107,14 +107,14 @@ export class FileTreeNodeComponent implements OnChanges {
     }
 
     private getFolderIconName(): string {
-        const NAME_AS_FOLDER_NAME = this.name as FolderName;
+        const nameAsFolderName = this.name as FolderName;
         let folderName = 'folder';
 
         if (
-            FOLDERS_ICON_NAME_MAPPER[NAME_AS_FOLDER_NAME]
+            FOLDERS_ICON_NAME_MAPPER[nameAsFolderName]
         ) {
             folderName = (
-                FOLDERS_ICON_NAME_MAPPER[NAME_AS_FOLDER_NAME]
+                FOLDERS_ICON_NAME_MAPPER[nameAsFolderName]
             );
         }
 
@@ -126,10 +126,8 @@ export class FileTreeNodeComponent implements OnChanges {
     }
 
     private getFileIconName(): string {
-        const NAME_AS_FILE_NAME = this.name as FileName;
-
         return (
-            FILE_ICON_NAME_MAPPER[NAME_AS_FILE_NAME]
+            FILE_ICON_NAME_MAPPER[this.name as FileName]
         );
     }
 
