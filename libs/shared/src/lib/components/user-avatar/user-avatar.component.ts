@@ -2,10 +2,13 @@ import {
     Input,
     Component,
     ChangeDetectionStrategy,
-    HostBinding, OnInit
+    HostBinding,
+    OnChanges
 } from '@angular/core';
 
 import { SafeStyle } from '@angular/platform-browser';
+
+const DEFAULT_URL = 'assets/images/user-avatar.png';
 
 @Component({
     selector: 'acua-user-avatar',
@@ -13,20 +16,18 @@ import { SafeStyle } from '@angular/platform-browser';
     template: ``,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserAvatarComponent implements OnInit {
+export class UserAvatarComponent implements OnChanges {
   @Input()
-    public userAvatarUrl!: string;
+    public avatarUrl!: string;
 
   @HostBinding('style.background-image')
-  public backgroundImgUrl: SafeStyle = `url("assets/images/user-avatar.png")`;
+  public backgroundImgUrl: SafeStyle = `url(${DEFAULT_URL})`;
 
-  public ngOnInit(): void {
+  public ngOnChanges(): void {
       this.setBackgroundUrl();
   }
 
   private setBackgroundUrl(): void {
-      if (this.userAvatarUrl) {
-          this.backgroundImgUrl = `url(${this.userAvatarUrl})`;
-      }
+      this.backgroundImgUrl = `url(${this.avatarUrl ? this.avatarUrl : DEFAULT_URL})`;
   }
 }

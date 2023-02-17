@@ -6,5 +6,5 @@ import { CodeEditorComponent } from '@code-review/pages/overview/components';
 
 export const OVERVIEW_ROUTES: Route[] = [
     { path: '', component: OverviewComponent },
-    { path: OverviewParamEnum.id, component: CodeEditorComponent }
+    { path: `:${OverviewParamEnum.id}`, component: CodeEditorComponent }
 ];
