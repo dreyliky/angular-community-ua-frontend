@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 
-import { AppRouteEnum } from '../core/enums/app-route-enum';
+import { AppRouteEnum } from '@code-review/core';
 import { RemoteEntryComponent } from './entry.component';
 
 export const REMOTE_ROUTES: Route[] = [
