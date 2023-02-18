@@ -16,8 +16,7 @@ import { TelegramLoginResponse } from '@host/interfaces';
 })
 export class LoginWidgetDirective implements AfterViewInit {
     @Output()
-    public login: EventEmitter<TelegramLoginResponse> =
-            new EventEmitter<TelegramLoginResponse>();
+    public login = new EventEmitter<TelegramLoginResponse>();
 
     private readonly document = inject(DOCUMENT);
     private readonly window = inject(WINDOW);
