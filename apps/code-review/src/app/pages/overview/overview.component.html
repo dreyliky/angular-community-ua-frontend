@@ -1,4 +1,10 @@
-<div class="overview">
-  <p class="overview__title">stackblitz-editor</p>
-  <acua-code-editor></acua-code-editor>
+<acua-file-explorer
+    [tree]="tree"
+    class="file-explorer">
+</acua-file-explorer>
+
+<div
+    acuaMonacoEditor
+    class="code-editor"
+    (monacoReady)="onMonacoEditorReady()">
 </div>

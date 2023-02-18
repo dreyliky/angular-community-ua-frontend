@@ -22,6 +22,10 @@ export const REMOTE_ROUTES: Route[] = [
                 path: AppRouteEnum.Request,
                 loadChildren: () =>
                     import('../pages/request/request.module').then((m) => m.RequestModule)
+            },
+            {
+                path: '**',
+                redirectTo: AppRouteEnum.List
             }
         ]
     },
