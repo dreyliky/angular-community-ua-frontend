@@ -1,21 +1,9 @@
 {
     "version": "0.2",
-    "ignorePaths": [
-        "**/*.scss",
-        "**/*.json"
-    ],
+    "ignorePaths": ["**/*.scss", "**/*.json"],
     "dictionaryDefinitions": [],
     "dictionaries": [],
-    "words": [
-        "codicon",
-        "stackblitz",
-        "Демо",
-        "Історія"
-    ],
-    "ignoreWords": [
-        "nrwl",
-        "acua",
-        "onauth"
-    ],
+    "words": ["codicon", "stackblitz", "Демо", "Історія"],
+    "ignoreWords": ["nrwl", "acua", "onauth", "Parens"],
     "import": []
 }

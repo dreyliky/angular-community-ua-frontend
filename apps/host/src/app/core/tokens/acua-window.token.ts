@@ -12,7 +12,7 @@ export const WINDOW = new InjectionToken<AcuaWindow>(
                 throw new Error('Window is not available');
             }
 
-            return (defaultView as any);
+            return defaultView as any;
         }
     }
 );

@@ -1,10 +1,8 @@
 {
-  "*.scss": [
-    "stylelint --fix",
-    "git add"
-  ],
-  "./**/*.ts": [
-    "eslint **/*.ts --fix",
-    "git add"
-  ]
+    "*": [
+        "npx prettier **/*.html **/*.scss **/*.ts **/*.json --write",
+        "git add"
+    ],
+    "*.scss": ["stylelint --fix"],
+    "./**/*.ts": ["eslint **/*.ts --fix"]
 }

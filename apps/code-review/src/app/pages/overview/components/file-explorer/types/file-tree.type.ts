@@ -1,4 +1,4 @@
 export type MonacoTreeElement = {
-	name: string;
-	content?: MonacoTreeElement[]
-}
+    name: string;
+    content?: MonacoTreeElement[];
+};
