@@ -9,7 +9,13 @@ import { UserMenuComponent } from './user-menu/user-menu.component';
 
 @NgModule({
     declarations: [HeaderComponent, UserMenuComponent],
-    imports: [CommonModule, RouterModule, MatIconModule, MatMenuModule, MatButtonModule],
+    imports: [
+        CommonModule,
+        RouterModule,
+        MatIconModule,
+        MatMenuModule,
+        MatButtonModule
+    ],
     exports: [HeaderComponent]
 })
 export class HeaderModule {}

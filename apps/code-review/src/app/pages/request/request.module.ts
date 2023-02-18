@@ -9,9 +9,7 @@ import { REQUEST_ROUTES } from './request.routes';
 import { RequestComponent } from './request.component';
 
 @NgModule({
-    declarations: [
-        RequestComponent
-    ],
+    declarations: [RequestComponent],
     imports: [
         CommonModule,
         MatRippleModule,

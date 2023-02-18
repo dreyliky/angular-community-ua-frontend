@@ -42,7 +42,7 @@
         "lint-staged": "^13.1.0",
         "npx": "^10.2.2",
         "nx": "15.6.3",
-        "prettier": "^2.6.2",
+        "prettier": "2.8.4",
         "stylelint": "^14.16.1",
         "stylelint-config-sass-guidelines": "^9.0.1",
         "stylelint-prettier": "^2.0.0",

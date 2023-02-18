@@ -20,13 +20,9 @@
         "editor.wordWrap": "off"
     },
     "editor.guides.bracketPairs": true,
-    "eslint.validate": [
-        "javascript",
-        "typescript",
-    ],
+    "eslint.validate": ["javascript", "typescript"],
     "stylelint.config": null,
-    "stylelint.validate": [
-        "scss"
-    ],
-    "cSpell.language": "en,uk"
+    "stylelint.validate": ["scss"],
+    "cSpell.language": "en,uk",
+    "editor.formatOnSave": true
 }

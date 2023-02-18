@@ -2,3 +2,11 @@
 
 /dist
 /coverage
+/node_modules
+/.firebase
+/.angular
+/.github
+/.husky
+/.vscode
+/.dist
+/tools

@@ -13,7 +13,7 @@ $acua-theme: mat.define-dark-theme((
         warn: $my-warn
     ),
     typography: mat.define-typography-config(),
-    density: 0,
+    density: 0
 ));
 
 @include mat.all-component-themes($acua-theme);

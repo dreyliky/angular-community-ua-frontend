@@ -1,9 +1,15 @@
 <button class="user-button" [matMenuTriggerFor]="menu">
-    <img class="user-avatar-image" src="assets/images/user-avatar.png" alt="user-avatar">
-    <img src="assets/icons/down-arrow.svg" alt="down-arrow">
+    <img
+        class="user-avatar-image"
+        src="assets/images/user-avatar.png"
+        alt="user-avatar"
+    />
+    <img src="assets/icons/down-arrow.svg" alt="down-arrow" />
 </button>
 
 <mat-menu #menu="matMenu">
-    <button [routerLink]="homeRouteEnum.CodeReview" mat-menu-item>Код-ревью</button>
+    <button [routerLink]="homeRouteEnum.CodeReview" mat-menu-item>
+        Код-ревью
+    </button>
     <button mat-menu-item>Вийти з акаунту</button>
 </mat-menu>

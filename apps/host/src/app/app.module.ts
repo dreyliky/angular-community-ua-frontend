@@ -6,9 +6,7 @@ import { AppComponent } from './app.component';
 import { APP_ROUTES } from './app.routes';
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
+    declarations: [AppComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -17,8 +15,6 @@ import { APP_ROUTES } from './app.routes';
             initialNavigation: 'enabledBlocking'
         })
     ],
-    bootstrap: [
-        AppComponent
-    ]
+    bootstrap: [AppComponent]
 })
 export class AppModule {}

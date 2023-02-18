@@ -110,12 +110,8 @@ export class FileTreeNodeComponent implements OnChanges {
         const nameAsFolderName = this.name as FolderName;
         let folderName = 'folder';
 
-        if (
-            FOLDERS_ICON_NAME_MAPPER[nameAsFolderName]
-        ) {
-            folderName = (
-                FOLDERS_ICON_NAME_MAPPER[nameAsFolderName]
-            );
+        if (FOLDERS_ICON_NAME_MAPPER[nameAsFolderName]) {
+            folderName = FOLDERS_ICON_NAME_MAPPER[nameAsFolderName];
         }
 
         if (this.isOpened) {
@@ -126,9 +122,7 @@ export class FileTreeNodeComponent implements OnChanges {
     }
 
     private getFileIconName(): string {
-        return (
-            FILE_ICON_NAME_MAPPER[this.name as FileName]
-        );
+        return FILE_ICON_NAME_MAPPER[this.name as FileName];
     }
 
     private tryGetExtensionIconName(): string | null {
@@ -137,12 +131,8 @@ export class FileTreeNodeComponent implements OnChanges {
         while (nameArray.length > 0) {
             const possibleExtensionName = nameArray.join('.') as ExtensionName;
 
-            if (
-                EXTENSION_ICON_NAME_MAPPER[possibleExtensionName]
-            ) {
-                return (
-                    EXTENSION_ICON_NAME_MAPPER[possibleExtensionName]
-                );
+            if (EXTENSION_ICON_NAME_MAPPER[possibleExtensionName]) {
+                return EXTENSION_ICON_NAME_MAPPER[possibleExtensionName];
             }
             nameArray = nameArray.slice(1);
         }

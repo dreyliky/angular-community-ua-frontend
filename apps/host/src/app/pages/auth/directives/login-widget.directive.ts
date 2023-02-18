@@ -16,7 +16,7 @@ import { TelegramLoginResponse } from '@host/interfaces';
 })
 export class LoginWidgetDirective implements AfterViewInit {
     @Output()
-    public login: EventEmitter<TelegramLoginResponse> = new EventEmitter<TelegramLoginResponse>();
+    public login = new EventEmitter<TelegramLoginResponse>();
 
     private readonly document = inject(DOCUMENT);
     private readonly window = inject(WINDOW);
@@ -35,12 +35,19 @@ export class LoginWidgetDirective implements AfterViewInit {
     }
 
     private setupScript(script: HTMLScriptElement): void {
-        script.setAttribute('src', 'https://telegram.org/js/telegram-widget.js?21');
-        script.setAttribute('data-telegram-login', this.environment.BotLoginName);
+        script.setAttribute(
+            'src',
+            'https://telegram.org/js/telegram-widget.js?21'
+        );
+        script.setAttribute(
+            'data-telegram-login',
+            this.environment.BotLoginName
+        );
         script.setAttribute('data-size', 'large');
         script.setAttribute('data-request-access', 'write');
         script.setAttribute('data-onauth', 'onTelegramLogin(user)');
 
-        this.window.onTelegramLogin = (data) => this.ngZone.run(() => this.login.emit(data));
+        this.window.onTelegramLogin = (data) =>
+            this.ngZone.run(() => this.login.emit(data));
     }
 }

@@ -17,17 +17,19 @@ const DEFAULT_URL = 'assets/images/user-avatar.png';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserAvatarComponent implements OnChanges {
-  @Input()
+    @Input()
     public avatarUrl!: string;
 
-  @HostBinding('style.background-image')
-  public backgroundImgUrl: SafeStyle = `url(${DEFAULT_URL})`;
+    @HostBinding('style.background-image')
+    public backgroundImgUrl: SafeStyle = `url(${DEFAULT_URL})`;
 
-  public ngOnChanges(): void {
-      this.setBackgroundUrl();
-  }
+    public ngOnChanges(): void {
+        this.setBackgroundUrl();
+    }
 
-  private setBackgroundUrl(): void {
-      this.backgroundImgUrl = `url(${this.avatarUrl ? this.avatarUrl : DEFAULT_URL})`;
-  }
+    private setBackgroundUrl(): void {
+        this.backgroundImgUrl = `url(${
+            this.avatarUrl ? this.avatarUrl : DEFAULT_URL
+        })`;
+    }
 }
