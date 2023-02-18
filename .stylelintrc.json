@@ -33,6 +33,7 @@
             {
                 "resolveNestedSelectors": true
             }
-        ]
+        ],
+        "function-parentheses-space-inside": "never-single-line"
     }
 }

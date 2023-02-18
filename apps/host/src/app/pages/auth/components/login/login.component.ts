@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { TelegramLoginResponse } from '@host/interfaces';
+import { TelegramLoginResponse } from '@host/shared';
 
 @Component({
     selector: 'acua-login',

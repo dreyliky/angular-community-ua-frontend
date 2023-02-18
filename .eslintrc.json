@@ -251,5 +251,6 @@
                 ]
             }
         }
-    ]
+    ],
+    "extends": ["prettier"]
 }

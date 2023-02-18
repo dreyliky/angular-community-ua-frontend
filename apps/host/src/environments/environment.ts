@@ -1,3 +1,3 @@
 export const environment = {
-    BotLoginName: 'acua_dev_bot'
+    botLoginName: 'angular_community_ua_bot'
 };
