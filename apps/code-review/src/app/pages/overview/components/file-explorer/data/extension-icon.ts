@@ -1,4 +1,4 @@
-export const extensions = {
+export const EXTENSION_ICON_NAME_MAPPER = {
     'htm': 'html',
     'html': 'html',
     'xhtml': 'html',

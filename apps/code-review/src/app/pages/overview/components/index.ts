@@ -1,2 +1,2 @@
-export * from './file-tree';
+export * from './file-explorer';
 
