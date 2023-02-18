@@ -1,4 +1,4 @@
-import { CodeReviewRequestStatusEnum } from '@code-review/enums';
+import { CodeReviewRequestStatusEnum } from '../enums';
 
 export interface CodeReviewRequest {
     readonly id: string;

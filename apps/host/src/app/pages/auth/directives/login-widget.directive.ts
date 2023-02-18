@@ -8,8 +8,8 @@ import {
     NgZone,
     Output
 } from '@angular/core';
-import { ENVIRONMENT, WINDOW } from '@host/core/tokens';
-import { TelegramLoginResponse } from '@host/interfaces';
+import { ENVIRONMENT, WINDOW } from '@host/core';
+import { TelegramLoginResponse } from '@host/shared';
 
 @Directive({
     selector: '[acuaLoginWidget]'
@@ -41,9 +41,10 @@ export class LoginWidgetDirective implements AfterViewInit {
         );
         script.setAttribute(
             'data-telegram-login',
-            this.environment.BotLoginName
+            this.environment.botLoginName
         );
         script.setAttribute('data-size', 'large');
+        script.setAttribute('data-lang', 'uk');
         script.setAttribute('data-request-access', 'write');
         script.setAttribute('data-onauth', 'onTelegramLogin(user)');
 
