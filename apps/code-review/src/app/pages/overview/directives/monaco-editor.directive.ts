@@ -1,4 +1,10 @@
-import { Directive, ElementRef, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+    Directive,
+    ElementRef,
+    EventEmitter,
+    OnInit,
+    Output
+} from '@angular/core';
 import loader from '@monaco-editor/loader';
 import type { editor, IRange } from 'monaco-editor';
 
@@ -46,6 +52,10 @@ export class MonacoEditorDirective implements OnInit {
 
     private async init(): Promise<void> {
         const monaco = await loader.init();
+        this.editor = monaco.editor.create(
+            this.hostRef.nativeElement,
+            this.editorOptions
+        );
 
         this.monacoEditor = monaco.editor;
         this.editor = monaco.editor.create(this.hostRef.nativeElement, this.editorOptions);

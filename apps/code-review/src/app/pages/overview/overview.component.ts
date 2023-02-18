@@ -8,7 +8,6 @@ import { MonacoEditorDirective } from './directives';
     styleUrls: ['./overview.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-
 export class OverviewComponent {
     @ViewChild(MonacoEditorDirective)
     private readonly codeEditor!: MonacoEditorDirective;

@@ -8,15 +8,15 @@ import {
     NgZone,
     Output
 } from '@angular/core';
-import { ENVIRONMENT, WINDOW } from '@host/core/tokens';
-import { TelegramLoginResponse } from '@host/interfaces';
+import { ENVIRONMENT, WINDOW } from '@host/core';
+import { TelegramLoginResponse } from '@host/shared';
 
 @Directive({
     selector: '[acuaLoginWidget]'
 })
 export class LoginWidgetDirective implements AfterViewInit {
     @Output()
-    public login: EventEmitter<TelegramLoginResponse> = new EventEmitter<TelegramLoginResponse>();
+    public login = new EventEmitter<TelegramLoginResponse>();
 
     private readonly document = inject(DOCUMENT);
     private readonly window = inject(WINDOW);
@@ -35,12 +35,20 @@ export class LoginWidgetDirective implements AfterViewInit {
     }
 
     private setupScript(script: HTMLScriptElement): void {
-        script.setAttribute('src', 'https://telegram.org/js/telegram-widget.js?21');
-        script.setAttribute('data-telegram-login', this.environment.BotLoginName);
+        script.setAttribute(
+            'src',
+            'https://telegram.org/js/telegram-widget.js?21'
+        );
+        script.setAttribute(
+            'data-telegram-login',
+            this.environment.botLoginName
+        );
         script.setAttribute('data-size', 'large');
+        script.setAttribute('data-lang', 'uk');
         script.setAttribute('data-request-access', 'write');
         script.setAttribute('data-onauth', 'onTelegramLogin(user)');
 
-        this.window.onTelegramLogin = (data) => this.ngZone.run(() => this.login.emit(data));
+        this.window.onTelegramLogin = (data) =>
+            this.ngZone.run(() => this.login.emit(data));
     }
 }

@@ -1,3 +1,3 @@
 export const environment = {
-    BotLoginName: 'acua_dev_bot'
+    botLoginName: 'acua_dev_bot'
 };

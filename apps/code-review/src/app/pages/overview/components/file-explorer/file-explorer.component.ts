@@ -1,8 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    Input
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MonacoTreeElement } from './types/file-tree.type';
 
 @Component({

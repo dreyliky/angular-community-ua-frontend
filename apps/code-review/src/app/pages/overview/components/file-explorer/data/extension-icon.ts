@@ -1,8 +1,8 @@
 export const EXTENSION_ICON_NAME_MAPPER = {
-    'htm': 'html',
-    'html': 'html',
-    'xhtml': 'html',
-    'ts': 'typescript',
+    htm: 'html',
+    html: 'html',
+    xhtml: 'html',
+    ts: 'typescript',
     'd.ts': 'typescript-def',
     'module.ts': 'angular',
     'module.js': 'angular',
@@ -21,10 +21,10 @@ export const EXTENSION_ICON_NAME_MAPPER = {
     'resolver.ts': 'angular-resolver',
     'resolver.js': 'angular-resolver',
     'tsconfig.json': 'tsconfig',
-    'settings': 'settings',
-    'json': 'json',
-    'css': 'css',
-    'scss': 'sass',
-    'sass': 'sass',
-    'less': 'less'
+    settings: 'settings',
+    json: 'json',
+    css: 'css',
+    scss: 'sass',
+    sass: 'sass',
+    less: 'less'
 };

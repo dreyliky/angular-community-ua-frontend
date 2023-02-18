@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 
-import { AppRouteEnum } from '../core/enums/app-route-enum';
+import { AppRouteEnum } from '@code-review/core';
 import { RemoteEntryComponent } from './entry.component';
 
 export const REMOTE_ROUTES: Route[] = [
@@ -11,17 +11,23 @@ export const REMOTE_ROUTES: Route[] = [
             {
                 path: AppRouteEnum.List,
                 loadChildren: () =>
-                    import('../pages/list/list.module').then((m) => m.ListModule)
+                    import('../pages/list/list.module').then(
+                        (m) => m.ListModule
+                    )
             },
             {
-                path:  AppRouteEnum.Overview,
+                path: AppRouteEnum.Overview,
                 loadChildren: () =>
-                    import('../pages/overview/overview.module').then((m) => m.OverviewModule)
+                    import('../pages/overview/overview.module').then(
+                        (m) => m.OverviewModule
+                    )
             },
             {
                 path: AppRouteEnum.Request,
                 loadChildren: () =>
-                    import('../pages/request/request.module').then((m) => m.RequestModule)
+                    import('../pages/request/request.module').then(
+                        (m) => m.RequestModule
+                    )
             },
             {
                 path: '**',

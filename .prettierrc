@@ -1,5 +1,11 @@
 {
-  "singleQuote": true,
-  "tabWidth": 4,
-  "endOfLine": "auto"
+    "singleQuote": true,
+    "tabWidth": 4,
+    "endOfLine": "auto",
+    "bracketSameLine": false,
+    "printWidth": 80,
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "trailingComma": "none",
+    "htmlWhitespaceSensitivity": "css"
 }
