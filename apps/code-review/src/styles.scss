@@ -9,3 +9,11 @@ body {
     background-color: rgb(var(--background-color));
     color: rgb(var(--text-color));
 }
+
+.selected-line {
+    background: #fff000;
+}
+
+.cursor-pointer {
+    cursor: pointer !important;
+}
