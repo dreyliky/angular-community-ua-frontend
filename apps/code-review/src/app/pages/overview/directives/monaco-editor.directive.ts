@@ -1,9 +1,9 @@
 import {
     Directive,
     ElementRef,
-    EventEmitter,
-    OnInit,
-    Output
+    EventEmitter, OnInit,
+    Output,
+    Renderer2
 } from '@angular/core';
 import loader from '@monaco-editor/loader';
 import type { editor, IRange } from 'monaco-editor';
@@ -35,7 +35,8 @@ export class MonacoEditorDirective implements OnInit {
     }
 
     constructor(
-        private readonly hostRef: ElementRef<HTMLElement>
+        private readonly hostRef: ElementRef<HTMLElement>,
+        private readonly renderer: Renderer2
     ) {}
 
     public ngOnInit(): void {
@@ -56,14 +57,10 @@ export class MonacoEditorDirective implements OnInit {
             this.hostRef.nativeElement,
             this.editorOptions
         );
-
         this.monacoEditor = monaco.editor;
-        this.editor = monaco.editor.create(this.hostRef.nativeElement, this.editorOptions);
         this.mouseTargetTypes = monaco.editor.MouseTargetType;
-
         const model = this.currentModel as editor.ITextModel;
         const editorDomContainer = this.editor.getContainerDomNode();
-
         this.styleCursorToPointer(editorDomContainer);
 
         this.registerEditorListeners(model);
@@ -74,37 +71,38 @@ export class MonacoEditorDirective implements OnInit {
     private registerEditorListeners(model: editor.ITextModel): void {
         this.editor.onMouseMove((e) => this.applySelectionToLine(model, e));
         this.editor.onMouseLeave(() => this.removeDecorations(model));
-        this.editor.onMouseDown((e) => console.log(this.getCodeLineTarget(e)));
+        this.editor.onMouseDown((e) => {
+            console.log(this.getCodeLineElement(model, e));
+        });
         this.editor.onDidChangeModel((e) => console.log(e)); // In order to react to changes in tree
     }
 
     private applySelectionToLine(model: editor.ITextModel, event: editor.IEditorMouseEvent): void {
-        const targetType = event.target.type;
+        this.removeDecorations(model);
 
-        if (!this.checkWhetherLineIsCode(targetType)) {
-            this.removeDecorations(model);
-
+        if (!this.checkWhetherLineWithCode(model, event.target)) {
             return;
         }
-        const lineNumber = event.target.position?.lineNumber as number;
+
         const eventRange = event.target.range as IRange;
-        const range: IRange = {
-            ...eventRange,
-            startColumn: 1,
-            endColumn: model.getLineMaxColumn(lineNumber)
-        };
-        const decor = this.setDecorationToLine(model, range);
-        this.decorations.push(decor[0]);
+
+        const decoration = this.setDecorationToLine(model, eventRange);
+        this.decorations.push(decoration[0]);
     }
 
-    private getCodeLineTarget(event: editor.IEditorMouseEvent): editor.IMouseTarget | null {
-        const targetType = event.target.type;
-
-        if (!this.checkWhetherLineIsCode(targetType)) {
-            return null;
+    private getCodeLineElement(
+        model: editor.ITextModel,
+        event: editor.IEditorMouseEvent
+    ): Element | void {
+        if (!this.checkWhetherLineWithCode(model, event.target)) {
+            return;
         }
 
-        return event.target;
+        const lineNumber = event.target.position?.lineNumber as number;
+        const lineElement = this.editor.getContainerDomNode()
+            .querySelector(`.view-lines > .view-line:nth-child(${lineNumber})`) as Element;
+
+        return lineElement;
     }
 
     private setDecorationToLine(model: editor.ITextModel, range: IRange): string[] {
@@ -114,6 +112,7 @@ export class MonacoEditorDirective implements OnInit {
                 {
                     range: range,
                     options: {
+                        isWholeLine: true,
                         className: 'selected-line'
                     }
                 }
@@ -125,13 +124,20 @@ export class MonacoEditorDirective implements OnInit {
         model.deltaDecorations(this.decorations, []);
     }
 
-    private checkWhetherLineIsCode(targetType: editor.MouseTargetType): boolean {
-        return targetType === this.mouseTargetTypes.CONTENT_TEXT;
+    private checkWhetherLineWithCode(
+        model: editor.ITextModel,
+        eventTarget: editor.IMouseTarget
+    ): boolean {
+        const target = eventTarget as any;
+        const targetDetails = target.detail;
+        const lineNumber = eventTarget.position?.lineNumber as number;
+        const lineLength = model.getLineLength(lineNumber);
+
+        return !targetDetails.isAfterLines && lineLength > 0;
     }
 
     private styleCursorToPointer(editorDomContainer: HTMLElement): void {
         const editorContent = editorDomContainer.querySelector('.view-lines') as Element;
-
-        editorContent.classList.add('cursor-pointer');
+        this.renderer.addClass(editorContent, 'cursor-pointer');
     }
 }

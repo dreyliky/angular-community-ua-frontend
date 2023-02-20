@@ -17,6 +17,6 @@ export class OverviewComponent {
 
     public onMonacoEditorReady(): void {
         // FIXME: Replace to real approach
-        this.codeEditor.setValue('export const MY_CODE_HERE = "VALUE";\n');
+        this.codeEditor.setValue('export const MY_CODE_HERE = "VALUE";\nexport const s = "VAE";\n');
     }
 }
