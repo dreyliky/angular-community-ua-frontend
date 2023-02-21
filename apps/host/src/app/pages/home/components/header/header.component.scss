@@ -12,18 +12,16 @@
         border-bottom: 1px solid hsl(220 10% 14%);
 
         .logo {
-            display: flex;
-            align-items: center;
+            cursor: pointer;
             font-size: 20px;
             font-weight: 900;
+            display: flex;
+            align-items: center;
             color: #f1f1f1;
-            cursor: pointer;
+            text-decoration: none;
 
-            .logo-link {
+            &-image {
                 margin-right: 8px;
-            }
-
-            .logo-image {
                 max-height: 40px;
                 max-width: 40px;
             }

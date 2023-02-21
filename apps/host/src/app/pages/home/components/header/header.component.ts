@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { AppRouteEnum } from '@host/core';
 
 @Component({
     selector: 'acua-header',
@@ -8,9 +8,9 @@ import { Router } from '@angular/router';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
-    constructor(private readonly router: Router) {}
+    private appRouteEnum = AppRouteEnum;
 
-    public navigateTo(path: string): void {
-        this.router.navigateByUrl(`${path}`);
+    protected get logoPath(): string {
+        return `/${this.appRouteEnum.Home}`;
     }
 }
