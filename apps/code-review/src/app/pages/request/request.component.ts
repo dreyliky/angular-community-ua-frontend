@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AppRouteEnum } from '@code-review/core';
 import { RequestFormComponent } from './components';
 
 @Component({
@@ -11,18 +12,18 @@ import { RequestFormComponent } from './components';
 export class RequestComponent {
     @ViewChild('form') protected requestForm!: RequestFormComponent;
 
-    constructor(private router: Router) {}
+    constructor(private router: Router, private route: ActivatedRoute) {}
 
     protected get disabled(): boolean {
         return !this.requestForm?.valid;
     }
 
-    protected click(): void {
-        this.requestForm.submit();
-    }
+    protected onRequestCreationButtonClick(): void {
+        console.log(this.requestForm.value);
+        console.log(this.route.snapshot.url);
 
-    protected onSubmitForm(formData: any): void {
-        console.log(formData);
-        this.router.navigateByUrl('/overview');
+        this.router.navigate(['../', AppRouteEnum.Overview], {
+            relativeTo: this.route
+        });
     }
 }

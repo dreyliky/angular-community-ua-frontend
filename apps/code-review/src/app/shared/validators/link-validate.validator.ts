@@ -4,11 +4,11 @@ import {
     ValidationErrors
 } from '@angular/forms';
 import { map, Observable } from 'rxjs';
-import { RequestApiService } from '../api';
+import { RequestService } from '../services';
 
 export class LinkValidateValidator {
     public static createValidator(
-        requestService: RequestApiService
+        requestService: RequestService
     ): AsyncValidatorFn {
         return (
             control: AbstractControl

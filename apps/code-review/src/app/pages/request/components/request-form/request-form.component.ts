@@ -1,56 +1,47 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import {
-    FormControl,
-    FormGroup,
-    ValidationErrors,
-    Validators
-} from '@angular/forms';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormControl, ValidationErrors } from '@angular/forms';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { LinkValidateValidator, RequestApiService } from '@code-review/shared';
+import { RequestService } from '@code-review/shared';
 import { EMPTY, switchMap } from 'rxjs';
+import { RequestForm } from '../../forms';
+import { IRequestForm } from '../../interfaces';
 
 @Component({
     templateUrl: './request-form.component.html',
     styleUrls: ['./request-form.component.scss'],
-    selector: 'acua-request-from'
+    selector: 'acua-request-from',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [RequestForm]
 })
 export class RequestFormComponent implements OnInit {
-    @Output() public submitForm = new EventEmitter();
-    protected form: FormGroup;
     protected iframeLink!: SafeUrl | null;
+    protected nameControl!: FormControl;
+    protected descriptionControl!: FormControl;
+    protected linkControl!: FormControl;
+
+    public get value(): Partial<IRequestForm> {
+        return this.form.value;
+    }
 
     public get valid(): boolean {
         return this.form.valid;
     }
 
     constructor(
-        private requestApiService: RequestApiService,
+        protected form: RequestForm,
+        private requestService: RequestService,
         private domSanitizer: DomSanitizer
-    ) {
-        this.form = this.createForm();
-    }
+    ) {}
 
     public ngOnInit(): void {
-        this.form = this.createForm();
+        this.initControls();
         this.updateIframeLink();
     }
 
-    public submit(): void {
-        if (this.form.valid) {
-            this.submitForm.next(this.form.value);
-        }
-    }
-
-    protected createForm(): FormGroup {
-        return new FormGroup({
-            name: new FormControl(),
-            description: new FormControl(),
-            link: new FormControl(
-                null,
-                [Validators.required],
-                [LinkValidateValidator.createValidator(this.requestApiService)]
-            )
-        });
+    protected initControls(): void {
+        this.nameControl = this.form.get('name') as FormControl;
+        this.descriptionControl = this.form.get('description') as FormControl;
+        this.linkControl = this.form.get('link') as FormControl;
     }
 
     protected hasControlError(controlName: string): boolean {
@@ -70,9 +61,9 @@ export class RequestFormComponent implements OnInit {
             .pipe(
                 switchMap((status) => {
                     if (status === 'VALID') {
-                        return this.requestApiService.getNormalizedLink(
-                            linkController.value
-                        );
+                        const value = linkController.value as string;
+
+                        return this.requestService.getNormalizedLink(value);
                     }
                     this.iframeLink = null;
 

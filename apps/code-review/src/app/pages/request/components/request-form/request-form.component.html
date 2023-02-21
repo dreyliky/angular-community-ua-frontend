@@ -1,15 +1,15 @@
 <form [formGroup]="form" class="request-form">
     <mat-form-field>
         <mat-label>Назва</mat-label>
-        <input matInput type="text" formControlName="name" />
+        <input matInput type="text" [formControl]="nameControl" />
     </mat-form-field>
     <mat-form-field>
         <mat-label>Опис</mat-label>
-        <textarea matInput formControlName="description"></textarea>
+        <textarea matInput [formControl]="descriptionControl"></textarea>
     </mat-form-field>
     <mat-form-field>
         <mat-label>Посилання на Stackblitz або Github</mat-label>
-        <input matInput type="text" formControlName="link" />
+        <input matInput type="text" [formControl]="linkControl" />
         <mat-error *ngIf="hasControlError('link')">
             {{ getLastControlError('link') }}
         </mat-error>

@@ -1,12 +1,9 @@
 <div class="request-page">
-    <acua-request-from
-        #form
-        (submitForm)="onSubmitForm($event)"
-    ></acua-request-from>
+    <acua-request-from #form></acua-request-from>
     <button
         mat-raised-button
         color="primary"
-        (click)="click()"
+        (click)="onRequestCreationButtonClick()"
         [disabled]="disabled"
     >
         Створити
