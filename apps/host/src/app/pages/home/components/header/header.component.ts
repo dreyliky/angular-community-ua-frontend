@@ -8,9 +8,7 @@ import { AppRouteEnum } from '@host/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
-    private appRouteEnum = AppRouteEnum;
-
-    protected get logoPath(): string {
-        return `/${this.appRouteEnum.Home}`;
+    protected get homePagePath(): string {
+        return `/${AppRouteEnum.Home}`;
     }
 }
