@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,7 +14,8 @@ import { APP_ROUTES } from './app.routes';
         RouterModule.forRoot(APP_ROUTES, {
             preloadingStrategy: PreloadAllModules,
             initialNavigation: 'enabledBlocking'
-        })
+        }),
+        HttpClientModule
     ],
     bootstrap: [AppComponent]
 })
