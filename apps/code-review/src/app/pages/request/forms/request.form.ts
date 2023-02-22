@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormGroupDef, LinkValidateValidator } from '@code-review/shared';
-import { RequestService } from '@code-review/shared/services/request.service';
-import { IRequestForm } from '../interfaces';
+import { RequestFormInfo } from '../interfaces';
 
 @Injectable()
-export class RequestForm extends FormGroup<FormGroupDef<IRequestForm>> {
-    constructor(private requestService: RequestService) {
+export class RequestForm extends FormGroup<FormGroupDef<RequestFormInfo>> {
+    constructor(private readonly linkValidateValidator: LinkValidateValidator) {
         super({
             name: new FormControl(),
             description: new FormControl(),
             link: new FormControl(
                 '',
                 [Validators.required],
-                [LinkValidateValidator.createValidator(requestService)]
+                [linkValidateValidator.validate.bind(linkValidateValidator)]
             )
         });
     }

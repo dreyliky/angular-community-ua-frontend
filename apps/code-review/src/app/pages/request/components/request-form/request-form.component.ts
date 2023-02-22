@@ -1,25 +1,23 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControl, ValidationErrors } from '@angular/forms';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { FormControl } from '@angular/forms';
 import { RequestService } from '@code-review/shared';
-import { EMPTY, switchMap } from 'rxjs';
+import { filter, Observable, switchMap } from 'rxjs';
 import { RequestForm } from '../../forms';
-import { IRequestForm } from '../../interfaces';
+import { RequestFormInfo } from '../../interfaces';
 
 @Component({
     templateUrl: './request-form.component.html',
     styleUrls: ['./request-form.component.scss'],
     selector: 'acua-request-from',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [RequestForm]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RequestFormComponent implements OnInit {
-    protected iframeLink!: SafeUrl | null;
     protected nameControl!: FormControl;
     protected descriptionControl!: FormControl;
     protected linkControl!: FormControl;
+    protected iframeLink$!: Observable<string>;
 
-    public get value(): Partial<IRequestForm> {
+    public get value(): Partial<RequestFormInfo> {
         return this.form.value;
     }
 
@@ -29,13 +27,11 @@ export class RequestFormComponent implements OnInit {
 
     constructor(
         protected form: RequestForm,
-        private requestService: RequestService,
-        private domSanitizer: DomSanitizer
+        private requestService: RequestService
     ) {}
 
     public ngOnInit(): void {
         this.initControls();
-        this.updateIframeLink();
     }
 
     protected initControls(): void {
@@ -44,36 +40,18 @@ export class RequestFormComponent implements OnInit {
         this.linkControl = this.form.get('link') as FormControl;
     }
 
-    protected hasControlError(controlName: string): boolean {
-        return !!this.form.get(controlName)?.errors;
+    protected onLinkChange(): void {
+        this.iframeLink$ = this.getIframeLink();
     }
 
-    protected getLastControlError(controlName: string): string {
-        const errors = this.form.get(controlName)?.errors as ValidationErrors;
-        const errorKey = Object.keys(errors || {})[0];
+    private getIframeLink(): Observable<string> {
+        return this.linkControl.statusChanges.pipe(
+            filter((status) => status === 'VALID'),
+            switchMap(() => {
+                const value = this.linkControl.value as string;
 
-        return errorKey;
-    }
-
-    private updateIframeLink(): void {
-        const linkController = this.form.get('link');
-        linkController?.statusChanges
-            .pipe(
-                switchMap((status) => {
-                    if (status === 'VALID') {
-                        const value = linkController.value as string;
-
-                        return this.requestService.getNormalizedLink(value);
-                    }
-                    this.iframeLink = null;
-
-                    return EMPTY;
-                })
-            )
-            // unsubscribe service?
-            .subscribe((link: string) => {
-                this.iframeLink =
-                    this.domSanitizer.bypassSecurityTrustResourceUrl(link);
-            });
+                return this.requestService.getNormalizedLink(value);
+            })
+        );
     }
 }

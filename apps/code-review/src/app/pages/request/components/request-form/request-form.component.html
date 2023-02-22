@@ -9,15 +9,26 @@
     </mat-form-field>
     <mat-form-field>
         <mat-label>Посилання на Stackblitz або Github</mat-label>
-        <input matInput type="text" [formControl]="linkControl" />
-        <mat-error *ngIf="hasControlError('link')">
-            {{ getLastControlError('link') }}
+        <input
+            matInput
+            type="text"
+            [formControl]="linkControl"
+            (input)="onLinkChange()"
+        />
+        <mat-error *ngIf="linkControl.hasError('required')">
+            Посилання на проєкт є обов'язковим.
+        </mat-error>
+        <mat-error *ngIf="linkControl.hasError('linkValidate')">
+            Приймаються посилання на stackblitz проєкти та github репозиторії.
         </mat-error>
     </mat-form-field>
-    <iframe
-        class="request-form__iframe"
-        *ngIf="iframeLink"
-        [src]="iframeLink"
-        frameborder="0"
-    ></iframe>
+    <ng-container *ngIf="iframeLink$ | async as iframeLink">
+        <iframe
+            *ngIf="valid"
+            class="request-form__iframe"
+            [src]="iframeLink | safe"
+            frameborder="0"
+        >
+        </iframe>
+    </ng-container>
 </form>
