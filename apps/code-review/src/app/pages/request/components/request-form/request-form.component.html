@@ -24,7 +24,7 @@
         <iframe
             *ngIf="formGroup.valid"
             class="request-form__iframe"
-            [src]="iframeLink | safe"
+            [src]="iframeLink | safeResourceUrl"
             frameborder="0"
         >
         </iframe>

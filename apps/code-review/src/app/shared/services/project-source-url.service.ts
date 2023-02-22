@@ -4,7 +4,9 @@ import { ProjectSourceUrlService as ProjectSourceUrlApiService } from '../api';
 
 @Injectable({ providedIn: 'root' })
 export class ProjectSourceUrlService {
-    constructor(private projectSourceUrlApi: ProjectSourceUrlApiService) {}
+    constructor(
+        private readonly projectSourceUrlApi: ProjectSourceUrlApiService
+    ) {}
 
     public validate(link: string): Observable<boolean> {
         return this.projectSourceUrlApi.validate(link);

@@ -1,2 +1,2 @@
 export * from './pipes.module';
-export * from './safe.pipe';
+export * from './safe-resource-url.pipe';
