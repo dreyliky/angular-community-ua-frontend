@@ -4,20 +4,20 @@ import {
     AsyncValidator,
     ValidationErrors
 } from '@angular/forms';
+import { ProjectSourceUrlService } from '@code-review/shared';
 import { map, Observable } from 'rxjs';
-import { RequestService } from '../../../shared/services';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class LinkValidateValidator implements AsyncValidator {
-    constructor(private readonly requestService: RequestService) {}
+    constructor(
+        private readonly projectSourceUrlService: ProjectSourceUrlService
+    ) {}
 
     public validate(
-        control: AbstractControl<any, any>
-    ): Observable<ValidationErrors | null> | Promise<ValidationErrors | null> {
-        return this.requestService
-            .validateLink(control.value)
+        control: AbstractControl<string, string>
+    ): Observable<ValidationErrors | null> {
+        return this.projectSourceUrlService
+            .validate(control.value)
             .pipe(
                 map((result: boolean) =>
                     result ? null : { linkValidate: true }

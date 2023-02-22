@@ -2,13 +2,14 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppRouteEnum } from '@code-review/core';
 import { RequestForm } from './forms';
+import { LinkValidateValidator } from './validators';
 
 @Component({
     selector: 'acua-request',
     templateUrl: './request.component.html',
     styleUrls: ['./request.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [RequestForm]
+    providers: [RequestForm, LinkValidateValidator]
 })
 export class RequestComponent {
     constructor(
@@ -17,7 +18,7 @@ export class RequestComponent {
         private readonly route: ActivatedRoute
     ) {}
 
-    protected get disabled(): boolean {
+    protected get isRequestCreationButtonDisabled(): boolean {
         return !this.requestForm?.valid;
     }
 

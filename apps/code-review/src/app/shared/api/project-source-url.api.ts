@@ -6,16 +6,16 @@ import { Observable } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
-export class RequestApiService {
+export class ProjectSourceUrlService {
     constructor(private readonly http: HttpClient) {}
 
-    public validateLink(link: string): Observable<boolean> {
+    public validate(link: string): Observable<boolean> {
         return this.http.get<boolean>(
             `${environment.backendUrl}/source-url/validate?url=${link}`
         );
     }
 
-    public getNormalizedLink(link: string): Observable<string> {
+    public getNormalized(link: string): Observable<string> {
         return this.http.get(
             `${environment.backendUrl}/source-url/stackblitz/normalized?url=${link}`,
             { responseType: 'text' }
