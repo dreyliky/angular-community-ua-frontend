@@ -1,0 +1,9 @@
+.request-form {
+    display: flex;
+    flex-direction: column;
+
+    &__iframe {
+        height: 600px;
+        margin-bottom: 22px;
+    }
+}
