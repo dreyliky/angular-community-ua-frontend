@@ -7,7 +7,10 @@ import { OverviewComponent } from './overview.component';
 import { OVERVIEW_ROUTES } from './overview.routes';
 
 @NgModule({
-    declarations: [OverviewComponent, MonacoEditorDirective],
+    declarations: [
+        OverviewComponent,
+        MonacoEditorDirective
+    ],
     imports: [
         CommonModule,
         FileExplorerModule,
