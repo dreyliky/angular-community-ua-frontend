@@ -1,8 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { inject, InjectionToken } from '@angular/core';
-import { AcuaWindow } from '../interfaces';
 
-export const WINDOW = new InjectionToken<AcuaWindow>(
+export const WINDOW = new InjectionToken<Window>(
     'An abstraction over global window object',
     {
         factory: () => {
