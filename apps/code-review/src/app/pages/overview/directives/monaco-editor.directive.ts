@@ -1,13 +1,15 @@
 import {
     Directive,
     ElementRef,
-    EventEmitter, OnInit,
+    EventEmitter,
+    OnInit,
     Output,
     Renderer2
 } from '@angular/core';
 import loader from '@monaco-editor/loader';
 import type { editor, IPosition, IRange } from 'monaco-editor';
 
+// FIXME: Move code to components/code-editor
 @Directive({
     selector: '[acuaMonacoEditor]'
 })
@@ -83,7 +85,10 @@ export class MonacoEditorDirective implements OnInit {
         const decorations = this.createDecorationsToLine(event);
         this.applyDecorationsToLine(model, event, decorations);
 
-        const commentCounterWidget = this.createCommentCounterWidget(model, event);
+        const commentCounterWidget = this.createCommentCounterWidget(
+            model,
+            event
+        );
         this.applyWidgetToLine(model, event, commentCounterWidget);
     }
 
@@ -126,12 +131,16 @@ export class MonacoEditorDirective implements OnInit {
             }),
             getDomNode: () => {
                 // Here, It should be comment counter component instead
-                const counterContainerElement = this.renderer.createElement('div');
+                const counterContainerElement =
+                    this.renderer.createElement('div');
                 const counterInnerElement = this.renderer.createElement('p');
                 counterInnerElement.innerHTML = '0';
                 this.renderer.addClass(counterContainerElement, 'counter');
                 this.renderer.addClass(counterInnerElement, 'counter-text');
-                this.renderer.appendChild(counterContainerElement, counterInnerElement);
+                this.renderer.appendChild(
+                    counterContainerElement,
+                    counterInnerElement
+                );
 
                 return counterContainerElement;
             }
@@ -171,7 +180,9 @@ export class MonacoEditorDirective implements OnInit {
         this.editor.addContentWidget(widget);
     }
 
-    private getSelectionDecoration(event: editor.IEditorMouseEvent): editor.IModelDeltaDecoration {
+    private getSelectionDecoration(
+        event: editor.IEditorMouseEvent
+    ): editor.IModelDeltaDecoration {
         const range = event.target.range as IRange;
 
         return {
@@ -192,8 +203,11 @@ export class MonacoEditorDirective implements OnInit {
         }
 
         const lineNumber = event.target.position?.lineNumber as number;
-        const lineElement = this.editor.getContainerDomNode()
-            .querySelector(`.view-lines > .view-line:nth-child(${lineNumber})`) as Element;
+        const lineElement = this.editor
+            .getContainerDomNode()
+            .querySelector(
+                `.view-lines > .view-line:nth-child(${lineNumber})`
+            ) as Element;
 
         return lineElement;
     }
@@ -202,10 +216,7 @@ export class MonacoEditorDirective implements OnInit {
         model: editor.ITextModel,
         newDecorations: editor.IModelDeltaDecoration[]
     ): string[] {
-        return model.deltaDecorations(
-            [],
-            newDecorations
-        );
+        return model.deltaDecorations([], newDecorations);
     }
 
     private removeDecorations(model: editor.ITextModel): void {
@@ -241,7 +252,9 @@ export class MonacoEditorDirective implements OnInit {
     }
 
     private styleCursorToPointer(editorDomContainer: HTMLElement): void {
-        const editorContent = editorDomContainer.querySelector('.view-lines') as Element;
+        const editorContent = editorDomContainer.querySelector(
+            '.view-lines'
+        ) as Element;
         this.renderer.addClass(editorContent, 'cursor-pointer');
     }
 }
