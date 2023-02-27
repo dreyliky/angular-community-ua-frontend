@@ -1,0 +1,41 @@
+header {
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 15px;
+
+        mat-icon {
+            cursor: pointer;
+        }
+
+        .btn-menu {
+            margin-top: 5px;
+            background-color: rgb(32, 35, 39);
+            border-radius: 50%;
+            border: 0;
+
+            .btn-menu-icon {
+                margin-top: 1px;
+                color: #fff;
+            }
+        }
+
+        .btn-menu:hover:focus {
+            background-color: rgb(40, 44, 49);
+        }
+
+        .block-request {
+            width: 300px;
+            height: 53px;
+
+            .panel-request {
+                background-color: rgb(32, 35, 39);
+            }
+
+            .title {
+                margin-left: 10px;
+            }
+        }
+    }
+}

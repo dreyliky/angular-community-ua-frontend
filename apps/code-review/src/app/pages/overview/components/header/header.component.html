@@ -1,0 +1,41 @@
+<ng-template #desktopTemplate>
+    <header>
+        <div class="container">
+            <button mat-icon-button class="btn-menu">
+                <mat-icon class="btn-menu-icon">menu</mat-icon>
+            </button>
+            <mat-accordion class="block-request">
+                <mat-expansion-panel
+                    (opened)="panelOpenState = true"
+                    (closed)="panelOpenState = false"
+                    class="panel-request"
+                >
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <acua-user-avatar
+                                matTooltip="UserName"
+                            ></acua-user-avatar>
+                            <span class="title">Мій запит на Code-Review</span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <p>
+                        Подивіться будь ласка мій код і напишіть що тут можна
+                        покращити. Особливо цікавить AppComponent. Подивіться
+                        будь ласка мій код і напишіть що тут можна покращити.
+                        Особливо цікавить AppComponent
+                    </p>
+                    <p>20 лютого 2023</p>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </header>
+</ng-template>
+
+<header *ngIf="isMobile; else desktopTemplate">
+    <div class="container">
+        <button mat-icon-button class="btn-menu">
+            <mat-icon class="btn-menu-icon">menu</mat-icon>
+        </button>
+        <button mat-button (click)="openDialog()">Деталі</button>
+    </div>
+</header>
