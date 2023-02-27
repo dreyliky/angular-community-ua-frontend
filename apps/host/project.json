@@ -98,7 +98,8 @@
                     "browserTarget": "host:build:production"
                 },
                 "development": {
-                    "browserTarget": "host:build:local"
+                    "browserTarget": "host:build:local",
+                    "devRemotes": ["code-review"]
                 }
             },
             "defaultConfiguration": "development",
