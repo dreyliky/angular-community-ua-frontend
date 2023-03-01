@@ -1,7 +1,15 @@
-:host {
+acua-code-editor {
     width: 100%;
     min-height: 100%;
     display: block;
     overflow: hidden;
     border: 0;
+}
+
+.selected-line {
+    background: #fded1052;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }

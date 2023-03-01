@@ -1,14 +1,13 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    Component,
-    Inject
+    Component, Inject, ViewEncapsulation
 } from '@angular/core';
 import type { editor } from 'monaco-editor';
 import { MONACO_EDITOR } from '../../tokens';
 import {
-    LineCommentsAmountDirective,
-    LineHighlighterDirective
+    CursorStyleDirective,
+    LineCommentsAmountDirective, LineHighlighterDirective
 } from './directives';
 import { MONACO_EDITOR_PROVIDER } from './providers';
 
@@ -17,8 +16,13 @@ import { MONACO_EDITOR_PROVIDER } from './providers';
     template: '',
     styleUrls: ['./code-editor.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    hostDirectives: [LineHighlighterDirective, LineCommentsAmountDirective],
-    providers: [MONACO_EDITOR_PROVIDER]
+    hostDirectives: [
+        LineHighlighterDirective,
+        LineCommentsAmountDirective,
+        CursorStyleDirective
+    ],
+    providers: [MONACO_EDITOR_PROVIDER],
+    encapsulation: ViewEncapsulation.None
 })
 export class CodeEditorComponent implements AfterViewInit {
     constructor(

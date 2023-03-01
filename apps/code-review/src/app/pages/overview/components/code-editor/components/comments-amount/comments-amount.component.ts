@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
     selector: 'acua-comments-amount',
@@ -6,4 +6,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     styleUrls: ['./comments-amount.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CommentsAmountComponent {}
+export class CommentsAmountComponent {
+    @Input()
+    public amount!: number;
+}

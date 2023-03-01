@@ -1,0 +1,17 @@
+.counter {
+    user-select: none;
+    width: 20px;
+
+    margin-left: 20px;
+    margin-top: 2px;
+
+    background: #fff000;
+    border-radius: 16px;
+    z-index: 0;
+
+    &-text {
+        color: #000;
+        text-align: center;
+        margin: 0;
+    }
+}
