@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy, Component, ViewChild
 } from '@angular/core';
 import { CodeEditorComponent } from './components';
+import { EditorCommentMetadata } from './components/code-editor/interfaces';
 import { MONACO_EDITOR_PROVIDER } from './components/code-editor/providers';
 import { FILE_TREE_ARRAY } from './data';
 
@@ -15,6 +16,17 @@ import { FILE_TREE_ARRAY } from './data';
 })
 export class OverviewComponent implements AfterViewInit {
     public readonly tree = FILE_TREE_ARRAY;
+
+    protected commentData: EditorCommentMetadata[] = [
+        {
+            lineNumber: 1,
+            amount: 3
+        },
+        {
+            lineNumber: 2,
+            amount: 5
+        }
+    ];
 
     @ViewChild(CodeEditorComponent)
     private readonly codeEditor!: CodeEditorComponent;

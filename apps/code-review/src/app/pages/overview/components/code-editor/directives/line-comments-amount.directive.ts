@@ -1,26 +1,30 @@
 import {
+    AfterViewInit,
     ComponentFactoryResolver,
     ComponentRef,
     Directive,
-    Inject, ViewContainerRef
+    Inject,
+    Input,
+    ViewContainerRef
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import type { editor, IPosition } from 'monaco-editor';
 import { OverviewDataParam as DataParam } from '../../../enums';
 import { MONACO_EDITOR } from '../../../tokens';
 import { CommentsAmountComponent } from '../components';
-import { whetherLineWithCode } from '../helpers';
+import { EditorCommentMetadata } from './../interfaces';
 
 @Directive({
     selector: '[acuaLineCommentsAmount]',
     standalone: true
 })
-export class LineCommentsAmountDirective {
-    private model: editor.ITextModel = this.editor.getModel() as editor.ITextModel;
+export class LineCommentsAmountDirective implements AfterViewInit {
+    @Input()
+    public commentData!: EditorCommentMetadata[];
 
-    private widget!: editor.IContentWidget | null;
-    private widgetComponent!: ComponentRef<CommentsAmountComponent> | null;
-    private lastLineNumber!: number | undefined;
+    private get model(): editor.ITextModel {
+        return this.editor.getModel() as editor.ITextModel;
+    }
 
     private get positionPreferences(): any {
         return this.route.snapshot.data[DataParam.MonacoApi].editor.ContentWidgetPositionPreference;
@@ -32,100 +36,58 @@ export class LineCommentsAmountDirective {
         private readonly route: ActivatedRoute,
         private readonly viewContainerRef: ViewContainerRef,
         private readonly componentFactoryRef: ComponentFactoryResolver
-    ) {
+    ) {}
+
+    public ngAfterViewInit(): void {
         this.init();
     }
 
     private init(): void {
-        this.editor.onMouseMove((e) => {
-            this.applyWidgetToLine(e);
-        });
-        this.editor.onMouseLeave(() => this.clearWidget());
-    }
+        for (const commentData of this.commentData) {
+            const lineNumber = commentData.lineNumber;
+            const amount = commentData.amount;
 
-    private applyWidgetToLine(event: editor.IEditorMouseEvent): void {
-        if (!this.isLineHoverSwitched(event.target)) {
-            return;
+            this.applyWidgetToLine(lineNumber, amount);
         }
-
-        this.clearWidget();
-
-        if (!whetherLineWithCode(this.model, event.target)) {
-            return;
-        }
-
-        const component = this.createWidgetComponent();
-        const widget = this.createContentWidget(event, component);
-
-        this.widgetComponent = component;
-        this.widget = widget;
-
-        this.editor.addContentWidget(this.widget);
     }
 
-    // eslint-disable-next-line max-lines-per-function
-    private createContentWidget(
-        event: editor.IEditorMouseEvent,
-        component: ComponentRef<CommentsAmountComponent>
-    ): editor.IContentWidget {
-        const lineNumber = event.target.position?.lineNumber as number;
-        const endColumn = this.model.getLineLength(lineNumber);
-        const position: IPosition = {
-            lineNumber,
-            column: endColumn
-        };
-        const widget: editor.IContentWidget = {
-            getId: () => 'comment.counter',
-            getPosition: () => ({
-                position: position,
-                preference: [
-                    this.positionPreferences.EXACT
-                ]
-            }),
-            getDomNode: () => {
-                return component.location.nativeElement;
-            }
-        };
-        console.log('created');
-        this.lastLineNumber = lineNumber;
+    private async applyWidgetToLine(lineNumber: number, amount: number): Promise<void> {
+        const component = await this.createWidgetComponent(amount);
+        const widget = await this.createContentWidget(lineNumber, component);
 
-        return widget;
+        this.editor.addContentWidget(widget);
     }
 
-    private createWidgetComponent(): ComponentRef<CommentsAmountComponent> {
+    private async createWidgetComponent(
+        amount: number
+    ): Promise<ComponentRef<CommentsAmountComponent>> {
         const factory = this.componentFactoryRef.resolveComponentFactory(CommentsAmountComponent);
         const component = factory.create(this.viewContainerRef.injector);
-        component.instance.amount = 5;
+        component.instance.amount = amount;
 
         component.changeDetectorRef.detectChanges();
 
         return component;
     }
 
-    private clearWidget(): void {
-        this.lastLineNumber = 0;
+    private async createContentWidget(
+        lineNumber: number,
+        component: ComponentRef<CommentsAmountComponent>
+    ): Promise<editor.IContentWidget> {
+        const endColumn = this.model.getLineMaxColumn(lineNumber);
+        const position: IPosition = {
+            lineNumber,
+            column: endColumn
+        };
+        const widget: editor.IContentWidget = {
+            getId: () => `comment.amount.${lineNumber}`,
+            getPosition: () => ({
+                position: position,
+                preference: [this.positionPreferences.EXACT]
+            }),
+            getDomNode: () => component.location.nativeElement
+        };
 
-        if (!this.widget) {
-            return;
-        }
-
-        this.editor.removeContentWidget(this.widget);
-        this.widget = null;
-
-        if (!this.widgetComponent) {
-            return;
-        }
-
-        this.widgetComponent.destroy();
-        this.widgetComponent = null;
-    }
-
-    private isLineHoverSwitched(target: editor.IMouseTarget): boolean {
-        const lineNumber = target.position?.lineNumber as number;
-        const lineMatch = this.lastLineNumber === lineNumber;
-        const _target = target as any;
-        const details = _target.detail;
-
-        return !lineMatch || details.isAfterLines;
+        return widget;
     }
 }

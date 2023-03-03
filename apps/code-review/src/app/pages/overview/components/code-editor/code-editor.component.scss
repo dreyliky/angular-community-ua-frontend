@@ -6,7 +6,11 @@ acua-code-editor {
     border: 0;
 }
 
-.selected-line {
+.acua-editor-highlight-line {
+    background: #fded1016;
+}
+
+.acua-editor-selected-line {
     background: #fded1052;
 }
 

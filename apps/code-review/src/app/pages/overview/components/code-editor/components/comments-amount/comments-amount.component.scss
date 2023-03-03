@@ -1,17 +1,15 @@
-.counter {
-    user-select: none;
+:host {
+    display: block;
     width: 20px;
 
-    margin-left: 20px;
-    margin-top: 2px;
+    margin-left: 5px !important;
+    margin-top: 3px !important;
 
     background: #fff000;
     border-radius: 16px;
     z-index: 0;
 
-    &-text {
-        color: #000;
-        text-align: center;
-        margin: 0;
-    }
+    color: #000;
+    text-align: center;
+    cursor: pointer;
 }

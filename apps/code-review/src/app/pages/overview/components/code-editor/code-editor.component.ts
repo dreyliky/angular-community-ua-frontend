@@ -1,13 +1,16 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    Component, Inject, ViewEncapsulation
+    Component,
+    Inject,
+    ViewEncapsulation
 } from '@angular/core';
 import type { editor } from 'monaco-editor';
 import { MONACO_EDITOR } from '../../tokens';
 import {
     CursorStyleDirective,
-    LineCommentsAmountDirective, LineHighlighterDirective
+    LineCommentsAmountDirective,
+    LineHighlighterDirective
 } from './directives';
 import { MONACO_EDITOR_PROVIDER } from './providers';
 
@@ -17,8 +20,16 @@ import { MONACO_EDITOR_PROVIDER } from './providers';
     styleUrls: ['./code-editor.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     hostDirectives: [
-        LineHighlighterDirective,
-        LineCommentsAmountDirective,
+        {
+            directive: LineHighlighterDirective,
+            // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+            inputs: ['commentData']
+        },
+        {
+            directive: LineCommentsAmountDirective,
+            // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+            inputs: ['commentData']
+        },
         CursorStyleDirective
     ],
     providers: [MONACO_EDITOR_PROVIDER],
