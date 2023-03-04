@@ -1,7 +1,5 @@
 import {
-    AfterViewInit,
-    ComponentFactoryResolver,
-    ComponentRef,
+    AfterViewInit, ComponentRef,
     Directive,
     Inject,
     Input,
@@ -34,8 +32,7 @@ export class LineCommentsAmountDirective implements AfterViewInit {
         @Inject(MONACO_EDITOR)
         private readonly editor: editor.IStandaloneCodeEditor,
         private readonly route: ActivatedRoute,
-        private readonly viewContainerRef: ViewContainerRef,
-        private readonly componentFactoryRef: ComponentFactoryResolver
+        private readonly viewContainerRef: ViewContainerRef
     ) {}
 
     public ngAfterViewInit(): void {
@@ -61,8 +58,7 @@ export class LineCommentsAmountDirective implements AfterViewInit {
     private async createWidgetComponent(
         amount: number
     ): Promise<ComponentRef<CommentsAmountComponent>> {
-        const factory = this.componentFactoryRef.resolveComponentFactory(CommentsAmountComponent);
-        const component = factory.create(this.viewContainerRef.injector);
+        const component = this.viewContainerRef.createComponent(CommentsAmountComponent);
         component.instance.amount = amount;
 
         component.changeDetectorRef.detectChanges();
