@@ -100,8 +100,7 @@
                 "development": {
                     "browserTarget": "host:build:local",
                     "port": 80,
-                    "host": "127.1.1.1",
-                    "publicHost": "127.1.1.1",
+                    "host": "127.0.0.1",
                     "open": true
                 }
             },
