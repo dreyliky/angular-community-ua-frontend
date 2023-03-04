@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
-import { FILE_TREE_ARRAY } from './data';
+import { SourceCodeApi } from './apis';
 import { MonacoEditorDirective } from './directives';
 
 @Component({
@@ -13,7 +13,11 @@ export class OverviewComponent {
     private readonly codeEditor!: MonacoEditorDirective;
 
     // eslint-disable-next-line @typescript-eslint/member-ordering
-    public readonly tree = FILE_TREE_ARRAY;
+    public readonly tree$ = this.sourceCodeApi.get('https%3A%2F%2Fgithub.com%2Fdreyliky%2Fangular-community-ua-backend');
+
+    constructor(
+        private sourceCodeApi: SourceCodeApi
+    ) {}
 
     public onMonacoEditorReady(): void {
         // FIXME: Replace to real approach

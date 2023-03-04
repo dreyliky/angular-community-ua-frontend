@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { MonacoTreeElement } from './types/file-tree.type';
+import { MonacoTreeFileNode, MonacoTreeNode } from '../../interfaces';
 
 @Component({
     selector: 'acua-file-explorer',
@@ -9,5 +9,9 @@ import { MonacoTreeElement } from './types/file-tree.type';
 })
 export class FileExplorerComponent {
     @Input()
-    public tree: MonacoTreeElement[] = [];
+    public tree: MonacoTreeNode[] = [];
+
+    public onFileSelected(node: MonacoTreeFileNode): void {
+        console.log(node);
+    }
 }

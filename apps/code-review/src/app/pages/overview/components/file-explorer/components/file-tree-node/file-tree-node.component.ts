@@ -1,15 +1,22 @@
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
+    EventEmitter,
     Input,
-    OnChanges
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    Output
 } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
+import { MonacoTreeFileNode, MonacoTreeNode } from '../../../../interfaces';
 import {
     EXTENSION_ICON_NAME_MAPPER,
     FILE_ICON_NAME_MAPPER,
     FOLDERS_ICON_NAME_MAPPER
 } from '../../data';
-import { MonacoTreeElement } from '../../types';
+import { FileSelectionService } from '../../services';
 
 type ExtensionName = keyof typeof EXTENSION_ICON_NAME_MAPPER;
 type FileName = keyof typeof FILE_ICON_NAME_MAPPER;
@@ -21,12 +28,12 @@ type FolderName = keyof typeof FOLDERS_ICON_NAME_MAPPER;
     styleUrls: ['./file-tree-node.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FileTreeNodeComponent implements OnChanges {
+export class FileTreeNodeComponent implements OnChanges, OnDestroy, OnInit {
     @Input()
-    public name = '';
+    public node!: MonacoTreeNode;
 
     @Input()
-    public content: MonacoTreeElement[] | null = null;
+    public children: MonacoTreeNode[] | undefined = undefined;
 
     @Input()
     public depth = 0;
@@ -34,12 +41,19 @@ export class FileTreeNodeComponent implements OnChanges {
     @Input()
     public hide = false;
 
+    @Output()
+    public fileSelected: EventEmitter<MonacoTreeFileNode> = new EventEmitter();
+
+    public get name(): string {
+        return this.node.name;
+    }
+
     public get marginLeftStyleValue(): string {
         return `${this.baseMarginLeft * this.depth}px`;
     }
 
-    public get isContentExist(): boolean {
-        return this.content !== null && this.content !== undefined;
+    public get isChildrenExist(): boolean {
+        return this.children !== null && this.children !== undefined;
     }
 
     public get isHidden(): boolean {
@@ -79,17 +93,68 @@ export class FileTreeNodeComponent implements OnChanges {
     private readonly baseMarginLeft = 10;
 
     private icon!: string;
+    private isSelected = false;
+
+    private destroy$: Subject<boolean> = new Subject<boolean>();
+
+    constructor(
+        private readonly fileSelectionService: FileSelectionService,
+        private readonly changeDetectorRef: ChangeDetectorRef
+    ) {}
+
+    public ngOnInit(): void {
+        this.initFileSelection();
+    }
 
     public ngOnChanges(): void {
-        this.icon = this.getIcon();
+        if (!this.icon) {
+            this.icon = this.getIcon();
+        }
+    }
+
+    public ngOnDestroy(): void {
+        this.destroy$.next(true);
+        this.destroy$.unsubscribe();
     }
 
     public onButtonToggle(): void {
         this.isOpened = !this.isOpened;
+
+        if (this.isChildrenExist) {
+            return;
+        }
+
+        const node = this.node as MonacoTreeFileNode;
+
+        this.fileSelectionService.setData(node);
+    }
+
+    public onFileSelected(node: MonacoTreeFileNode): void {
+        this.fileSelected.emit(node);
+    }
+
+    private initFileSelection(): void {
+        this.fileSelectionService.data$
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: (node: MonacoTreeFileNode | null) => {
+                    if (!node) {
+                        return;
+                    }
+
+                    this.isSelected = node === this.node ? true : false;
+
+                    if (this.isSelected) {
+                        const _node = this.node as MonacoTreeFileNode;
+                        this.fileSelected.emit(_node);
+                    }
+                    this.changeDetectorRef.markForCheck();
+                }
+            });
     }
 
     private getIcon(): string {
-        if (this.isContentExist) {
+        if (this.isChildrenExist) {
             return this.getFolderIconName();
         }
 
