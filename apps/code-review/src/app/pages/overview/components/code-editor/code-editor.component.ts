@@ -1,18 +1,19 @@
 import {
-    AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     Inject,
     ViewEncapsulation
 } from '@angular/core';
 import type { editor } from 'monaco-editor';
+import { ReviewRequestCommentsState } from '../../states';
 import { MONACO_EDITOR } from '../../tokens';
 import {
-    CursorStyleDirective,
     LineCommentsAmountDirective,
-    LineHighlighterDirective
+    LineHighlighterDirective,
+    TextSelectionDisablerDirective
 } from './directives';
-import { MONACO_EDITOR_PROVIDER } from './providers';
+import { MONACO_API_PROVIDER, MONACO_EDITOR_PROVIDER } from './providers';
+import { EditorCommentsState } from './states';
 
 @Component({
     selector: 'acua-code-editor',
@@ -20,32 +21,30 @@ import { MONACO_EDITOR_PROVIDER } from './providers';
     styleUrls: ['./code-editor.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     hostDirectives: [
-        {
-            directive: LineHighlighterDirective,
-            // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-            inputs: ['commentData']
-        },
-        {
-            directive: LineCommentsAmountDirective,
-            // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-            inputs: ['commentData']
-        },
-        CursorStyleDirective
+        LineHighlighterDirective,
+        LineCommentsAmountDirective,
+        TextSelectionDisablerDirective
     ],
-    providers: [MONACO_EDITOR_PROVIDER],
+    providers: [
+        MONACO_EDITOR_PROVIDER,
+        MONACO_API_PROVIDER,
+        EditorCommentsState
+    ],
     encapsulation: ViewEncapsulation.None
 })
-export class CodeEditorComponent implements AfterViewInit {
+export class CodeEditorComponent {
     constructor(
         @Inject(MONACO_EDITOR)
-        private readonly editor: editor.IStandaloneCodeEditor
+        private readonly editor: editor.IStandaloneCodeEditor,
+        private readonly reviewRequestCommentsState: ReviewRequestCommentsState,
+        private readonly editorCommentsState: EditorCommentsState
     ) {}
 
-    public ngAfterViewInit(): void {
-        this.editor.layout();
-    }
+    public openFile(fileFullPath: string, content: string): void {
+        const fileComments =
+            this.reviewRequestCommentsState.getFileCommentsAmount(fileFullPath);
 
-    public setValue(code: string): void {
-        this.editor.setValue(code);
+        this.editorCommentsState.set(fileComments);
+        this.editor.setValue(content);
     }
 }

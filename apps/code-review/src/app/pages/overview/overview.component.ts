@@ -1,40 +1,30 @@
 import {
     AfterViewInit,
-    ChangeDetectionStrategy, Component, ViewChild
+    ChangeDetectionStrategy,
+    Component,
+    ViewChild
 } from '@angular/core';
 import { CodeEditorComponent } from './components';
-import { EditorCommentMetadata } from './components/code-editor/interfaces';
-import { MONACO_EDITOR_PROVIDER } from './components/code-editor/providers';
 import { FILE_TREE_ARRAY } from './data';
 
 @Component({
     selector: 'acua-overview',
     templateUrl: './overview.component.html',
     styleUrls: ['./overview.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [MONACO_EDITOR_PROVIDER]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OverviewComponent implements AfterViewInit {
     public readonly tree = FILE_TREE_ARRAY;
-
-    protected commentData: EditorCommentMetadata[] = [
-        {
-            lineNumber: 1,
-            amount: 3
-        },
-        {
-            lineNumber: 2,
-            amount: 5
-        }
-    ];
 
     @ViewChild(CodeEditorComponent)
     private readonly codeEditor!: CodeEditorComponent;
 
     public ngAfterViewInit(): void {
         // FIXME: Replace to real approach
-        this.codeEditor.setValue(
-            'export const MY_CODE_HERE = "VALUE";\nexport const s = "VAE";\n'
+        this.codeEditor.openFile(
+            'src/app/app.component.ts',
+            'export const MY_CODE_HERE = "VALUE";\nexport const s = "VAE";\n' +
+                'export const myAmazingConst = "Hello world!"\n'
         );
     }
 }

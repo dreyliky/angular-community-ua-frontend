@@ -1,1 +1,1 @@
-export * from './check-line.helper';
+export * from './line-check.helper';

@@ -4,16 +4,26 @@ acua-code-editor {
     display: block;
     overflow: hidden;
     border: 0;
+
+    .view-lines {
+        cursor: pointer;
+    }
+
+    .cursors-layer {
+        display: none;
+    }
 }
 
-.acua-editor-highlight-line {
-    background: #fded1016;
-}
-
-.acua-editor-selected-line {
-    background: #fded1052;
-}
-
-.cursor-pointer {
+.acua-editor-line-decoration {
     cursor: pointer;
+
+    &.acua-has-comments {
+        background: #f8ef7309;
+    }
+
+    &:hover {
+        background: #fded1031;
+    }
+
+    z-index: 1;
 }

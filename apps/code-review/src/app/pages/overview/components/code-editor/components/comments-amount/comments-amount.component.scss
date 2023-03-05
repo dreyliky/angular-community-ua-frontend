@@ -1,15 +1,13 @@
 :host {
     display: block;
-    width: 20px;
-
-    margin-left: 5px !important;
-    margin-top: 3px !important;
-
-    background: #fff000;
-    border-radius: 16px;
-    z-index: 0;
-
+    min-width: 20px;
+    margin-left: 5px;
+    margin-top: 1px;
+    padding: 0 5px;
+    background: #a19600;
+    border-radius: 6px;
     color: #000;
+    font-weight: bold;
     text-align: center;
-    cursor: pointer;
+    z-index: -1;
 }

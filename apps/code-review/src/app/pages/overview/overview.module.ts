@@ -4,7 +4,8 @@ import { RouterModule } from '@angular/router';
 import { CodeEditorModule, FileExplorerModule } from './components';
 import { OverviewComponent } from './overview.component';
 import { OVERVIEW_ROUTES } from './overview.routes';
-import { MonacoApiResolver } from './resolvers';
+import { MonacoApiResolver, ReviewRequestCommentsResolver } from './resolvers';
+import { ReviewRequestCommentsState } from './states';
 
 @NgModule({
     declarations: [OverviewComponent],
@@ -14,6 +15,10 @@ import { MonacoApiResolver } from './resolvers';
         CodeEditorModule,
         RouterModule.forChild(OVERVIEW_ROUTES)
     ],
-    providers: [MonacoApiResolver]
+    providers: [
+        MonacoApiResolver,
+        ReviewRequestCommentsResolver,
+        ReviewRequestCommentsState
+    ]
 })
 export class OverviewModule {}
