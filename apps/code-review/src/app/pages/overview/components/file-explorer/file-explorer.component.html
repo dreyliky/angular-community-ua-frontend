@@ -1,7 +1,7 @@
 <acua-file-tree-node
     *ngFor="let node of tree"
     [node]="node"
-    [children]="node.children"
+    [children]="node.children!"
     [depth]="0"
     [hide]="false"
     (fileSelected)="onFileSelected($event)"

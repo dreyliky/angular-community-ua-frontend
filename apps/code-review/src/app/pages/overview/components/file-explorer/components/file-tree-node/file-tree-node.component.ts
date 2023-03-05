@@ -33,7 +33,7 @@ export class FileTreeNodeComponent implements OnChanges, OnDestroy, OnInit {
     public node!: MonacoTreeNode;
 
     @Input()
-    public children: MonacoTreeNode[] | undefined = undefined;
+    public children: MonacoTreeNode[] | null = null;
 
     @Input()
     public depth = 0;
@@ -52,8 +52,8 @@ export class FileTreeNodeComponent implements OnChanges, OnDestroy, OnInit {
         return `${this.baseMarginLeft * this.depth}px`;
     }
 
-    public get isChildrenExist(): boolean {
-        return this.children !== null && this.children !== undefined;
+    public get doChildrenExist(): boolean {
+        return !!this.children;
     }
 
     public get isHidden(): boolean {
@@ -123,7 +123,7 @@ export class FileTreeNodeComponent implements OnChanges, OnDestroy, OnInit {
     public onButtonToggle(): void {
         this.isOpened = !this.isOpened;
 
-        if (this.isChildrenExist) {
+        if (this.doChildrenExist) {
             return;
         }
 
@@ -174,7 +174,7 @@ export class FileTreeNodeComponent implements OnChanges, OnDestroy, OnInit {
     }
 
     private getIcon(): string {
-        if (this.isChildrenExist) {
+        if (this.doChildrenExist) {
             return this.getFolderIconName();
         }
 

@@ -9,7 +9,7 @@ import { MonacoTreeFileNode, MonacoTreeNode } from '../../interfaces';
 })
 export class FileExplorerComponent {
     @Input()
-    public tree: MonacoTreeNode[] = [];
+    public tree!: MonacoTreeNode[];
 
     public onFileSelected(node: MonacoTreeFileNode): void {
         console.log(node);
