@@ -18,7 +18,7 @@ export class SourceCodeApi {
         private readonly http: HttpClient
     ) {}
 
-    public get(url: string): Observable<MonacoTreeNode[]> {
-        return this.http.get<MonacoTreeNode[]>(this.endpoint + url);
+    public get(source: string): Observable<MonacoTreeNode[]> {
+        return this.http.get<MonacoTreeNode[]>(this.endpoint + source);
     }
 }

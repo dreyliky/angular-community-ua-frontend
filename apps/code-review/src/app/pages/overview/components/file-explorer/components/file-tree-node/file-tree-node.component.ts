@@ -89,11 +89,14 @@ export class FileTreeNodeComponent implements OnChanges, OnDestroy, OnInit {
     }
 
     public isOpened = false;
+    public isSelected = false;
+    public isHovered = false;
+
+    private timer!: NodeJS.Timeout | null;
 
     private readonly baseMarginLeft = 10;
 
     private icon!: string;
-    private isSelected = false;
 
     private destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -133,6 +136,22 @@ export class FileTreeNodeComponent implements OnChanges, OnDestroy, OnInit {
         this.fileSelected.emit(node);
     }
 
+    public onNameEnter(): void {
+        this.timer = setTimeout(() => {
+            this.isHovered = true;
+            this.changeDetectorRef.markForCheck();
+        }, 1500);
+    }
+
+    public onNameLeave(): void {
+        if (!this.timer) {
+            return;
+        }
+        this.isHovered = false;
+        clearTimeout(this.timer);
+        this.changeDetectorRef.markForCheck();
+    }
+
     private initFileSelection(): void {
         this.fileSelectionService.data$
             .pipe(takeUntil(this.destroy$))
@@ -148,6 +167,7 @@ export class FileTreeNodeComponent implements OnChanges, OnDestroy, OnInit {
                         const _node = this.node as MonacoTreeFileNode;
                         this.fileSelected.emit(_node);
                     }
+
                     this.changeDetectorRef.markForCheck();
                 }
             });

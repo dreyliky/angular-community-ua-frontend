@@ -1,8 +1,19 @@
-<div [class]="rowCssClassesAsString" (click)="onButtonToggle()">
+<div [class]="rowCssClassesAsString" [ngClass]="{'selected-file': isSelected}" (click)="onButtonToggle()">
     <span [style.margin-left]="marginLeftStyleValue"></span>
     <i *ngIf="isChildrenExist" [class]="arrowCssClassesAsString"></i>
     <img [src]="fileExplorerIconSrc" class="monaco-tree-icon" />
-    <div class="monaco-tree-name">{{ name }}</div>
+    <div
+        class="monaco-tree-name"
+        (mouseenter)="onNameEnter()"
+        (mouseleave)="onNameLeave()">
+        {{ name }}
+    </div>
+    <p
+        class="monaco-name-context"
+        [style.margin-left]="marginLeftStyleValue"
+        [style.visibility]="isHovered ? 'visible' : 'hidden'">
+        {{ name }}
+    </p>
 </div>
 
 <acua-file-tree-node

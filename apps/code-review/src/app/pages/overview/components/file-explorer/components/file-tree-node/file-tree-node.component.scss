@@ -1,4 +1,5 @@
 .monaco-tree-row {
+    position: relative;
     font-size: 14px;
     line-height: 24px;
     display: flex;
@@ -19,13 +20,23 @@
         position: relative;
         top: 2px;
         transform: rotate(-90deg);
-        transition: all 0.5s;
+        transition: all 0.2s;
     }
 
     .monaco-tree-arrow.open {
         transform: rotate(0deg);
         left: -2px;
         top: 0;
+    }
+
+    .monaco-tree-name {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+
+        &:hover {
+            text-overflow: unset;
+        }
     }
 }
 
@@ -54,4 +65,17 @@
     .monaco-tree-icon {
         margin-left: 10px;
     }
+}
+
+.selected-file {
+    background: rgba(65, 75, 236, 0.15);
+}
+
+.monaco-name-context {
+    background: rgba(254, 245, 186, 1);
+    color: #2a2d2e;
+    position: absolute;
+    top: 8px;
+    left: 60px;
+    z-index: 55;
 }
