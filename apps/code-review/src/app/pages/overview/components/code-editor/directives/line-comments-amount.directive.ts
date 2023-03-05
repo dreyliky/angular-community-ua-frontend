@@ -17,7 +17,6 @@ export class LineCommentsAmountDirective {
         private readonly editorCommentsState: EditorCommentsState,
         private readonly injector: Injector
     ) {
-        // Test
         this.initEditorModelContentInitListener();
     }
 
