@@ -136,7 +136,7 @@ export class FileTreeNodeComponent implements OnChanges, OnDestroy, OnInit {
         this.fileSelected.emit(node);
     }
 
-    public onNameEnter(): void {
+    public onNameOver(): void {
         this.timer = setTimeout(() => {
             this.isHovered = true;
             this.changeDetectorRef.markForCheck();
