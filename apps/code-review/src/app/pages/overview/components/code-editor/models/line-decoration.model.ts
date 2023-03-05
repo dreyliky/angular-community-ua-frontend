@@ -11,10 +11,7 @@ export class LineDecoration implements editor.IModelDeltaDecoration {
 
     public readonly options: editor.IModelDecorationOptions = {
         isWholeLine: true,
-        className: `${LINE_DECORATION_CLASS_NAME} ${this.className}`,
-        hoverMessage: {
-            value: 'Click to add a comment'
-        }
+        className: `${LINE_DECORATION_CLASS_NAME} ${this.className}`
     };
 
     constructor(
