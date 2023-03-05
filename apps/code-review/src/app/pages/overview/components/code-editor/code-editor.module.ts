@@ -5,9 +5,7 @@ import { CommentsAmountComponent } from './components';
 
 @NgModule({
     declarations: [CodeEditorComponent, CommentsAmountComponent],
-    imports: [
-        CommonModule
-    ],
+    imports: [CommonModule],
     exports: [CodeEditorComponent]
 })
 export class CodeEditorModule {}
