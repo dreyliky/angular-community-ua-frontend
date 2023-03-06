@@ -1,0 +1,32 @@
+<form [formGroup]="formGroup" class="request-form">
+    <mat-form-field *ngIf="formGroup.controls.name">
+        <mat-label>Назва</mat-label>
+        <input matInput type="text" [formControl]="formGroup.controls.name" />
+    </mat-form-field>
+    <mat-form-field *ngIf="formGroup.controls.description">
+        <mat-label>Опис</mat-label>
+        <textarea
+            matInput
+            [formControl]="formGroup.controls.description"
+        ></textarea>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Посилання на Stackblitz або Github</mat-label>
+        <input matInput type="text" [formControl]="formGroup.controls.link" />
+        <mat-error *ngIf="formGroup.controls.link.hasError('required')">
+            Посилання на проєкт є обов'язковим.
+        </mat-error>
+        <mat-error *ngIf="formGroup.controls.link.hasError('linkValidate')">
+            Приймаються посилання на stackblitz проєкти та github репозиторії.
+        </mat-error>
+    </mat-form-field>
+    <ng-container *ngIf="iframeLink$ | async as iframeLink">
+        <iframe
+            *ngIf="formGroup.valid"
+            class="request-form__iframe"
+            [src]="iframeLink | safeResourceUrl"
+            frameborder="0"
+        >
+        </iframe>
+    </ng-container>
+</form>
