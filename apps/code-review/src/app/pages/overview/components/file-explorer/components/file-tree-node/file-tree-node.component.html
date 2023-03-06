@@ -1,6 +1,6 @@
 <div [class]="rowCssClassesAsString" [ngClass]="{'selected-file': isSelected}" (click)="onButtonToggle()">
     <span [style.margin-left]="marginLeftStyleValue"></span>
-    <i *ngIf="isChildrenExist" [class]="arrowCssClassesAsString"></i>
+    <i *ngIf="doChildrenExist" [class]="arrowCssClassesAsString"></i>
     <img [src]="fileExplorerIconSrc" class="monaco-tree-icon" />
     <div
         class="monaco-tree-name"

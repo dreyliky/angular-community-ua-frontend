@@ -10,12 +10,12 @@ import {
     Output
 } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { MonacoTreeFileNode, MonacoTreeNode } from '../../../../interfaces';
 import {
     EXTENSION_ICON_NAME_MAPPER,
     FILE_ICON_NAME_MAPPER,
     FOLDERS_ICON_NAME_MAPPER
 } from '../../data';
+import { MonacoTreeFileNode, MonacoTreeNode } from '../../interfaces';
 import { FileSelectionService } from '../../services';
 
 type ExtensionName = keyof typeof EXTENSION_ICON_NAME_MAPPER;

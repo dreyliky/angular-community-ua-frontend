@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { MonacoTreeFileNode, MonacoTreeNode } from '../../interfaces';
+import { MonacoTreeFileNode, MonacoTreeNode } from './interfaces';
 
 @Component({
     selector: 'acua-file-explorer',

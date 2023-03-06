@@ -1,11 +1,11 @@
 import {
     AfterViewInit,
-    ChangeDetectionStrategy,
-    Component,
+    ChangeDetectionStrategy, Component,
     ViewChild
 } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { CodeEditorComponent } from './components';
-import { FILE_TREE_ARRAY } from './data';
+import { OverviewDataParam } from './enums';
 
 @Component({
     selector: 'acua-overview',
@@ -14,15 +14,19 @@ import { FILE_TREE_ARRAY } from './data';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OverviewComponent implements AfterViewInit {
-    public readonly tree = FILE_TREE_ARRAY;
+    public tree = this.route.snapshot.data[OverviewDataParam.TreeNode];
 
     @ViewChild(CodeEditorComponent)
     private readonly codeEditor!: CodeEditorComponent;
 
+    constructor(
+        private readonly route: ActivatedRoute
+    ) {}
+
     public ngAfterViewInit(): void {
         // FIXME: Replace to real approach
         this.codeEditor.openFile(
-            'src/app/app.component.ts',
+            'apps/main/src/main.ts',
             'export const MY_CODE_HERE = "VALUE";\nexport const s = "VAE";\n' +
                 'export const myAmazingConst = "Hello world!"\n'
         );
