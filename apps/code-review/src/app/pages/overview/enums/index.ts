@@ -1,3 +1,3 @@
-export * from './monaco-tree-node-type.enum';
+export * from './overview-data-param.enum';
 export * from './overview-param.enum';
 

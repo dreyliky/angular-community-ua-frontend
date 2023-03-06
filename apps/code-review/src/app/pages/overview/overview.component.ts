@@ -1,6 +1,11 @@
-import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
-import { SourceCodeApi } from './apis';
-import { MonacoEditorDirective } from './directives';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    ViewChild
+} from '@angular/core';
+import { CodeEditorComponent } from './components';
+import { FILE_TREE_ARRAY } from './data';
 
 @Component({
     selector: 'acua-overview',
@@ -8,19 +13,18 @@ import { MonacoEditorDirective } from './directives';
     styleUrls: ['./overview.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class OverviewComponent {
-    @ViewChild(MonacoEditorDirective)
-    private readonly codeEditor!: MonacoEditorDirective;
+export class OverviewComponent implements AfterViewInit {
+    public readonly tree = FILE_TREE_ARRAY;
 
-    // eslint-disable-next-line @typescript-eslint/member-ordering
-    public readonly tree$ = this.sourceCodeApi.get('https%3A%2F%2Fgithub.com%2Fdreyliky%2Fangular-community-ua-backend');
+    @ViewChild(CodeEditorComponent)
+    private readonly codeEditor!: CodeEditorComponent;
 
-    constructor(
-        private sourceCodeApi: SourceCodeApi
-    ) {}
-
-    public onMonacoEditorReady(): void {
+    public ngAfterViewInit(): void {
         // FIXME: Replace to real approach
-        this.codeEditor.setValue('export const MY_CODE_HERE = "VALUE";\n');
+        this.codeEditor.openFile(
+            'src/app/app.component.ts',
+            'export const MY_CODE_HERE = "VALUE";\nexport const s = "VAE";\n' +
+                'export const myAmazingConst = "Hello world!"\n'
+        );
     }
 }
