@@ -10,9 +10,9 @@ export interface MonacoTreeNode {
 }
 
 export interface MonacoTreeFolderNode extends Omit<MonacoTreeNode, 'content'> {
-    children: MonacoTreeNode[];
+    readonly children: MonacoTreeNode[];
 }
 
 export interface MonacoTreeFileNode extends Omit<MonacoTreeNode, 'children'> {
-    content: string;
+    readonly content: string;
 }

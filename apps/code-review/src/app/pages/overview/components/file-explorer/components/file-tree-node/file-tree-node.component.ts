@@ -4,12 +4,11 @@ import {
     Component,
     EventEmitter,
     Input,
-    OnChanges,
-    OnDestroy,
-    OnInit,
+    OnChanges, OnInit,
     Output
 } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
+import { Subscription } from 'rxjs';
 import {
     EXTENSION_ICON_NAME_MAPPER,
     FILE_ICON_NAME_MAPPER,
@@ -29,7 +28,7 @@ type FolderName = keyof typeof FOLDERS_ICON_NAME_MAPPER;
     styleUrls: ['./file-tree-node.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FileTreeNodeComponent implements OnChanges, OnDestroy, OnInit {
+export class FileTreeNodeComponent implements OnChanges, OnInit {
     @Input()
     public node!: MonacoTreeNode;
 
@@ -103,8 +102,6 @@ export class FileTreeNodeComponent implements OnChanges, OnDestroy, OnInit {
 
     private icon!: string;
 
-    private destroy$: Subject<boolean> = new Subject<boolean>();
-
     constructor(
         private readonly fileSelectionService: FileSelectionService,
         private readonly changeDetectorRef: ChangeDetectorRef,
@@ -119,11 +116,6 @@ export class FileTreeNodeComponent implements OnChanges, OnDestroy, OnInit {
         if (!this.icon && this.depth <= this.fileExplorerDepth) {
             this.icon = this.getIcon();
         }
-    }
-
-    public ngOnDestroy(): void {
-        this.destroy$.next(true);
-        this.destroy$.unsubscribe();
     }
 
     public onButtonToggle(): void {
@@ -159,9 +151,9 @@ export class FileTreeNodeComponent implements OnChanges, OnDestroy, OnInit {
         this.changeDetectorRef.markForCheck();
     }
 
-    private initFileSelection(): void {
-        this.fileSelectionService.data$
-            .pipe(takeUntil(this.destroy$))
+    @AutoUnsubscribe()
+    private initFileSelection(): Subscription {
+        return this.fileSelectionService.data$
             .subscribe({
                 next: (node: MonacoTreeFileNode | null) => {
                     if (!node) {
@@ -174,7 +166,6 @@ export class FileTreeNodeComponent implements OnChanges, OnDestroy, OnInit {
                         const _node = this.node as MonacoTreeFileNode;
                         this.fileSelected.emit(_node);
                     }
-
                     this.changeDetectorRef.markForCheck();
                 }
             });
