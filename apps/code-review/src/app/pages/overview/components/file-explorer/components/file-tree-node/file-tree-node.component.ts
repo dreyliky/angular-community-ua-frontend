@@ -17,6 +17,7 @@ import {
 } from '../../data';
 import { MonacoTreeFileNode, MonacoTreeNode } from '../../interfaces';
 import { FileSelectionService } from '../../services';
+import { FileExplorerDepthState } from '../../states';
 
 type ExtensionName = keyof typeof EXTENSION_ICON_NAME_MAPPER;
 type FileName = keyof typeof FILE_ICON_NAME_MAPPER;
@@ -88,6 +89,10 @@ export class FileTreeNodeComponent implements OnChanges, OnDestroy, OnInit {
         return CLASSES;
     }
 
+    public get fileExplorerDepth(): number {
+        return this.fileExplorerDepthState.data as number;
+    }
+
     public isOpened = false;
     public isSelected = false;
     public isHovered = false;
@@ -102,7 +107,8 @@ export class FileTreeNodeComponent implements OnChanges, OnDestroy, OnInit {
 
     constructor(
         private readonly fileSelectionService: FileSelectionService,
-        private readonly changeDetectorRef: ChangeDetectorRef
+        private readonly changeDetectorRef: ChangeDetectorRef,
+        private readonly fileExplorerDepthState: FileExplorerDepthState
     ) {}
 
     public ngOnInit(): void {
@@ -110,7 +116,7 @@ export class FileTreeNodeComponent implements OnChanges, OnDestroy, OnInit {
     }
 
     public ngOnChanges(): void {
-        if (!this.icon) {
+        if (!this.icon && this.depth <= this.fileExplorerDepth) {
             this.icon = this.getIcon();
         }
     }
@@ -122,6 +128,7 @@ export class FileTreeNodeComponent implements OnChanges, OnDestroy, OnInit {
 
     public onButtonToggle(): void {
         this.isOpened = !this.isOpened;
+        this.fileExplorerDepthState.set(this.incrementedDepth);
 
         if (this.doChildrenExist) {
             return;
