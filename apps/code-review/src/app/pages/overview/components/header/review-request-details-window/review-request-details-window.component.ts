@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
     selector: 'acua-review-request-details-window',
@@ -7,12 +6,4 @@ import { MatDialogRef } from '@angular/material/dialog';
     styleUrls: ['./review-request-details-window.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReviewRequestDetailsWindowComponent {
-    constructor(
-        public dialogRef: MatDialogRef<ReviewRequestDetailsWindowComponent>
-    ) {}
-
-    public onClose(): void {
-        this.dialogRef.close();
-    }
-}
+export class ReviewRequestDetailsWindowComponent {}

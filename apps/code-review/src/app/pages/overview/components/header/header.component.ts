@@ -11,16 +11,22 @@ import { ReviewRequestDetailsWindowComponent } from './review-request-details-wi
 })
 export class HeaderComponent {
     public panelOpenState = false;
-    public readonly isMobile: boolean;
+    public readonly isMobile = this.deviceService.isMobile();
 
     constructor(
-        private deviceService: DeviceDetectorService,
-        public dialog: MatDialog
-    ) {
-        this.isMobile = this.deviceService.isMobile();
+        private readonly deviceService: DeviceDetectorService,
+        private readonly dialog: MatDialog
+    ) {}
+
+    public onDetailsButtonClick(): void {
+        this.dialog.open(ReviewRequestDetailsWindowComponent);
     }
 
-    public openDialog(): void {
-        this.dialog.open(ReviewRequestDetailsWindowComponent);
+    public onRequestAccordionOpen(): void {
+        this.panelOpenState = true;
+    }
+
+    public onRequestAccordionClose(): void {
+        this.panelOpenState = false;
     }
 }
