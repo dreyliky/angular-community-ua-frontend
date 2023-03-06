@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { MonacoTreeFileNode } from '../interfaces';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class FileSelectionService {
     private _data$: BehaviorSubject<MonacoTreeFileNode | null>
         = new BehaviorSubject<MonacoTreeFileNode | null>(null);
