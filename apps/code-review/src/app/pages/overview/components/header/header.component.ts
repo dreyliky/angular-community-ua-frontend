@@ -10,7 +10,6 @@ import { ReviewRequestDetailsWindowComponent } from './review-request-details-wi
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
-    public panelOpenState = false;
     public readonly isMobile = this.deviceService.isMobile();
 
     constructor(
@@ -20,13 +19,5 @@ export class HeaderComponent {
 
     public onDetailsButtonClick(): void {
         this.dialog.open(ReviewRequestDetailsWindowComponent);
-    }
-
-    public onRequestAccordionOpen(): void {
-        this.panelOpenState = true;
-    }
-
-    public onRequestAccordionClose(): void {
-        this.panelOpenState = false;
     }
 }
