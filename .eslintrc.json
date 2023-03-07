@@ -70,14 +70,6 @@
                         "after": true
                     }
                 ],
-                "indent": [
-                    "error",
-                    4,
-                    {
-                        "SwitchCase": 1,
-                        "MemberExpression": 1
-                    }
-                ],
                 "max-lines-per-function": [
                     "error",
                     {
@@ -102,13 +94,6 @@
                     }
                 ],
                 "no-extra-boolean-cast": "off",
-                "brace-style": [
-                    "error",
-                    "1tbs",
-                    {
-                        "allowSingleLine": false
-                    }
-                ],
                 "radix": ["error", "always"],
                 "yoda": ["error", "never"],
                 "no-useless-return": "error",
@@ -231,7 +216,8 @@
                 "@typescript-eslint/no-inferrable-types": "off",
                 "@typescript-eslint/no-explicit-any": "off",
                 "@angular-eslint/no-host-metadata-property": "off",
-                "@angular-eslint/no-input-rename": "off"
+                "@angular-eslint/no-input-rename": "off",
+                "@typescript-eslint/no-non-null-assertion": "off"
             }
         },
         {

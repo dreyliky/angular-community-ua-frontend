@@ -98,14 +98,13 @@
                     "browserTarget": "host:build:production"
                 },
                 "development": {
-                    "browserTarget": "host:build:local"
+                    "browserTarget": "host:build:local",
+                    "port": 80,
+                    "host": "127.0.0.1",
+                    "open": true
                 }
             },
-            "defaultConfiguration": "development",
-            "options": {
-                "port": 80,
-                "publicHost": "localhost"
-            }
+            "defaultConfiguration": "development"
         },
         "extract-i18n": {
             "executor": "@angular-devkit/build-angular:extract-i18n",

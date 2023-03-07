@@ -1,3 +1,3 @@
 export enum OverviewParamEnum {
-    id = 'id'
+    Id = 'id'
 }
