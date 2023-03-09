@@ -10,7 +10,7 @@ export const OVERVIEW_ROUTES: Route[] = [
         resolve: {
             [OverviewDataParam.MonacoApi]: MonacoApiResolver,
             [OverviewDataParam.Comments]: ReviewRequestCommentsResolver,
-            [OverviewDataParam.TreeNode]: SourceCodeResolver
+            [OverviewDataParam.SourceCode]: SourceCodeResolver
         }
     }
 ];

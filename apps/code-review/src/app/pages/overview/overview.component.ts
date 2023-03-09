@@ -1,27 +1,25 @@
 import {
     AfterViewInit,
-    ChangeDetectionStrategy, Component,
-    ViewChild
+    ChangeDetectionStrategy,
+    Component, inject, ViewChild
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { MonacoTreeFileNode } from '@code-review/shared';
 import { CodeEditorComponent } from './components';
-import { OverviewDataParam } from './enums';
+import { SOURCE_CODE_PROVIDER } from './providers';
+import { SOURCE_CODE } from './tokens';
 
 @Component({
     selector: 'acua-overview',
     templateUrl: './overview.component.html',
     styleUrls: ['./overview.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [SOURCE_CODE_PROVIDER]
 })
 export class OverviewComponent implements AfterViewInit {
-    public tree = this.route.snapshot.data[OverviewDataParam.TreeNode];
+    public tree = inject(SOURCE_CODE);
 
     @ViewChild(CodeEditorComponent)
     private readonly codeEditor!: CodeEditorComponent;
-
-    constructor(
-        private readonly route: ActivatedRoute
-    ) {}
 
     public ngAfterViewInit(): void {
         // FIXME: Replace to real approach
@@ -30,5 +28,10 @@ export class OverviewComponent implements AfterViewInit {
             'export const MY_CODE_HERE = "VALUE";\nexport const s = "VAE";\n' +
                 'export const myAmazingConst = "Hello world!"\n'
         );
+    }
+
+    public onFileSelected(node: MonacoTreeFileNode): void {
+        console.log(node);
+        // this.codeEditor.openFile(node.fullPath, node.content);
     }
 }

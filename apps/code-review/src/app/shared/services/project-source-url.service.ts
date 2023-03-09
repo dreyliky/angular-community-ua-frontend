@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MonacoTreeNode } from '../../pages/overview/components/file-explorer/interfaces';
 import { ProjectSourceUrlApiService } from '../api';
+import { MonacoTreeNode } from '../interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class ProjectSourceUrlService {

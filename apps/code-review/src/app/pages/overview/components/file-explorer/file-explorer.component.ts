@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { MonacoTreeFileNode, MonacoTreeNode } from './interfaces';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { MonacoTreeFileNode, MonacoTreeNode } from '@code-review/shared';
 
 @Component({
     selector: 'acua-file-explorer',
@@ -11,7 +11,10 @@ export class FileExplorerComponent {
     @Input()
     public tree!: MonacoTreeNode[];
 
+    @Output()
+    public fileSelected: EventEmitter<MonacoTreeFileNode> = new EventEmitter();
+
     public onFileSelected(node: MonacoTreeFileNode): void {
-        console.log(node);
+        this.fileSelected.emit(node);
     }
 }

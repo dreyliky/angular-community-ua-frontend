@@ -33,10 +33,6 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
-
-        &:hover {
-            text-overflow: unset;
-        }
     }
 }
 

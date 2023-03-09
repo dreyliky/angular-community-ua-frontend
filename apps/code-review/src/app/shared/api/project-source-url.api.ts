@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { ENVIRONMENT } from '@code-review/core';
 import { Observable } from 'rxjs';
-import { MonacoTreeNode } from '../../pages/overview/components/file-explorer/interfaces';
+import { MonacoTreeNode } from '../interfaces';
 
 @Injectable({
     providedIn: 'root'

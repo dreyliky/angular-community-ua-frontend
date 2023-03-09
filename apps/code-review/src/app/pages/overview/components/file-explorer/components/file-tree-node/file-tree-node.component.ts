@@ -4,19 +4,19 @@ import {
     Component,
     EventEmitter,
     Input,
-    OnChanges, OnInit,
+    OnChanges,
+    OnInit,
     Output
 } from '@angular/core';
+import { MonacoTreeFileNode, MonacoTreeNode } from '@code-review/shared';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
-import { Subscription } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 import {
     EXTENSION_ICON_NAME_MAPPER,
     FILE_ICON_NAME_MAPPER,
     FOLDERS_ICON_NAME_MAPPER
 } from '../../data';
-import { MonacoTreeFileNode, MonacoTreeNode } from '../../interfaces';
-import { FileSelectionService } from '../../services';
-import { FileExplorerDepthState } from '../../states';
+import { FileExplorerDepthState, FileSelectionState } from '../../states';
 
 type ExtensionName = keyof typeof EXTENSION_ICON_NAME_MAPPER;
 type FileName = keyof typeof FILE_ICON_NAME_MAPPER;
@@ -56,6 +56,10 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
         return !!this.children;
     }
 
+    public get isFile(): boolean {
+        return !!this.node.content;
+    }
+
     public get isHidden(): boolean {
         return !this.isOpened || this.hide;
     }
@@ -92,24 +96,29 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
         return this.fileExplorerDepthState.data as number;
     }
 
+    public get isAllowedToRender(): boolean {
+        return this.depth <= this.fileExplorerDepth && this.hasBeenOpened;
+    }
+
     public isOpened = false;
     public isSelected = false;
-    public isHovered = false;
 
-    private timer!: NodeJS.Timeout | null;
+    private hasBeenOpened = false;
 
     private readonly baseMarginLeft = 10;
 
     private icon!: string;
 
     constructor(
-        private readonly fileSelectionService: FileSelectionService,
+        private readonly fileSelectionState: FileSelectionState,
         private readonly changeDetectorRef: ChangeDetectorRef,
         private readonly fileExplorerDepthState: FileExplorerDepthState
     ) {}
 
     public ngOnInit(): void {
-        this.initFileSelection();
+        if (!this.children) {
+            this.initFileSelection();
+        }
     }
 
     public ngOnChanges(): void {
@@ -120,54 +129,32 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
 
     public onButtonToggle(): void {
         this.isOpened = !this.isOpened;
+        this.hasBeenOpened = true;
         this.fileExplorerDepthState.set(this.incrementedDepth);
 
         if (this.doChildrenExist) {
             return;
         }
 
-        const node = this.node as MonacoTreeFileNode;
-
-        this.fileSelectionService.setData(node);
+        this.fileSelectionState.set(this.node as MonacoTreeFileNode);
     }
 
     public onFileSelected(node: MonacoTreeFileNode): void {
         this.fileSelected.emit(node);
     }
 
-    public onNameOver(): void {
-        this.timer = setTimeout(() => {
-            this.isHovered = true;
-            this.changeDetectorRef.markForCheck();
-        }, 1500);
-    }
-
-    public onNameLeave(): void {
-        if (!this.timer) {
-            return;
-        }
-        this.isHovered = false;
-        clearTimeout(this.timer);
-        this.changeDetectorRef.markForCheck();
-    }
-
     @AutoUnsubscribe()
     private initFileSelection(): Subscription {
-        return this.fileSelectionService.data$
-            .subscribe({
-                next: (node: MonacoTreeFileNode | null) => {
-                    if (!node) {
-                        return;
-                    }
+        return this.fileSelectionState.data$
+            .pipe(filter<MonacoTreeFileNode | null>(Boolean))
+            .subscribe((node: MonacoTreeFileNode) => {
+                this.isSelected = node.fullPath === this.node.fullPath;
 
-                    this.isSelected = node === this.node ? true : false;
-
-                    if (this.isSelected) {
-                        const _node = this.node as MonacoTreeFileNode;
-                        this.fileSelected.emit(_node);
-                    }
-                    this.changeDetectorRef.markForCheck();
+                if (this.isSelected) {
+                    this.fileSelected.emit(this.node as MonacoTreeFileNode);
                 }
+
+                this.changeDetectorRef.markForCheck();
             });
     }
 
