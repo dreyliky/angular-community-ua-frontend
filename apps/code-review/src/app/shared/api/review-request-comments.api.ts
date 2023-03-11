@@ -10,7 +10,7 @@ export class ReviewRequestCommentsApi {
         reviewRequestId: string
     ): Observable<CommentAmountDictionary> {
         return of({
-            'apps/main/src/main.ts': {
+            'apps/host/src/app/app.component.ts': {
                 '1': 3,
                 '3': 99
             }
