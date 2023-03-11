@@ -104,8 +104,6 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
     ) {}
 
     public ngOnInit(): void {
-        console.log(this.node.name);
-
         if (!this.node.children) {
             this.initFileSelection();
         }
