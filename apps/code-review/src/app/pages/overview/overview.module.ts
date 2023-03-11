@@ -4,7 +4,11 @@ import { RouterModule } from '@angular/router';
 import { CodeEditorModule, FileExplorerModule } from './components';
 import { OverviewComponent } from './overview.component';
 import { OVERVIEW_ROUTES } from './overview.routes';
-import { MonacoApiResolver, ReviewRequestCommentsResolver, SourceCodeResolver } from './resolvers';
+import {
+    MonacoApiResolver,
+    ReviewRequestCommentsResolver,
+    SourceCodeResolver
+} from './resolvers';
 import { ReviewRequestCommentsState } from './states';
 
 @NgModule({
