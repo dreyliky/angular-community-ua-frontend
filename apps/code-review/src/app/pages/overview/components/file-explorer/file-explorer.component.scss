@@ -1,4 +1,8 @@
 :host {
+    width: 200px;
+    min-width: 200px;
     display: block;
+    user-select: none;
+    background-color: #212121;
     overflow-y: auto;
 }
