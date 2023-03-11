@@ -1,30 +1,29 @@
 :host {
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    min-height: 57px;
+    height: 57px;
+    padding: 0 13px;
+    align-items: center;
+    background-color: hsl(220 10% 20%);
+    border-bottom: 1px solid hsl(220 10% 14%);
+    box-sizing: border-box;
+    z-index: 10;
 
-    .header {
+    .logo {
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: 900;
         display: flex;
-        justify-content: space-between;
-        min-height: 57px;
-        height: 57px;
-        padding: 0 10px;
         align-items: center;
-        background-color: hsl(220 10% 20%);
-        border-bottom: 1px solid hsl(220 10% 14%);
+        color: #f1f1f1;
+        text-decoration: none;
 
-        .logo {
-            cursor: pointer;
-            font-size: 20px;
-            font-weight: 900;
-            display: flex;
-            align-items: center;
-            color: #f1f1f1;
-            text-decoration: none;
-
-            &-image {
-                margin-right: 8px;
-                max-height: 40px;
-                max-width: 40px;
-            }
+        &-image {
+            margin-right: 8px;
+            max-height: 45px;
+            max-width: 45px;
         }
     }
 }

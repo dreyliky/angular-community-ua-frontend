@@ -1,21 +1,14 @@
 :host {
     width: 100%;
+    height: 100%;
+    height: -webkit-fill-available;
+    height: fill-available;
+    min-height: -moz-available;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
-    position: absolute;
-    inset: 50px 0 0 0;
     display: flex;
-    flex-direction: row;
-}
-
-.header {
-    width: 100%;
-    height: 50px;
-}
-
-.file-explorer {
-    width: 200px;
-    min-width: 200px;
-    user-select: none;
+    flex: 1;
 }

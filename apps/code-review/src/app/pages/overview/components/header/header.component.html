@@ -1,29 +1,24 @@
-<header>
-    <div class="container">
-        <button mat-icon-button class="btn-menu">
-            <mat-icon class="btn-menu-icon">menu</mat-icon>
-        </button>
-        <mat-accordion class="block-request" *ngIf="!isMobile">
-            <mat-expansion-panel class="panel-request">
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        <acua-user-avatar
-                            [matTooltip]="'UserName'"
-                        ></acua-user-avatar>
-                        <span class="title">Мій запит на Code-Review</span>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <p>
-                    Подивіться будь ласка мій код і напишіть що тут можна
-                    покращити. Особливо цікавить AppComponent. Подивіться будь
-                    ласка мій код і напишіть що тут можна покращити. Особливо
-                    цікавить AppComponent
-                </p>
-                <p>20 лютого 2023</p>
-            </mat-expansion-panel>
-        </mat-accordion>
-        <button mat-button (click)="onDetailsButtonClick()" *ngIf="isMobile">
-            Деталі
-        </button>
-    </div>
-</header>
+<button mat-icon-button class="btn-menu">
+    <mat-icon class="btn-menu-icon">menu</mat-icon>
+</button>
+
+<mat-accordion class="block-request" *ngIf="!isMobile">
+    <mat-expansion-panel class="panel-request">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <acua-user-avatar [matTooltip]="'UserName'"></acua-user-avatar>
+                <span class="title">Мій запит на Code-Review</span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>
+            Подивіться будь ласка мій код і напишіть що тут можна покращити.
+            Особливо цікавить AppComponent. Подивіться будь ласка мій код і
+            напишіть що тут можна покращити. Особливо цікавить AppComponent
+        </p>
+        <p>20 лютого 2023</p>
+    </mat-expansion-panel>
+</mat-accordion>
+
+<button mat-button (click)="onDetailsButtonClick()" *ngIf="isMobile">
+    Деталі
+</button>
