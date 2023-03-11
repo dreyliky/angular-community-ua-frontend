@@ -26,5 +26,6 @@ export const EXTENSION_ICON_NAME_MAPPER = {
     css: 'css',
     scss: 'sass',
     sass: 'sass',
-    less: 'less'
+    less: 'less',
+    js: 'javascript'
 };

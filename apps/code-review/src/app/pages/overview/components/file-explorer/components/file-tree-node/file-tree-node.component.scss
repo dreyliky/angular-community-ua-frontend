@@ -7,6 +7,14 @@
     cursor: pointer;
     padding-left: 32px;
 
+    &.selected {
+        background-color: rgba(65, 75, 236, 0.15) !important;
+    }
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
     .monaco-tree-icon {
         width: 16px;
         height: 22px;
@@ -62,10 +70,6 @@
     .monaco-tree-icon {
         margin-left: 10px;
     }
-}
-
-.selected-file {
-    background: rgba(65, 75, 236, 0.15);
 }
 
 .monaco-name-context {
