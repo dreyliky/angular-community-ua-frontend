@@ -4,8 +4,10 @@ import { MonacoApi } from '../../../types';
 
 @Injectable()
 export class LanguageService {
-    /** Key - file extension; Value - language id */
+    /** Key - file extension; Value - languageId */
     private readonly fileExtensionMap = new Map<string, string>();
+
+    private readonly defaultLanguageId = 'plaintext';
 
     constructor(
         @Inject(MONACO_API)
@@ -17,13 +19,16 @@ export class LanguageService {
     public getLanguageIdByFileFullPath(fileFullPath: string): string {
         const fileExtension = this.getFileExtension(fileFullPath);
 
-        return this.fileExtensionMap.get(fileExtension) ?? 'plaintext';
+        return (
+            this.fileExtensionMap.get(fileExtension) ?? this.defaultLanguageId
+        );
     }
 
     private getFileExtension(fileFullPath: string): string {
-        const fileExtension = fileFullPath.split('.').pop()?.toLowerCase();
+        const lastDotIndex = fileFullPath.lastIndexOf('.');
+        const fileExtension = fileFullPath.slice(lastDotIndex).toLowerCase();
 
-        return `.${fileExtension}` ?? '';
+        return fileExtension;
     }
 
     private initFileExtensionMap(): void {
