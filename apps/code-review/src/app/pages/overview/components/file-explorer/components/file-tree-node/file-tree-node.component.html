@@ -7,15 +7,14 @@
     <i *ngIf="doChildrenExist" [class]="arrowCssClassesAsString"></i>
     <img [src]="fileExplorerIconSrc" class="monaco-tree-icon" />
     <div [title]="node.fullPath" class="monaco-tree-name">
-        {{ name }}
+        {{ node.name }}
     </div>
 </div>
 
 <ng-container *ngIf="isAllowedToRender">
     <acua-file-tree-node
-        *ngFor="let node of children"
+        *ngFor="let node of node.children"
         [node]="node"
-        [children]="node.children!"
         [depth]="incrementedDepth"
         [hide]="isHidden"
         (fileSelected)="onFileSelected($event)"

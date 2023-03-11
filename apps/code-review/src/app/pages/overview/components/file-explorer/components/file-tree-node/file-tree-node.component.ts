@@ -16,7 +16,7 @@ import {
     FILE_ICON_NAME_MAPPER,
     FOLDERS_ICON_NAME_MAPPER
 } from '../../data';
-import { FileExplorerDepthState, FileSelectionState } from '../../states';
+import { FileSelectionState } from '../../states';
 
 type ExtensionName = keyof typeof EXTENSION_ICON_NAME_MAPPER;
 type FileName = keyof typeof FILE_ICON_NAME_MAPPER;
@@ -33,9 +33,6 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
     public node!: MonacoTreeNode;
 
     @Input()
-    public children: MonacoTreeNode[] | null = null;
-
-    @Input()
     public depth = 0;
 
     @Input()
@@ -44,16 +41,12 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
     @Output()
     public fileSelected: EventEmitter<MonacoTreeFileNode> = new EventEmitter();
 
-    public get name(): string {
-        return this.node.name;
-    }
-
     public get marginLeftStyleValue(): string {
         return `${this.baseMarginLeft * this.depth}px`;
     }
 
     public get doChildrenExist(): boolean {
-        return !!this.children;
+        return !!this.node.children;
     }
 
     public get isFile(): boolean {
@@ -92,12 +85,8 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
         return CLASSES;
     }
 
-    public get fileExplorerDepth(): number {
-        return this.fileExplorerDepthState.data as number;
-    }
-
     public get isAllowedToRender(): boolean {
-        return this.depth <= this.fileExplorerDepth && this.hasBeenOpened;
+        return !this.isHidden || this.hasBeenOpened;
     }
 
     public isOpened = false;
@@ -111,18 +100,19 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
 
     constructor(
         private readonly fileSelectionState: FileSelectionState,
-        private readonly changeDetectorRef: ChangeDetectorRef,
-        private readonly fileExplorerDepthState: FileExplorerDepthState
+        private readonly changeDetectorRef: ChangeDetectorRef
     ) {}
 
     public ngOnInit(): void {
-        if (!this.children) {
+        console.log(this.node.name);
+
+        if (!this.node.children) {
             this.initFileSelection();
         }
     }
 
     public ngOnChanges(): void {
-        if (!this.icon && this.depth <= this.fileExplorerDepth) {
+        if (!this.icon) {
             this.icon = this.getIcon();
         }
     }
@@ -130,7 +120,6 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
     public onButtonToggle(): void {
         this.isOpened = !this.isOpened;
         this.hasBeenOpened = true;
-        this.fileExplorerDepthState.set(this.incrementedDepth);
 
         if (this.doChildrenExist) {
             return;
@@ -163,7 +152,7 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
             return this.getFolderIconName();
         }
 
-        if (FILE_ICON_NAME_MAPPER[this.name as FileName]) {
+        if (FILE_ICON_NAME_MAPPER[this.node.name as FileName]) {
             return this.getFileIconName();
         }
 
@@ -177,7 +166,7 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
     }
 
     private getFolderIconName(): string {
-        const nameAsFolderName = this.name as FolderName;
+        const nameAsFolderName = this.node.name as FolderName;
         let folderName = 'folder';
 
         if (FOLDERS_ICON_NAME_MAPPER[nameAsFolderName]) {
@@ -192,11 +181,11 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
     }
 
     private getFileIconName(): string {
-        return FILE_ICON_NAME_MAPPER[this.name as FileName];
+        return FILE_ICON_NAME_MAPPER[this.node.name as FileName];
     }
 
     private tryGetExtensionIconName(): string | null {
-        let nameArray = this.name.split('.');
+        let nameArray = this.node.name.split('.');
 
         while (nameArray.length > 0) {
             const possibleExtensionName = nameArray.join('.') as ExtensionName;

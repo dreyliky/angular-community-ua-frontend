@@ -6,12 +6,14 @@ import {
     Output
 } from '@angular/core';
 import { MonacoTreeFileNode, MonacoTreeNode } from '@code-review/shared';
+import { FileSelectionState } from './states';
 
 @Component({
     selector: 'acua-file-explorer',
     templateUrl: './file-explorer.component.html',
     styleUrls: ['./file-explorer.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [FileSelectionState]
 })
 export class FileExplorerComponent {
     @Input()
