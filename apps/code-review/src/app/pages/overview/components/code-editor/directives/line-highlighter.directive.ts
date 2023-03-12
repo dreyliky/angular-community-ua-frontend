@@ -1,6 +1,5 @@
 import { Directive, Inject, OnDestroy } from '@angular/core';
 import type { editor, IDisposable } from 'monaco-editor';
-import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
 import { Subscription } from 'rxjs';
 import { MONACO_EDITOR } from '../../../tokens';
 import { LINE_DECORATION_HAS_COMMENTS_CLASS_NAME as HAS_COMMENTS_CLASS } from '../constants';
@@ -15,6 +14,7 @@ import { EditorCommentsState } from '../states';
 export class LineHighlighterDirective implements OnDestroy {
     private mouseDownListener: IDisposable | undefined;
     private editorModelListener: IDisposable | undefined;
+    private commentsObserver: Subscription | undefined;
 
     private get editorModel(): editor.ITextModel {
         return this.editor.getModel() as editor.ITextModel;
@@ -31,19 +31,23 @@ export class LineHighlighterDirective implements OnDestroy {
     public ngOnDestroy(): void {
         this.mouseDownListener?.dispose();
         this.editorModelListener?.dispose();
+        this.commentsObserver?.unsubscribe();
     }
 
     private initEditorModelContentInitListener(): void {
         this.editorModelListener = this.editor.onDidChangeModelContent(() => {
+            this.commentsObserver?.unsubscribe();
+
             this.initDecorationsToAllLines();
             this.initEditorMouseDownListener();
             this.initEditorCommentsObserver();
         });
     }
 
-    @AutoUnsubscribe()
-    private initEditorCommentsObserver(): Subscription {
-        return this.editorCommentsState.actualData$.subscribe(() => {
+    private initEditorCommentsObserver(): void {
+        const commentsState$ = this.editorCommentsState.actualData$;
+
+        this.commentsObserver = commentsState$.subscribe(() => {
             this.updateDecorationClassNamesForLinesWithComments();
         });
     }
