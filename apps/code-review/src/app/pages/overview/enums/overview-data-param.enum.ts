@@ -1,4 +1,5 @@
 export enum OverviewDataParam {
     MonacoApi = 'monacoApi',
-    Comments = 'comments'
+    Comments = 'comments',
+    SourceCode = 'sourceCode'
 }

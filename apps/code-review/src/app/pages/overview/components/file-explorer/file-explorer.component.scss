@@ -1,6 +1,9 @@
 :host {
     width: 200px;
     min-width: 200px;
+    height: 100%;
     user-select: none;
     background-color: #212121;
+    overflow-y: scroll;
+    resize: horizontal;
 }

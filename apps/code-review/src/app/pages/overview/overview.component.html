@@ -4,6 +4,7 @@
     <acua-file-explorer
         [tree]="tree"
         class="file-explorer"
+        (fileSelected)="onFileSelected($event)"
     ></acua-file-explorer>
 
     <acua-code-editor class="code-editor"></acua-code-editor>

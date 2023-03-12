@@ -1,30 +1,28 @@
 import {
-    AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    inject,
     ViewChild
 } from '@angular/core';
+import { MonacoTreeFileNode } from '@code-review/shared';
 import { CodeEditorComponent } from './components';
-import { FILE_TREE_ARRAY } from './data';
+import { SOURCE_CODE_PROVIDER } from './providers';
+import { SOURCE_CODE } from './tokens';
 
 @Component({
     selector: 'acua-overview',
     templateUrl: './overview.component.html',
     styleUrls: ['./overview.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [SOURCE_CODE_PROVIDER]
 })
-export class OverviewComponent implements AfterViewInit {
-    public readonly tree = FILE_TREE_ARRAY;
+export class OverviewComponent {
+    public tree = inject(SOURCE_CODE);
 
     @ViewChild(CodeEditorComponent)
     private readonly codeEditor!: CodeEditorComponent;
 
-    public ngAfterViewInit(): void {
-        // FIXME: Replace to real approach
-        this.codeEditor.openFile(
-            'src/app/app.component.ts',
-            'export const MY_CODE_HERE = "VALUE";\nexport const s = "VAE";\n' +
-                'export const myAmazingConst = "Hello world!"\n'
-        );
+    public onFileSelected(node: MonacoTreeFileNode): void {
+        this.codeEditor.openFile(node.fullPath, node.content);
     }
 }
