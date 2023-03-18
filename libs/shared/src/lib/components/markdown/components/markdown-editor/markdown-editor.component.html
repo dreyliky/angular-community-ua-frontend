@@ -8,12 +8,7 @@
         <textarea #markdownTextArea matInput></textarea>
         <div class="markdown-action_buttons">
             <div *ngFor="let markdownMember of markdownDataArray">
-                <button
-                    (click)="
-                        insertMarkdownSyntax(markdownMember.methodEnumMember)
-                    "
-                    mat-fab
-                >
+                <button (click)="insertMarkdownSyntax(markdownMember.methodEnumMember)" mat-fab>
                     <mat-icon>{{ markdownMember.matIconName }}</mat-icon>
                 </button>
             </div>

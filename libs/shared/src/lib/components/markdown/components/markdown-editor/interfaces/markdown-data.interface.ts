@@ -1,6 +1,6 @@
 import { MarkdownSyntaxEnum } from '../enums';
 
 export interface MarkdownData {
-    methodEnumMember: MarkdownSyntaxEnum;
-    matIconName: string;
+    readonly methodEnumMember: MarkdownSyntaxEnum;
+    readonly matIconName: string;
 }
