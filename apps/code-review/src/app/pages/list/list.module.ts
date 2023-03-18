@@ -7,7 +7,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 
-import { MarkdownSharedModule, UserAvatarModule } from '@acua/shared';
+import { MarkdownModule, UserAvatarModule } from '@acua/shared';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import {
     AllRequestsComponent,
@@ -35,7 +35,7 @@ import { LIST_ROUTES } from './list.routes';
         MatRippleModule,
         MatTooltipModule,
         UserAvatarModule,
-        MarkdownSharedModule,
+        MarkdownModule,
         MatButtonToggleModule,
         RouterModule.forChild(LIST_ROUTES)
     ]

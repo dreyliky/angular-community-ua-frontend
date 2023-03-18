@@ -22,4 +22,4 @@ import { MarkdownEditorComponent, MarkdownPreviewerComponent } from './component
     declarations: [MarkdownEditorComponent, MarkdownPreviewerComponent],
     exports: [MarkdownEditorComponent, MarkdownPreviewerComponent]
 })
-export class MarkdownSharedModule {}
+export class MarkdownModule {}
