@@ -25,6 +25,7 @@
         "@nrwl/nx-cloud": "latest",
         "@nrwl/workspace": "15.6.3",
         "@types/jest": "28.1.1",
+        "@types/markdown-it": "^12.2.3",
         "@types/node": "16.11.7",
         "@typescript-eslint/eslint-plugin": "^5.36.1",
         "@typescript-eslint/parser": "^5.36.1",
