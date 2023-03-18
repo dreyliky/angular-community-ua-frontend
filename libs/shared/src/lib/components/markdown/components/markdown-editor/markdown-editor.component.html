@@ -1,0 +1,25 @@
+<mat-button-toggle-group multiple>
+    <mat-button-toggle (click)="onButtonActiveToggle()"
+        >Preview</mat-button-toggle
+    ></mat-button-toggle-group
+>
+<ng-container *ngIf="isMarkdownEditorActive; else markdownPreviewerTemplate">
+    <mat-form-field>
+        <textarea #markdownTextArea matInput></textarea>
+        <div class="markdown-action_buttons">
+            <div *ngFor="let markdownMember of markdownDataArray">
+                <button
+                    (click)="
+                        insertMarkdownSyntax(markdownMember.methodEnumMember)
+                    "
+                    mat-fab
+                >
+                    <mat-icon>{{ markdownMember.matIconName }}</mat-icon>
+                </button>
+            </div>
+        </div>
+    </mat-form-field>
+</ng-container>
+<ng-template #markdownPreviewerTemplate>
+    <acua-markdown-previewer [text]="markdownText"></acua-markdown-previewer>
+</ng-template>

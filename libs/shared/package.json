@@ -1,4 +1,7 @@
 {
     "name": "@acua/shared",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "devDependencies": {
+        "@types/markdown-it": "^12.2.3"
+    }
 }
