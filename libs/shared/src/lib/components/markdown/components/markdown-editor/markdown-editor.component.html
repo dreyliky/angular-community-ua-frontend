@@ -5,7 +5,7 @@
 >
 <ng-container *ngIf="isMarkdownEditorActive; else markdownPreviewerTemplate">
     <mat-form-field>
-        <textarea #markdownTextArea matInput></textarea>
+        <textarea markdownEditorSelector #markdownTextArea matInput></textarea>
         <div class="markdown-action_buttons">
             <acua-markdown-button
                 *ngFor="let button of markdownButtonArray"
