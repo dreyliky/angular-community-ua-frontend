@@ -36,11 +36,12 @@ export class LineHighlighterDirective implements OnDestroy {
 
     private initEditorModelContentInitListener(): void {
         this.editorModelListener = this.editor.onDidChangeModelContent(() => {
-            this.commentsObserver?.unsubscribe();
-
             this.initDecorationsToAllLines();
             this.initEditorMouseDownListener();
-            this.initEditorCommentsObserver();
+
+            if (!this.commentsObserver) {
+                this.initEditorCommentsObserver();
+            }
         });
     }
 
