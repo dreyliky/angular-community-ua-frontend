@@ -8,6 +8,7 @@ import { MonacoTreeFileNode } from '@code-review/shared';
 import { CodeEditorComponent } from './components';
 import { SOURCE_CODE_PROVIDER } from './providers';
 import { SOURCE_CODE } from './tokens';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
     selector: 'acua-overview',
@@ -18,11 +19,21 @@ import { SOURCE_CODE } from './tokens';
 })
 export class OverviewComponent {
     public tree = inject(SOURCE_CODE);
+    public readonly isMobile = this.deviceService.isMobile();
+    public isFileExplorerOpenMobile = false;
+    public isFileExplorerOpenDesktop = true;
 
     @ViewChild(CodeEditorComponent)
     private readonly codeEditor!: CodeEditorComponent;
 
+    constructor(private readonly deviceService: DeviceDetectorService) {}
+
     public onFileSelected(node: MonacoTreeFileNode): void {
         this.codeEditor.openFile(node.fullPath, node.content);
+    }
+
+    public toggleFileExplorer(): void {
+        this.isFileExplorerOpenMobile = !this.isFileExplorerOpenMobile;
+        this.isFileExplorerOpenDesktop = !this.isFileExplorerOpenDesktop;
     }
 }
