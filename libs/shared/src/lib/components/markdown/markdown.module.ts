@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MarkdownEditorComponent, MarkdownPreviewerComponent } from './components';
+import { MarkdownEditorButtonComponent } from './components/markdown-editor/components';
 
 @NgModule({
     imports: [
@@ -19,7 +20,11 @@ import { MarkdownEditorComponent, MarkdownPreviewerComponent } from './component
         MatInputModule,
         MatButtonToggleModule
     ],
-    declarations: [MarkdownEditorComponent, MarkdownPreviewerComponent],
+    declarations: [
+        MarkdownEditorComponent,
+        MarkdownPreviewerComponent,
+        MarkdownEditorButtonComponent
+    ],
     exports: [MarkdownEditorComponent, MarkdownPreviewerComponent]
 })
 export class MarkdownModule {}

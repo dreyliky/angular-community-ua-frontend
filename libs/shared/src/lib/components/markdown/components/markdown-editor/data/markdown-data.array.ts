@@ -1,17 +1,14 @@
-import { MarkdownSyntaxEnum } from '../enums';
-import { MarkdownData } from '../interfaces';
+import { BoldButtonClass, ItalicButtonClass } from '../classes';
+import { HeaderButtonClass } from '../classes/header-button.class';
 
-export const MARKDOWN_DATA_ARRAY: MarkdownData[] = [
+export const MARKDOWN_BUTTON_ARRAY = [
     {
-        methodEnumMember: MarkdownSyntaxEnum.Bold,
-        matIconName: 'format_bold'
+        buttonClass: new HeaderButtonClass()
     },
     {
-        methodEnumMember: MarkdownSyntaxEnum.Italic,
-        matIconName: 'format_italic'
+        buttonClass: new BoldButtonClass()
     },
     {
-        methodEnumMember: MarkdownSyntaxEnum.Header,
-        matIconName: 'text_fields'
+        buttonClass: new ItalicButtonClass()
     }
 ];

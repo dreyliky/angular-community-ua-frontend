@@ -7,11 +7,11 @@
     <mat-form-field>
         <textarea #markdownTextArea matInput></textarea>
         <div class="markdown-action_buttons">
-            <div *ngFor="let markdownMember of markdownDataArray">
-                <button (click)="insertMarkdownSyntax(markdownMember.methodEnumMember)" mat-fab>
-                    <mat-icon>{{ markdownMember.matIconName }}</mat-icon>
-                </button>
-            </div>
+            <acua-markdown-button
+                *ngFor="let button of markdownButtonArray"
+                (enumEmitter)="insertMarkdownSyntax($event)"
+                [class]="button.buttonClass"
+            ></acua-markdown-button>
         </div>
     </mat-form-field>
 </ng-container>

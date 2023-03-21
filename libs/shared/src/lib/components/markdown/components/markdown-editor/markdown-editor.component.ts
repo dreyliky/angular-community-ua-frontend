@@ -1,11 +1,6 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    ViewChild
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
 import * as MarkdownIt from 'markdown-it';
-import { MARKDOWN_DATA_ARRAY } from './data';
+import { MARKDOWN_BUTTON_ARRAY } from './data';
 import { MarkdownSyntaxEnum } from './enums';
 import { getMarkdownSyntax } from './functions';
 
@@ -19,7 +14,7 @@ export class MarkdownEditorComponent {
     @ViewChild('markdownTextArea')
     public markdownTextArea!: ElementRef<HTMLTextAreaElement>;
 
-    public readonly markdownDataArray = MARKDOWN_DATA_ARRAY;
+    public readonly markdownButtonArray = MARKDOWN_BUTTON_ARRAY;
 
     public isMarkdownEditorActive = true;
 
@@ -33,31 +28,21 @@ export class MarkdownEditorComponent {
         this.insertMarkdownWithSelection(markdownSyntaxType);
     }
 
-    public insertMarkdownWithoutSelection(
-        markdownSyntaxType: MarkdownSyntaxEnum
-    ): void {
+    public insertMarkdownWithoutSelection(markdownSyntaxType: MarkdownSyntaxEnum): void {
         const markdownTextArea = this.markdownTextArea.nativeElement;
-        const markdownSyntaxText = getMarkdownSyntax(
-            markdownSyntaxType,
-            markdownTextArea.value
-        );
+        const markdownSyntaxText = getMarkdownSyntax(markdownSyntaxType, markdownTextArea.value);
 
         markdownTextArea.value = markdownSyntaxText;
     }
 
-    public insertMarkdownWithSelection(
-        markdownSyntaxType: MarkdownSyntaxEnum
-    ): void {
+    public insertMarkdownWithSelection(markdownSyntaxType: MarkdownSyntaxEnum): void {
         const markdownTextArea = this.markdownTextArea.nativeElement;
         const selectedPositions = this.getSelectedPositions();
         const croppedText = markdownTextArea.value.substring(
             selectedPositions.start,
             selectedPositions.end
         );
-        const markdownSyntaxText = getMarkdownSyntax(
-            markdownSyntaxType,
-            croppedText
-        );
+        const markdownSyntaxText = getMarkdownSyntax(markdownSyntaxType, croppedText);
         const newMarkdownSyntaxText =
             markdownTextArea.value.slice(0, selectedPositions.start) +
             markdownSyntaxText +
@@ -67,9 +52,7 @@ export class MarkdownEditorComponent {
     }
 
     public renderAsMarkdownIt(): string {
-        const markdownItText = new MarkdownIt().render(
-            this.markdownTextArea.nativeElement.value
-        );
+        const markdownItText = new MarkdownIt().render(this.markdownTextArea.nativeElement.value);
 
         return markdownItText;
     }
@@ -92,9 +75,6 @@ export class MarkdownEditorComponent {
     private isMarkdownTextAreaTextSelected(): boolean {
         const selectedPositions = this.getSelectedPositions();
 
-        return (
-            selectedPositions.start === selectedPositions.end ||
-            selectedPositions.end === 0
-        );
+        return selectedPositions.start === selectedPositions.end || selectedPositions.end === 0;
     }
 }
