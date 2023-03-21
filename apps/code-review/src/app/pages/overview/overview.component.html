@@ -1,14 +1,14 @@
 <acua-header
     class="header"
-    (toggleFileExplorer)="toggleFileExplorer()"
+    (toggleFileExplorer)="onHeaderHamburgerMenuButtonClick()"
 ></acua-header>
 
 <mat-drawer-container class="container">
     <mat-drawer
-        mode="side"
-        class="mat-drawer-desktop"
-        *ngIf="!isMobile"
-        [opened]="isFileExplorerOpenDesktop"
+        [mode]="mode"
+        class="mat-drawer"
+        [ngClass]="isMobile ? 'mat-drawer-mobile' : 'mat-drawer-desktop'"
+        [opened]="isSidenavOpened"
     >
         <acua-file-explorer
             [tree]="tree"
@@ -16,22 +16,7 @@
             (fileSelected)="onFileSelected($event)"
         ></acua-file-explorer>
     </mat-drawer>
-    <mat-drawer-content>
-        <acua-code-editor class="code-editor"></acua-code-editor>
-    </mat-drawer-content>
 
-    <mat-drawer
-        mode="over"
-        class="mat-drawer-mobile"
-        *ngIf="isMobile"
-        [opened]="isFileExplorerOpenMobile"
-    >
-        <acua-file-explorer
-            [tree]="tree"
-            class="file-explorer"
-            (fileSelected)="onFileSelected($event)"
-        ></acua-file-explorer>
-    </mat-drawer>
     <mat-drawer-content>
         <acua-code-editor class="code-editor"></acua-code-editor>
     </mat-drawer-content>

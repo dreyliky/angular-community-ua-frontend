@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { MonacoTreeFileNode } from '@code-review/shared';
 import { CodeEditorComponent } from './components';
+import { MatDrawerMode } from '@angular/material/sidenav';
 import { SOURCE_CODE_PROVIDER } from './providers';
 import { SOURCE_CODE } from './tokens';
 import { DeviceDetectorService } from 'ngx-device-detector';
@@ -20,8 +21,8 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 export class OverviewComponent {
     public tree = inject(SOURCE_CODE);
     public readonly isMobile = this.deviceService.isMobile();
-    public isFileExplorerOpenMobile = false;
-    public isFileExplorerOpenDesktop = true;
+    public mode: MatDrawerMode = this.isMobile ? 'over' : 'side';
+    public isSidenavOpened = this.isMobile ? false : true;
 
     @ViewChild(CodeEditorComponent)
     private readonly codeEditor!: CodeEditorComponent;
@@ -32,8 +33,7 @@ export class OverviewComponent {
         this.codeEditor.openFile(node.fullPath, node.content);
     }
 
-    public toggleFileExplorer(): void {
-        this.isFileExplorerOpenMobile = !this.isFileExplorerOpenMobile;
-        this.isFileExplorerOpenDesktop = !this.isFileExplorerOpenDesktop;
+    public onHeaderHamburgerMenuButtonClick(): void {
+        this.isSidenavOpened = !this.isSidenavOpened;
     }
 }
