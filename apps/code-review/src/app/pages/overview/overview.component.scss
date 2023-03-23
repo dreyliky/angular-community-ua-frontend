@@ -20,8 +20,9 @@
     }
 
     .mat-drawer-desktop {
-        min-width: 15%;
-        resize: horizontal;
+        width: auto;
+        min-width: 300px;
+        max-width: 35%;
     }
 
     .mat-drawer-mobile {

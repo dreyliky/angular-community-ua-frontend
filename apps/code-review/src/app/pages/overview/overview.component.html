@@ -1,13 +1,13 @@
 <acua-header
     class="header"
-    (toggleFileExplorer)="onHeaderHamburgerMenuButtonClick()"
+    (hamburgerMenuButtonClick)="onHeaderHamburgerMenuButtonClick()"
 ></acua-header>
 
 <mat-drawer-container class="container">
     <mat-drawer
         [mode]="mode"
         class="mat-drawer"
-        [ngClass]="isMobile ? 'mat-drawer-mobile' : 'mat-drawer-desktop'"
+        [ngClass]="adaptiveClasses"
         [opened]="isSidenavOpened"
     >
         <acua-file-explorer

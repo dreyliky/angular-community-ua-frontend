@@ -21,7 +21,11 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 export class OverviewComponent {
     public tree = inject(SOURCE_CODE);
     public readonly isMobile = this.deviceService.isMobile();
-    public mode: MatDrawerMode = this.isMobile ? 'over' : 'side';
+    public readonly mode: MatDrawerMode = this.isMobile ? 'over' : 'side';
+    public readonly adaptiveClasses = this.isMobile
+        ? 'mat-drawer-mobile'
+        : 'mat-drawer-desktop';
+
     public isSidenavOpened = this.isMobile ? false : true;
 
     @ViewChild(CodeEditorComponent)

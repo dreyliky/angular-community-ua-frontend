@@ -17,7 +17,8 @@ import { ReviewRequestDetailsWindowComponent } from './review-request-details-wi
 export class HeaderComponent {
     public readonly isMobile = this.deviceService.isMobile();
 
-    @Output() public toggleFileExplorer = new EventEmitter<boolean>();
+    @Output()
+    public readonly hamburgerMenuButtonClick = new EventEmitter<MouseEvent>();
 
     constructor(
         private readonly deviceService: DeviceDetectorService,
