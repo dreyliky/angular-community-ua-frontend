@@ -6,8 +6,10 @@ import {
 } from '@angular/core';
 import { MonacoTreeFileNode } from '@code-review/shared';
 import { CodeEditorComponent } from './components';
+import { MatDrawerMode } from '@angular/material/sidenav';
 import { SOURCE_CODE_PROVIDER } from './providers';
 import { SOURCE_CODE } from './tokens';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
     selector: 'acua-overview',
@@ -18,11 +20,24 @@ import { SOURCE_CODE } from './tokens';
 })
 export class OverviewComponent {
     public tree = inject(SOURCE_CODE);
+    public readonly isMobile = this.deviceService.isMobile();
+    public readonly mode: MatDrawerMode = this.isMobile ? 'over' : 'side';
+    public readonly adaptiveClasses = this.isMobile
+        ? 'mat-drawer-mobile'
+        : 'mat-drawer-desktop';
+
+    public isSidenavOpened = this.isMobile ? false : true;
 
     @ViewChild(CodeEditorComponent)
     private readonly codeEditor!: CodeEditorComponent;
 
+    constructor(private readonly deviceService: DeviceDetectorService) {}
+
     public onFileSelected(node: MonacoTreeFileNode): void {
         this.codeEditor.openFile(node.fullPath, node.content);
+    }
+
+    public onHeaderHamburgerMenuButtonClick(): void {
+        this.isSidenavOpened = !this.isSidenavOpened;
     }
 }

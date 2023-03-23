@@ -6,6 +6,7 @@ import {
     FileExplorerModule,
     HeaderModule
 } from './components';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { OverviewComponent } from './overview.component';
 import { OVERVIEW_ROUTES } from './overview.routes';
 import {
@@ -22,6 +23,7 @@ import { ReviewRequestCommentsState } from './states';
         FileExplorerModule,
         HeaderModule,
         CodeEditorModule,
+        MatSidenavModule,
         RouterModule.forChild(OVERVIEW_ROUTES)
     ],
     providers: [
