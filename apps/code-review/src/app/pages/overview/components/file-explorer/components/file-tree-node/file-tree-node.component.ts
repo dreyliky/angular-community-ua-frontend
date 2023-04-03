@@ -77,7 +77,7 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
     }
 
     public get rowCssClassesAsString(): string {
-        const CLASSES = 'monaco-tree-row';
+        const CLASSES = `monaco-tree-row ${this.rowAdaptationCssClass}`;
 
         if (this.hide) {
             return `${CLASSES} hide`;
@@ -95,13 +95,13 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
 
     public readonly isMobile = this.deviceService.isMobile();
 
-    public readonly adaptiveRow = this.isMobile
-        ? 'monaco-tree-row-mobile'
-        : 'monaco-tree-row-desktop';
-
-    public readonly adaptiveIcon = this.isMobile
+    public readonly fileIconCssClass = this.isMobile
         ? 'monaco-tree-icon-mobile'
         : 'monaco-tree-icon';
+
+    private readonly rowAdaptationCssClass = this.isMobile
+        ? 'monaco-tree-row-mobile'
+        : 'monaco-tree-row-desktop';
 
     private hasBeenOpened = false;
 
