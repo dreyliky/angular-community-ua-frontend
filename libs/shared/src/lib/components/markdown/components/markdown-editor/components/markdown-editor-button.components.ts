@@ -1,19 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { BoldButtonClass } from '../classes/bold-button.class';
-import { HeaderButtonClass } from '../classes/header-button.class';
-import { ItalicButtonClass } from '../classes/italic-button.class';
-import { MarkdownSyntaxEnum } from '../enums';
+import { MarkdownIconNameType } from '../types';
 
 @Component({
     selector: 'acua-markdown-button',
-    template: `<button (click)="enumEmitter.emit(class.enumMember)" mat-fab>
-        <mat-icon>{{ class.matIconName }}</mat-icon>
-    </button>`
+    templateUrl: './markdown-editor-button.component.html'
 })
 export class MarkdownEditorButtonComponent {
     @Input()
-    public class!: BoldButtonClass | ItalicButtonClass | HeaderButtonClass;
+    public iconName!: MarkdownIconNameType;
 
     @Output()
-    public enumEmitter = new EventEmitter<MarkdownSyntaxEnum>();
+    public enumEmitter = new EventEmitter<Event>();
 }

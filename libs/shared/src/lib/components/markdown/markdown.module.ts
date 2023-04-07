@@ -6,8 +6,12 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MarkdownEditorComponent, MarkdownPreviewerComponent } from './components';
-import { MarkdownEditorButtonComponent } from './components/markdown-editor/components';
+import {
+    MarkdownEditorButtonComponent,
+    MarkdownEditorComponent,
+    MarkdownEditorSelectorDirective,
+    MarkdownPreviewerComponent
+} from './components';
 
 @NgModule({
     imports: [
@@ -23,7 +27,8 @@ import { MarkdownEditorButtonComponent } from './components/markdown-editor/comp
     declarations: [
         MarkdownEditorComponent,
         MarkdownPreviewerComponent,
-        MarkdownEditorButtonComponent
+        MarkdownEditorButtonComponent,
+        MarkdownEditorSelectorDirective
     ],
     exports: [MarkdownEditorComponent, MarkdownPreviewerComponent]
 })

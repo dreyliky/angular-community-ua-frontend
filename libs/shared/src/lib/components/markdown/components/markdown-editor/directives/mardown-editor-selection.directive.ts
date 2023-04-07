@@ -1,7 +1,6 @@
 import { Directive, ElementRef } from '@angular/core';
 import * as MarkdownIt from 'markdown-it';
-import { MarkdownSyntaxEnum } from '../enums';
-import { getMarkdownSyntax } from '../functions';
+import { MarkdownButton } from '../interfaces/markdown-button.interface';
 
 @Directive({
     selector: '[markdownEditorSelector]'
@@ -9,29 +8,28 @@ import { getMarkdownSyntax } from '../functions';
 export class MarkdownEditorSelectorDirective {
     constructor(private readonly hostRef: ElementRef<HTMLTextAreaElement>) {}
 
-    public insertMarkdownSyntax(markdownSyntaxEnum: MarkdownSyntaxEnum): void {
+    public insertMarkdownSyntax(markdownButton: MarkdownButton): void {
         if (this.isMarkdownTextAreaTextSelected()) {
-            return this.insertMarkdownWithoutSelection(markdownSyntaxEnum);
+            return this.insertMarkdownWithoutSelection(markdownButton);
         }
-        this.insertMarkdownWithSelection(markdownSyntaxEnum);
+        this.insertMarkdownWithSelection(markdownButton);
     }
 
-    public insertMarkdownWithoutSelection(markdownSyntaxEnum: MarkdownSyntaxEnum): void {
+    public insertMarkdownWithoutSelection(markdownButton: MarkdownButton): void {
         const markdownTextArea = this.hostRef.nativeElement;
-        const markdownSyntaxText = getMarkdownSyntax(markdownSyntaxEnum, markdownTextArea.value);
+        const markdownSyntaxText = markdownButton.getMarkdownSyntax(markdownTextArea.value);
 
         markdownTextArea.value = markdownSyntaxText;
     }
 
-    public insertMarkdownWithSelection(markdownSyntaxEnum: MarkdownSyntaxEnum): void {
+    public insertMarkdownWithSelection(markdownButton: MarkdownButton): void {
         const markdownTextArea = this.hostRef.nativeElement;
         const selectedPositions = this.getSelectedPositions();
         const croppedText = markdownTextArea.value.substring(
             selectedPositions.start,
             selectedPositions.end
         );
-        const markdownSyntaxText = getMarkdownSyntax(markdownSyntaxEnum, croppedText);
-        console.log(markdownSyntaxText);
+        const markdownSyntaxText = markdownButton.getMarkdownSyntax(croppedText);
         const newMarkdownSyntaxText =
             markdownTextArea.value.slice(0, selectedPositions.start) +
             markdownSyntaxText +

@@ -1,6 +1,8 @@
 import { MarkdownSyntaxEnum } from '../enums';
+import { MarkdownIconNameType } from '../types';
 
 export interface MarkdownButton {
-    readonly enumMember: MarkdownSyntaxEnum;
-    readonly matIconName: string;
+    readonly markdownSyntaxEnum: MarkdownSyntaxEnum;
+    readonly matIconName: MarkdownIconNameType;
+    readonly getMarkdownSyntax: (markdownText: string) => string;
 }

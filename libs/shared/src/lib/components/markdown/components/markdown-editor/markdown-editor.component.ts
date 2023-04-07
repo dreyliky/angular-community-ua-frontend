@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { MARKDOWN_BUTTON_ARRAY } from './data';
 import { MarkdownEditorSelectorDirective } from './directives';
-import { MarkdownSyntaxEnum } from './enums';
+import { MarkdownButton } from './interfaces/markdown-button.interface';
 
 @Component({
     selector: 'acua-markdown-editor',
@@ -14,16 +14,16 @@ export class MarkdownEditorComponent {
     public markdownEditorSelectorDirective!: MarkdownEditorSelectorDirective;
 
     public readonly markdownButtonArray = MARKDOWN_BUTTON_ARRAY;
-
     public isMarkdownEditorActive = true;
-
     public markdownText!: string;
 
-    public insertMarkdownSyntax(markdownSyntaxType: MarkdownSyntaxEnum): void {
-        this.markdownEditorSelectorDirective.insertMarkdownSyntax(markdownSyntaxType);
+    public insertMarkdownSyntax(markdownButton: MarkdownButton): void {
+        this.markdownEditorSelectorDirective.insertMarkdownSyntax(markdownButton);
 
-        if (!this.isMarkdownEditorActive) {
-            this.markdownText = this.markdownEditorSelectorDirective.renderAsMarkdownIt();
+        if (this.isMarkdownEditorActive) {
+            const markdownText = this.markdownEditorSelectorDirective.renderAsMarkdownIt();
+
+            this.markdownText = markdownText;
         }
     }
 
