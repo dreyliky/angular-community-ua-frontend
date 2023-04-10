@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MarkdownIconNameType } from '../types';
 
 @Component({
@@ -8,7 +8,4 @@ import { MarkdownIconNameType } from '../types';
 export class MarkdownEditorButtonComponent {
     @Input()
     public iconName!: MarkdownIconNameType;
-
-    @Output()
-    public enumEmitter = new EventEmitter<Event>();
 }

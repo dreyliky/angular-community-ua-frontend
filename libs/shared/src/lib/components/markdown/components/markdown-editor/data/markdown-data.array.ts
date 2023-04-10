@@ -1,5 +1,4 @@
-import { BoldButtonClass, ItalicButtonClass } from '../classes';
-import { HeaderButtonClass } from '../classes/header-button.class';
+import { BoldButtonClass, HeaderButtonClass, ItalicButtonClass } from '../classes';
 
 export const MARKDOWN_BUTTON_ARRAY = [
     new HeaderButtonClass(),

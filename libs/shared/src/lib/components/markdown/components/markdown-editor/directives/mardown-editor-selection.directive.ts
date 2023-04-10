@@ -1,18 +1,21 @@
 import { Directive, ElementRef } from '@angular/core';
 import * as MarkdownIt from 'markdown-it';
-import { MarkdownButton } from '../interfaces/markdown-button.interface';
+import { MarkdownButton } from '../interfaces';
 
 @Directive({
     selector: '[markdownEditorSelector]'
 })
 export class MarkdownEditorSelectorDirective {
+    private readonly markdownIt = new MarkdownIt();
+
     constructor(private readonly hostRef: ElementRef<HTMLTextAreaElement>) {}
 
     public insertMarkdownSyntax(markdownButton: MarkdownButton): void {
         if (this.isMarkdownTextAreaTextSelected()) {
-            return this.insertMarkdownWithoutSelection(markdownButton);
+            this.insertMarkdownWithoutSelection(markdownButton);
+        } else {
+            this.insertMarkdownWithSelection(markdownButton);
         }
-        this.insertMarkdownWithSelection(markdownButton);
     }
 
     public insertMarkdownWithoutSelection(markdownButton: MarkdownButton): void {
@@ -24,24 +27,19 @@ export class MarkdownEditorSelectorDirective {
 
     public insertMarkdownWithSelection(markdownButton: MarkdownButton): void {
         const markdownTextArea = this.hostRef.nativeElement;
-        const selectedPositions = this.getSelectedPositions();
-        const croppedText = markdownTextArea.value.substring(
-            selectedPositions.start,
-            selectedPositions.end
-        );
+        const { start, end } = this.getSelectedPositions();
+        const croppedText = markdownTextArea.value.substring(start, end);
         const markdownSyntaxText = markdownButton.getMarkdownSyntax(croppedText);
         const newMarkdownSyntaxText =
-            markdownTextArea.value.slice(0, selectedPositions.start) +
+            markdownTextArea.value.slice(0, start) +
             markdownSyntaxText +
-            markdownTextArea.value.slice(selectedPositions.end);
+            markdownTextArea.value.slice(end);
 
         markdownTextArea.value = newMarkdownSyntaxText;
     }
 
     public renderAsMarkdownIt(): string {
-        const markdownItText = new MarkdownIt().render(this.hostRef.nativeElement.value);
-
-        return markdownItText;
+        return this.markdownIt.render(this.hostRef.nativeElement.value);
     }
 
     private getSelectedPositions(): { start: number; end: number } {
@@ -52,8 +50,8 @@ export class MarkdownEditorSelectorDirective {
     }
 
     private isMarkdownTextAreaTextSelected(): boolean {
-        const selectedPositions = this.getSelectedPositions();
+        const { start, end } = this.getSelectedPositions();
 
-        return selectedPositions.start === selectedPositions.end || selectedPositions.end === 0;
+        return start === end || end === 0;
     }
 }

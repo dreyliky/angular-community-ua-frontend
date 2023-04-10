@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { MARKDOWN_BUTTON_ARRAY } from './data';
 import { MarkdownEditorSelectorDirective } from './directives';
-import { MarkdownButton } from './interfaces/markdown-button.interface';
+import { MarkdownButton } from './interfaces';
 
 @Component({
     selector: 'acua-markdown-editor',
@@ -17,7 +17,7 @@ export class MarkdownEditorComponent {
     public isMarkdownEditorActive = true;
     public markdownText!: string;
 
-    public insertMarkdownSyntax(markdownButton: MarkdownButton): void {
+    public onMarkdownButtonClick(markdownButton: MarkdownButton): void {
         this.markdownEditorSelectorDirective.insertMarkdownSyntax(markdownButton);
 
         if (this.isMarkdownEditorActive) {

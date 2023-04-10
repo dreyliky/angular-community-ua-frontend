@@ -1,1 +1,1 @@
-export * from './markdown-data.interface';
+export * from './markdown-button.interface';

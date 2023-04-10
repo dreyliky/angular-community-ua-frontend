@@ -1,1 +1,1 @@
-export * from './markdown-syntax.enum';
+export * from './markdown-action.enum';
