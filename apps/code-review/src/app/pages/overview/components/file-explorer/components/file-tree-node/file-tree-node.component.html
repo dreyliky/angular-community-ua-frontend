@@ -5,7 +5,7 @@
 >
     <span [style.margin-left]="marginLeftStyleValue"></span>
     <i *ngIf="doChildrenExist" [class]="arrowCssClassesAsString"></i>
-    <img [src]="fileExplorerIconSrc" class="monaco-tree-icon" />
+    <img [src]="fileExplorerIconSrc" [ngClass]="fileIconCssClass" />
     <div [title]="node.fullPath" class="monaco-tree-name">
         {{ node.name }}
     </div>

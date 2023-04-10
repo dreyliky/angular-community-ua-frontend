@@ -1,13 +1,11 @@
 {
-    "**/*.html": ["npx prettier **/*.html --write", "git add"],
+    "**/*.html": ["npx prettier **/*.html --write"],
     "**/*.scss": [
         "npx prettier **/*.scss --write",
-        "stylelint --fix",
-        "git add"
+        "stylelint --fix"
     ],
     "**/*.ts": [
         "npx prettier **/*.ts --write",
-        "eslint **/*.ts --fix",
-        "git add"
+        "eslint **/*.ts --fix"
     ]
 }
