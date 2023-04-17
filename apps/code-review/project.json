@@ -62,6 +62,20 @@
                             "with": "apps/code-review/src/environments/environment.development.ts"
                         }
                     ]
+                },
+                "local": {
+                    "buildOptimizer": false,
+                    "optimization": false,
+                    "vendorChunk": true,
+                    "extractLicenses": false,
+                    "sourceMap": true,
+                    "namedChunks": true,
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/host/src/environments/environment.ts",
+                            "with": "apps/host/src/environments/environment.local.ts"
+                        }
+                    ]
                 }
             },
             "defaultConfiguration": "production"
