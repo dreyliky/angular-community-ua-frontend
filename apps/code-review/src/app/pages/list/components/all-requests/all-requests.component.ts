@@ -6,8 +6,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     styleUrls: ['./all-requests.component.scss', '../../styles/request-styles.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AllRequestsComponent {
-    constructor() {
-        console.log('pk');
-    }
-}
+export class AllRequestsComponent {}

@@ -13,7 +13,6 @@ export class LoginErrorHandler {
     constructor(private readonly snackBar: MatSnackBar) {}
 
     public handle(httpError: HttpErrorResponse): void {
-        console.log(httpError);
         const errorHandler = this.errorHandlerMap.get(httpError.status);
 
         errorHandler?.call(this);
