@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppRouteEnum } from '@code-review/core';
 
 const ELEMENT_DATA = [
@@ -20,9 +20,11 @@ export class RequestsTableComponent {
     public readonly dataSource = ELEMENT_DATA;
     public readonly displayedColumns: string[] = ['name', 'date', 'user'];
 
-    constructor(private readonly router: Router) {}
+    constructor(private readonly router: Router, private readonly activatedRoute: ActivatedRoute) {}
 
     public onTableRowClick(id: number): void {
-        this.router.navigateByUrl(`/${AppRouteEnum.Overview}/${id}`);
+        this.router.navigate([`../${AppRouteEnum.Overview}/${id}`], {
+            relativeTo: this.activatedRoute
+        });
     }
 }

@@ -5,11 +5,7 @@
         align-items: center;
         cursor: pointer;
 
-        .user-avatar-image {
-            pointer-events: none;
-            border: 50%;
-            border-radius: 50%;
-            border: 1px solid rgb(211, 211, 211);
+        .user-avatar {
             max-width: 40px;
             max-height: 40px;
         }

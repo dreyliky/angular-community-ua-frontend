@@ -1,10 +1,13 @@
+import { AuthModule } from '@acua/shared';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PreloadAllModules, RouterModule } from '@angular/router';
+import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { APP_ROUTES } from './app.routes';
+import { APP_CONFIG_PROVIDER } from './config';
 import { MAIN_BACKEND_URL_PROVIDER } from './core';
 
 @NgModule({
@@ -16,9 +19,10 @@ import { MAIN_BACKEND_URL_PROVIDER } from './core';
             preloadingStrategy: PreloadAllModules,
             initialNavigation: 'enabledBlocking'
         }),
+        AuthModule.init({ urlsWithAuth: [environment.backendUrl] }),
         HttpClientModule
     ],
-    providers: [MAIN_BACKEND_URL_PROVIDER],
+    providers: [APP_CONFIG_PROVIDER, MAIN_BACKEND_URL_PROVIDER],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -1,4 +1,4 @@
-import { TelegramLoginDto } from '@acua/shared/auth';
+import { TelegramLoginDto } from '@acua/shared';
 import { DOCUMENT } from '@angular/common';
 import {
     AfterViewInit,

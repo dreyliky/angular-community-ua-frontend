@@ -1,3 +1,4 @@
+import { AuthService, UserService } from '@acua/shared';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { HomeRouteEnum } from '@host/pages/home/enums';
 
@@ -8,5 +9,15 @@ import { HomeRouteEnum } from '@host/pages/home/enums';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserMenuComponent {
-    public readonly homeRouteEnum = HomeRouteEnum;
+    protected readonly user$ = this.userService.data$;
+    protected readonly homeRouteEnum = HomeRouteEnum;
+
+    constructor(
+        private readonly authService: AuthService,
+        private readonly userService: UserService
+    ) {}
+
+    public onLogoutButtonClick(): void {
+        this.authService.logout();
+    }
 }

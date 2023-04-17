@@ -25,9 +25,9 @@
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row
-        (click)="onTableRowClick(1)"
-        class="request-table__row"
         matRipple
         *matRowDef="let row; columns: displayedColumns"
+        class="request-table__row"
+        (click)="onTableRowClick(1)"
     ></mat-row>
 </mat-table>
