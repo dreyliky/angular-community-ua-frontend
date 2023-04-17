@@ -1,6 +1,4 @@
-import { Input, Component, ChangeDetectionStrategy, HostBinding, OnChanges } from '@angular/core';
-
-import { SafeStyle } from '@angular/platform-browser';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges } from '@angular/core';
 
 const DEFAULT_URL = 'assets/images/user-avatar.png';
 
@@ -15,7 +13,7 @@ export class UserAvatarComponent implements OnChanges {
     public avatarUrl!: string;
 
     @HostBinding('style.background-image')
-    public backgroundImgUrl: SafeStyle = `url(${DEFAULT_URL})`;
+    public backgroundImgUrl = `url(${DEFAULT_URL})`;
 
     public ngOnChanges(): void {
         this.setBackgroundUrl();

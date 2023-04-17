@@ -1,13 +1,8 @@
 .sections {
-    margin-top: 15px;
     display: flex;
     flex-direction: column;
+    margin-bottom: 15px;
     row-gap: 15px;
-
-    .section-of-requests {
-        padding: 0 15px;
-        border: 1px solid #fff;
-    }
 }
 
 ul {

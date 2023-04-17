@@ -16,4 +16,8 @@ export class BearerTokenService {
     public set(token: string): void {
         this.storageService.set(this.storageKey, token);
     }
+
+    public clear(): void {
+        this.storageService.remove(this.storageKey);
+    }
 }

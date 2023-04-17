@@ -1,3 +1,4 @@
+import { UserService } from '@acua/shared';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AppRouteEnum } from '@host/core';
 
@@ -8,7 +9,8 @@ import { AppRouteEnum } from '@host/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
-    protected get homePagePath(): string {
-        return `/${AppRouteEnum.Home}`;
-    }
+    protected readonly user$ = this.userService.data$;
+    protected readonly homePagePath = `/${AppRouteEnum.Home}`;
+
+    constructor(private readonly userService: UserService) {}
 }

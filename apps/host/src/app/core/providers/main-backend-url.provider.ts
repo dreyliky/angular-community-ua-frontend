@@ -4,5 +4,5 @@ import { ENVIRONMENT } from '../tokens';
 
 export const MAIN_BACKEND_URL_PROVIDER: Provider = {
     provide: MAIN_BACKEND_URL,
-    useFactory: () => inject(ENVIRONMENT).mainBackendUrl
+    useFactory: () => inject(ENVIRONMENT).backendUrl
 };
