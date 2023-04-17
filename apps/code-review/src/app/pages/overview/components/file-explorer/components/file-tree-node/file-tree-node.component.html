@@ -1,8 +1,4 @@
-<div
-    [class]="rowCssClassesAsString"
-    [class.selected]="isSelected"
-    (click)="onButtonToggle()"
->
+<div [class]="rowCssClassesAsString" [class.selected]="isSelected" (click)="onButtonToggle()">
     <span [style.margin-left]="marginLeftStyleValue"></span>
     <i *ngIf="doChildrenExist" [class]="arrowCssClassesAsString"></i>
     <img [src]="fileExplorerIconSrc" [ngClass]="fileIconCssClass" />

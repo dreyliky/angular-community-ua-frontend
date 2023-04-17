@@ -22,10 +22,7 @@ export const FILE_TREE_ARRAY = [
             },
             {
                 name: 'environments',
-                content: [
-                    { name: 'environment.prod.ts' },
-                    { name: 'environment.ts' }
-                ]
+                content: [{ name: 'environment.prod.ts' }, { name: 'environment.ts' }]
             },
             {
                 name: 'favicon.ico'
