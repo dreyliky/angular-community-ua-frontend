@@ -5,9 +5,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class SourceCodeResolver implements Resolve<MonacoTreeNode[]> {
-    constructor(
-        private readonly projectSourceUrlService: ProjectSourceUrlService
-    ) {}
+    constructor(private readonly projectSourceUrlService: ProjectSourceUrlService) {}
 
     public resolve(): Observable<MonacoTreeNode[]> {
         return this.projectSourceUrlService.getSource(

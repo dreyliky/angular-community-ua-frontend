@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { APP_ROUTES } from './app.routes';
+import { MAIN_BACKEND_URL_PROVIDER } from './core';
 
 @NgModule({
     declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { APP_ROUTES } from './app.routes';
         }),
         HttpClientModule
     ],
+    providers: [MAIN_BACKEND_URL_PROVIDER],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

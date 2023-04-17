@@ -9,10 +9,7 @@ export const HOME_ROUTES: Routes = [
         children: [
             {
                 path: HomeRouteEnum.CodeReview,
-                loadChildren: () =>
-                    import('code-review/Module').then(
-                        (m) => m.RemoteEntryModule
-                    )
+                loadChildren: () => import('code-review/Module').then((m) => m.RemoteEntryModule)
             },
             {
                 path: '**',

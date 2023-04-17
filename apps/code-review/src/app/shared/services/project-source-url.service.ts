@@ -5,9 +5,7 @@ import { MonacoTreeNode } from '../interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class ProjectSourceUrlService {
-    constructor(
-        private readonly projectSourceUrlApi: ProjectSourceUrlApiService
-    ) {}
+    constructor(private readonly projectSourceUrlApi: ProjectSourceUrlApiService) {}
 
     public getSource(link: string): Observable<MonacoTreeNode[]> {
         return this.projectSourceUrlApi.getSource(link);

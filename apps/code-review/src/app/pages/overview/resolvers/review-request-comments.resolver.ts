@@ -9,20 +9,14 @@ import { OverviewParamEnum } from '../enums';
 import { ReviewRequestCommentsState } from '../states';
 
 @Injectable()
-export class ReviewRequestCommentsResolver
-    implements Resolve<CommentsAmountDictionary>
-{
+export class ReviewRequestCommentsResolver implements Resolve<CommentsAmountDictionary> {
     constructor(
         private readonly commentsService: ReviewRequestCommentsService,
         private readonly commentsState: ReviewRequestCommentsState
     ) {}
 
-    public resolve(
-        route: ActivatedRouteSnapshot
-    ): Observable<CommentsAmountDictionary> {
-        const reviewRequestId = route.paramMap.get(
-            OverviewParamEnum.Id
-        ) as string;
+    public resolve(route: ActivatedRouteSnapshot): Observable<CommentsAmountDictionary> {
+        const reviewRequestId = route.paramMap.get(OverviewParamEnum.Id) as string;
 
         return this.commentsService
             .getAmountDictionary(reviewRequestId)

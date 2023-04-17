@@ -17,6 +17,7 @@
         "paths": {
             "@acua/assets": ["libs/assets/src/index.ts"],
             "@acua/shared": ["libs/shared/src/index.ts"],
+            "@acua/shared/*": ["libs/shared/src/lib/features/*"],
             "@code-review/*": ["apps/code-review/src/app/*"],
             "@host/*": ["apps/host/src/app/*"]
         }

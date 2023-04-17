@@ -73,13 +73,11 @@ export class LineHighlighterDirective implements OnDestroy {
     }
 
     private updateDecorationClassNamesForLinesWithComments(): void {
-        this.editorCommentsState
-            .getEntries()
-            .forEach(([line, commentAmount]) => {
-                if (commentAmount) {
-                    this.updateLineDecoration(+line, HAS_COMMENTS_CLASS);
-                }
-            });
+        this.editorCommentsState.getEntries().forEach(([line, commentAmount]) => {
+            if (commentAmount) {
+                this.updateLineDecoration(+line, HAS_COMMENTS_CLASS);
+            }
+        });
     }
 
     private updateLineDecoration(line: number, className: string = ''): void {

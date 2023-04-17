@@ -7,9 +7,7 @@ import { ReviewRequestCommentAmountDictionary as CommentAmountDictionary } from 
 export class ReviewRequestCommentsService {
     constructor(private readonly commentsApi: ReviewRequestCommentsApi) {}
 
-    public getAmountDictionary(
-        reviewRequestId: string
-    ): Observable<CommentAmountDictionary> {
+    public getAmountDictionary(reviewRequestId: string): Observable<CommentAmountDictionary> {
         return this.commentsApi.getAmountDictionary(reviewRequestId);
     }
 }
