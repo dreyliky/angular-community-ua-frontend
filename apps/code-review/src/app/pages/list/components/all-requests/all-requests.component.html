@@ -1,6 +1,7 @@
-<div class="all-requests">
-    <h2>Список запитів на код-ревью</h2>
-    <div class="request-list">
-        <acua-requests-table></acua-requests-table>
-    </div>
-</div>
+<h2>Список запитів на код-ревью</h2>
+
+<acua-review-request-card
+    *ngFor="let reviewRequest of reviewRequests$ | async"
+    [data]="reviewRequest"
+>
+</acua-review-request-card>

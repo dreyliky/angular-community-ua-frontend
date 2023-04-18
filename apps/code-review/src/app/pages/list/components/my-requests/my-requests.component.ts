@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ReviewRequestsService } from '@code-review/shared';
 
 @Component({
     selector: 'acua-my-requests',
@@ -6,4 +7,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     styleUrls: ['./my-requests.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MyRequestsComponent {}
+export class MyRequestsComponent {
+    public readonly reviewRequests$ = this.reviewRequestsService.getAll();
+
+    constructor(private readonly reviewRequestsService: ReviewRequestsService) {}
+}

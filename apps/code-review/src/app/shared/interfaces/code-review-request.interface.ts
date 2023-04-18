@@ -1,9 +1,12 @@
+import { User } from '@acua/shared';
 import { CodeReviewRequestStatusEnum } from '../enums';
 
 export interface CodeReviewRequest {
     readonly id: string;
-    readonly user: any;
+    readonly user: User;
+    readonly title: string;
+    readonly description: string;
     readonly status: CodeReviewRequestStatusEnum;
-    readonly stackblitzUrl: string;
+    readonly sourceUrl: string;
     readonly date: string;
 }
