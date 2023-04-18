@@ -4,20 +4,22 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
+import { LoginButtonComponent, UserMenuComponent } from './components';
+import { LoginWidgetDirective } from './directives';
 import { HeaderComponent } from './header.component';
-import { LoginButtonComponent } from './login-button';
-import { UserMenuComponent } from './user-menu';
 
 @NgModule({
-    declarations: [HeaderComponent, UserMenuComponent, LoginButtonComponent],
+    declarations: [HeaderComponent, UserMenuComponent, LoginButtonComponent, LoginWidgetDirective],
     imports: [
         CommonModule,
         RouterModule,
         UserAvatarModule,
         MatIconModule,
         MatMenuModule,
-        MatButtonModule
+        MatButtonModule,
+        MatSnackBarModule
     ],
     exports: [HeaderComponent]
 })

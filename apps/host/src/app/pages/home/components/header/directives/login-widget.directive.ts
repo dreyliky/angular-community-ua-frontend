@@ -37,7 +37,7 @@ export class LoginWidgetDirective implements AfterViewInit {
     private setupScript(script: HTMLScriptElement): void {
         script.setAttribute('src', 'https://telegram.org/js/telegram-widget.js?21');
         script.setAttribute('data-telegram-login', this.environment.botLoginName);
-        script.setAttribute('data-size', 'large');
+        script.setAttribute('data-size', 'medium');
         script.setAttribute('data-lang', 'uk');
         script.setAttribute('data-request-access', 'write');
         script.setAttribute('data-onauth', 'onTelegramLogin(user)');
