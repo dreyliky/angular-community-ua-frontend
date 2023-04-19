@@ -2,7 +2,7 @@ import { MarkdownActionEnum } from '../enums';
 import { MarkdownIconNameType } from '../types';
 
 export interface MarkdownButton {
-    readonly markdownSyntaxEnum: MarkdownActionEnum;
+    readonly actionType: MarkdownActionEnum;
     readonly matIconName: MarkdownIconNameType;
-    readonly getMarkdownSyntax: (markdownText: string) => string;
+    getMarkdown(context?: string): string;
 }

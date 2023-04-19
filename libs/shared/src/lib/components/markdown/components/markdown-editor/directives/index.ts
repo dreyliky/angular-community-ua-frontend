@@ -1,1 +1,1 @@
-export * from './mardown-editor-selection.directive';
+export * from './markdown-editor-input.directive';

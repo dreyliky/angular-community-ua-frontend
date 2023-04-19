@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import {
     MarkdownEditorButtonComponent,
     MarkdownEditorComponent,
-    MarkdownEditorSelectorDirective,
+    MarkdownEditorInputDirective,
     MarkdownPreviewerComponent
 } from './components';
 
@@ -28,7 +28,7 @@ import {
         MarkdownEditorComponent,
         MarkdownPreviewerComponent,
         MarkdownEditorButtonComponent,
-        MarkdownEditorSelectorDirective
+        MarkdownEditorInputDirective
     ],
     exports: [MarkdownEditorComponent, MarkdownPreviewerComponent]
 })

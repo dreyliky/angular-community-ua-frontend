@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
 import { MARKDOWN_BUTTON_ARRAY } from './data';
-import { MarkdownEditorSelectorDirective } from './directives';
+import { MarkdownEditorInputDirective } from './directives';
 import { MarkdownButton } from './interfaces';
 
 @Component({
@@ -10,19 +10,23 @@ import { MarkdownButton } from './interfaces';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MarkdownEditorComponent {
-    @ViewChild(MarkdownEditorSelectorDirective)
-    public markdownEditorSelectorDirective!: MarkdownEditorSelectorDirective;
+    @ViewChild(MarkdownEditorInputDirective)
+    public markdownEditorSelectorDirective!: MarkdownEditorInputDirective;
+
+    @ViewChild('markdownTextArea')
+    public textAreaElement!: ElementRef<HTMLTextAreaElement>;
 
     public readonly markdownButtonArray = MARKDOWN_BUTTON_ARRAY;
     public isMarkdownEditorActive = true;
     public markdownText!: string;
 
     public onMarkdownButtonClick(markdownButton: MarkdownButton): void {
-        this.markdownEditorSelectorDirective.insertMarkdownSyntax(markdownButton);
+        const markdownText = this.markdownEditorSelectorDirective.insertMarkdownSyntax(
+            markdownButton.getMarkdown(),
+            markdownButton.getMarkdown(this.textAreaElement.nativeElement.value)
+        );
 
         if (this.isMarkdownEditorActive) {
-            const markdownText = this.markdownEditorSelectorDirective.renderAsMarkdownIt();
-
             this.markdownText = markdownText;
         }
     }
