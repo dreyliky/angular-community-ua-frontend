@@ -18,7 +18,7 @@ export class MarkdownEditorInputDirective {
         if (this.isMarkdownTextAreaTextSelected()) {
             this.insertMarkdownWithoutSelection(markdown);
         } else {
-            this.insertMarkdownWithSelection(markdownContext);
+            this.insertMarkdownWithSelection(markdown);
         }
 
         return this.render();
@@ -45,12 +45,21 @@ export class MarkdownEditorInputDirective {
     private insertMarkdownWithSelection(markdownContext: string): void {
         const markdownTextArea = this.hostRef.nativeElement;
         const { start, end } = this.getSelectedPositions();
-        const newMarkdownSyntaxText =
-            markdownTextArea.value.slice(0, start) +
-            markdownContext +
-            markdownTextArea.value.slice(end);
 
-        markdownTextArea.value = newMarkdownSyntaxText;
+        if (markdownContext === '# ') {
+            markdownTextArea.value =
+                markdownTextArea.value.slice(0, start) +
+                markdownContext +
+                markdownTextArea.value.slice(start, end);
+        } else {
+            const partOfMarkdown = markdownContext.slice(markdownContext.length / 2);
+            markdownTextArea.value =
+                markdownTextArea.value.slice(0, start) +
+                partOfMarkdown +
+                markdownTextArea.value.slice(start, end) +
+                partOfMarkdown +
+                markdownTextArea.value.slice(end);
+        }
     }
 
     private insertBoldMarkdown(specifiedValue: string): void {

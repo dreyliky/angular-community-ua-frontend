@@ -6,6 +6,10 @@ export class HeaderButtonClass implements MarkdownButton {
     public readonly matIconName = 'text_fields';
 
     public getMarkdown(context?: string): string {
-        return `# ${context?.trim()}`;
+        if (context) {
+            return `# ${context?.trim()}`;
+        }
+
+        return '# ';
     }
 }
