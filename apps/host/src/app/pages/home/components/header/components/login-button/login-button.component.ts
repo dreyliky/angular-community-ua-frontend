@@ -4,16 +4,16 @@ import { Router } from '@angular/router';
 import { AppRouteEnum } from '@host/core';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
 import { Subscription } from 'rxjs';
-import { LoginErrorHandler } from './services';
+import { LoginErrorHandler } from '../../services';
 
 @Component({
-    selector: 'acua-auth',
-    templateUrl: './acua-auth.component.html',
-    styleUrls: ['./acua-auth.component.scss'],
+    selector: 'acua-login-button',
+    templateUrl: './login-button.component.html',
+    styleUrls: ['./login-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [LoginErrorHandler]
 })
-export class AuthComponent {
+export class LoginButtonComponent {
     constructor(
         private readonly authService: AuthService,
         private readonly router: Router,

@@ -2,6 +2,7 @@ import { UserAvatarModule } from '@acua/shared';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatRippleModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
@@ -12,7 +13,7 @@ import {
     AllRequestsComponent,
     HistoricalRequestsComponent,
     MyRequestsComponent,
-    RequestsTableComponent,
+    ReviewRequestCardComponent,
     ReviewRequestCreationButtonComponent
 } from './components';
 import { ListComponent } from './list.component';
@@ -23,9 +24,9 @@ import { LIST_ROUTES } from './list.routes';
         ListComponent,
         AllRequestsComponent,
         MyRequestsComponent,
-        RequestsTableComponent,
         HistoricalRequestsComponent,
-        ReviewRequestCreationButtonComponent
+        ReviewRequestCreationButtonComponent,
+        ReviewRequestCardComponent
     ],
     imports: [
         CommonModule,
@@ -33,6 +34,7 @@ import { LIST_ROUTES } from './list.routes';
         MatTabsModule,
         MatChipsModule,
         MatTableModule,
+        MatCardModule,
         MatRippleModule,
         MatTooltipModule,
         UserAvatarModule,

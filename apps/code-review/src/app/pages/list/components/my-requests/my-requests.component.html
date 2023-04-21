@@ -1,11 +1,15 @@
-<div class="sections">
-    <section class="opened-requests">
-        <h2>Відкриті запити</h2>
-        <acua-requests-table></acua-requests-table>
-    </section>
+<h2>Відкриті запити</h2>
 
-    <section class="closed-requests">
-        <h2>Закриті запити</h2>
-        <acua-requests-table></acua-requests-table>
-    </section>
-</div>
+<acua-review-request-card
+    *ngFor="let reviewRequest of reviewRequests$ | async"
+    [data]="reviewRequest"
+>
+</acua-review-request-card>
+
+<h2>Закриті запити</h2>
+
+<acua-review-request-card
+    *ngFor="let reviewRequest of reviewRequests$ | async"
+    [data]="reviewRequest"
+>
+</acua-review-request-card>
