@@ -92,16 +92,21 @@
             "defaultConfiguration": "production"
         },
         "serve": {
-            "executor": "@nrwl/angular:module-federation-dev-server",
+            "executor": "@nrwl/angular:webpack-dev-server",
+            "options": {
+                "port": 80,
+                "host": "127.0.0.1",
+                "open": true
+            },
             "configurations": {
-                "production": {
+                "productions": {
                     "browserTarget": "host:build:production"
                 },
                 "development": {
-                    "browserTarget": "host:build:local",
-                    "port": 80,
-                    "host": "127.0.0.1",
-                    "open": true
+                    "browserTarget": "host:build:development"
+                },
+                "local": {
+                    "browserTarget": "host:build:local"
                 }
             },
             "defaultConfiguration": "development"

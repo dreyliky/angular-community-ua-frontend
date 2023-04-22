@@ -82,19 +82,23 @@
         },
         "serve": {
             "executor": "@nrwl/angular:webpack-dev-server",
+            "options": {
+                "port": 4201,
+                "publicHost": "http://localhost:4201",
+                "open": true
+            },
             "configurations": {
                 "production": {
                     "browserTarget": "code-review:build:production"
                 },
                 "development": {
                     "browserTarget": "code-review:build:development"
+                },
+                "local": {
+                    "browserTarget": "code-review:build:local"
                 }
             },
-            "defaultConfiguration": "development",
-            "options": {
-                "port": 4201,
-                "publicHost": "localhost"
-            }
+            "defaultConfiguration": "development"
         },
         "extract-i18n": {
             "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -124,7 +128,7 @@
             }
         },
         "serve-static": {
-            "executor": "@nrwl/angular:file-server",
+            "executor": "@nrwl/web:file-server",
             "defaultConfiguration": "development",
             "options": {
                 "buildTarget": "code-review:build",
