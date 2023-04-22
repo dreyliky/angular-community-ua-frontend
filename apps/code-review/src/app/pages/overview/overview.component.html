@@ -1,9 +1,13 @@
+<ng-template #isLoader>
+    <acua-loader></acua-loader>
+</ng-template>
+
 <acua-header
     class="header"
     (hamburgerMenuButtonClick)="onHeaderHamburgerMenuButtonClick()"
 ></acua-header>
 
-<mat-drawer-container class="container">
+<mat-drawer-container class="container" *ngIf="sourceCode | async; else isLoader">
     <mat-drawer
         [mode]="mode"
         class="mat-drawer"

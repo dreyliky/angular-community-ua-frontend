@@ -5,11 +5,12 @@ import { CodeEditorModule, FileExplorerModule, HeaderModule } from './components
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { OverviewComponent } from './overview.component';
 import { OVERVIEW_ROUTES } from './overview.routes';
-import { MonacoApiResolver, ReviewRequestCommentsResolver, SourceCodeResolver } from './resolvers';
+import { MonacoApiResolver } from './resolvers';
 import { ReviewRequestCommentsState } from './states';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
-    declarations: [OverviewComponent],
+    declarations: [OverviewComponent, LoaderComponent],
     imports: [
         CommonModule,
         FileExplorerModule,
@@ -18,11 +19,6 @@ import { ReviewRequestCommentsState } from './states';
         MatSidenavModule,
         RouterModule.forChild(OVERVIEW_ROUTES)
     ],
-    providers: [
-        MonacoApiResolver,
-        ReviewRequestCommentsResolver,
-        ReviewRequestCommentsState,
-        SourceCodeResolver
-    ]
+    providers: [MonacoApiResolver, ReviewRequestCommentsState]
 })
 export class OverviewModule {}
