@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ReviewRequestsService } from '@code-review/shared';
+import { ReviewRequestService } from '@code-review/shared';
 
 @Component({
     selector: 'acua-all-requests',
@@ -10,5 +10,5 @@ import { ReviewRequestsService } from '@code-review/shared';
 export class AllRequestsComponent {
     public readonly reviewRequests$ = this.reviewRequestsService.getAll();
 
-    constructor(private readonly reviewRequestsService: ReviewRequestsService) {}
+    constructor(private readonly reviewRequestsService: ReviewRequestService) {}
 }

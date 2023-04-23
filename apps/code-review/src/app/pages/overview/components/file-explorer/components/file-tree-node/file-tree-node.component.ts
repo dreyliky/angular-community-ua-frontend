@@ -8,16 +8,16 @@ import {
     OnInit,
     Output
 } from '@angular/core';
-import { MonacoTreeFileNode, MonacoTreeNode } from '@code-review/shared';
+import { ProjectEntity, ProjectFile } from '@code-review/shared';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
-import { filter, Subscription } from 'rxjs';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { Subscription, filter } from 'rxjs';
 import {
     EXTENSION_ICON_NAME_MAPPER,
     FILE_ICON_NAME_MAPPER,
     FOLDERS_ICON_NAME_MAPPER
 } from '../../data';
 import { FileSelectionState } from '../../states';
-import { DeviceDetectorService } from 'ngx-device-detector';
 
 type ExtensionName = keyof typeof EXTENSION_ICON_NAME_MAPPER;
 type FileName = keyof typeof FILE_ICON_NAME_MAPPER;
@@ -31,7 +31,7 @@ type FolderName = keyof typeof FOLDERS_ICON_NAME_MAPPER;
 })
 export class FileTreeNodeComponent implements OnChanges, OnInit {
     @Input()
-    public node!: MonacoTreeNode;
+    public node!: ProjectEntity;
 
     @Input()
     public depth = 0;
@@ -40,7 +40,7 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
     public hide = false;
 
     @Output()
-    public fileSelected: EventEmitter<MonacoTreeFileNode> = new EventEmitter();
+    public fileSelected: EventEmitter<ProjectFile> = new EventEmitter();
 
     public get marginLeftStyleValue(): string {
         return `${this.baseMarginLeft * this.depth}px`;
@@ -135,22 +135,22 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
             return;
         }
 
-        this.fileSelectionState.set(this.node as MonacoTreeFileNode);
+        this.fileSelectionState.set(this.node as ProjectFile);
     }
 
-    public onFileSelected(node: MonacoTreeFileNode): void {
+    public onFileSelected(node: ProjectFile): void {
         this.fileSelected.emit(node);
     }
 
     @AutoUnsubscribe()
     private initFileSelection(): Subscription {
         return this.fileSelectionState.data$
-            .pipe(filter<MonacoTreeFileNode | null>(Boolean))
-            .subscribe((node: MonacoTreeFileNode) => {
+            .pipe(filter<ProjectFile | null>(Boolean))
+            .subscribe((node: ProjectFile) => {
                 this.isSelected = node.fullPath === this.node.fullPath;
 
                 if (this.isSelected) {
-                    this.fileSelected.emit(this.node as MonacoTreeFileNode);
+                    this.fileSelected.emit(this.node as ProjectFile);
                 }
 
                 this.changeDetectorRef.markForCheck();

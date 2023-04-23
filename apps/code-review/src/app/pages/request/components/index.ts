@@ -1,1 +1,2 @@
-export * from './request-form/request-form.component';
+export * from './creation-button';
+export * from './request-form';

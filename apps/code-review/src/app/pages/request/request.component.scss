@@ -1,3 +1,13 @@
-.request-page {
-    padding: 0 15px;
+:host {
+    width: 100%;
+    max-width: 800px;
+    display: block;
+    margin: 13px auto;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

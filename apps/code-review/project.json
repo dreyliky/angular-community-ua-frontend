@@ -72,8 +72,8 @@
                     "namedChunks": true,
                     "fileReplacements": [
                         {
-                            "replace": "apps/host/src/environments/environment.ts",
-                            "with": "apps/host/src/environments/environment.local.ts"
+                            "replace": "apps/code-review/src/environments/environment.ts",
+                            "with": "apps/code-review/src/environments/environment.local.ts"
                         }
                     ]
                 }

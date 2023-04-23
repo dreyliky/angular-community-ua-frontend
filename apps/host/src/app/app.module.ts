@@ -1,4 +1,4 @@
-import { AuthModule } from '@acua/shared';
+import { AuthModule, UrlsWithAuthService } from '@acua/shared';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -19,10 +19,14 @@ import { MAIN_BACKEND_URL_PROVIDER } from './core';
             preloadingStrategy: PreloadAllModules,
             initialNavigation: 'enabledBlocking'
         }),
-        AuthModule.init({ urlsWithAuth: [environment.backendUrl] }),
+        AuthModule,
         HttpClientModule
     ],
     providers: [APP_CONFIG_PROVIDER, MAIN_BACKEND_URL_PROVIDER],
     bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+    constructor(private readonly urlsWithAuthService: UrlsWithAuthService) {
+        this.urlsWithAuthService.register([environment.backendUrl]);
+    }
+}

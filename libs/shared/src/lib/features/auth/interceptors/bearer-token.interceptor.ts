@@ -1,14 +1,13 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BearerTokenService } from '../services';
-import { URLS_WITH_AUTH } from '../tokens';
+import { UrlsWithAuthState } from '../states';
 
 @Injectable()
 export class BearerTokenInterceptor implements HttpInterceptor {
     constructor(
-        @Inject(URLS_WITH_AUTH)
-        private readonly urlsWithAuth: string[],
+        private readonly urlsWithAuthState: UrlsWithAuthState,
         private readonly bearerTokenService: BearerTokenService
     ) {}
 
@@ -27,6 +26,6 @@ export class BearerTokenInterceptor implements HttpInterceptor {
     }
 
     private isRequestShouldBeWithAuth(url: string): boolean {
-        return this.urlsWithAuth.some((allowedUrl) => url.startsWith(allowedUrl));
+        return this.urlsWithAuthState.data!.some((allowedUrl) => url.startsWith(allowedUrl));
     }
 }

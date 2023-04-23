@@ -1,29 +1,35 @@
 <form [formGroup]="formGroup" class="request-form">
-    <mat-form-field *ngIf="formGroup.controls.name">
-        <mat-label>Назва</mat-label>
-        <input matInput type="text" [formControl]="formGroup.controls.name" />
-    </mat-form-field>
-    <mat-form-field *ngIf="formGroup.controls.description">
-        <mat-label>Опис</mat-label>
-        <textarea matInput [formControl]="formGroup.controls.description"></textarea>
-    </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="form-field" [appearance]="'outline'">
         <mat-label>Посилання на Stackblitz або Github</mat-label>
-        <input matInput type="text" [formControl]="formGroup.controls.link" />
-        <mat-error *ngIf="formGroup.controls.link.hasError('required')">
+
+        <input matInput type="text" [formControl]="formGroup.controls.sourceUrl" />
+
+        <mat-error *ngIf="formGroup.controls.sourceUrl.hasError('required')">
             Посилання на проєкт є обов'язковим.
         </mat-error>
-        <mat-error *ngIf="formGroup.controls.link.hasError('linkValidate')">
+
+        <mat-error *ngIf="formGroup.controls.sourceUrl.hasError('sourceUrlInvalid')">
             Приймаються посилання на stackblitz проєкти та github репозиторії.
         </mat-error>
     </mat-form-field>
-    <ng-container *ngIf="iframeLink$ | async as iframeLink">
+
+    <mat-form-field class="form-field" [appearance]="'outline'">
+        <mat-label>Опис</mat-label>
+
+        <textarea matInput [formControl]="formGroup.controls.description"></textarea>
+    </mat-form-field>
+
+    <ng-container *ngIf="iframeLink$ | async as iframeLink; else noPreviewTemplate">
         <iframe
             *ngIf="formGroup.valid"
-            class="request-form__iframe"
+            class="project-preview"
             [src]="iframeLink | safeResourceUrl"
             frameborder="0"
         >
         </iframe>
     </ng-container>
 </form>
+
+<ng-template #noPreviewTemplate>
+    <div class="project-preview empty">Тут ви побачите попередній перегляд вашого проєкту.</div>
+</ng-template>

@@ -2,8 +2,25 @@
     display: flex;
     flex-direction: column;
 
-    &__iframe {
-        height: 600px;
+    .project-preview {
+        width: 100%;
+        min-height: 350px;
+        height: 50vh;
         margin-bottom: 22px;
+        border: solid 1px rgb(126, 126, 126);
+        border-radius: 4px;
+        user-select: none;
+
+        &.empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgb(126, 126, 126);
+            font-size: 18px;
+        }
+    }
+
+    .form-field {
+        margin-bottom: 10px;
     }
 }

@@ -1,8 +1,9 @@
 <mat-card [routerLink]="reviewPageLink" [relativeTo]="activatedRoute">
     <mat-card-header>
-        <acua-user-avatar mat-card-avatar class="user-avatar"></acua-user-avatar>
+        <acua-user-avatar mat-card-avatar class="user-avatar" [avatarUrl]="data.user.photoUrl">
+        </acua-user-avatar>
+
         <mat-card-title>{{ data.user.firstName }} {{ data.user.lastName }}</mat-card-title>
-        <mat-card-subtitle>{{ data.title }}</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>

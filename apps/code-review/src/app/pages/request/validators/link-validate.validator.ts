@@ -1,15 +1,35 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, AsyncValidator, ValidationErrors } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
 import { ProjectSourceUrlService } from '@code-review/shared';
-import { map, Observable } from 'rxjs';
+import {
+    BehaviorSubject,
+    Observable,
+    debounceTime,
+    distinctUntilChanged,
+    map,
+    switchMap,
+    take
+} from 'rxjs';
 
 @Injectable()
-export class LinkValidateValidator implements AsyncValidator {
+export class SourceUrlValidator {
+    private readonly stackblitzErrorPatterns = ['public-status error', 'public-section__error'];
+
     constructor(private readonly projectSourceUrlService: ProjectSourceUrlService) {}
 
-    public validate(control: AbstractControl<string, string>): Observable<ValidationErrors | null> {
-        return this.projectSourceUrlService
-            .validate(control.value)
-            .pipe(map((result: boolean) => (result ? null : { linkValidate: true })));
+    public get(): AsyncValidatorFn {
+        const controlValue$ = new BehaviorSubject<string>('');
+        const validationLogic$ = controlValue$.pipe(
+            distinctUntilChanged(),
+            debounceTime(1000),
+            switchMap((sourceUrl) => this.projectSourceUrlService.validate(sourceUrl)),
+            map((result: boolean) => (result ? null : { sourceUrlInvalid: true }))
+        );
+
+        return (control: AbstractControl<string, string>): Observable<ValidationErrors | null> => {
+            controlValue$.next(control.value);
+
+            return validationLogic$.pipe(take(1));
+        };
     }
 }
