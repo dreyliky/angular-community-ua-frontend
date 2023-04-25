@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppRouteEnum } from '@code-review/core';
-import { CodeReviewRequest } from '@code-review/shared';
+import { ReviewRequestDto } from '@code-review/shared';
 
 @Component({
     selector: 'acua-review-request-card',
@@ -11,7 +11,7 @@ import { CodeReviewRequest } from '@code-review/shared';
 })
 export class ReviewRequestCardComponent {
     @Input()
-    public data!: CodeReviewRequest;
+    public data!: ReviewRequestDto;
 
     public get reviewPageLink(): string {
         return `../${AppRouteEnum.Overview}/${this.data.id}`;

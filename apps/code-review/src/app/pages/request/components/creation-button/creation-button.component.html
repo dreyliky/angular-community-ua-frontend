@@ -1,0 +1,17 @@
+<ng-template [ngxAsync]="reviewRequestCreation$" [ngxAsyncLoading]="loadingTemplate">
+    <button
+        mat-raised-button
+        class="creation-button"
+        [color]="'accent'"
+        [disabled]="isDisabled$ | async"
+        (click)="onClick()"
+    >
+        Створити
+    </button>
+</ng-template>
+
+<ng-template #loadingTemplate>
+    <button mat-raised-button class="creation-button" [disabled]="true">
+        Створюємо запит на Код-Ревью. Почекайте...
+    </button>
+</ng-template>

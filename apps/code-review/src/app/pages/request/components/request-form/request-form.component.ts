@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ProjectSourceUrlService } from '@code-review/shared';
-import { debounceTime, filter, Observable, switchMap } from 'rxjs';
+import { Observable, debounceTime, filter, map, switchMap } from 'rxjs';
 import { RequestForm } from '../../forms';
 
 @Component({
@@ -9,27 +9,20 @@ import { RequestForm } from '../../forms';
     selector: 'acua-request-from',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RequestFormComponent implements OnInit {
-    protected iframeLink$!: Observable<string>;
+export class RequestFormComponent {
+    protected iframeLink$: Observable<string> = this.getIframeLinkObservable();
 
     constructor(
         protected readonly formGroup: RequestForm,
         private readonly projectSourceUrlService: ProjectSourceUrlService
     ) {}
 
-    public ngOnInit(): void {
-        this.iframeLink$ = this.getIframeLinkObservable();
-    }
-
     private getIframeLinkObservable(): Observable<string> {
-        return this.formGroup.controls.link.statusChanges.pipe(
+        return this.formGroup.controls.sourceUrl.statusChanges.pipe(
             debounceTime(1000),
             filter((status) => status === 'VALID'),
-            switchMap(() => {
-                const value = this.formGroup.controls.link.value;
-
-                return this.projectSourceUrlService.getNormalized(value);
-            })
+            map(() => this.formGroup.controls.sourceUrl.value),
+            switchMap((sourceUrl) => this.projectSourceUrlService.getNormalized(sourceUrl))
         );
     }
 }

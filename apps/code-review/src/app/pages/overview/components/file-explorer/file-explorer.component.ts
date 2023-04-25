@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { MonacoTreeFileNode, MonacoTreeNode } from '@code-review/shared';
+import { ProjectEntity, ProjectFile } from '@code-review/shared';
 import { FileSelectionState } from './states';
 
 @Component({
@@ -11,12 +11,12 @@ import { FileSelectionState } from './states';
 })
 export class FileExplorerComponent {
     @Input()
-    public tree!: MonacoTreeNode[];
+    public tree!: ProjectEntity[];
 
     @Output()
-    public fileSelected: EventEmitter<MonacoTreeFileNode> = new EventEmitter();
+    public fileSelected: EventEmitter<ProjectFile> = new EventEmitter();
 
-    public onFileSelected(node: MonacoTreeFileNode): void {
+    public onFileSelected(node: ProjectFile): void {
         this.fileSelected.emit(node);
     }
 }

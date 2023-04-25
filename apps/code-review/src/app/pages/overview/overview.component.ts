@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject, ViewChild } from '@angular/core';
-import { MonacoTreeFileNode } from '@code-review/shared';
-import { CodeEditorComponent } from './components';
 import { MatDrawerMode } from '@angular/material/sidenav';
-import { SOURCE_CODE_PROVIDER } from './providers';
-import { SOURCE_CODE } from './tokens';
+import { ProjectFile } from '@code-review/shared';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { CodeEditorComponent } from './components';
+import { SOURCE_CODE_PROVIDER } from './providers';
 import { DependenciesService } from './services/dependencies.service';
+import { SOURCE_CODE } from './tokens';
 
 @Component({
     selector: 'acua-overview',
@@ -33,7 +33,7 @@ export class OverviewComponent {
         private readonly dependeciesService: DependenciesService
     ) {}
 
-    public onFileSelected(node: MonacoTreeFileNode): void {
+    public onFileSelected(node: ProjectFile): void {
         this.codeEditor.openFile(node.fullPath, node.content);
     }
 

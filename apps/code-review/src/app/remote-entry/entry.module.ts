@@ -1,4 +1,4 @@
-import { AuthModule } from '@acua/shared';
+import { UrlsWithAuthService } from '@acua/shared';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -8,10 +8,10 @@ import { REMOTE_ROUTES } from './entry.routes';
 
 @NgModule({
     declarations: [RemoteEntryComponent],
-    imports: [
-        CommonModule,
-        RouterModule.forChild(REMOTE_ROUTES),
-        AuthModule.init({ urlsWithAuth: [environment.backendUrl, environment.mainBackendUrl] })
-    ]
+    imports: [CommonModule, RouterModule.forChild(REMOTE_ROUTES)]
 })
-export class RemoteEntryModule {}
+export class RemoteEntryModule {
+    constructor(private readonly urlsWithAuthService: UrlsWithAuthService) {
+        this.urlsWithAuthService.register([environment.backendUrl, environment.mainBackendUrl]);
+    }
+}

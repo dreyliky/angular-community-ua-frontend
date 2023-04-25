@@ -1,18 +1,18 @@
-import { MonacoTreeNodeTypeEnum } from '../enums';
+import { ProjectEntityTypeEnum } from '../enums';
 
-export interface MonacoTreeNode {
+interface BaseProjectEntity {
     readonly name: string;
-    readonly type: MonacoTreeNodeTypeEnum;
+    readonly type: ProjectEntityTypeEnum;
     readonly fullPath: string;
     readonly lastModified: number;
-    readonly children?: MonacoTreeNode[];
-    readonly content?: string;
 }
 
-export interface MonacoTreeFolderNode extends Omit<MonacoTreeNode, 'content'> {
-    readonly children: MonacoTreeNode[];
+export interface ProjectFolder extends BaseProjectEntity {
+    readonly children: ProjectEntity[];
 }
 
-export interface MonacoTreeFileNode extends Omit<MonacoTreeNode, 'children'> {
+export interface ProjectFile extends BaseProjectEntity {
     readonly content: string;
 }
+
+export type ProjectEntity = ProjectFolder & ProjectFile;
