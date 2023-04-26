@@ -7,7 +7,7 @@ import { OverviewComponent } from './overview.component';
 import { OVERVIEW_ROUTES } from './overview.routes';
 import { MonacoApiResolver } from './resolvers';
 import { ReviewRequestCommentsState } from './states';
-import { LoaderComponent } from './components/loader/loader.component';
+import { LoaderComponent } from '@acua/shared';
 
 @NgModule({
     declarations: [OverviewComponent, LoaderComponent],

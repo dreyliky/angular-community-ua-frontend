@@ -1,33 +1,39 @@
 import { Injectable } from '@angular/core';
-import { ReviewRequestCommentsState } from '../states';
-import { ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import {
     ReviewRequestCommentAmountDictionary as CommentsAmountDictionary,
-    ReviewRequestCommentsService
+    ProjectEntity,
+    ReviewRequestCommentsService,
+    ReviewRequestSourceCodeService
 } from '@code-review/shared';
-import { MonacoTreeNode, ProjectSourceUrlService } from '@code-review/shared';
-import { Observable, tap } from 'rxjs';
+import { Observable, forkJoin, tap } from 'rxjs';
 import { OverviewParamEnum } from '../enums';
+import { ReviewRequestCommentsState } from '../states';
 
 @Injectable()
 export class DependenciesService {
+    private get openedReviewRequestId(): string {
+        return this.activatedRoute.snapshot.params[OverviewParamEnum.Id];
+    }
+
     constructor(
-        private readonly projectSourceUrlService: ProjectSourceUrlService,
         private readonly commentsService: ReviewRequestCommentsService,
-        private readonly commentsState: ReviewRequestCommentsState
+        private readonly commentsState: ReviewRequestCommentsState,
+        private readonly activatedRoute: ActivatedRoute,
+        private readonly sourceCodeService: ReviewRequestSourceCodeService
     ) {}
 
-    public Comments(route: ActivatedRouteSnapshot): Observable<CommentsAmountDictionary> {
-        const reviewRequestId = route.paramMap.get(OverviewParamEnum.Id) as string;
-
+    public loadComments(): Observable<CommentsAmountDictionary> {
         return this.commentsService
-            .getAmountDictionary(reviewRequestId)
+            .getAmountDictionary(this.openedReviewRequestId)
             .pipe(tap((comments) => this.commentsState.set(comments)));
     }
 
-    public SourceCode(): Observable<MonacoTreeNode[]> {
-        return this.projectSourceUrlService.getSource(
-            'https%3A%2F%2Fgithub.com%2Fdreyliky%2Fangular-community-ua-frontend'
-        );
+    public loadSourceCode(): Observable<ProjectEntity[]> {
+        return this.sourceCodeService.get(this.openedReviewRequestId);
+    }
+
+    public load(): Observable<unknown> {
+        return forkJoin([this.loadSourceCode(), this.loadComments()]);
     }
 }

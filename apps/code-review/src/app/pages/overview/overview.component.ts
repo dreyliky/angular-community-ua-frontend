@@ -4,8 +4,8 @@ import { ProjectFile } from '@code-review/shared';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { CodeEditorComponent } from './components';
 import { SOURCE_CODE_PROVIDER } from './providers';
-import { DependenciesService } from './services/dependencies.service';
 import { SOURCE_CODE } from './tokens';
+import { DependenciesService } from './services';
 
 @Component({
     selector: 'acua-overview',
@@ -16,7 +16,7 @@ import { SOURCE_CODE } from './tokens';
 })
 export class OverviewComponent {
     public tree = inject(SOURCE_CODE);
-    public sourceCode = this.dependeciesService.SourceCode();
+    public sourceCode = this.dependeciesService.loadSourceCode();
     public readonly isMobile = this.deviceService.isMobile();
     public readonly mode: MatDrawerMode = this.isMobile ? 'over' : 'side';
     public readonly adaptiveClasses = this.isMobile ? 'mat-drawer-mobile' : 'mat-drawer-desktop';
