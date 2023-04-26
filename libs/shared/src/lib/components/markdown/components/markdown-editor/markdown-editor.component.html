@@ -1,19 +1,9 @@
-<div class="markdown-buttons_nav">
-    <mat-button-toggle-group multiple>
-        <mat-button-toggle (click)="onButtonActiveToggle()">Preview</mat-button-toggle>
-    </mat-button-toggle-group>
-
-    <div class="markdown-action_buttons">
-        <acua-markdown-button
-            *ngFor="let button of markdownButtonArray"
-            (click)="onMarkdownButtonClick(button)"
-            [iconName]="button.matIconName"
-        ></acua-markdown-button>
-    </div>
+<textarea class="markdown-input" #markdownTextArea markdownEditorInput matInput></textarea>
+<div class="markdown-toolbar">
+    <acua-markdown-button
+        *ngFor="let button of markdownButtonArray"
+        (click)="onMarkdownButtonClick(button)"
+        [matTooltip]="button.tooltipInfo"
+        [iconName]="button.matIconName"
+    ></acua-markdown-button>
 </div>
-<ng-container *ngIf="isMarkdownEditorActive; else markdownPreviewerTemplate">
-    <textarea class="markdown-input" #markdownTextArea markdownEditorInput matInput></textarea>
-</ng-container>
-<ng-template #markdownPreviewerTemplate>
-    <acua-markdown-previewer [text]="markdownText"></acua-markdown-previewer>
-</ng-template>

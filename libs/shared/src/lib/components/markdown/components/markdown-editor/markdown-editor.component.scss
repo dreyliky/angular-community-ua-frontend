@@ -1,20 +1,15 @@
 :host {
     display: flex;
     flex-direction: column;
-    width: 800px;
-    background-color: rgb(91, 89, 89);
 
-    .markdown-buttons_nav {
+    .markdown-toolbar {
         display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-    }
-
-    .markdown-action_buttons {
-        display: flex;
+        height: 50px;
     }
 
     .markdown-input {
+        width: -webkit-fill-available;
         resize: vertical;
+        height: 150px;
     }
 }

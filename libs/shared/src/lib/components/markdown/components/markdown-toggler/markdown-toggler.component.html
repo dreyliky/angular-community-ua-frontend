@@ -1,0 +1,17 @@
+<div class="markdown-buttons">
+    <mat-button-toggle-group>
+        <mat-button-toggle
+            (click)="handleWriteClick()"
+            [disabled]="isMarkdownActive"
+            checked
+            value="write"
+            >Write</mat-button-toggle
+        >
+        <mat-button-toggle
+            (click)="handlePreviewClick()"
+            [disabled]="!isMarkdownActive"
+            value="preview"
+            >Preview</mat-button-toggle
+        >
+    </mat-button-toggle-group>
+</div>

@@ -15,7 +15,6 @@ import {
     MyRequestsComponent,
     RequestsTableComponent
 } from './components';
-import { MarkdownComponent } from './components/markdown';
 import { ListComponent } from './list.component';
 import { LIST_ROUTES } from './list.routes';
 @NgModule({
@@ -24,8 +23,7 @@ import { LIST_ROUTES } from './list.routes';
         AllRequestsComponent,
         MyRequestsComponent,
         RequestsTableComponent,
-        HistoricalRequestsComponent,
-        MarkdownComponent
+        HistoricalRequestsComponent
     ],
     imports: [
         CommonModule,

@@ -1,8 +1,10 @@
-import { MarkdownActionEnum } from '../enums';
 import { MarkdownIconNameType } from '../types';
+import { MarkdownSyntaxSides } from './markdown-syntax-sides.interface';
 
-export interface MarkdownButton {
-    readonly actionType: MarkdownActionEnum;
+export interface MarkdownSyntax {
     readonly matIconName: MarkdownIconNameType;
-    getMarkdown(context?: string): string;
+    readonly hasDoubleSide: boolean;
+    readonly position?: number;
+    readonly tooltipInfo?: string;
+    getSyntaxSides(): MarkdownSyntaxSides;
 }

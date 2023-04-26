@@ -1,0 +1,8 @@
+:host {
+    width: 800px;
+
+    .markdown {
+        display: flex;
+        flex-direction: column;
+    }
+}

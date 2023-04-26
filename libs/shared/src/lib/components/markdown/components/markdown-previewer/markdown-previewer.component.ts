@@ -1,12 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MarkdownInputState } from '../../states';
 
 @Component({
-    selector: 'acua-markdown-previewer[text]',
+    selector: 'acua-markdown-previewer',
     templateUrl: './markdown-previewer.component.html',
     styleUrls: ['./markdown-previewer.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MarkdownPreviewerComponent {
-    @Input()
-    public text = '';
+    constructor(public readonly markdownInputState: MarkdownInputState) {}
 }

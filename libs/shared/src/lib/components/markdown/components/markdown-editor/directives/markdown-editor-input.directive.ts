@@ -1,5 +1,6 @@
-import { Directive, ElementRef } from '@angular/core';
-import * as MarkdownIt from 'markdown-it';
+import { AfterViewInit, Directive, ElementRef, HostListener } from '@angular/core';
+import { MarkdownInputState } from '../../../states';
+import { MarkdownSyntax, MarkdownSyntaxSides } from '../interfaces';
 
 interface inputSelectionRange {
     readonly start: number;
@@ -9,94 +10,112 @@ interface inputSelectionRange {
 @Directive({
     selector: '[markdownEditorInput]'
 })
-export class MarkdownEditorInputDirective {
-    private readonly markdownIt = new MarkdownIt();
+export class MarkdownEditorInputDirective implements AfterViewInit {
+    constructor(
+        private readonly hostRef: ElementRef<HTMLTextAreaElement>,
+        private readonly markdownInputState: MarkdownInputState
+    ) {}
 
-    constructor(private readonly hostRef: ElementRef<HTMLTextAreaElement>) {}
+    public ngAfterViewInit(): void {
+        this.onMarkdownTextAreaStateInit();
+    }
 
-    public insertMarkdownSyntax(markdown: string, markdownContext: string): string {
+    public insertMarkdownSyntax(markdownButton: MarkdownSyntax): void {
         if (this.isMarkdownTextAreaTextSelected()) {
-            this.insertMarkdownWithoutSelection(markdown);
+            this.insertMarkdownWithoutSelection(markdownButton);
         } else {
-            this.insertMarkdownWithSelection(markdown);
+            this.insertMarkdownWithSelection(markdownButton);
         }
 
-        return this.render();
+        this.handleMarkdownTextAreaChange();
     }
 
-    public render(): string {
-        return this.markdownIt.render(this.hostRef.nativeElement.value);
+    private onMarkdownTextAreaStateInit(): void {
+        this.hostRef.nativeElement.value = this.markdownInputState.data!;
     }
 
-    private insertMarkdownWithoutSelection(markdown: string): void {
+    @HostListener('change')
+    private onMarkdownTextAreaChange(): void {
+        this.handleMarkdownTextAreaChange();
+    }
+
+    private insertMarkdownWithoutSelection(markdownButton: MarkdownSyntax): void {
+        if (markdownButton.hasDoubleSide) {
+            this.insertMarkdownWithoutSelectionDoubleSide(
+                markdownButton.getSyntaxSides(),
+                markdownButton.position!
+            );
+        } else {
+            this.insertMarkdownWithoutSelectionOneSide(markdownButton.getSyntaxSides());
+        }
+    }
+
+    private insertMarkdownWithSelection(markdownButton: MarkdownSyntax): void {
+        if (markdownButton.hasDoubleSide) {
+            this.insertMarkdownWithSelectionDoubleSide(markdownButton.getSyntaxSides());
+        } else {
+            this.insertMarkdownWithSelectionOneSide(markdownButton.getSyntaxSides());
+        }
+    }
+
+    private insertMarkdownWithSelectionDoubleSide(sides: MarkdownSyntaxSides): void {
         const markdownTextArea = this.hostRef.nativeElement;
         const { start, end } = this.getSelectedPositions();
-        const specifiedValue = markdownTextArea.value.substring(start, end);
-
-        if (markdown === '****') {
-            this.insertBoldMarkdown(specifiedValue);
-        } else if (markdown === '__') {
-            this.insertItalicMarkdown(specifiedValue);
-        } else {
-            this.insertHeaderMarkdown(markdownTextArea);
-        }
+        markdownTextArea.value =
+            markdownTextArea.value.slice(0, start) +
+            sides.leftSide +
+            markdownTextArea.value.slice(start, end) +
+            sides.rightSide +
+            markdownTextArea.value.slice(end);
     }
 
-    private insertMarkdownWithSelection(markdownContext: string): void {
+    private insertMarkdownWithSelectionOneSide(sides: MarkdownSyntaxSides): void {
         const markdownTextArea = this.hostRef.nativeElement;
         const { start, end } = this.getSelectedPositions();
-
-        if (markdownContext === '# ') {
-            markdownTextArea.value =
-                markdownTextArea.value.slice(0, start) +
-                markdownContext +
-                markdownTextArea.value.slice(start, end);
-        } else {
-            const partOfMarkdown = markdownContext.slice(markdownContext.length / 2);
-            markdownTextArea.value =
-                markdownTextArea.value.slice(0, start) +
-                partOfMarkdown +
-                markdownTextArea.value.slice(start, end) +
-                partOfMarkdown +
-                markdownTextArea.value.slice(end);
-        }
+        markdownTextArea.value =
+            markdownTextArea.value.slice(0, start) +
+            sides.leftSide +
+            markdownTextArea.value.slice(start, end) +
+            markdownTextArea.value.slice(end);
     }
 
-    private insertBoldMarkdown(specifiedValue: string): void {
-        this.insertMarkdownAtPosition(`**${specifiedValue}**`, 2);
-    }
-
-    private insertItalicMarkdown(specifiedValue: string): void {
-        this.insertMarkdownAtPosition(`_${specifiedValue}_`, 1);
-    }
-
-    private insertHeaderMarkdown(markdownTextArea: HTMLTextAreaElement): void {
-        markdownTextArea.value = `# ${markdownTextArea.value.trim()}`;
-    }
-
-    private insertMarkdownAtPosition(specifiedValue: string, position: number): void {
+    private insertMarkdownWithoutSelectionDoubleSide(
+        sides: MarkdownSyntaxSides,
+        position: number
+    ): void {
         const markdownTextArea = this.hostRef.nativeElement;
         const { start, end } = this.getSelectedPositions();
 
         const finText =
             markdownTextArea.value.substring(0, start) +
-            specifiedValue +
-            markdownTextArea.value.substring(end);
+            sides.leftSide +
+            markdownTextArea.value.substring(end) +
+            sides.rightSide;
         markdownTextArea.value = finText;
         markdownTextArea.focus();
-        markdownTextArea.selectionEnd = start + position;
+        markdownTextArea.selectionEnd = start + position!;
     }
 
-    private getSelectedPositions(): inputSelectionRange {
-        return {
-            start: this.hostRef.nativeElement.selectionStart,
-            end: this.hostRef.nativeElement.selectionEnd
-        };
+    private insertMarkdownWithoutSelectionOneSide(sides: MarkdownSyntaxSides): void {
+        const markdownTextArea = this.hostRef.nativeElement;
+        markdownTextArea.focus();
+        markdownTextArea.value = sides.leftSide + markdownTextArea.value;
     }
 
     private isMarkdownTextAreaTextSelected(): boolean {
-        const { start, end } = this.getSelectedPositions();
+        const selectedPositions = this.getSelectedPositions();
 
-        return start === end || end === 0;
+        return selectedPositions.start === selectedPositions.end || selectedPositions.end === 0;
+    }
+
+    private getSelectedPositions(): inputSelectionRange {
+        const markdownTextArea = this.hostRef.nativeElement;
+
+        return { start: markdownTextArea.selectionStart, end: markdownTextArea.selectionEnd };
+    }
+
+    private handleMarkdownTextAreaChange(): void {
+        const value = this.hostRef.nativeElement.value;
+        this.markdownInputState.set(value);
     }
 }

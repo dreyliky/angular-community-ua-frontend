@@ -6,4 +6,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     styleUrls: ['./markdown.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MarkdownComponent {}
+export class MarkdownComponent {
+    public isMarkdownEditorActive = true;
+
+    public onToggler(active: boolean): void {
+        this.isMarkdownEditorActive = active;
+    }
+}

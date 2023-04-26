@@ -1,0 +1,11 @@
+<div class="markdown">
+    <acua-markdown-toggler (markdownState)="onToggler($event)"></acua-markdown-toggler>
+
+    <ng-container *ngIf="isMarkdownEditorActive; else markdownPreviewerTemplate">
+        <acua-markdown-editor></acua-markdown-editor>
+    </ng-container>
+
+    <ng-template #markdownPreviewerTemplate>
+        <acua-markdown-previewer></acua-markdown-previewer>
+    </ng-template>
+</div>
