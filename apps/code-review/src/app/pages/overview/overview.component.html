@@ -3,7 +3,7 @@
     (hamburgerMenuButtonClick)="onHeaderHamburgerMenuButtonClick()"
 ></acua-header>
 
-<mat-drawer-container class="container" *ngIf="sourceCode | async; else isLoader">
+<mat-drawer-container class="container" *ngIf="sourceCode | async; else loaderTemplate">
     <mat-drawer
         [mode]="mode"
         class="mat-drawer"
@@ -22,6 +22,6 @@
     </mat-drawer-content>
 </mat-drawer-container>
 
-<ng-template #isLoader>
+<ng-template #loaderTemplate>
     <acua-loader></acua-loader>
 </ng-template>

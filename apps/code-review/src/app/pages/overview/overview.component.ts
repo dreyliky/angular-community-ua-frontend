@@ -23,7 +23,7 @@ export class OverviewComponent {
 
     public isSidenavOpened = this.isMobile ? false : true;
 
-    public isLoader = false;
+    public loaderTemplate = false;
 
     @ViewChild(CodeEditorComponent)
     private readonly codeEditor!: CodeEditorComponent;
