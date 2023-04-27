@@ -7,16 +7,17 @@ import { OverviewComponent } from './overview.component';
 import { OVERVIEW_ROUTES } from './overview.routes';
 import { MonacoApiResolver } from './resolvers';
 import { ReviewRequestCommentsState } from './states';
-import { LoaderComponent } from '@acua/shared';
+import { LoaderModule } from '@acua/shared';
 
 @NgModule({
-    declarations: [OverviewComponent, LoaderComponent],
+    declarations: [OverviewComponent],
     imports: [
         CommonModule,
         FileExplorerModule,
         HeaderModule,
         CodeEditorModule,
         MatSidenavModule,
+        LoaderModule,
         RouterModule.forChild(OVERVIEW_ROUTES)
     ],
     providers: [MonacoApiResolver, ReviewRequestCommentsState]

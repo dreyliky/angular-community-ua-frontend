@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
     selector: 'acua-loader',
@@ -6,4 +6,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     styleUrls: ['./loader.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoaderComponent {}
+export class LoaderComponent {
+    @Input() public label!: string;
+}
