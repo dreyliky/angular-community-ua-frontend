@@ -24,8 +24,7 @@
             "outputs": ["{options.outputFile}"],
             "options": {
                 "lintFilePatterns": [
-                    "libs/shared/**/*.ts",
-                    "libs/shared/**/*.html"
+                    "libs/shared/**/*.ts"
                 ]
             }
         }
