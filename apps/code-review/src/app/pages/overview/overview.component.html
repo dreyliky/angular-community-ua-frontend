@@ -11,7 +11,8 @@
         [opened]="isSidenavOpened"
     >
         <acua-file-explorer
-            [tree]="tree"
+            *ngIf="projectEntities$ | async as projectEntities"
+            [tree]="projectEntities"
             class="file-explorer"
             (fileSelected)="onFileSelected($event)"
         ></acua-file-explorer>

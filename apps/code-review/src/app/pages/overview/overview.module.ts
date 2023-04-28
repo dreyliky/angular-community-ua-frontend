@@ -1,13 +1,12 @@
+import { LoaderModule } from '@acua/shared';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
 import { CodeEditorModule, FileExplorerModule, HeaderModule } from './components';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { OverviewComponent } from './overview.component';
 import { OVERVIEW_ROUTES } from './overview.routes';
 import { MonacoApiResolver } from './resolvers';
-import { ReviewRequestCommentsState } from './states';
-import { LoaderModule } from '@acua/shared';
 
 @NgModule({
     declarations: [OverviewComponent],
@@ -20,6 +19,6 @@ import { LoaderModule } from '@acua/shared';
         LoaderModule,
         RouterModule.forChild(OVERVIEW_ROUTES)
     ],
-    providers: [MonacoApiResolver, ReviewRequestCommentsState]
+    providers: [MonacoApiResolver]
 })
 export class OverviewModule {}

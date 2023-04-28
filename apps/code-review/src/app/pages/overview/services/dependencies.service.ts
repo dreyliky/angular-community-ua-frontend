@@ -8,7 +8,7 @@ import {
 } from '@code-review/shared';
 import { Observable, forkJoin, tap } from 'rxjs';
 import { OverviewParamEnum } from '../enums';
-import { ReviewRequestCommentsState } from '../states';
+import { ProjectEntitiesState, ReviewRequestCommentsState } from '../states';
 
 @Injectable()
 export class DependenciesService {
@@ -17,23 +17,26 @@ export class DependenciesService {
     }
 
     constructor(
-        private readonly commentsService: ReviewRequestCommentsService,
-        private readonly commentsState: ReviewRequestCommentsState,
         private readonly activatedRoute: ActivatedRoute,
-        private readonly sourceCodeService: ReviewRequestSourceCodeService
+        private readonly commentsService: ReviewRequestCommentsService,
+        private readonly sourceCodeService: ReviewRequestSourceCodeService,
+        private readonly commentsState: ReviewRequestCommentsState,
+        private readonly projectEntitiesState: ProjectEntitiesState
     ) {}
 
-    public loadComments(): Observable<CommentsAmountDictionary> {
+    public loadAll(): Observable<unknown> {
+        return forkJoin([this.loadSourceCode(), this.loadComments()]);
+    }
+
+    private loadComments(): Observable<CommentsAmountDictionary> {
         return this.commentsService
             .getAmountDictionary(this.openedReviewRequestId)
             .pipe(tap((comments) => this.commentsState.set(comments)));
     }
 
-    public loadSourceCode(): Observable<ProjectEntity[]> {
-        return this.sourceCodeService.get(this.openedReviewRequestId);
-    }
-
-    public load(): Observable<unknown> {
-        return forkJoin([this.loadSourceCode(), this.loadComments()]);
+    private loadSourceCode(): Observable<ProjectEntity[]> {
+        return this.sourceCodeService
+            .get(this.openedReviewRequestId)
+            .pipe(tap((data) => this.projectEntitiesState.set(data)));
     }
 }
