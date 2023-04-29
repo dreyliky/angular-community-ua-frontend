@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 import { ProjectEntity, ProjectFile } from '@code-review/shared';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
-import { DeviceDetectorService } from 'ngx-device-detector';
 import { Subscription, filter } from 'rxjs';
 import {
     EXTENSION_ICON_NAME_MAPPER,
@@ -77,7 +76,7 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
     }
 
     public get rowCssClassesAsString(): string {
-        const CLASSES = `monaco-tree-row ${this.rowAdaptationCssClass}`;
+        const CLASSES = `monaco-tree-row`;
 
         if (this.hide) {
             return `${CLASSES} hide`;
@@ -93,16 +92,6 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
     public isOpened = false;
     public isSelected = false;
 
-    public readonly isMobile = this.deviceService.isMobile();
-
-    public readonly fileIconCssClass = this.isMobile
-        ? 'monaco-tree-icon-mobile'
-        : 'monaco-tree-icon';
-
-    private readonly rowAdaptationCssClass = this.isMobile
-        ? 'monaco-tree-row-mobile'
-        : 'monaco-tree-row-desktop';
-
     private hasBeenOpened = false;
 
     private readonly baseMarginLeft = 10;
@@ -111,8 +100,7 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
 
     constructor(
         private readonly fileSelectionState: FileSelectionState,
-        private readonly changeDetectorRef: ChangeDetectorRef,
-        private readonly deviceService: DeviceDetectorService
+        private readonly changeDetectorRef: ChangeDetectorRef
     ) {}
 
     public ngOnInit(): void {

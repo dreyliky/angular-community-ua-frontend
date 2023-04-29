@@ -1,0 +1,20 @@
+<button
+    *acuaAvailableForScreen="['XSmall']; invert: true"
+    mat-raised-button
+    [color]="'accent'"
+    [disabled]="isDisabled"
+>
+    <mat-icon>{{ iconName }}</mat-icon>
+
+    {{ label }}
+</button>
+
+<button
+    *acuaAvailableForScreen="['XSmall']"
+    class="fab-button"
+    mat-fab
+    [color]="'accent'"
+    [disabled]="isDisabled"
+>
+    <mat-icon>{{ iconName }}</mat-icon>
+</button>

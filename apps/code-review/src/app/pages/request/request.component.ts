@@ -7,6 +7,9 @@ import { SourceUrlValidator } from './validators';
     templateUrl: './request.component.html',
     styleUrls: ['./request.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [RequestForm, SourceUrlValidator]
+    providers: [RequestForm, SourceUrlValidator],
+    host: {
+        class: 'acua-page'
+    }
 })
 export class RequestComponent {}

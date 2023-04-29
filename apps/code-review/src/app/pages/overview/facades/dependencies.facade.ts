@@ -4,28 +4,40 @@ import {
     ReviewRequestCommentAmountDictionary as CommentsAmountDictionary,
     ProjectEntity,
     ReviewRequestCommentsService,
+    ReviewRequestDto,
+    ReviewRequestService,
     ReviewRequestSourceCodeService
 } from '@code-review/shared';
 import { Observable, forkJoin, tap } from 'rxjs';
 import { OverviewParamEnum } from '../enums';
-import { ProjectEntitiesState, ReviewRequestCommentsState } from '../states';
+import {
+    OpenedReviewRequestState,
+    ProjectEntitiesState,
+    ReviewRequestCommentsState
+} from '../states';
 
 @Injectable()
-export class DependenciesService {
+export class DependenciesFacade {
     private get openedReviewRequestId(): string {
         return this.activatedRoute.snapshot.params[OverviewParamEnum.Id];
     }
 
     constructor(
         private readonly activatedRoute: ActivatedRoute,
+        private readonly reviewRequestService: ReviewRequestService,
         private readonly commentsService: ReviewRequestCommentsService,
         private readonly sourceCodeService: ReviewRequestSourceCodeService,
         private readonly commentsState: ReviewRequestCommentsState,
-        private readonly projectEntitiesState: ProjectEntitiesState
+        private readonly projectEntitiesState: ProjectEntitiesState,
+        private readonly openedReviewRequestState: OpenedReviewRequestState
     ) {}
 
     public loadAll(): Observable<unknown> {
-        return forkJoin([this.loadSourceCode(), this.loadComments()]);
+        return forkJoin([
+            this.loadOpenedReviewRequestInfo(),
+            this.loadSourceCode(),
+            this.loadComments()
+        ]);
     }
 
     private loadComments(): Observable<CommentsAmountDictionary> {
@@ -38,5 +50,11 @@ export class DependenciesService {
         return this.sourceCodeService
             .get(this.openedReviewRequestId)
             .pipe(tap((data) => this.projectEntitiesState.set(data)));
+    }
+
+    private loadOpenedReviewRequestInfo(): Observable<ReviewRequestDto> {
+        return this.reviewRequestService
+            .get(this.openedReviewRequestId)
+            .pipe(tap((data) => this.openedReviewRequestState.set(data)));
     }
 }

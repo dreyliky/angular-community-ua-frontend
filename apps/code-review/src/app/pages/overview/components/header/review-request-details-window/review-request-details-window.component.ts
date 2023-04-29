@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { OpenedReviewRequestState } from '../../../states';
 
 @Component({
     selector: 'acua-review-request-details-window',
@@ -6,4 +7,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     styleUrls: ['./review-request-details-window.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReviewRequestDetailsWindowComponent {}
+export class ReviewRequestDetailsWindowComponent {
+    protected readonly openedReviewRequest$ = this.openedReviewRequestState.data$;
+
+    constructor(private readonly openedReviewRequestState: OpenedReviewRequestState) {}
+}

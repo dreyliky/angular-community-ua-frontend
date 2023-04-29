@@ -1,4 +1,4 @@
-import { AuthModule } from '@acua/shared';
+import { AuthModule, MATERIAL_ICON_DEFAULT_OPTIONS_PROVIDER } from '@acua/shared';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,7 +21,11 @@ import { MAIN_BACKEND_URL_PROVIDER } from './core';
         }),
         AuthModule
     ],
-    providers: [APP_CONFIG_PROVIDER, MAIN_BACKEND_URL_PROVIDER],
+    providers: [
+        APP_CONFIG_PROVIDER,
+        MAIN_BACKEND_URL_PROVIDER,
+        MATERIAL_ICON_DEFAULT_OPTIONS_PROVIDER
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

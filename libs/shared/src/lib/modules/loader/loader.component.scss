@@ -1,16 +1,23 @@
 $bar-color: rgb(255, 230, 0);
 $ball-color: rgb(0, 162, 255);
 
+:host {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .text {
     display: flex;
     justify-content: center;
     margin-top: 15px;
+    font-weight: 500;
 }
 
 .wrapper {
     display: flex;
     justify-content: center;
-    margin-top: 300px;
 
     .loader {
         position: relative;

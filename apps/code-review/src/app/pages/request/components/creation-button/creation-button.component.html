@@ -1,17 +1,18 @@
-<ng-template [ngxAsync]="reviewRequestCreation$" [ngxAsyncLoading]="loadingTemplate">
-    <button
-        mat-raised-button
-        class="creation-button"
-        [color]="'accent'"
-        [disabled]="isDisabled$ | async"
+<ng-template
+    [ngxAsync]="reviewRequestCreation$"
+    (loading)="overlay.open(loadingTemplate)"
+    (success)="overlay.close()"
+    (error)="overlay.close()"
+>
+    <acua-action-button
+        [label]="'Створити'"
+        [iconName]="'save'"
+        [isDisabled]="!!(isDisabled$ | async)"
         (click)="onClick()"
     >
-        Створити
-    </button>
+    </acua-action-button>
 </ng-template>
 
 <ng-template #loadingTemplate>
-    <button mat-raised-button class="creation-button" [disabled]="true">
-        Створюємо запит на Код-Ревью. Почекайте...
-    </button>
+    <acua-loader [label]="'Створення запиту на Код-Ревью...'"></acua-loader>
 </ng-template>

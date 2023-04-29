@@ -10,7 +10,17 @@
 </button>
 
 <mat-menu #menu="matMenu">
-    <button [routerLink]="homeRouteEnum.CodeReview" mat-menu-item>Код-ревью</button>
+    <button [routerLink]="homeRouteEnum.CodeReview" mat-menu-item>
+        <mat-icon>code</mat-icon>
 
-    <button mat-menu-item (click)="onLogoutButtonClick()">Вийти з облікового запису</button>
+        Код-ревью
+    </button>
+
+    <mat-divider></mat-divider>
+
+    <button mat-menu-item (click)="onLogoutButtonClick()">
+        <mat-icon>logout</mat-icon>
+
+        Вийти
+    </button>
 </mat-menu>

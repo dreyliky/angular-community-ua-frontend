@@ -13,6 +13,10 @@ export class ReviewRequestService {
         return this.reviewRequestsApi.getAll();
     }
 
+    public get(id: string): Observable<ReviewRequestDto> {
+        return this.reviewRequestsApi.get(id);
+    }
+
     public create(data: ReviewRequestCreationDto): Observable<ResponseWithId> {
         return this.reviewRequestsApi.create(data);
     }

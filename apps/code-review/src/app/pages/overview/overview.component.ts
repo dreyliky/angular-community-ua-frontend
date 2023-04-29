@@ -1,33 +1,45 @@
+import { ScreenService } from '@acua/shared';
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { MatDrawerMode } from '@angular/material/sidenav';
 import { ProjectFile } from '@code-review/shared';
-import { DeviceDetectorService } from 'ngx-device-detector';
+import { Observable, map } from 'rxjs';
 import { CodeEditorComponent } from './components';
-import { DependenciesService } from './services';
-import { ProjectEntitiesState, ReviewRequestCommentsState } from './states';
+import { DependenciesFacade } from './facades';
+import {
+    OpenedReviewRequestState,
+    ProjectEntitiesState,
+    ReviewRequestCommentsState
+} from './states';
 
 @Component({
     selector: 'acua-overview',
     templateUrl: './overview.component.html',
     styleUrls: ['./overview.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [ReviewRequestCommentsState, ProjectEntitiesState, DependenciesService]
+    providers: [
+        DependenciesFacade,
+        ReviewRequestCommentsState,
+        OpenedReviewRequestState,
+        ProjectEntitiesState
+    ]
 })
 export class OverviewComponent {
-    public readonly dependencies$ = this.dependenciesService.loadAll();
+    public readonly dependencies$ = this.dependenciesFacade.loadAll();
     public readonly projectEntities$ = this.projectEntitiesState.data$;
-    public readonly isMobile = this.deviceService.isMobile();
-    public readonly mode: MatDrawerMode = this.isMobile ? 'over' : 'side';
-    public readonly adaptiveClasses = this.isMobile ? 'mat-drawer-mobile' : 'mat-drawer-desktop';
+    public readonly isMobile$ = this.screenService.isMatch$(['XSmall']);
 
-    public isSidenavOpened = !this.isMobile;
+    public readonly drawerMode$: Observable<MatDrawerMode> = this.isMobile$.pipe(
+        map((isMobile) => (isMobile ? 'over' : 'side'))
+    );
+
+    public isSidenavOpened = !this.screenService.isMatch(['XSmall']);
 
     @ViewChild(CodeEditorComponent)
     private readonly codeEditor!: CodeEditorComponent;
 
     constructor(
-        private readonly deviceService: DeviceDetectorService,
-        private readonly dependenciesService: DependenciesService,
+        private readonly screenService: ScreenService,
+        private readonly dependenciesFacade: DependenciesFacade,
         private readonly projectEntitiesState: ProjectEntitiesState
     ) {}
 

@@ -1,3 +1,5 @@
+@import 'mixins.scss';
+
 .monaco-tree-row {
     position: relative;
     display: flex;
@@ -5,13 +7,10 @@
     gap: 6px;
     cursor: pointer;
     padding-left: 32px;
+    font-size: 14px;
+    line-height: 24px;
 
-    &.monaco-tree-row-desktop {
-        font-size: 14px;
-        line-height: 24px;
-    }
-
-    &.monaco-tree-row-mobile {
+    @include for-mobile-only {
         font-size: 21px;
         line-height: 36px;
     }
@@ -24,14 +23,14 @@
         background-color: rgba(255, 255, 255, 0.1);
     }
 
-    .monaco-tree-icon {
+    .icon {
         width: 16px;
         height: 22px;
-    }
 
-    .monaco-tree-icon-mobile {
-        width: 24px;
-        height: 33px;
+        @include for-mobile-only {
+            width: 24px;
+            height: 33px;
+        }
     }
 
     .monaco-tree-arrow {

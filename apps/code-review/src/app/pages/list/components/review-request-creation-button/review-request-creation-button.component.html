@@ -1,12 +1,7 @@
-<button
-    *ngIf="user$ | async; else disabledButtonTemplate"
-    mat-raised-button
-    [color]="'accent'"
+<acua-action-button
+    *ngIf="user$ | async"
+    [label]="'Запросити Код-Ревью'"
+    [iconName]="'add'"
     [routerLink]="requestPageLink"
 >
-    Запросити Код-Ревью
-</button>
-
-<ng-template #disabledButtonTemplate>
-    <button mat-raised-button disabled [color]="'accent'">Увійдіть щоб запросити Код-Ревью</button>
-</ng-template>
+</acua-action-button>

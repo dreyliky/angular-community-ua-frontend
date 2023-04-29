@@ -1,6 +1,6 @@
 import { AuthService, UserService } from '@acua/shared';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { HomeRouteEnum } from '@host/pages/home/enums';
+import { HomeRouteEnum } from '../../../../enums';
 
 @Component({
     selector: 'acua-user-menu',
