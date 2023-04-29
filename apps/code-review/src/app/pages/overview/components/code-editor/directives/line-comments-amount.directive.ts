@@ -33,15 +33,13 @@ export class LineCommentsAmountDirective {
     }
 
     private updateCommentAmountWidgets(): void {
-        this.editorCommentsState
-            .getEntries()
-            .forEach(([line, commentAmount]) => {
-                const lineNumber = +line;
+        this.editorCommentsState.getEntries().forEach(([line, commentAmount]) => {
+            const lineNumber = +line;
 
-                if (commentAmount) {
-                    this.applyWidgetToLine(lineNumber);
-                }
-            });
+            if (commentAmount) {
+                this.applyWidgetToLine(lineNumber);
+            }
+        });
     }
 
     private applyWidgetToLine(lineNumber: number): void {

@@ -19,9 +19,7 @@ export class LanguageService {
     public getLanguageIdByFileFullPath(fileFullPath: string): string {
         const fileExtension = this.getFileExtension(fileFullPath);
 
-        return (
-            this.fileExtensionMap.get(fileExtension) ?? this.defaultLanguageId
-        );
+        return this.fileExtensionMap.get(fileExtension) ?? this.defaultLanguageId;
     }
 
     private getFileExtension(fileFullPath: string): string {

@@ -1,10 +1,4 @@
-import {
-    Input,
-    Component,
-    ChangeDetectionStrategy,
-    HostBinding,
-    OnChanges
-} from '@angular/core';
+import { Input, Component, ChangeDetectionStrategy, HostBinding, OnChanges } from '@angular/core';
 
 import { SafeStyle } from '@angular/platform-browser';
 
@@ -28,8 +22,6 @@ export class UserAvatarComponent implements OnChanges {
     }
 
     private setBackgroundUrl(): void {
-        this.backgroundImgUrl = `url(${
-            this.avatarUrl ? this.avatarUrl : DEFAULT_URL
-        })`;
+        this.backgroundImgUrl = `url(${this.avatarUrl ? this.avatarUrl : DEFAULT_URL})`;
     }
 }

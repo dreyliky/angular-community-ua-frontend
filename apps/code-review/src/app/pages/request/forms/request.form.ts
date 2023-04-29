@@ -12,9 +12,7 @@ export class RequestForm extends FormGroup<FormGroupDef<RequestFormInfo>> {
             link: new FormControl('', {
                 nonNullable: true,
                 validators: [Validators.required],
-                asyncValidators: [
-                    linkValidateValidator.validate.bind(linkValidateValidator)
-                ]
+                asyncValidators: [linkValidateValidator.validate.bind(linkValidateValidator)]
             })
         });
     }

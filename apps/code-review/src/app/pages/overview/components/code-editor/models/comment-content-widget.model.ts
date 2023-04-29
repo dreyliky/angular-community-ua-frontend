@@ -25,10 +25,7 @@ export class CommentContentWidget implements editor.IContentWidget {
         return this.monacoApi.editor.ContentWidgetPositionPreference;
     }
 
-    constructor(
-        private readonly lineNumber: number,
-        private readonly injector: Injector
-    ) {}
+    constructor(private readonly lineNumber: number, private readonly injector: Injector) {}
 
     public getId(): string {
         return `comment.amount.${this.lineNumber}`;
@@ -50,9 +47,7 @@ export class CommentContentWidget implements editor.IContentWidget {
 
     private createComponentRef(): ComponentRef<CommentsAmountComponent> {
         const viewContainerRef = this.injector.get(ViewContainerRef);
-        const component = viewContainerRef.createComponent(
-            CommentsAmountComponent
-        );
+        const component = viewContainerRef.createComponent(CommentsAmountComponent);
         component.instance.amount = this.getCommentsAmount();
 
         component.changeDetectorRef.detectChanges();

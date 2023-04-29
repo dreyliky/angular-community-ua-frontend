@@ -5,10 +5,7 @@
     </mat-form-field>
     <mat-form-field *ngIf="formGroup.controls.description">
         <mat-label>Опис</mat-label>
-        <textarea
-            matInput
-            [formControl]="formGroup.controls.description"
-        ></textarea>
+        <textarea matInput [formControl]="formGroup.controls.description"></textarea>
     </mat-form-field>
     <mat-form-field>
         <mat-label>Посилання на Stackblitz або Github</mat-label>
