@@ -6,9 +6,9 @@
 <ng-template [ngxAsync]="dependencies$" [ngxAsyncLoading]="loaderTemplate">
     <mat-drawer-container class="container">
         <mat-drawer
-            [mode]="mode"
+            [mode]="(drawerMode$ | async)!"
             class="mat-drawer"
-            [ngClass]="adaptiveClasses"
+            [ngClass]="drawerCssClasses$ | async"
             [opened]="isSidenavOpened"
         >
             <acua-file-explorer

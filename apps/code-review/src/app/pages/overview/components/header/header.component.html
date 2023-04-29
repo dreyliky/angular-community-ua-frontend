@@ -2,7 +2,7 @@
     <mat-icon class="btn-menu-icon">menu</mat-icon>
 </button>
 
-<mat-accordion class="block-request" *ngIf="!isMobile">
+<mat-accordion *acuaAvailableForScreen="['XSmall']; invert: true" class="block-request">
     <mat-expansion-panel class="panel-request">
         <mat-expansion-panel-header>
             <mat-panel-title>
@@ -19,4 +19,6 @@
     </mat-expansion-panel>
 </mat-accordion>
 
-<button mat-button (click)="onDetailsButtonClick()" *ngIf="isMobile">Деталі</button>
+<button *acuaAvailableForScreen="['XSmall']" mat-button (click)="onDetailsButtonClick()">
+    Деталі
+</button>

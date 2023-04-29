@@ -26,12 +26,16 @@
                 ],
                 "styles": [
                     "apps/host/src/styles.scss",
-                    "libs/assets/src/lib/styles/acua-material-theme.scss",
-                    "libs/assets/src/lib/styles/variables.scss"
+                    "libs/assets/src/lib/styles/index.scss"
                 ],
                 "scripts": [],
                 "customWebpackConfig": {
                     "path": "apps/host/webpack.config.js"
+                },
+                "stylePreprocessorOptions": {
+                    "includePaths": [
+                        "libs/assets/src/lib/styles"
+                    ]
                 },
                 "aot": true
             },

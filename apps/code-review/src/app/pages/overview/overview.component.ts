@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, ViewChild, inject } from '@angular/core';
+import { ScreenService } from '@acua/shared';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { MatDrawerMode } from '@angular/material/sidenav';
 import { ProjectFile } from '@code-review/shared';
-import { DeviceDetectorService } from 'ngx-device-detector';
+import { Observable, map } from 'rxjs';
 import { CodeEditorComponent } from './components';
 import { DependenciesService } from './services';
 import { ProjectEntitiesState, ReviewRequestCommentsState } from './states';
@@ -16,16 +17,23 @@ import { ProjectEntitiesState, ReviewRequestCommentsState } from './states';
 export class OverviewComponent {
     public readonly dependencies$ = this.dependenciesService.loadAll();
     public readonly projectEntities$ = this.projectEntitiesState.data$;
-    public readonly isMobile = inject(DeviceDetectorService).isMobile();
-    public readonly mode: MatDrawerMode = this.isMobile ? 'over' : 'side';
-    public readonly adaptiveClasses = this.isMobile ? 'mat-drawer-mobile' : 'mat-drawer-desktop';
+    public readonly isMobile$ = this.screenService.isMatch$(['XSmall']);
 
-    public isSidenavOpened = !this.isMobile;
+    public readonly drawerMode$: Observable<MatDrawerMode> = this.isMobile$.pipe(
+        map((isMobile) => (isMobile ? 'over' : 'side'))
+    );
+
+    public readonly drawerCssClasses$ = this.isMobile$.pipe(
+        map((isMobile) => (isMobile ? 'mat-drawer-mobile' : 'mat-drawer-desktop'))
+    );
+
+    public isSidenavOpened = !this.screenService.isMatch(['XSmall']);
 
     @ViewChild(CodeEditorComponent)
     private readonly codeEditor!: CodeEditorComponent;
 
     constructor(
+        private readonly screenService: ScreenService,
         private readonly dependenciesService: DependenciesService,
         private readonly projectEntitiesState: ProjectEntitiesState
     ) {}

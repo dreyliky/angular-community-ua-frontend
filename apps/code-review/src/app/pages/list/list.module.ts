@@ -1,4 +1,4 @@
-import { ActionButtonModule, UserAvatarModule } from '@acua/shared';
+import { ActionButtonModule, ScreenModule, UserAvatarModule } from '@acua/shared';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -38,9 +38,10 @@ import { LIST_ROUTES } from './list.routes';
         MatCardModule,
         MatRippleModule,
         MatTooltipModule,
+        MatIconModule,
+        ScreenModule,
         ActionButtonModule,
         UserAvatarModule,
-        MatIconModule,
         RouterModule.forChild(LIST_ROUTES)
     ]
 })

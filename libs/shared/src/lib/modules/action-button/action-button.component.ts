@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
-import { DeviceDetectorService } from 'ngx-device-detector';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
     selector: 'acua-action-button',
@@ -16,6 +15,4 @@ export class ActionButtonComponent {
 
     @Input()
     public isDisabled: boolean = false;
-
-    protected readonly isMobile = inject(DeviceDetectorService).isMobile();
 }

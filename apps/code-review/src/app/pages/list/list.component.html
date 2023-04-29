@@ -4,7 +4,7 @@
     <acua-review-request-creation-button></acua-review-request-creation-button>
 </div>
 
-<mat-tab-group [animationDuration]="'0ms'" [mat-stretch-tabs]="isMobile">
+<mat-tab-group [animationDuration]="'0ms'" [mat-stretch-tabs]="isMobile$ | async">
     <mat-tab [label]="'Всі'">
         <acua-all-requests></acua-all-requests>
     </mat-tab>
