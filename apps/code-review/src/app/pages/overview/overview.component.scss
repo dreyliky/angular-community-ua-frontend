@@ -1,3 +1,5 @@
+@import 'mixins.scss';
+
 :host {
     width: 100%;
     height: stretch;
@@ -15,17 +17,14 @@
     overflow: hidden;
 
     .mat-drawer {
-        background-color: #202327;
-        border: 0;
-    }
-
-    .mat-drawer-desktop {
         width: auto;
         min-width: 300px;
         max-width: 35%;
-    }
+        background-color: #202327;
+        border: 0;
 
-    .mat-drawer-mobile {
-        width: 75%;
+        @include for-mobile-only {
+            width: 75%;
+        }
     }
 }

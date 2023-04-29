@@ -1,13 +1,3 @@
-:host {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: var(--acua-layout-padding);
-    box-sizing: border-box;
-    overflow-y: auto;
-}
-
 .title {
     width: max-content;
     min-width: max-content;

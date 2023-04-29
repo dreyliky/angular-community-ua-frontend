@@ -1,24 +1,22 @@
-<h2 mat-dialog-title class="title">Мій запит на Код-Ревью</h2>
-<mat-dialog-content>
+<h2 mat-dialog-title class="title">Запит на Код-Ревью</h2>
+
+<mat-dialog-content *acuaLet="openedReviewRequest$ | async as openedReviewRequest">
     <div class="info">
-        <acua-user-avatar class="user-avatar"></acua-user-avatar>
+        <acua-user-avatar
+            class="user-avatar"
+            [avatarUrl]="openedReviewRequest!.user.photoUrl"
+        ></acua-user-avatar>
         <div class="info-request">
-            <p class="user-name">User Name</p>
-            <p class="date">23 лютого 2023</p>
+            <p class="user-name">{{ openedReviewRequest!.user.username }}</p>
+            <p class="date">{{ openedReviewRequest!.date | date }}</p>
         </div>
     </div>
+
     <div>
-        <p>
-            Подивіться будь ласка мій код і напишіть що тут можна покращити. Особливо цікавить
-            AppComponent Подивіться будь ласка мій код і напишіть що тут можна покращити. Особливо
-            цікавить AppComponent Подивіться будь ласка мій код і напишіть що тут можна покращити.
-            Особливо цікавить AppComponent Подивіться будь ласка мій код і напишіть що тут можна
-            покращити. Особливо цікавить AppComponent Подивіться будь ласка мій код і напишіть що
-            тут можна покращити. Особливо цікавить AppComponent Подивіться будь ласка мій код і
-            напишіть що тут можна покращити. Особливо цікавить AppComponent
-        </p>
+        <p>{{ openedReviewRequest!.description }}</p>
     </div>
 </mat-dialog-content>
+
 <mat-dialog-actions [align]="'end'">
     <button mat-button [mat-dialog-close]="true">Закрити</button>
 </mat-dialog-actions>

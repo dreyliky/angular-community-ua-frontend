@@ -1,11 +1,1 @@
-@mixin for-mobile-only {
-    @media (max-width: 599px) {
-        @content;
-    }
-}
-
-@mixin for-mobile-up {
-    @media (min-width: 600px) {
-        @content;
-    }
-}
+@import './mixins/screen.scss';

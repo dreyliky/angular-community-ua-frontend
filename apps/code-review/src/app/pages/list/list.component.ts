@@ -5,7 +5,10 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
     selector: 'acua-list',
     templateUrl: './list.component.html',
     styleUrls: ['./list.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        class: 'acua-page'
+    }
 })
 export class ListComponent {
     protected readonly isMobile$ = inject(ScreenService).isMatch$(['XSmall']);

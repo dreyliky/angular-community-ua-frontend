@@ -1,19 +1,13 @@
-<acua-header
-    class="header"
-    (hamburgerMenuButtonClick)="onHeaderHamburgerMenuButtonClick()"
-></acua-header>
-
 <ng-template [ngxAsync]="dependencies$" [ngxAsyncLoading]="loaderTemplate">
+    <acua-header
+        class="header"
+        (hamburgerMenuButtonClick)="onHeaderHamburgerMenuButtonClick()"
+    ></acua-header>
+
     <mat-drawer-container class="container">
-        <mat-drawer
-            [mode]="(drawerMode$ | async)!"
-            class="mat-drawer"
-            [ngClass]="drawerCssClasses$ | async"
-            [opened]="isSidenavOpened"
-        >
+        <mat-drawer class="mat-drawer" [mode]="(drawerMode$ | async)!" [opened]="isSidenavOpened">
             <acua-file-explorer
-                *ngIf="projectEntities$ | async as projectEntities"
-                [tree]="projectEntities"
+                [tree]="(projectEntities$ | async)!"
                 class="file-explorer"
                 (fileSelected)="onFileSelected($event)"
             ></acua-file-explorer>

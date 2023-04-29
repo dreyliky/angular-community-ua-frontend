@@ -1,4 +1,4 @@
-import { ScreenModule, UserAvatarModule } from '@acua/shared';
+import { ScreenModule, UserAvatarModule, UtilsModule } from '@acua/shared';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,6 +21,7 @@ import { ReviewRequestDetailsWindowComponent } from './review-request-details-wi
         MatDialogModule,
         MatButtonModule,
         UserAvatarModule,
+        UtilsModule,
         ScreenModule
     ],
     exports: [HeaderComponent]

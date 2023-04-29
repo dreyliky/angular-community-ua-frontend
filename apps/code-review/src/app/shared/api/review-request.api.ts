@@ -16,6 +16,10 @@ export class ReviewRequestApi {
         return this.http.get<ReviewRequestDto[]>(`${this.apiUrl}/review-requests`);
     }
 
+    public get(id: string): Observable<ReviewRequestDto> {
+        return this.http.get<ReviewRequestDto>(`${this.apiUrl}/review-requests/${id}`);
+    }
+
     public create(data: ReviewRequestCreationDto): Observable<ResponseWithId> {
         return this.http.post<ResponseWithId>(`${this.apiUrl}/review-requests`, data);
     }

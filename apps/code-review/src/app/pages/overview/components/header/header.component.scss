@@ -28,7 +28,9 @@
     }
 
     .block-request {
-        width: 300px;
+        width: auto;
+        min-width: 300px;
+        max-width: 425px;
         height: 53px;
         z-index: 10;
 
