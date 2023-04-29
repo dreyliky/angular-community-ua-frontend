@@ -6,7 +6,8 @@ import {
     Input,
     OnChanges,
     OnInit,
-    Output
+    Output,
+    inject
 } from '@angular/core';
 import { ProjectEntity, ProjectFile } from '@code-review/shared';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
@@ -93,7 +94,7 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
     public isOpened = false;
     public isSelected = false;
 
-    public readonly isMobile = this.deviceService.isMobile();
+    public readonly isMobile = inject(DeviceDetectorService).isMobile();
 
     public readonly fileIconCssClass = this.isMobile
         ? 'monaco-tree-icon-mobile'
@@ -111,8 +112,7 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
 
     constructor(
         private readonly fileSelectionState: FileSelectionState,
-        private readonly changeDetectorRef: ChangeDetectorRef,
-        private readonly deviceService: DeviceDetectorService
+        private readonly changeDetectorRef: ChangeDetectorRef
     ) {}
 
     public ngOnInit(): void {

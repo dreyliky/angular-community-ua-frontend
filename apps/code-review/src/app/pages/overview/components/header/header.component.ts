@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Output, EventEmitter } from '@angular/core';
-import { DeviceDetectorService } from 'ngx-device-detector';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { ReviewRequestDetailsWindowComponent } from './review-request-details-window';
 
 @Component({
@@ -10,15 +10,12 @@ import { ReviewRequestDetailsWindowComponent } from './review-request-details-wi
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
-    public readonly isMobile = this.deviceService.isMobile();
+    public readonly isMobile = inject(DeviceDetectorService).isMobile();
 
     @Output()
     public readonly hamburgerMenuButtonClick = new EventEmitter<MouseEvent>();
 
-    constructor(
-        private readonly deviceService: DeviceDetectorService,
-        private readonly dialog: MatDialog
-    ) {}
+    constructor(private readonly dialog: MatDialog) {}
 
     public onDetailsButtonClick(): void {
         this.dialog.open(ReviewRequestDetailsWindowComponent);

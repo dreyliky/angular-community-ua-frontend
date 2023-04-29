@@ -2,7 +2,9 @@
     width: 100%;
     max-width: 800px;
     display: block;
-    margin: 13px auto;
+    padding: var(--acua-layout-padding);
+    box-sizing: border-box;
+    overflow-y: auto;
 }
 
 .header {

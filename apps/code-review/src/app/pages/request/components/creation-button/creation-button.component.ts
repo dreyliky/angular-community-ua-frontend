@@ -1,4 +1,4 @@
-import { markControlAsTouchedAndValidate } from '@acua/shared';
+import { OverlayService, markControlAsTouchedAndValidate } from '@acua/shared';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppRouteEnum } from '@code-review/core';
@@ -10,7 +10,8 @@ import { RequestForm } from '../../forms';
     selector: 'acua-creation-button',
     templateUrl: './creation-button.component.html',
     styleUrls: ['./creation-button.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [OverlayService]
 })
 export class CreationButtonComponent {
     protected reviewRequestCreation$: Observable<unknown> | null = null;
@@ -21,6 +22,7 @@ export class CreationButtonComponent {
     );
 
     constructor(
+        protected readonly overlay: OverlayService,
         private readonly requestForm: RequestForm,
         private readonly router: Router,
         private readonly route: ActivatedRoute,

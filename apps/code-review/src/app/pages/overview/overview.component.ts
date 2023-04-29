@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, inject } from '@angular/core';
 import { MatDrawerMode } from '@angular/material/sidenav';
 import { ProjectFile } from '@code-review/shared';
 import { DeviceDetectorService } from 'ngx-device-detector';
@@ -16,7 +16,7 @@ import { ProjectEntitiesState, ReviewRequestCommentsState } from './states';
 export class OverviewComponent {
     public readonly dependencies$ = this.dependenciesService.loadAll();
     public readonly projectEntities$ = this.projectEntitiesState.data$;
-    public readonly isMobile = this.deviceService.isMobile();
+    public readonly isMobile = inject(DeviceDetectorService).isMobile();
     public readonly mode: MatDrawerMode = this.isMobile ? 'over' : 'side';
     public readonly adaptiveClasses = this.isMobile ? 'mat-drawer-mobile' : 'mat-drawer-desktop';
 
@@ -26,7 +26,6 @@ export class OverviewComponent {
     private readonly codeEditor!: CodeEditorComponent;
 
     constructor(
-        private readonly deviceService: DeviceDetectorService,
         private readonly dependenciesService: DependenciesService,
         private readonly projectEntitiesState: ProjectEntitiesState
     ) {}

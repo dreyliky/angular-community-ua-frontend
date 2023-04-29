@@ -3,25 +3,27 @@
     (hamburgerMenuButtonClick)="onHeaderHamburgerMenuButtonClick()"
 ></acua-header>
 
-<mat-drawer-container class="container" *ngIf="dependencies$ | async; else loaderTemplate">
-    <mat-drawer
-        [mode]="mode"
-        class="mat-drawer"
-        [ngClass]="adaptiveClasses"
-        [opened]="isSidenavOpened"
-    >
-        <acua-file-explorer
-            *ngIf="projectEntities$ | async as projectEntities"
-            [tree]="projectEntities"
-            class="file-explorer"
-            (fileSelected)="onFileSelected($event)"
-        ></acua-file-explorer>
-    </mat-drawer>
+<ng-template [ngxAsync]="dependencies$" [ngxAsyncLoading]="loaderTemplate">
+    <mat-drawer-container class="container">
+        <mat-drawer
+            [mode]="mode"
+            class="mat-drawer"
+            [ngClass]="adaptiveClasses"
+            [opened]="isSidenavOpened"
+        >
+            <acua-file-explorer
+                *ngIf="projectEntities$ | async as projectEntities"
+                [tree]="projectEntities"
+                class="file-explorer"
+                (fileSelected)="onFileSelected($event)"
+            ></acua-file-explorer>
+        </mat-drawer>
 
-    <mat-drawer-content>
-        <acua-code-editor class="code-editor"></acua-code-editor>
-    </mat-drawer-content>
-</mat-drawer-container>
+        <mat-drawer-content>
+            <acua-code-editor class="code-editor"></acua-code-editor>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</ng-template>
 
 <ng-template #loaderTemplate>
     <acua-loader [label]="'Завантаження проєкту...'"></acua-loader>

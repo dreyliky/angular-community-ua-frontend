@@ -17,6 +17,10 @@
         <mat-label>Опис</mat-label>
 
         <textarea matInput [formControl]="formGroup.controls.description"></textarea>
+
+        <mat-error *ngIf="formGroup.controls.sourceUrl.hasError('required')">
+            Уточніть, що саме ви хотіли б почути від спільноти.
+        </mat-error>
     </mat-form-field>
 
     <ng-container *ngIf="iframeLink$ | async as iframeLink; else noPreviewTemplate">

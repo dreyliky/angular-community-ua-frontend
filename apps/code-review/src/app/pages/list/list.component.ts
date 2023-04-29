@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
     selector: 'acua-list',
@@ -6,4 +7,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     styleUrls: ['./list.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListComponent {}
+export class ListComponent {
+    protected readonly isMobile = inject(DeviceDetectorService).isMobile();
+}

@@ -7,7 +7,10 @@ import { SourceUrlValidator } from '../validators';
 export class RequestForm extends FormGroup<FormGroupDef<ReviewRequestCreationDto>> {
     constructor(linkValidateValidator: SourceUrlValidator) {
         super({
-            description: new FormControl('', { nonNullable: true }),
+            description: new FormControl('', {
+                nonNullable: true,
+                validators: [Validators.required]
+            }),
             sourceUrl: new FormControl('', {
                 nonNullable: true,
                 validators: [Validators.required],
