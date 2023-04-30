@@ -1,15 +1,13 @@
-<h2>Відкриті запити</h2>
+<ng-container *ngIf="reviewRequests$ | async as reviewRequests">
+    <ng-container *ngIf="reviewRequests.length; else emptyDataTemplate">
+        <acua-review-request-card
+            *ngFor="let reviewRequest of reviewRequests"
+            [data]="reviewRequest"
+        >
+        </acua-review-request-card>
+    </ng-container>
+</ng-container>
 
-<acua-review-request-card
-    *ngFor="let reviewRequest of reviewRequests$ | async"
-    [data]="reviewRequest"
->
-</acua-review-request-card>
-
-<h2>Закриті запити</h2>
-
-<acua-review-request-card
-    *ngFor="let reviewRequest of reviewRequests$ | async"
-    [data]="reviewRequest"
->
-</acua-review-request-card>
+<ng-template #emptyDataTemplate>
+    <acua-absent-data>Ви ще не створили жодного запиту на Код-Ревью.</acua-absent-data>
+</ng-template>

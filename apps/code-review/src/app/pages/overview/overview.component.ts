@@ -5,9 +5,9 @@ import { ProjectFile } from '@code-review/shared';
 import { Observable, map } from 'rxjs';
 import { CodeEditorComponent } from './components';
 import { DependenciesFacade } from './facades';
-import { MONACO_API_PROVIDER } from './providers';
 import { MonacoThemeLoaderService } from './services';
 import {
+    MonacoApiState,
     OpenedReviewRequestState,
     ProjectEntitiesState,
     ReviewRequestCommentsState
@@ -19,8 +19,8 @@ import {
     styleUrls: ['./overview.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
-        MONACO_API_PROVIDER,
         DependenciesFacade,
+        MonacoApiState,
         MonacoThemeLoaderService,
         ReviewRequestCommentsState,
         OpenedReviewRequestState,

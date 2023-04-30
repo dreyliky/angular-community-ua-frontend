@@ -8,7 +8,7 @@ import { ReviewRequestService } from '@code-review/shared';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MyRequestsComponent {
-    public readonly reviewRequests$ = this.reviewRequestsService.getAll();
+    public readonly reviewRequests$ = this.reviewRequestsService.getAllMy();
 
     constructor(private readonly reviewRequestsService: ReviewRequestService) {}
 }

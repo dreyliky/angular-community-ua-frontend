@@ -6,8 +6,7 @@ import {
     AvailableForUnauthorizedOnlyDirective
 } from './directives';
 import { BearerTokenInterceptor } from './interceptors';
-import { AuthService, BearerTokenService, LoginService, UrlsWithAuthService } from './services';
-import { UrlsWithAuthState } from './states';
+import { AuthService, BearerTokenService, LoginService } from './services';
 
 @NgModule({
     declarations: [AvailableForAuthorizedOnlyDirective, AvailableForUnauthorizedOnlyDirective],
@@ -16,8 +15,6 @@ import { UrlsWithAuthState } from './states';
         AuthService,
         BearerTokenService,
         LoginService,
-        UrlsWithAuthService,
-        UrlsWithAuthState,
         { provide: HTTP_INTERCEPTORS, useClass: BearerTokenInterceptor, multi: true }
     ],
     exports: [AvailableForAuthorizedOnlyDirective, AvailableForUnauthorizedOnlyDirective]

@@ -1,7 +1,6 @@
-import { AuthService, UrlsWithAuthService, User, UserService } from '@acua/shared';
+import { AuthService, User, UserService } from '@acua/shared';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
-import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -9,13 +8,10 @@ import { environment } from '../../environments/environment';
 export class AppConfig {
     constructor(
         private readonly userService: UserService,
-        private readonly authService: AuthService,
-        private readonly urlsWithAuthService: UrlsWithAuthService
+        private readonly authService: AuthService
     ) {}
 
     public load(): Observable<unknown> {
-        this.urlsWithAuthService.register([environment.backendUrl, environment.mainBackendUrl]);
-
         return this.loadUserData();
     }
 

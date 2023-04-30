@@ -1,17 +1,16 @@
 import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
 import type { editor } from 'monaco-editor';
 import { ReviewRequestCommentsState } from '../../states';
-import { MONACO_API } from '../../tokens';
 import { MonacoApi } from '../../types';
 import {
     LineCommentsAmountDirective,
     LineHighlighterDirective,
     TextSelectionDisablerDirective
 } from './directives';
-import { MONACO_EDITOR_PROVIDER } from './providers';
+import { MONACO_API_PROVIDER, MONACO_EDITOR_PROVIDER } from './providers';
 import { LanguageService } from './services';
 import { EditorCommentsState } from './states';
-import { MONACO_EDITOR } from './tokens';
+import { MONACO_API, MONACO_EDITOR } from './tokens';
 
 @Component({
     selector: 'acua-code-editor',
@@ -23,7 +22,7 @@ import { MONACO_EDITOR } from './tokens';
         LineCommentsAmountDirective,
         TextSelectionDisablerDirective
     ],
-    providers: [MONACO_EDITOR_PROVIDER, LanguageService, EditorCommentsState],
+    providers: [MONACO_EDITOR_PROVIDER, MONACO_API_PROVIDER, LanguageService, EditorCommentsState],
     encapsulation: ViewEncapsulation.None
 })
 export class CodeEditorComponent {

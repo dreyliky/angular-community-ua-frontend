@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import type { editor } from 'monaco-editor';
 import { Observable, of, tap } from 'rxjs';
-import { MonacoThemeDataState } from '../states';
-import { MONACO_API } from '../tokens';
+import { MonacoApiState, MonacoThemeDataState } from '../states';
 import { MonacoApi } from '../types';
 
 @Injectable()
@@ -11,8 +10,12 @@ export class MonacoThemeLoaderService {
     private readonly themeName = 'tommorow-night';
     private readonly themeUrl = `/assets/json/monaco-themes/tommorow-night.json`;
 
+    private get monacoApi(): MonacoApi {
+        return this.monacoApiState.data!;
+    }
+
     constructor(
-        @Inject(MONACO_API) private readonly monacoApi: MonacoApi,
+        private readonly monacoApiState: MonacoApiState,
         private readonly themeDataState: MonacoThemeDataState,
         private readonly http: HttpClient
     ) {}

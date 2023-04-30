@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
-import { MONACO_API } from '../../../tokens';
 import { MonacoApi } from '../../../types';
+import { MONACO_API } from '../tokens';
 
 @Injectable()
 export class LanguageService {

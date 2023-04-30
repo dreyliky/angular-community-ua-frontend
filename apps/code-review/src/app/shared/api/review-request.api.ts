@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { ENVIRONMENT } from '@code-review/core';
 import { Observable } from 'rxjs';
+import { CodeReviewRequestStatusEnum } from '../enums';
 import { ResponseWithId, ReviewRequestCreationDto, ReviewRequestDto } from '../interfaces';
 
 @Injectable({
@@ -12,8 +13,12 @@ export class ReviewRequestApi {
 
     constructor(private readonly http: HttpClient) {}
 
-    public getAll(): Observable<ReviewRequestDto[]> {
-        return this.http.get<ReviewRequestDto[]>(`${this.apiUrl}/review-requests`);
+    public getAllWithStatus(status: CodeReviewRequestStatusEnum): Observable<ReviewRequestDto[]> {
+        return this.http.get<ReviewRequestDto[]>(`${this.apiUrl}/review-requests/status/${status}`);
+    }
+
+    public getAllMy(): Observable<ReviewRequestDto[]> {
+        return this.http.get<ReviewRequestDto[]>(`${this.apiUrl}/review-requests/my`);
     }
 
     public get(id: string): Observable<ReviewRequestDto> {

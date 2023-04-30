@@ -1,7 +1,13 @@
-<h2>Список історичних запитів на код-ревью</h2>
+<ng-container *ngIf="reviewRequests$ | async as reviewRequests">
+    <ng-container *ngIf="reviewRequests.length; else emptyDataTemplate">
+        <acua-review-request-card
+            *ngFor="let reviewRequest of reviewRequests"
+            [data]="reviewRequest"
+        >
+        </acua-review-request-card>
+    </ng-container>
+</ng-container>
 
-<acua-review-request-card
-    *ngFor="let reviewRequest of reviewRequests$ | async"
-    [data]="reviewRequest"
->
-</acua-review-request-card>
+<ng-template #emptyDataTemplate>
+    <acua-absent-data>Історичні запити на Код-Ревью відсутні.</acua-absent-data>
+</ng-template>

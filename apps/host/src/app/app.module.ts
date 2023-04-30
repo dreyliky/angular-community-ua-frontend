@@ -1,14 +1,9 @@
-import {
-    AuthModule,
-    MATERIAL_ICON_DEFAULT_OPTIONS_PROVIDER,
-    UrlsWithAuthService
-} from '@acua/shared';
+import { AuthModule, MATERIAL_ICON_DEFAULT_OPTIONS_PROVIDER } from '@acua/shared';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PreloadAllModules, RouterModule } from '@angular/router';
-import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { APP_ROUTES } from './app.routes';
 import { APP_CONFIG_PROVIDER } from './config';
@@ -33,8 +28,4 @@ import { MAIN_BACKEND_URL_PROVIDER } from './core';
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule {
-    constructor(private readonly urlsWithAuthService: UrlsWithAuthService) {
-        this.urlsWithAuthService.register([environment.backendUrl]);
-    }
-}
+export class AppModule {}

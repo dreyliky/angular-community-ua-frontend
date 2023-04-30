@@ -8,14 +8,17 @@ import {
     ReviewRequestService,
     ReviewRequestSourceCodeService
 } from '@code-review/shared';
-import { Observable, forkJoin, tap } from 'rxjs';
+import monacoLoader from '@monaco-editor/loader';
+import { Observable, forkJoin, from, switchMap, tap } from 'rxjs';
 import { OverviewParamEnum } from '../enums';
 import { MonacoThemeLoaderService } from '../services';
 import {
+    MonacoApiState,
     OpenedReviewRequestState,
     ProjectEntitiesState,
     ReviewRequestCommentsState
 } from '../states';
+import { MonacoApi } from '../types';
 
 @Injectable()
 export class DependenciesFacade {
@@ -29,18 +32,29 @@ export class DependenciesFacade {
         private readonly commentsService: ReviewRequestCommentsService,
         private readonly sourceCodeService: ReviewRequestSourceCodeService,
         private readonly monacoThemeLoaderService: MonacoThemeLoaderService,
+        private readonly monacoApiState: MonacoApiState,
         private readonly commentsState: ReviewRequestCommentsState,
         private readonly projectEntitiesState: ProjectEntitiesState,
         private readonly openedReviewRequestState: OpenedReviewRequestState
     ) {}
 
     public loadAll(): Observable<unknown> {
-        return forkJoin([
-            this.loadOpenedReviewRequestInfo(),
-            this.loadSourceCode(),
-            this.loadComments(),
-            this.monacoThemeLoaderService.loadAndDefine()
-        ]);
+        return this.loadMonacoApi().pipe(
+            switchMap(() =>
+                forkJoin([
+                    this.loadOpenedReviewRequestInfo(),
+                    this.loadSourceCode(),
+                    this.loadComments(),
+                    this.monacoThemeLoaderService.loadAndDefine()
+                ])
+            )
+        );
+    }
+
+    private loadMonacoApi(): Observable<MonacoApi> {
+        return from(monacoLoader.init()).pipe(
+            tap((monacoApi) => this.monacoApiState.set(monacoApi))
+        );
     }
 
     private loadComments(): Observable<CommentsAmountDictionary> {

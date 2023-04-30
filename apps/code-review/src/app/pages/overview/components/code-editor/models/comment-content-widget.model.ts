@@ -1,9 +1,8 @@
 import { ComponentRef, Injector, ViewContainerRef } from '@angular/core';
 import type { editor } from 'monaco-editor';
-import { MONACO_API } from '../../../tokens';
 import { CommentsAmountComponent } from '../components';
 import { EditorCommentsState } from '../states';
-import { MONACO_EDITOR } from '../tokens';
+import { MONACO_API, MONACO_EDITOR } from '../tokens';
 
 export class CommentContentWidget implements editor.IContentWidget {
     private readonly editor = this.injector.get(MONACO_EDITOR);

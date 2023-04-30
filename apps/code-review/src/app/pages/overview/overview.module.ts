@@ -7,7 +7,6 @@ import { NgxAsyncModule } from 'ngx-async-directive';
 import { CodeEditorModule, FileExplorerModule, HeaderModule } from './components';
 import { OverviewComponent } from './overview.component';
 import { OVERVIEW_ROUTES } from './overview.routes';
-import { MonacoApiResolver } from './resolvers';
 
 @NgModule({
     declarations: [OverviewComponent],
@@ -20,7 +19,6 @@ import { MonacoApiResolver } from './resolvers';
         LoaderModule,
         NgxAsyncModule,
         RouterModule.forChild(OVERVIEW_ROUTES)
-    ],
-    providers: [MonacoApiResolver]
+    ]
 })
 export class OverviewModule {}
