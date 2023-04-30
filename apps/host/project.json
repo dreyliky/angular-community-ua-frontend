@@ -18,24 +18,21 @@
                 "assets": [
                     "apps/host/src/favicon.ico",
                     "apps/host/src/assets",
+                    "apps/host/src/manifest.webmanifest",
+                    "apps/host/src/service-worker.js",
                     {
                         "input": "libs/assets/src/lib",
                         "glob": "**/*",
                         "output": "assets"
                     }
                 ],
-                "styles": [
-                    "apps/host/src/styles.scss",
-                    "libs/assets/src/lib/styles/index.scss"
-                ],
+                "styles": ["apps/host/src/styles.scss", "libs/assets/src/lib/styles/index.scss"],
                 "scripts": [],
                 "customWebpackConfig": {
                     "path": "apps/host/webpack.config.js"
                 },
                 "stylePreprocessorOptions": {
-                    "includePaths": [
-                        "libs/assets/src/lib/styles"
-                    ]
+                    "includePaths": ["libs/assets/src/lib/styles"]
                 },
                 "aot": true
             },
