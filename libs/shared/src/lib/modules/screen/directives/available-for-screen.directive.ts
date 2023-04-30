@@ -1,5 +1,12 @@
 import { Breakpoints } from '@angular/cdk/layout';
-import { Directive, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Directive,
+    Input,
+    OnInit,
+    TemplateRef,
+    ViewContainerRef
+} from '@angular/core';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
 import { Subscription } from 'rxjs';
 import { ScreenService } from '../services';
@@ -17,7 +24,8 @@ export class AvailableForScreenDirective implements OnInit {
     constructor(
         private readonly screenService: ScreenService,
         private readonly templateRef: TemplateRef<unknown>,
-        private readonly viewContainerRef: ViewContainerRef
+        private readonly viewContainerRef: ViewContainerRef,
+        private readonly changeDetector: ChangeDetectorRef
     ) {}
 
     public ngOnInit(): void {
@@ -29,10 +37,12 @@ export class AvailableForScreenDirective implements OnInit {
         return this.screenService.isMatch$(this.types).subscribe((isMatch) => {
             if (this.shouldBeRendered(isMatch)) {
                 this.viewContainerRef.clear();
-                this.viewContainerRef.createEmbeddedView(this.templateRef).detectChanges();
+                this.viewContainerRef.createEmbeddedView(this.templateRef);
             } else {
                 this.viewContainerRef.clear();
             }
+
+            this.changeDetector.detectChanges();
         });
     }
 

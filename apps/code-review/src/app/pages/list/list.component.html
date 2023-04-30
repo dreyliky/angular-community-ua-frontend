@@ -12,7 +12,7 @@
             </ng-template>
         </mat-tab>
 
-        <mat-tab [label]="'Мої'">
+        <mat-tab *acuaForAuthorizedOnly [label]="'Мої'">
             <ng-template matTabContent>
                 <acua-my-requests></acua-my-requests>
             </ng-template>
