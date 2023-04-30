@@ -1,6 +1,6 @@
 import { Directive, Inject } from '@angular/core';
-import type { editor, IRange } from 'monaco-editor';
-import { MONACO_EDITOR } from '../../../tokens';
+import type { IRange, editor } from 'monaco-editor';
+import { MONACO_EDITOR } from '../tokens';
 
 @Directive({
     selector: '[acuaTextSelectionDisabler]',

@@ -35,11 +35,8 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
     @Input()
     public depth = 0;
 
-    @Input()
-    public hide = false;
-
     @Output()
-    public fileSelected: EventEmitter<ProjectFile> = new EventEmitter();
+    public fileSelected = new EventEmitter<ProjectFile>();
 
     public get marginLeftStyleValue(): string {
         return `${this.baseMarginLeft * this.depth}px`;
@@ -47,14 +44,6 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
 
     public get doChildrenExist(): boolean {
         return !!this.node.children;
-    }
-
-    public get isFile(): boolean {
-        return !!this.node.content;
-    }
-
-    public get isHidden(): boolean {
-        return !this.isOpened || this.hide;
     }
 
     public get incrementedDepth(): number {
@@ -65,34 +54,8 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
         return `/assets/icons/file-explorer/${this.icon}.svg`;
     }
 
-    public get arrowCssClassesAsString(): string {
-        const CLASSES = 'monaco-tree-arrow codicon codicon-chevron-down';
-
-        if (this.isOpened) {
-            return `${CLASSES} open`;
-        }
-
-        return CLASSES;
-    }
-
-    public get rowCssClassesAsString(): string {
-        const CLASSES = `monaco-tree-row`;
-
-        if (this.hide) {
-            return `${CLASSES} hide`;
-        }
-
-        return CLASSES;
-    }
-
-    public get isAllowedToRender(): boolean {
-        return !this.isHidden || this.hasBeenOpened;
-    }
-
     public isOpened = false;
     public isSelected = false;
-
-    private hasBeenOpened = false;
 
     private readonly baseMarginLeft = 10;
 
@@ -115,34 +78,25 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
         }
     }
 
-    public onButtonToggle(): void {
+    public onRowClick(): void {
         this.isOpened = !this.isOpened;
-        this.hasBeenOpened = true;
 
-        if (this.doChildrenExist) {
-            return;
+        if (!this.doChildrenExist) {
+            this.fileSelectionState.set(this.node);
         }
-
-        this.fileSelectionState.set(this.node as ProjectFile);
-    }
-
-    public onFileSelected(node: ProjectFile): void {
-        this.fileSelected.emit(node);
     }
 
     @AutoUnsubscribe()
     private initFileSelection(): Subscription {
-        return this.fileSelectionState.data$
-            .pipe(filter<ProjectFile | null>(Boolean))
-            .subscribe((node: ProjectFile) => {
-                this.isSelected = node.fullPath === this.node.fullPath;
+        return this.fileSelectionState.data$.pipe(filter(Boolean)).subscribe((node) => {
+            this.isSelected = node.fullPath === this.node.fullPath;
 
-                if (this.isSelected) {
-                    this.fileSelected.emit(this.node as ProjectFile);
-                }
+            if (this.isSelected) {
+                this.fileSelected.emit(this.node);
+            }
 
-                this.changeDetectorRef.markForCheck();
-            });
+            this.changeDetectorRef.markForCheck();
+        });
     }
 
     private getIcon(): string {

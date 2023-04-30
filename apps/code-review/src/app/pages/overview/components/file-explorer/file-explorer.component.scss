@@ -1,9 +1,10 @@
 :host {
-    width: 200px;
+    width: 100%;
     min-width: 200px;
     height: 100%;
+    display: flex;
+    flex-direction: column;
     user-select: none;
-    background-color: #212121;
-    overflow-y: scroll;
-    resize: horizontal;
+    background-color: #17191b;
+    overflow-y: auto;
 }

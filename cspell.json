@@ -3,7 +3,7 @@
     "ignorePaths": ["**/*.scss", "**/*.json"],
     "dictionaryDefinitions": [],
     "dictionaries": [],
-    "words": ["codicon", "stackblitz", "Демо", "Історія", "Ревью"],
+    "words": ["codicon", "stackblitz", "Демо", "Історія", "Ревью", "tommorow"],
     "ignoreWords": ["nrwl", "acua", "onauth", "Parens"],
     "import": []
 }

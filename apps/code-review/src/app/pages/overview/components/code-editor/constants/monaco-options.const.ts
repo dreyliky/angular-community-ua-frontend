@@ -1,7 +1,7 @@
 import type { editor } from 'monaco-editor';
 
 export const MONACO_OPTIONS: editor.IStandaloneEditorConstructionOptions = {
-    theme: 'vs-dark',
+    theme: 'tommorow-night',
     language: 'typescript',
     fontSize: 18,
     domReadOnly: true,

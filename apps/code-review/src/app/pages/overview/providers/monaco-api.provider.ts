@@ -1,8 +1,8 @@
 import { inject, Provider } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { OverviewDataParam as DataParam } from '../../../enums';
-import { MONACO_API } from '../../../tokens';
-import { MonacoApi } from '../../../types';
+import { OverviewDataParam as DataParam } from '../enums';
+import { MONACO_API } from '../tokens';
+import { MonacoApi } from '../types';
 
 export const MONACO_API_PROVIDER: Provider = {
     provide: MONACO_API,

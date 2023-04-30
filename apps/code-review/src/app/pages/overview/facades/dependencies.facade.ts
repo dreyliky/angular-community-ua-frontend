@@ -10,6 +10,7 @@ import {
 } from '@code-review/shared';
 import { Observable, forkJoin, tap } from 'rxjs';
 import { OverviewParamEnum } from '../enums';
+import { MonacoThemeLoaderService } from '../services';
 import {
     OpenedReviewRequestState,
     ProjectEntitiesState,
@@ -27,6 +28,7 @@ export class DependenciesFacade {
         private readonly reviewRequestService: ReviewRequestService,
         private readonly commentsService: ReviewRequestCommentsService,
         private readonly sourceCodeService: ReviewRequestSourceCodeService,
+        private readonly monacoThemeLoaderService: MonacoThemeLoaderService,
         private readonly commentsState: ReviewRequestCommentsState,
         private readonly projectEntitiesState: ProjectEntitiesState,
         private readonly openedReviewRequestState: OpenedReviewRequestState
@@ -36,7 +38,8 @@ export class DependenciesFacade {
         return forkJoin([
             this.loadOpenedReviewRequestInfo(),
             this.loadSourceCode(),
-            this.loadComments()
+            this.loadComments(),
+            this.monacoThemeLoaderService.loadAndDefine()
         ]);
     }
 

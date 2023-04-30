@@ -1,19 +1,25 @@
-<div [class]="rowCssClassesAsString" [class.selected]="isSelected" (click)="onButtonToggle()">
+<div class="monaco-tree-row" [class.selected]="isSelected" (click)="onRowClick()">
     <span [style.margin-left]="marginLeftStyleValue"></span>
-    <i *ngIf="doChildrenExist" [class]="arrowCssClassesAsString"></i>
+
+    <i
+        *ngIf="doChildrenExist"
+        class="monaco-tree-arrow codicon codicon-chevron-down"
+        [class.open]="this.isOpened"
+    ></i>
+
     <img [src]="fileExplorerIconSrc" class="icon" />
+
     <div [title]="node.fullPath" class="monaco-tree-name">
         {{ node.name }}
     </div>
 </div>
 
-<ng-container *ngIf="isAllowedToRender">
+<ng-container *ngIf="isOpened">
     <acua-file-tree-node
         *ngFor="let node of node.children"
         [node]="node"
         [depth]="incrementedDepth"
-        [hide]="isHidden"
-        (fileSelected)="onFileSelected($event)"
+        (fileSelected)="fileSelected.emit($event)"
     >
     </acua-file-tree-node>
 </ng-container>

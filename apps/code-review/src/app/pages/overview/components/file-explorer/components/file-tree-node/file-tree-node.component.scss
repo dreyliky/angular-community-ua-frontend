@@ -6,9 +6,10 @@
     align-items: center;
     gap: 6px;
     cursor: pointer;
-    padding-left: 32px;
+    padding-left: 20px;
     font-size: 14px;
-    line-height: 24px;
+    line-height: 28px;
+    color: #b4b5b5;
 
     @include for-mobile-only {
         font-size: 21px;
@@ -16,16 +17,28 @@
     }
 
     &.selected {
-        background-color: rgba(65, 75, 236, 0.15) !important;
+        background-color: rgba(0, 0, 0, 0.1) !important;
+        color: #2ec9b0;
     }
 
-    &:hover {
-        background-color: rgba(255, 255, 255, 0.1);
+    &.active {
+        background: rgb(63, 63, 70);
+    }
+
+    &:hover:not(.selected) {
+        color: #fff;
+    }
+
+    /* stylelint-disable-next-line selector-class-pattern */
+    .root-2 {
+        .monaco-tree-icon {
+            margin-left: 10px;
+        }
     }
 
     .icon {
-        width: 16px;
-        height: 22px;
+        width: 20px;
+        height: 20px;
 
         @include for-mobile-only {
             width: 24px;
@@ -42,46 +55,19 @@
         top: 2px;
         transform: rotate(-90deg);
         transition: all 0.2s;
-    }
 
-    .monaco-tree-arrow.open {
-        transform: rotate(0deg);
-        left: -2px;
-        top: 0;
+        &.open {
+            transform: rotate(0deg);
+            left: -2px;
+            top: 0;
+        }
     }
 
     .monaco-tree-name {
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
-        padding-right: 5px;
-    }
-}
-
-.monaco-tree-row.vs-dark:hover {
-    background: #2a2d2e;
-}
-
-.monaco-tree-row.vs-dark.active {
-    background: rgb(63, 63, 70);
-}
-
-.monaco-tree-row.vs-light:hover {
-    background: #e8e8e8;
-}
-
-.monaco-tree-row.vs-light.active {
-    background: #e4e6f1;
-}
-
-.monaco-tree-row.hide {
-    display: none;
-}
-
-/* stylelint-disable-next-line selector-class-pattern */
-.monaco-tree-row .root-2 {
-    .monaco-tree-icon {
-        margin-left: 10px;
+        padding: 0 5px 0 2px;
     }
 }
 

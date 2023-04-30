@@ -18,9 +18,8 @@
 
     .mat-drawer {
         width: auto;
+        max-width: 350px;
         min-width: 300px;
-        max-width: 35%;
-        background-color: #202327;
         border: 0;
 
         @include for-mobile-only {

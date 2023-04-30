@@ -1,11 +1,11 @@
 import { Directive, Inject, OnDestroy } from '@angular/core';
-import type { editor, IDisposable } from 'monaco-editor';
+import type { IDisposable, editor } from 'monaco-editor';
 import { Subscription } from 'rxjs';
-import { MONACO_EDITOR } from '../../../tokens';
 import { LINE_DECORATION_HAS_COMMENTS_CLASS_NAME as HAS_COMMENTS_CLASS } from '../constants';
 import { isTargetOverActualLineOfCode } from '../helpers';
 import { LineDecoration } from '../models';
 import { EditorCommentsState } from '../states';
+import { MONACO_EDITOR } from '../tokens';
 
 @Directive({
     selector: '[acuaLineHighlighter]',

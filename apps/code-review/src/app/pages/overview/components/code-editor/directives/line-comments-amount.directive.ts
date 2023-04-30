@@ -1,10 +1,10 @@
 import { Directive, Inject, Injector } from '@angular/core';
 import type { editor } from 'monaco-editor';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
-import { filter, Subscription, tap } from 'rxjs';
-import { MONACO_EDITOR } from '../../../tokens';
+import { Subscription, filter, tap } from 'rxjs';
 import { CommentContentWidget } from '../models';
 import { EditorCommentsState } from '../states';
+import { MONACO_EDITOR } from '../tokens';
 
 @Directive({
     selector: '[acuaLineCommentsAmount]',

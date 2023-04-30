@@ -1,9 +1,9 @@
 import { ElementRef, inject, Provider } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OverviewDataParam as DataParam } from '../../../enums';
-import { MONACO_EDITOR } from '../../../tokens';
 import { MonacoApi } from '../../../types';
 import { MONACO_OPTIONS } from '../constants';
+import { MONACO_EDITOR } from '../tokens';
 
 export const MONACO_EDITOR_PROVIDER: Provider = {
     provide: MONACO_EDITOR,

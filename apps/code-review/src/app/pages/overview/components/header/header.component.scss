@@ -5,7 +5,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 10px;
-    background-color: #212121;
+    background-color: #17191b;
+    border-bottom: solid 1px #101113;
     box-sizing: border-box;
 
     mat-icon {
@@ -35,7 +36,7 @@
         z-index: 10;
 
         .panel-request {
-            background-color: #212121;
+            background-color: #17191b;
             box-shadow: none !important;
         }
 
