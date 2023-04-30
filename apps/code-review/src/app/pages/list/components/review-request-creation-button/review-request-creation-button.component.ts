@@ -1,4 +1,3 @@
-import { UserService } from '@acua/shared';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppRouteEnum } from '@code-review/core';
@@ -10,11 +9,7 @@ import { AppRouteEnum } from '@code-review/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReviewRequestCreationButtonComponent {
-    protected readonly user$ = this.userService.data$;
     protected readonly requestPageLink = `../${AppRouteEnum.Request}`;
 
-    constructor(
-        public readonly activatedRoute: ActivatedRoute,
-        private readonly userService: UserService
-    ) {}
+    constructor(public readonly activatedRoute: ActivatedRoute) {}
 }

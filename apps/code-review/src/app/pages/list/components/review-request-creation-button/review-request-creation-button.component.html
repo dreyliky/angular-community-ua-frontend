@@ -1,5 +1,5 @@
 <acua-action-button
-    *ngIf="user$ | async"
+    *acuaForAuthorizedOnly
     [label]="'Запросити Код-Ревью'"
     [iconName]="'add'"
     [routerLink]="requestPageLink"

@@ -1,4 +1,3 @@
-import { UserService } from '@acua/shared';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AppRouteEnum } from '@host/core';
 
@@ -6,11 +5,11 @@ import { AppRouteEnum } from '@host/core';
     selector: 'acua-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        class: 'mat-elevation-z1'
+    }
 })
 export class HeaderComponent {
-    protected readonly user$ = this.userService.data$;
     protected readonly homePagePath = `/${AppRouteEnum.Home}`;
-
-    constructor(private readonly userService: UserService) {}
 }

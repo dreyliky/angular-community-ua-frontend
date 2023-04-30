@@ -4,9 +4,7 @@
 </a>
 
 <div class="left-side-menu">
-    <acua-user-menu *ngIf="user$ | async; else loginButtonTemplate"> </acua-user-menu>
+    <acua-user-menu *acuaForAuthorizedOnly></acua-user-menu>
 </div>
 
-<ng-template #loginButtonTemplate>
-    <acua-login-button></acua-login-button>
-</ng-template>
+<acua-login-button *acuaForUnauthorizedOnly></acua-login-button>
