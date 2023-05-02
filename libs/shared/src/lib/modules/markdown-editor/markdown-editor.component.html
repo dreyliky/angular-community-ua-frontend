@@ -1,0 +1,21 @@
+<acua-markdown-toolbar [markdownInputDirective]="markdownInputDirective"></acua-markdown-toolbar>
+
+<!-- 1... -->
+<div [hidden]="!markdownActive">
+    <acua-markdown-input #markdownInput></acua-markdown-input>
+</div>
+
+<div [hidden]="markdownActive">
+    <acua-markdown-previewer></acua-markdown-previewer>
+</div>
+<!-- ... -->
+
+<!-- 2... -->
+<ng-container *ngIf="markdownActive; else previewerTemplate">
+    <acua-markdown-input #markdownInput></acua-markdown-input>
+</ng-container>
+
+<ng-template #previewerTemplate>
+    <acua-markdown-previewer></acua-markdown-previewer>
+</ng-template>
+<!-- ... -->

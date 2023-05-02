@@ -1,0 +1,12 @@
+<mat-button-toggle-group>
+    <mat-button-toggle
+        [disabled]="markdownActive"
+        checked
+        value="write"
+        (click)="updateWriteClick()"
+        >Write</mat-button-toggle
+    >
+    <mat-button-toggle (click)="updatePreviewClick()" [disabled]="!markdownActive" value="preview"
+        >Preview</mat-button-toggle
+    >
+</mat-button-toggle-group>

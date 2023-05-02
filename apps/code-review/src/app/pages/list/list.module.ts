@@ -1,4 +1,4 @@
-import { UserAvatarModule } from '@acua/shared';
+import { MarkdownEditorModule, UserAvatarModule } from '@acua/shared';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -38,6 +38,7 @@ import { LIST_ROUTES } from './list.routes';
         MatRippleModule,
         MatTooltipModule,
         UserAvatarModule,
+        MarkdownEditorModule,
         RouterModule.forChild(LIST_ROUTES)
     ]
 })
