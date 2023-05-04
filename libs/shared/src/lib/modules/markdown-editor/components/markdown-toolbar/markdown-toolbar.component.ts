@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { MarkdownActiveTabState } from '../../states';
-import { MarkdownInputDirective } from '../markdown-input';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { MarkdownViewModeState } from '../../states';
 import { MARKDOWN_BUTTON_ARRAY } from './data';
 import { MarkdownButtonSyntax } from './interfaces';
 
@@ -11,15 +10,11 @@ import { MarkdownButtonSyntax } from './interfaces';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MarkdownToolbarComponent {
-    @Input()
-    public markdownInputDirective!: MarkdownInputDirective;
+    @Output()
+    public markdownButtonClick = new EventEmitter<MarkdownButtonSyntax>();
 
-    public readonly markdownActive$ = this.markdownActiveState.data$;
+    public readonly markdownViewMode$ = this.markdownViewModeState.data$;
     public readonly markdownButtonArray = MARKDOWN_BUTTON_ARRAY;
 
-    constructor(private readonly markdownActiveState: MarkdownActiveTabState) {}
-
-    public onMarkdownButtonClick(button: MarkdownButtonSyntax): void {
-        this.markdownInputDirective.insertMarkdownSyntax(button);
-    }
+    constructor(private readonly markdownViewModeState: MarkdownViewModeState) {}
 }

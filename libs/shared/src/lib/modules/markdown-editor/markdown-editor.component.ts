@@ -1,12 +1,15 @@
 import {
-    AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     OnInit,
     ViewChild
 } from '@angular/core';
-import { MarkdownInputComponent, MarkdownInputDirective } from './components';
-import { MarkdownActiveTabState } from './states';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
+import { Subscription } from 'rxjs';
+import { MarkdownButtonSyntax } from './components';
+import { MarkdownInputDirective } from './directives';
+import { MarkdownViewModeState } from './states';
 
 @Component({
     selector: 'acua-markdown-editor',
@@ -14,26 +17,31 @@ import { MarkdownActiveTabState } from './states';
     styleUrls: ['./markdown-editor.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MarkdownEditorComponent implements OnInit, AfterViewInit {
-    @ViewChild('markdownInput')
-    public markdownInput!: MarkdownInputComponent;
+export class MarkdownEditorComponent implements OnInit {
+    @ViewChild(MarkdownInputDirective)
+    public markdownEditorInputDirective!: MarkdownInputDirective;
 
-    public markdownActive!: boolean;
-    public markdownInputDirective!: MarkdownInputDirective;
+    public markdownViewMode!: boolean;
 
-    constructor(private readonly markdownActiveState: MarkdownActiveTabState) {}
+    constructor(
+        private readonly markdownViewModeState: MarkdownViewModeState,
+        private readonly changeDetector: ChangeDetectorRef
+    ) {}
 
     public ngOnInit(): void {
         this.initializeMarkdownActive();
     }
 
-    public ngAfterViewInit(): void {
-        this.markdownInputDirective = this.markdownInput.markdownEditorInputDirective;
+    @AutoUnsubscribe()
+    public initializeMarkdownActive(): Subscription {
+        return this.markdownViewModeState.data$.subscribe((mode) => {
+            this.markdownViewMode = mode!;
+
+            this.changeDetector.detectChanges();
+        });
     }
 
-    public initializeMarkdownActive(): void {
-        this.markdownActiveState.data$.subscribe((active) => {
-            this.markdownActive = active!;
-        });
+    public onMarkdownButtonClick(button: MarkdownButtonSyntax): void {
+        this.markdownEditorInputDirective.insertMarkdownSyntax(button);
     }
 }

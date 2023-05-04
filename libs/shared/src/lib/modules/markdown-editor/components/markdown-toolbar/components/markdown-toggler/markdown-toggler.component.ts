@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { MarkdownActiveTabState } from '../../../../states';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
+import { Subscription } from 'rxjs';
+import { MarkdownViewModeState } from '../../../../states';
 
 @Component({
     selector: 'acua-markdown-toggler',
@@ -8,25 +10,31 @@ import { MarkdownActiveTabState } from '../../../../states';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MarkdownTogglerComponent implements OnInit {
-    public markdownActive!: boolean;
+    public markdownViewMode!: boolean;
 
-    constructor(private readonly markdownActiveState: MarkdownActiveTabState) {}
+    constructor(
+        private readonly markdownViewModeState: MarkdownViewModeState,
+        private readonly changeDetector: ChangeDetectorRef
+    ) {}
 
     public ngOnInit(): void {
         this.initializeMarkdownActive();
     }
 
-    public initializeMarkdownActive(): void {
-        this.markdownActiveState.data$.subscribe((active) => {
-            this.markdownActive = active!;
+    @AutoUnsubscribe()
+    public initializeMarkdownActive(): Subscription {
+        return this.markdownViewModeState.data$.subscribe((mode) => {
+            this.markdownViewMode = mode!;
+
+            this.changeDetector.detectChanges();
         });
     }
 
     public updateWriteClick(): void {
-        this.markdownActiveState.set(true);
+        this.markdownViewModeState.set(true);
     }
 
     public updatePreviewClick(): void {
-        this.markdownActiveState.set(false);
+        this.markdownViewModeState.set(false);
     }
 }

@@ -1,6 +1,6 @@
 import { AfterViewInit, Directive, ElementRef, HostListener } from '@angular/core';
-import { MarkdownInputState } from '../../../states';
-import { MarkdownButtonSyntax, MarkdownSyntaxSides } from '../../markdown-toolbar';
+import { MarkdownButtonSyntax, MarkdownSyntaxSides } from '../components';
+import { MarkdownInputState } from '../states';
 
 interface InputSelectionRange {
     readonly start: number;

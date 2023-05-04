@@ -2,4 +2,11 @@
     display: flex;
     flex-direction: column;
     width: 800px;
+
+    .markdown-input {
+        width: -webkit-fill-available;
+        height: 120px;
+        border-radius: 5px;
+        resize: vertical;
+    }
 }
