@@ -37,12 +37,11 @@ export class OverviewComponent {
     public readonly dependencies$ = this.dependenciesFacade.loadAll();
     public readonly projectEntities = toSignal(this.projectEntitiesState.data$);
     public readonly isMobile = this.screenService.isMatch(['XSmall']);
+    public readonly isSidenavOpened = signal(!this.isMobile());
 
     public readonly drawerMode = computed<MatDrawerMode>(() =>
         this.isMobile() ? 'over' : 'side'
     );
-
-    public isSidenavOpened = signal(!this.isMobile());
 
     @ViewChild(CodeEditorComponent)
     private readonly codeEditor!: CodeEditorComponent;
@@ -58,6 +57,6 @@ export class OverviewComponent {
     }
 
     public onHeaderHamburgerMenuButtonClick(): void {
-        this.isSidenavOpened.set(!this.isSidenavOpened);
+        this.isSidenavOpened.update((state) => !state);
     }
 }

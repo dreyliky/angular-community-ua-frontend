@@ -1,0 +1,16 @@
+<div
+    class="monaco-tree-row"
+    [class.selected]="isSelected()"
+    (click)="onRowClick()">
+    <span [style.margin-left]="marginLeftStyleValue"></span>
+
+    <img
+        [src]="iconUrl()"
+        class="icon" />
+
+    <div
+        [title]="data.fullPath"
+        class="monaco-tree-name">
+        {{ data.name }}
+    </div>
+</div>

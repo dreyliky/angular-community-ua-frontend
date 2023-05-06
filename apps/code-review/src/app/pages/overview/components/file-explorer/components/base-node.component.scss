@@ -1,0 +1,57 @@
+@import 'mixins.scss';
+
+.monaco-tree-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    padding-left: 20px;
+    font-size: 14px;
+    line-height: 28px;
+    color: #b4b5b5;
+
+    @include for-mobile-only {
+        font-size: 21px;
+        line-height: 36px;
+    }
+
+    &.selected {
+        background-color: rgba(0, 0, 0, 0.1) !important;
+        color: #2ec9b0;
+    }
+
+    &.active {
+        background: rgb(63, 63, 70);
+    }
+
+    &:hover:not(.selected) {
+        color: #fff;
+    }
+
+    .icon {
+        width: 20px;
+        height: 20px;
+
+        @include for-mobile-only {
+            width: 24px;
+            height: 33px;
+        }
+    }
+
+    .monaco-tree-name {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        padding: 0 5px 0 2px;
+    }
+}
+
+.monaco-name-context {
+    background: rgba(254, 245, 186, 1);
+    color: #2a2d2e;
+    position: absolute;
+    top: 8px;
+    left: 60px;
+    z-index: 55;
+}
