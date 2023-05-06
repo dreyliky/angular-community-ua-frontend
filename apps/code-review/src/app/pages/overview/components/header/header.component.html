@@ -1,20 +1,26 @@
-<button mat-icon-button class="btn-menu" (click)="hamburgerMenuButtonClick.emit($event)">
+<button
+    mat-icon-button
+    class="btn-menu"
+    (click)="hamburgerMenuButtonClick.emit($event)">
     <mat-icon class="btn-menu-icon">menu</mat-icon>
 </button>
 
-<mat-accordion *acuaAvailableForScreen="['XSmall']; invert: true" class="block-request">
+<mat-accordion
+    *acuaAvailableForScreen="['XSmall']; invert: true"
+    class="block-request">
     <mat-expansion-panel
         *acuaLet="openedReviewRequest$ | async as openedReviewRequest"
-        class="panel-request"
-    >
+        class="panel-request">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 <acua-user-avatar
-                    [avatarUrl]="openedReviewRequest!.user.photoUrl"
-                ></acua-user-avatar>
+                    [avatarUrl]="
+                        openedReviewRequest!.user.photoUrl
+                    "></acua-user-avatar>
 
                 <span class="title">
-                    Запит на Код-Ревью від {{ openedReviewRequest!.user.username }}
+                    Запит на Код-Ревью від
+                    {{ openedReviewRequest!.user.username }}
                 </span>
             </mat-panel-title>
         </mat-expansion-panel-header>
@@ -27,6 +33,9 @@
     </mat-expansion-panel>
 </mat-accordion>
 
-<button *acuaAvailableForScreen="['XSmall']" mat-button (click)="onDetailsButtonClick()">
+<button
+    *acuaAvailableForScreen="['XSmall']"
+    mat-button
+    (click)="onDetailsButtonClick()">
     Деталі
 </button>

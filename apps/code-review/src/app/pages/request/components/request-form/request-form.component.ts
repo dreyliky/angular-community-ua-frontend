@@ -22,7 +22,9 @@ export class RequestFormComponent {
             debounceTime(1000),
             filter((status) => status === 'VALID'),
             map(() => this.formGroup.controls.sourceUrl.value),
-            switchMap((sourceUrl) => this.projectSourceUrlService.getNormalized(sourceUrl))
+            switchMap((sourceUrl) =>
+                this.projectSourceUrlService.getNormalized(sourceUrl)
+            )
         );
     }
 }

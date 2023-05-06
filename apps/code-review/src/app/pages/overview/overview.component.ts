@@ -32,9 +32,8 @@ export class OverviewComponent {
     public readonly projectEntities$ = this.projectEntitiesState.data$;
     public readonly isMobile$ = this.screenService.isMatch$(['XSmall']);
 
-    public readonly drawerMode$: Observable<MatDrawerMode> = this.isMobile$.pipe(
-        map((isMobile) => (isMobile ? 'over' : 'side'))
-    );
+    public readonly drawerMode$: Observable<MatDrawerMode> =
+        this.isMobile$.pipe(map((isMobile) => (isMobile ? 'over' : 'side')));
 
     public isSidenavOpened = !this.screenService.isMatch(['XSmall']);
 

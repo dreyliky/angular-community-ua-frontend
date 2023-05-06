@@ -22,7 +22,9 @@ export class MonacoThemeLoaderService {
 
     public loadAndDefine(): Observable<editor.IStandaloneThemeData> {
         return this.load().pipe(
-            tap((themeData) => this.monacoApi.editor.defineTheme(this.themeName, themeData))
+            tap((themeData) =>
+                this.monacoApi.editor.defineTheme(this.themeName, themeData)
+            )
         );
     }
 

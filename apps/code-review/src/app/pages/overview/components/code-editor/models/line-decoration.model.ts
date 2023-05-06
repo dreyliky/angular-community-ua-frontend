@@ -14,5 +14,8 @@ export class LineDecoration implements editor.IModelDeltaDecoration {
         className: `${LINE_DECORATION_CLASS_NAME} ${this.className}`
     };
 
-    constructor(private readonly lineNumber: number, private readonly className: string) {}
+    constructor(
+        private readonly lineNumber: number,
+        private readonly className: string
+    ) {}
 }

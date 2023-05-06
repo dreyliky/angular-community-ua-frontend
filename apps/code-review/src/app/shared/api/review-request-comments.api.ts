@@ -6,7 +6,9 @@ import { ReviewRequestCommentAmountDictionary as CommentAmountDictionary } from 
     providedIn: 'root'
 })
 export class ReviewRequestCommentsApi {
-    public getAmountDictionary(reviewRequestId: string): Observable<CommentAmountDictionary> {
+    public getAmountDictionary(
+        reviewRequestId: string
+    ): Observable<CommentAmountDictionary> {
         return of({
             'apps/host/src/app/app.component.ts': {
                 '1': 3,

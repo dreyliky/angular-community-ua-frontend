@@ -12,7 +12,12 @@ import { LoginWidgetDirective } from './directives';
 import { HeaderComponent } from './header.component';
 
 @NgModule({
-    declarations: [HeaderComponent, UserMenuComponent, LoginButtonComponent, LoginWidgetDirective],
+    declarations: [
+        HeaderComponent,
+        UserMenuComponent,
+        LoginButtonComponent,
+        LoginWidgetDirective
+    ],
     imports: [
         CommonModule,
         RouterModule,

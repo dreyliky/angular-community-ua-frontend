@@ -4,7 +4,8 @@ import { AppRouteEnum } from './core/enums/app-route.enum';
 export const APP_ROUTES: Route[] = [
     {
         path: AppRouteEnum.Home,
-        loadChildren: () => import('./pages/home/home.module').then((m) => m.HomeModule)
+        loadChildren: () =>
+            import('./pages/home/home.module').then((m) => m.HomeModule)
     },
     {
         path: '**',

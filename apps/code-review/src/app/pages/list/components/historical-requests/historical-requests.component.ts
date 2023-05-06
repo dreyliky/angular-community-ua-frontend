@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CodeReviewRequestStatusEnum, ReviewRequestService } from '@code-review/shared';
+import {
+    CodeReviewRequestStatusEnum,
+    ReviewRequestService
+} from '@code-review/shared';
 
 @Component({
     selector: 'acua-historical-requests',
@@ -8,9 +11,10 @@ import { CodeReviewRequestStatusEnum, ReviewRequestService } from '@code-review/
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HistoricalRequestsComponent {
-    public readonly reviewRequests$ = this.reviewRequestsService.getAllWithStatus(
-        CodeReviewRequestStatusEnum.Closed
-    );
+    public readonly reviewRequests$ =
+        this.reviewRequestsService.getAllWithStatus(
+            CodeReviewRequestStatusEnum.Closed
+        );
 
     constructor(private readonly reviewRequestsService: ReviewRequestService) {}
 }

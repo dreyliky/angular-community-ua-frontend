@@ -9,14 +9,24 @@ import { BearerTokenInterceptor } from './interceptors';
 import { AuthService, BearerTokenService, LoginService } from './services';
 
 @NgModule({
-    declarations: [AvailableForAuthorizedOnlyDirective, AvailableForUnauthorizedOnlyDirective],
+    declarations: [
+        AvailableForAuthorizedOnlyDirective,
+        AvailableForUnauthorizedOnlyDirective
+    ],
     providers: [
         LoginApi,
         AuthService,
         BearerTokenService,
         LoginService,
-        { provide: HTTP_INTERCEPTORS, useClass: BearerTokenInterceptor, multi: true }
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: BearerTokenInterceptor,
+            multi: true
+        }
     ],
-    exports: [AvailableForAuthorizedOnlyDirective, AvailableForUnauthorizedOnlyDirective]
+    exports: [
+        AvailableForAuthorizedOnlyDirective,
+        AvailableForUnauthorizedOnlyDirective
+    ]
 })
 export class AuthModule {}

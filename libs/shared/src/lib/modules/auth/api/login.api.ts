@@ -14,7 +14,12 @@ export class LoginApi {
         private readonly http: HttpClient
     ) {}
 
-    public loginByTelegram(data: TelegramLoginDto): Observable<LoginResponseDto> {
-        return this.http.post<LoginResponseDto>(`${this.backendUrl}/login`, data);
+    public loginByTelegram(
+        data: TelegramLoginDto
+    ): Observable<LoginResponseDto> {
+        return this.http.post<LoginResponseDto>(
+            `${this.backendUrl}/login`,
+            data
+        );
     }
 }

@@ -6,7 +6,9 @@ import { ProjectSourceUrlApiService } from '../api';
     providedIn: 'root'
 })
 export class ProjectSourceUrlService {
-    constructor(private readonly projectSourceUrlApi: ProjectSourceUrlApiService) {}
+    constructor(
+        private readonly projectSourceUrlApi: ProjectSourceUrlApiService
+    ) {}
 
     public validate(link: string): Observable<boolean> {
         return this.projectSourceUrlApi.validate(link);

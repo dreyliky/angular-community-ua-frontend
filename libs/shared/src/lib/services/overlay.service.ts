@@ -1,4 +1,9 @@
-import { Overlay, OverlayConfig, OverlayPositionBuilder, OverlayRef } from '@angular/cdk/overlay';
+import {
+    Overlay,
+    OverlayConfig,
+    OverlayPositionBuilder,
+    OverlayRef
+} from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { Injectable, TemplateRef, ViewContainerRef } from '@angular/core';
 
@@ -26,7 +31,10 @@ export class OverlayService {
     ) {}
 
     public open(templateRef: TemplateRef<unknown>): void {
-        const templatePortal = new TemplatePortal(templateRef, this.viewContainerRef);
+        const templatePortal = new TemplatePortal(
+            templateRef,
+            this.viewContainerRef
+        );
         this._reference = this.overlay.create(this.config);
 
         this._reference.attach(templatePortal);

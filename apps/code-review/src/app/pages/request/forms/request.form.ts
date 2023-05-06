@@ -4,7 +4,9 @@ import { FormGroupDef, ReviewRequestCreationDto } from '@code-review/shared';
 import { SourceUrlValidator } from '../validators';
 
 @Injectable()
-export class RequestForm extends FormGroup<FormGroupDef<ReviewRequestCreationDto>> {
+export class RequestForm extends FormGroup<
+    FormGroupDef<ReviewRequestCreationDto>
+> {
     constructor(linkValidateValidator: SourceUrlValidator) {
         super({
             description: new FormControl('', {

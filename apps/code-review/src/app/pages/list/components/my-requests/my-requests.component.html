@@ -2,12 +2,12 @@
     <ng-container *ngIf="reviewRequests.length; else emptyDataTemplate">
         <acua-review-request-card
             *ngFor="let reviewRequest of reviewRequests"
-            [data]="reviewRequest"
-        >
-        </acua-review-request-card>
+            [data]="reviewRequest"></acua-review-request-card>
     </ng-container>
 </ng-container>
 
 <ng-template #emptyDataTemplate>
-    <acua-absent-data>Ви ще не створили жодного запиту на Код-Ревью.</acua-absent-data>
+    <acua-absent-data>
+        Ви ще не створили жодного запиту на Код-Ревью.
+    </acua-absent-data>
 </ng-template>

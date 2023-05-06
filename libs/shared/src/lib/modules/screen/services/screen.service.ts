@@ -8,7 +8,9 @@ import { Observable, map } from 'rxjs';
 export class ScreenService {
     constructor(private readonly breakpointObserver: BreakpointObserver) {}
 
-    public isMatch$(screenTypes: Array<keyof typeof Breakpoints>): Observable<boolean> {
+    public isMatch$(
+        screenTypes: Array<keyof typeof Breakpoints>
+    ): Observable<boolean> {
         return this.breakpointObserver
             .observe(this.getBreakpoints(screenTypes))
             .pipe(map(({ matches }) => matches));
@@ -18,7 +20,9 @@ export class ScreenService {
         return this.breakpointObserver.isMatched(screenTypes);
     }
 
-    private getBreakpoints(screenTypes: Array<keyof typeof Breakpoints>): string[] {
+    private getBreakpoints(
+        screenTypes: Array<keyof typeof Breakpoints>
+    ): string[] {
         return screenTypes.map((type) => Breakpoints[type]);
     }
 }

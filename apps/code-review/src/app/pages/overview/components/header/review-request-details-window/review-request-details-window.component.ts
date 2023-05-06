@@ -8,7 +8,10 @@ import { OpenedReviewRequestState } from '../../../states';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReviewRequestDetailsWindowComponent {
-    protected readonly openedReviewRequest$ = this.openedReviewRequestState.data$;
+    protected readonly openedReviewRequest$ =
+        this.openedReviewRequestState.data$;
 
-    constructor(private readonly openedReviewRequestState: OpenedReviewRequestState) {}
+    constructor(
+        private readonly openedReviewRequestState: OpenedReviewRequestState
+    ) {}
 }

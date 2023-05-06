@@ -2,15 +2,12 @@
     [ngxAsync]="reviewRequestCreation$"
     (loading)="overlay.open(loadingTemplate)"
     (success)="overlay.close()"
-    (error)="overlay.close()"
->
+    (error)="overlay.close()">
     <acua-action-button
         [label]="'Створити'"
         [iconName]="'save'"
         [isDisabled]="!!(isDisabled$ | async)"
-        (click)="onClick()"
-    >
-    </acua-action-button>
+        (click)="onClick()"></acua-action-button>
 </ng-template>
 
 <ng-template #loadingTemplate>

@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Injector, Output } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Injector,
+    Output
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { OpenedReviewRequestState } from '../../states';
 import { ReviewRequestDetailsWindowComponent } from './review-request-details-window';
@@ -13,7 +19,8 @@ export class HeaderComponent {
     @Output()
     public readonly hamburgerMenuButtonClick = new EventEmitter<MouseEvent>();
 
-    protected readonly openedReviewRequest$ = this.openedReviewRequestState.data$;
+    protected readonly openedReviewRequest$ =
+        this.openedReviewRequestState.data$;
 
     constructor(
         private readonly dialog: MatDialog,
@@ -22,6 +29,8 @@ export class HeaderComponent {
     ) {}
 
     public onDetailsButtonClick(): void {
-        this.dialog.open(ReviewRequestDetailsWindowComponent, { injector: this.injector });
+        this.dialog.open(ReviewRequestDetailsWindowComponent, {
+            injector: this.injector
+        });
     }
 }

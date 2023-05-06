@@ -88,15 +88,17 @@ export class FileTreeNodeComponent implements OnChanges, OnInit {
 
     @AutoUnsubscribe()
     private initFileSelection(): Subscription {
-        return this.fileSelectionState.data$.pipe(filter(Boolean)).subscribe((node) => {
-            this.isSelected = node.fullPath === this.node.fullPath;
+        return this.fileSelectionState.data$
+            .pipe(filter(Boolean))
+            .subscribe((node) => {
+                this.isSelected = node.fullPath === this.node.fullPath;
 
-            if (this.isSelected) {
-                this.fileSelected.emit(this.node);
-            }
+                if (this.isSelected) {
+                    this.fileSelected.emit(this.node);
+                }
 
-            this.changeDetectorRef.markForCheck();
-        });
+                this.changeDetectorRef.markForCheck();
+            });
     }
 
     private getIcon(): string {

@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Directive, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Directive,
+    OnInit,
+    TemplateRef,
+    ViewContainerRef
+} from '@angular/core';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../user/services/user.service';

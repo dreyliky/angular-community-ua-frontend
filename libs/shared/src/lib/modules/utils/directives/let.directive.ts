@@ -1,4 +1,10 @@
-import { Directive, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import {
+    Directive,
+    Input,
+    OnInit,
+    TemplateRef,
+    ViewContainerRef
+} from '@angular/core';
 
 interface LetContext<T> {
     acuaLet: T;
@@ -28,6 +34,9 @@ export class LetDirective<T> implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.viewContainerRef.createEmbeddedView(this.templateRef, this._context);
+        this.viewContainerRef.createEmbeddedView(
+            this.templateRef,
+            this._context
+        );
     }
 }

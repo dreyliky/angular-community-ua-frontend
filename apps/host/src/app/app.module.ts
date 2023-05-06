@@ -1,4 +1,7 @@
-import { AuthModule, MATERIAL_ICON_DEFAULT_OPTIONS_PROVIDER } from '@acua/shared';
+import {
+    AuthModule,
+    MATERIAL_ICON_DEFAULT_OPTIONS_PROVIDER
+} from '@acua/shared';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';

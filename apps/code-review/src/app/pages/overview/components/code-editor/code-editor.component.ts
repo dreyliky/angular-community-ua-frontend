@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    Inject,
+    ViewEncapsulation
+} from '@angular/core';
 import type { editor } from 'monaco-editor';
 import { ReviewRequestCommentsState } from '../../states';
 import { MonacoApi } from '../../types';
@@ -22,7 +27,12 @@ import { MONACO_API, MONACO_EDITOR } from './tokens';
         LineCommentsAmountDirective,
         TextSelectionDisablerDirective
     ],
-    providers: [MONACO_EDITOR_PROVIDER, MONACO_API_PROVIDER, LanguageService, EditorCommentsState],
+    providers: [
+        MONACO_EDITOR_PROVIDER,
+        MONACO_API_PROVIDER,
+        LanguageService,
+        EditorCommentsState
+    ],
     encapsulation: ViewEncapsulation.None
 })
 export class CodeEditorComponent {
@@ -49,13 +59,15 @@ export class CodeEditorComponent {
     }
 
     private updateEditorLanguage(fileFullPath: string): void {
-        const languageId = this.languageService.getLanguageIdByFileFullPath(fileFullPath);
+        const languageId =
+            this.languageService.getLanguageIdByFileFullPath(fileFullPath);
 
         this.changeLanguage(languageId);
     }
 
     private updateEditorComments(fileFullPath: string): void {
-        const fileComments = this.reviewRequestCommentsState.getFileCommentsAmount(fileFullPath);
+        const fileComments =
+            this.reviewRequestCommentsState.getFileCommentsAmount(fileFullPath);
 
         if (fileComments) {
             this.editorCommentsState.set(fileComments);

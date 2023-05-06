@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    HostBinding,
+    Input,
+    OnChanges
+} from '@angular/core';
 
 const DEFAULT_URL = 'assets/images/user-avatar.png';
 
@@ -20,6 +26,8 @@ export class UserAvatarComponent implements OnChanges {
     }
 
     private setBackgroundUrl(): void {
-        this.backgroundImgUrl = `url(${this.avatarUrl ? this.avatarUrl : DEFAULT_URL})`;
+        this.backgroundImgUrl = `url(${
+            this.avatarUrl ? this.avatarUrl : DEFAULT_URL
+        })`;
     }
 }

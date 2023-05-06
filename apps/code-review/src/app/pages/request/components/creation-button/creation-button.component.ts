@@ -31,7 +31,8 @@ export class CreationButtonComponent {
 
     protected onClick(): void {
         if (this.requestForm.valid) {
-            this.reviewRequestCreation$ = this.getReviewRequestCreationObservable();
+            this.reviewRequestCreation$ =
+                this.getReviewRequestCreationObservable();
         } else {
             markControlAsTouchedAndValidate(this.requestForm);
         }

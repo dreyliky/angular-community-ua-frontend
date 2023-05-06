@@ -13,6 +13,8 @@ export class ReviewRequestSourceCodeApi {
     constructor(private readonly http: HttpClient) {}
 
     public get(id: string): Observable<ProjectEntity[]> {
-        return this.http.get<ProjectEntity[]>(`${this.apiUrl}/review-requests/${id}/source-code`);
+        return this.http.get<ProjectEntity[]>(
+            `${this.apiUrl}/review-requests/${id}/source-code`
+        );
     }
 }
