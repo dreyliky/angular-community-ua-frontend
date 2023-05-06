@@ -27,11 +27,10 @@ export class AvailableForUnauthorizedOnlyDirective implements OnInit {
     @AutoUnsubscribe()
     private initUserObserver(): Subscription {
         return this.userService.data$.subscribe((user) => {
+            this.viewContainerRef.clear();
+
             if (!user) {
-                this.viewContainerRef.clear();
                 this.viewContainerRef.createEmbeddedView(this.templateRef);
-            } else {
-                this.viewContainerRef.clear();
             }
 
             this.changeDetector.detectChanges();
