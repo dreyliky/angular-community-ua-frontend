@@ -1,8 +1,14 @@
 import { ScreenService } from '@acua/shared';
-import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ViewChild,
+    computed,
+    signal
+} from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MatDrawerMode } from '@angular/material/sidenav';
 import { ProjectFile } from '@code-review/shared';
-import { Observable, map } from 'rxjs';
 import { CodeEditorComponent } from './components';
 import { DependenciesFacade } from './facades';
 import { MonacoThemeLoaderService } from './services';
@@ -29,13 +35,14 @@ import {
 })
 export class OverviewComponent {
     public readonly dependencies$ = this.dependenciesFacade.loadAll();
-    public readonly projectEntities$ = this.projectEntitiesState.data$;
-    public readonly isMobile$ = this.screenService.isMatch$(['XSmall']);
+    public readonly projectEntities = toSignal(this.projectEntitiesState.data$);
+    public readonly isMobile = this.screenService.isMatch(['XSmall']);
 
-    public readonly drawerMode$: Observable<MatDrawerMode> =
-        this.isMobile$.pipe(map((isMobile) => (isMobile ? 'over' : 'side')));
+    public readonly drawerMode = computed<MatDrawerMode>(() =>
+        this.isMobile() ? 'over' : 'side'
+    );
 
-    public isSidenavOpened = !this.screenService.isMatch(['XSmall']);
+    public isSidenavOpened = signal(!this.isMobile());
 
     @ViewChild(CodeEditorComponent)
     private readonly codeEditor!: CodeEditorComponent;
@@ -51,6 +58,6 @@ export class OverviewComponent {
     }
 
     public onHeaderHamburgerMenuButtonClick(): void {
-        this.isSidenavOpened = !this.isSidenavOpened;
+        this.isSidenavOpened.set(!this.isSidenavOpened);
     }
 }

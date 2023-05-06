@@ -10,7 +10,7 @@ import { RequestForm } from '../../forms';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RequestFormComponent {
-    protected iframeLink$: Observable<string> = this.getIframeLinkObservable();
+    protected readonly iframeLink$ = this.getIframeLinkObservable();
 
     constructor(
         protected readonly formGroup: RequestForm,

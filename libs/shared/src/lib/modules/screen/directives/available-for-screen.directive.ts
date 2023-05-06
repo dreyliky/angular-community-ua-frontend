@@ -5,7 +5,8 @@ import {
     Input,
     OnInit,
     TemplateRef,
-    ViewContainerRef
+    ViewContainerRef,
+    inject
 } from '@angular/core';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
 import { Subscription } from 'rxjs';
@@ -15,18 +16,16 @@ import { ScreenService } from '../services';
     selector: '[acuaAvailableForScreen]'
 })
 export class AvailableForScreenDirective implements OnInit {
-    @Input('acuaAvailableForScreen')
+    @Input({ required: true, alias: 'acuaAvailableForScreen' })
     public types!: Array<keyof typeof Breakpoints>;
 
     @Input('acuaAvailableForScreenInvert')
     public invert: boolean = false;
 
-    constructor(
-        private readonly screenService: ScreenService,
-        private readonly templateRef: TemplateRef<unknown>,
-        private readonly viewContainerRef: ViewContainerRef,
-        private readonly changeDetector: ChangeDetectorRef
-    ) {}
+    private readonly screenService = inject(ScreenService);
+    private readonly templateRef = inject(TemplateRef<unknown>);
+    private readonly viewContainerRef = inject(ViewContainerRef);
+    private readonly changeDetector = inject(ChangeDetectorRef);
 
     public ngOnInit(): void {
         this.initBreakpointsObserver();
@@ -35,11 +34,10 @@ export class AvailableForScreenDirective implements OnInit {
     @AutoUnsubscribe()
     private initBreakpointsObserver(): Subscription {
         return this.screenService.isMatch$(this.types).subscribe((isMatch) => {
+            this.viewContainerRef.clear();
+
             if (this.shouldBeRendered(isMatch)) {
-                this.viewContainerRef.clear();
                 this.viewContainerRef.createEmbeddedView(this.templateRef);
-            } else {
-                this.viewContainerRef.clear();
             }
 
             this.changeDetector.detectChanges();

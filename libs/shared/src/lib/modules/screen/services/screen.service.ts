@@ -1,5 +1,6 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Injectable } from '@angular/core';
+import { Injectable, Signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { Observable, map } from 'rxjs';
 
 @Injectable({
@@ -16,8 +17,10 @@ export class ScreenService {
             .pipe(map(({ matches }) => matches));
     }
 
-    public isMatch(screenTypes: Array<keyof typeof Breakpoints>): boolean {
-        return this.breakpointObserver.isMatched(screenTypes);
+    public isMatch(
+        screenTypes: Array<keyof typeof Breakpoints>
+    ): Signal<boolean> {
+        return toSignal(this.isMatch$(screenTypes), { initialValue: false });
     }
 
     private getBreakpoints(

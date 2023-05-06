@@ -7,7 +7,7 @@
 
     <mat-tab-group
         [animationDuration]="'0ms'"
-        [mat-stretch-tabs]="isMobile$ | async">
+        [mat-stretch-tabs]="isMobile()">
         <mat-tab [label]="'Всі'">
             <ng-template matTabContent>
                 <acua-all-requests></acua-all-requests>

@@ -10,11 +10,11 @@
     <mat-drawer-container class="container">
         <mat-drawer
             class="mat-drawer"
-            [mode]="(drawerMode$ | async)!"
-            [opened]="isSidenavOpened">
+            [mode]="drawerMode()"
+            [opened]="isSidenavOpened()">
             <acua-file-explorer
-                [tree]="(projectEntities$ | async)!"
                 class="file-explorer"
+                [tree]="projectEntities()!"
                 (fileSelected)="onFileSelected($event)"></acua-file-explorer>
         </mat-drawer>
 
