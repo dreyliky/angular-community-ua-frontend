@@ -6,7 +6,7 @@
     "prefix": "acua",
     "targets": {
         "build": {
-            "executor": "@nrwl/angular:webpack-browser",
+            "executor": "@nx/angular:webpack-browser",
             "outputs": ["{options.outputPath}"],
             "options": {
                 "outputPath": "dist/apps/code-review",
@@ -32,9 +32,7 @@
                     "path": "apps/code-review/webpack.config.js"
                 },
                 "stylePreprocessorOptions": {
-                    "includePaths": [
-                        "libs/assets/src/lib/styles"
-                    ]
+                    "includePaths": ["libs/assets/src/lib/styles"]
                 }
             },
             "configurations": {
@@ -55,7 +53,7 @@
                 },
                 "development": {
                     "buildOptimizer": false,
-                    "optimization": false,
+                    "optimization": true,
                     "vendorChunk": true,
                     "extractLicenses": false,
                     "sourceMap": true,
@@ -69,7 +67,7 @@
                 },
                 "local": {
                     "buildOptimizer": false,
-                    "optimization": false,
+                    "optimization": true,
                     "vendorChunk": true,
                     "extractLicenses": false,
                     "sourceMap": true,
@@ -85,7 +83,7 @@
             "defaultConfiguration": "production"
         },
         "serve": {
-            "executor": "@nrwl/angular:webpack-dev-server",
+            "executor": "@nx/angular:webpack-dev-server",
             "options": {
                 "port": 4201,
                 "publicHost": "http://localhost:4201",
@@ -111,14 +109,14 @@
             }
         },
         "lint": {
-            "executor": "@nrwl/linter:eslint",
+            "executor": "@nx/linter:eslint",
             "outputs": ["{options.outputFile}"],
             "options": {
                 "lintFilePatterns": ["apps/code-review/**/*.ts"]
             }
         },
         "test": {
-            "executor": "@nrwl/jest:jest",
+            "executor": "@nx/jest:jest",
             "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
             "options": {
                 "jestConfig": "apps/code-review/jest.config.ts",
