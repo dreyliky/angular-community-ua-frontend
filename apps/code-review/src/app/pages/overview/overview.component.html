@@ -12,10 +12,7 @@
             class="mat-drawer"
             [mode]="drawerMode()"
             [opened]="isSidenavOpened()">
-            <acua-file-explorer
-                class="file-explorer"
-                [tree]="projectEntities()!"
-                (fileSelected)="onFileSelected($event)"></acua-file-explorer>
+            <acua-sidebar></acua-sidebar>
         </mat-drawer>
 
         <mat-drawer-content>

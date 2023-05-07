@@ -1,14 +1,9 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
-    EventEmitter,
     OnInit,
-    Output,
-    inject,
     signal
 } from '@angular/core';
-import { ProjectFile } from '@code-review/shared';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
 import { Subscription, filter } from 'rxjs';
 import { EXTENSION_ICON_NAME_MAPPER, FILE_ICON_NAME_MAPPER } from '../../data';
@@ -24,12 +19,7 @@ type ExtensionName = keyof typeof EXTENSION_ICON_NAME_MAPPER;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileNodeComponent extends BaseNodeComponent implements OnInit {
-    @Output()
-    public readonly fileSelected = new EventEmitter<ProjectFile>();
-
     public readonly isSelected = signal(false);
-
-    private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
     public ngOnInit(): void {
         this.initFileSelection();
@@ -59,12 +49,6 @@ export class FileNodeComponent extends BaseNodeComponent implements OnInit {
             .pipe(filter(Boolean))
             .subscribe((node) => {
                 this.isSelected.set(node.fullPath === this.data.fullPath);
-
-                if (this.isSelected()) {
-                    this.fileSelected.emit(this.data);
-                }
-
-                this.changeDetectorRef.markForCheck();
             });
     }
 
