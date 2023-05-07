@@ -13,4 +13,10 @@
         class="monaco-tree-name">
         {{ data.name }}
     </div>
+
+    <div
+        *ngIf="commentAmount$ | async as commentAmount"
+        class="comment-amount">
+        {{ commentAmount }}
+    </div>
 </div>

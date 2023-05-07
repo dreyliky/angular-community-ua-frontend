@@ -14,8 +14,7 @@ import {
 })
 export class ReviewRequestApi {
     private readonly apiUrl = inject(ENVIRONMENT).backendUrl;
-
-    constructor(private readonly http: HttpClient) {}
+    private readonly http = inject(HttpClient);
 
     public getAllWithStatus(
         status: CodeReviewRequestStatusEnum

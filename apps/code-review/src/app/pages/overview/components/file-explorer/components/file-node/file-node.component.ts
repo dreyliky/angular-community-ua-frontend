@@ -2,10 +2,12 @@ import {
     ChangeDetectionStrategy,
     Component,
     OnInit,
+    inject,
     signal
 } from '@angular/core';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
-import { Subscription, filter } from 'rxjs';
+import { Subscription, defer, filter } from 'rxjs';
+import { ReviewRequestCommentsState } from '../../../../states';
 import { EXTENSION_ICON_NAME_MAPPER, FILE_ICON_NAME_MAPPER } from '../../data';
 import { BaseNodeComponent } from '../base-node.component';
 
@@ -15,11 +17,16 @@ type ExtensionName = keyof typeof EXTENSION_ICON_NAME_MAPPER;
 @Component({
     selector: 'acua-file-node',
     templateUrl: './file-node.component.html',
-    styleUrls: ['../base-node.component.scss'],
+    styleUrls: ['file-node.component.scss', '../base-node.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileNodeComponent extends BaseNodeComponent implements OnInit {
     public readonly isSelected = signal(false);
+    public readonly commentAmount$ = defer(() =>
+        this.commentsState.getFileTotalCommentsAmount(this.data.fullPath)
+    );
+
+    private readonly commentsState = inject(ReviewRequestCommentsState);
 
     public ngOnInit(): void {
         this.initFileSelection();
