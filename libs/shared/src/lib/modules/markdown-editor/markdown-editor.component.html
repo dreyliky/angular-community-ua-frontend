@@ -1,0 +1,18 @@
+<acua-markdown-toolbar
+    (markdownButtonClick)="
+        onMarkdownButtonClick($event)
+    "></acua-markdown-toolbar>
+
+<div class="view-container">
+    <ng-container *ngIf="markdownViewMode$ | async; else previewerTemplate">
+        <textarea
+            class="markdown-input"
+            #markdownInput
+            markdownInput
+            matInput></textarea>
+    </ng-container>
+
+    <ng-template #previewerTemplate>
+        <acua-markdown-previewer></acua-markdown-previewer>
+    </ng-template>
+</div>

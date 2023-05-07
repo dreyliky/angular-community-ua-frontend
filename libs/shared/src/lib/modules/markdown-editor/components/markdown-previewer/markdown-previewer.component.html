@@ -1,0 +1,7 @@
+<ng-container *ngIf="data$ | async as text; else nothingToPreviewTemplate">
+    <div [innerHTML]="getMarkdownSyntax(text)"></div>
+</ng-container>
+
+<ng-template #nothingToPreviewTemplate>
+    <p>Нічого для перегляду</p>
+</ng-template>

@@ -1,0 +1,11 @@
+<acua-markdown-toggler></acua-markdown-toggler>
+
+<ng-container *ngIf="markdownViewMode$ | async">
+    <div class="markdown-buttons">
+        <acua-markdown-button
+            *ngFor="let button of markdownButtonArray"
+            [iconName]="button.matIconName"
+            [tooltipInfo]="button.tooltipInfo"
+            (click)="markdownButtonClick.emit(button)"></acua-markdown-button>
+    </div>
+</ng-container>
