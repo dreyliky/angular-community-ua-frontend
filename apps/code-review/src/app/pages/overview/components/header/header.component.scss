@@ -9,40 +9,15 @@
     border-bottom: solid 1px #101113;
     box-sizing: border-box;
 
-    mat-icon {
-        cursor: pointer;
-    }
-
     .btn-menu {
         background-color: transparent;
         border-radius: 50%;
         border: 0;
+        cursor: pointer;
 
         .btn-menu-icon {
             margin-top: 1px;
             color: #fff;
-        }
-    }
-
-    .btn-menu:hover:focus {
-        background-color: transparent;
-    }
-
-    .block-request {
-        width: auto;
-        min-width: 300px;
-        max-width: 425px;
-        height: 53px;
-        z-index: 10;
-
-        .panel-request {
-            background-color: #17191b;
-            box-shadow: none !important;
-        }
-
-        .title {
-            margin-left: 10px;
-            user-select: none;
         }
     }
 }

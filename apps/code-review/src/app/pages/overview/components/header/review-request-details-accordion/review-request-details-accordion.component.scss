@@ -1,0 +1,21 @@
+:host {
+    display: flex;
+}
+
+.block-request {
+    width: auto;
+    min-width: 300px;
+    max-width: 425px;
+    height: 48px;
+    z-index: 10;
+
+    .panel-request {
+        background-color: #17191b;
+        box-shadow: none !important;
+    }
+
+    .title {
+        margin-left: 10px;
+        user-select: none;
+    }
+}

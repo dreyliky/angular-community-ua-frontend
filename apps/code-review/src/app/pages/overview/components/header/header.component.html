@@ -5,33 +5,11 @@
     <mat-icon class="btn-menu-icon">menu</mat-icon>
 </button>
 
-<mat-accordion
-    *acuaAvailableForScreen="['XSmall']; invert: true"
-    class="block-request">
-    <mat-expansion-panel
-        *acuaLet="openedReviewRequest$ | async as openedReviewRequest"
-        class="panel-request">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                <acua-user-avatar
-                    [avatarUrl]="
-                        openedReviewRequest!.user.photoUrl
-                    "></acua-user-avatar>
-
-                <span class="title">
-                    Запит на Код-Ревью від
-                    {{ openedReviewRequest!.user.username }}
-                </span>
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <p class="description">
-            {{ openedReviewRequest!.description }}
-        </p>
-
-        <p>{{ openedReviewRequest!.date | date }}</p>
-    </mat-expansion-panel>
-</mat-accordion>
+<acua-review-request-details-accordion
+    *acuaAvailableForScreen="
+        ['XSmall'];
+        invert: true
+    "></acua-review-request-details-accordion>
 
 <button
     *acuaAvailableForScreen="['XSmall']"

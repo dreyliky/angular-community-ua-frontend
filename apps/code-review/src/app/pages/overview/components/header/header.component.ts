@@ -6,7 +6,6 @@ import {
     Output
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { OpenedReviewRequestState } from '../../states';
 import { ReviewRequestDetailsWindowComponent } from './review-request-details-window';
 
 @Component({
@@ -19,12 +18,8 @@ export class HeaderComponent {
     @Output()
     public readonly hamburgerMenuButtonClick = new EventEmitter<MouseEvent>();
 
-    protected readonly openedReviewRequest$ =
-        this.openedReviewRequestState.data$;
-
     constructor(
         private readonly dialog: MatDialog,
-        private readonly openedReviewRequestState: OpenedReviewRequestState,
         private readonly injector: Injector
     ) {}
 

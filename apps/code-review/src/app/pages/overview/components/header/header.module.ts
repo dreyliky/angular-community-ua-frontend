@@ -8,10 +8,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { HeaderComponent } from './header.component';
+import { ReviewRequestDetailsAccordionComponent } from './review-request-details-accordion';
 import { ReviewRequestDetailsWindowComponent } from './review-request-details-window';
 
 @NgModule({
-    declarations: [HeaderComponent, ReviewRequestDetailsWindowComponent],
+    declarations: [
+        HeaderComponent,
+        ReviewRequestDetailsWindowComponent,
+        ReviewRequestDetailsAccordionComponent
+    ],
     imports: [
         CommonModule,
         MatIconModule,
