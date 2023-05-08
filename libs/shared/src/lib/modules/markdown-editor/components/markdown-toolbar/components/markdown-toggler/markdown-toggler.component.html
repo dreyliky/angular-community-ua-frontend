@@ -1,0 +1,16 @@
+<mat-button-toggle-group>
+    <mat-button-toggle
+        [disabled]="viewMode$ | async"
+        checked
+        value="write"
+        (click)="onWriteButtonClick()">
+        Написання
+    </mat-button-toggle>
+
+    <mat-button-toggle
+        [disabled]="!(viewMode$ | async)"
+        value="preview"
+        (click)="onPreviewButtonClick()">
+        Перегляд
+    </mat-button-toggle>
+</mat-button-toggle-group>

@@ -2,6 +2,7 @@ import {
     AbsentDataModule,
     ActionButtonModule,
     AuthModule,
+    MarkdownEditorModule,
     ScreenModule,
     UserAvatarModule
 } from '@acua/shared';
@@ -50,6 +51,7 @@ import { LIST_ROUTES } from './list.routes';
         ActionButtonModule,
         UserAvatarModule,
         AuthModule,
+        MarkdownEditorModule,
         RouterModule.forChild(LIST_ROUTES)
     ]
 })
