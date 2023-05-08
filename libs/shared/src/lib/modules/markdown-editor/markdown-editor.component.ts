@@ -11,7 +11,7 @@ import { MarkdownViewModeState } from './states';
 })
 export class MarkdownEditorComponent {
     @ViewChild(MarkdownInputDirective)
-    public markdownEditorInputDirective!: MarkdownInputDirective;
+    public readonly markdownEditorInputDirective!: MarkdownInputDirective;
 
     public readonly markdownViewMode$ = this.markdownViewModeState.data$;
 

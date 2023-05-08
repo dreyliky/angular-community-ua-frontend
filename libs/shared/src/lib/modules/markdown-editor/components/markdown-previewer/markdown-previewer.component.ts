@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import * as MarkdownIt from 'markdown-it';
+import { map } from 'rxjs';
 import { MarkdownInputState } from '../../states';
 
 @Component({
@@ -9,11 +10,9 @@ import { MarkdownInputState } from '../../states';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MarkdownPreviewerComponent {
-    public readonly data$ = this.markdownInputState.data$;
+    public readonly data$ = this.markdownInputState.data$.pipe(
+        map((value) => new MarkdownIt().render(value!))
+    );
 
     constructor(private readonly markdownInputState: MarkdownInputState) {}
-
-    public getMarkdownSyntax(text: string): string {
-        return new MarkdownIt().render(text);
-    }
 }

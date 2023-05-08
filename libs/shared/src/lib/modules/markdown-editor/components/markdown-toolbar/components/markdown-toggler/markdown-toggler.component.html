@@ -4,13 +4,13 @@
         checked
         value="write"
         (click)="onWriteButtonClick()">
-        Write
+        Написання
     </mat-button-toggle>
 
     <mat-button-toggle
         [disabled]="!(viewMode$ | async)"
         value="preview"
         (click)="onPreviewButtonClick()">
-        Preview
+        Перегляд
     </mat-button-toggle>
 </mat-button-toggle-group>

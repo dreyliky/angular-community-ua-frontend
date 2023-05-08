@@ -22,7 +22,7 @@ export class MarkdownInputDirective implements AfterViewInit {
     ) {}
 
     public ngAfterViewInit(): void {
-        this.onMarkdownTextAreaStateInit();
+        this.hostRef.nativeElement.value = this.markdownInputState.data!;
     }
 
     public insertMarkdownSyntax(markdownButton: MarkdownButtonSyntax): void {
@@ -35,16 +35,12 @@ export class MarkdownInputDirective implements AfterViewInit {
             this.insertMarkdownWithSelection(markdownButton.syntaxSides);
         }
 
-        this.handleMarkdownTextAreaChange();
+        this.markdownInputState.set(this.hostRef.nativeElement.value);
     }
 
     @HostListener('change')
     protected onMarkdownTextAreaChange(): void {
-        this.handleMarkdownTextAreaChange();
-    }
-
-    private onMarkdownTextAreaStateInit(): void {
-        this.hostRef.nativeElement.value = this.markdownInputState.data!;
+        this.markdownInputState.set(this.hostRef.nativeElement.value);
     }
 
     private insertMarkdownWithSelection(sides: MarkdownSyntaxSides): void {
@@ -87,9 +83,5 @@ export class MarkdownInputDirective implements AfterViewInit {
             start: markdownTextArea.selectionStart,
             end: markdownTextArea.selectionEnd
         };
-    }
-
-    private handleMarkdownTextAreaChange(): void {
-        this.markdownInputState.set(this.hostRef.nativeElement.value);
     }
 }
