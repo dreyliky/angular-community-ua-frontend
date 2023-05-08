@@ -8,8 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ProjectSourceUrlApiService {
     private readonly apiUrl = inject(ENVIRONMENT).backendUrl;
-
-    constructor(private readonly http: HttpClient) {}
+    private readonly http = inject(HttpClient);
 
     public validate(link: string): Observable<boolean> {
         return this.http.get<boolean>(

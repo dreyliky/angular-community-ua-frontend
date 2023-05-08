@@ -1,16 +1,13 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
-    EventEmitter,
     OnInit,
-    Output,
     inject,
     signal
 } from '@angular/core';
-import { ProjectFile } from '@code-review/shared';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
-import { Subscription, filter } from 'rxjs';
+import { Subscription, defer, filter } from 'rxjs';
+import { ReviewRequestCommentsState } from '../../../../states';
 import { EXTENSION_ICON_NAME_MAPPER, FILE_ICON_NAME_MAPPER } from '../../data';
 import { BaseNodeComponent } from '../base-node.component';
 
@@ -20,16 +17,16 @@ type ExtensionName = keyof typeof EXTENSION_ICON_NAME_MAPPER;
 @Component({
     selector: 'acua-file-node',
     templateUrl: './file-node.component.html',
-    styleUrls: ['../base-node.component.scss'],
+    styleUrls: ['file-node.component.scss', '../base-node.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileNodeComponent extends BaseNodeComponent implements OnInit {
-    @Output()
-    public readonly fileSelected = new EventEmitter<ProjectFile>();
-
     public readonly isSelected = signal(false);
+    public readonly commentAmount$ = defer(() =>
+        this.commentsState.getFileTotalCommentsAmount(this.data.fullPath)
+    );
 
-    private readonly changeDetectorRef = inject(ChangeDetectorRef);
+    private readonly commentsState = inject(ReviewRequestCommentsState);
 
     public ngOnInit(): void {
         this.initFileSelection();
@@ -59,12 +56,6 @@ export class FileNodeComponent extends BaseNodeComponent implements OnInit {
             .pipe(filter(Boolean))
             .subscribe((node) => {
                 this.isSelected.set(node.fullPath === this.data.fullPath);
-
-                if (this.isSelected()) {
-                    this.fileSelected.emit(this.data);
-                }
-
-                this.changeDetectorRef.markForCheck();
             });
     }
 

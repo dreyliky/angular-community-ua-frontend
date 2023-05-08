@@ -6,9 +6,9 @@ import {
     computed,
     signal
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { MatDrawerMode } from '@angular/material/sidenav';
-import { ProjectFile } from '@code-review/shared';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
+import { Subscription, filter } from 'rxjs';
 import { CodeEditorComponent } from './components';
 import { DependenciesFacade } from './facades';
 import { MonacoThemeLoaderService } from './services';
@@ -16,6 +16,7 @@ import {
     MonacoApiState,
     OpenedReviewRequestState,
     ProjectEntitiesState,
+    ProjectFileSelectionState,
     ReviewRequestCommentsState
 } from './states';
 
@@ -30,12 +31,12 @@ import {
         MonacoThemeLoaderService,
         ReviewRequestCommentsState,
         OpenedReviewRequestState,
+        ProjectFileSelectionState,
         ProjectEntitiesState
     ]
 })
 export class OverviewComponent {
     public readonly dependencies$ = this.dependenciesFacade.loadAll();
-    public readonly projectEntities = toSignal(this.projectEntitiesState.data$);
     public readonly isMobile = this.screenService.isMatch(['XSmall']);
     public readonly isSidenavOpened = signal(!this.isMobile());
 
@@ -48,15 +49,22 @@ export class OverviewComponent {
 
     constructor(
         private readonly screenService: ScreenService,
-        private readonly dependenciesFacade: DependenciesFacade,
-        private readonly projectEntitiesState: ProjectEntitiesState
-    ) {}
-
-    public onFileSelected(node: ProjectFile): void {
-        this.codeEditor.openFile(node.fullPath, node.content);
+        private readonly fileSelectionState: ProjectFileSelectionState,
+        private readonly dependenciesFacade: DependenciesFacade
+    ) {
+        this.initFileSelectionObserver();
     }
 
     public onHeaderHamburgerMenuButtonClick(): void {
         this.isSidenavOpened.update((state) => !state);
+    }
+
+    @AutoUnsubscribe()
+    private initFileSelectionObserver(): Subscription {
+        return this.fileSelectionState.data$
+            .pipe(filter(Boolean))
+            .subscribe((file) => {
+                this.codeEditor.openFile(file.fullPath, file.content);
+            });
     }
 }

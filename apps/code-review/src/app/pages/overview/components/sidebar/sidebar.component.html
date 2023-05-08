@@ -1,0 +1,30 @@
+<mat-accordion
+    class="cr-overview-accordion"
+    multi>
+    <mat-expansion-panel
+        class="cr-overview-panel"
+        [togglePosition]="'before'"
+        [expanded]="true">
+        <mat-expansion-panel-header class="cr-overview-panel-header">
+            <mat-panel-title class="cr-overview-panel-title">
+                Файли
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <acua-file-explorer
+            class="cr-overview-file-explorer"
+            [tree]="projectEntities()!"></acua-file-explorer>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel
+        class="cr-overview-panel"
+        [togglePosition]="'before'">
+        <mat-expansion-panel-header class="cr-overview-panel-header">
+            <mat-panel-title class="cr-overview-panel-title">
+                Коментарі
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        Коментарі будуть тут...
+    </mat-expansion-panel>
+</mat-accordion>

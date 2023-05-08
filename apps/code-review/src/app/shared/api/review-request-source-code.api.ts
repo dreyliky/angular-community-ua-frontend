@@ -9,8 +9,7 @@ import { ProjectEntity } from '../interfaces';
 })
 export class ReviewRequestSourceCodeApi {
     private readonly apiUrl = inject(ENVIRONMENT).backendUrl;
-
-    constructor(private readonly http: HttpClient) {}
+    private readonly http = inject(HttpClient);
 
     public get(id: string): Observable<ProjectEntity[]> {
         return this.http.get<ProjectEntity[]>(

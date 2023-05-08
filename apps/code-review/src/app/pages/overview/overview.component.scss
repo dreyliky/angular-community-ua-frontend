@@ -22,6 +22,10 @@
         min-width: 300px;
         border: 0;
 
+        ::ng-deep .mat-drawer-inner-container {
+            overflow: hidden;
+        }
+
         @include for-mobile-only {
             width: 75%;
         }
