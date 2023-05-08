@@ -16,7 +16,7 @@ import {
     MonacoApiState,
     OpenedReviewRequestState,
     ProjectEntitiesState,
-    ReviewRequestCommentsState
+    ReviewRequestCommentAmountState
 } from '../states';
 import { MonacoApi } from '../types';
 
@@ -33,7 +33,7 @@ export class DependenciesFacade {
         private readonly sourceCodeService: ReviewRequestSourceCodeService,
         private readonly monacoThemeLoaderService: MonacoThemeLoaderService,
         private readonly monacoApiState: MonacoApiState,
-        private readonly commentsState: ReviewRequestCommentsState,
+        private readonly commentsState: ReviewRequestCommentAmountState,
         private readonly projectEntitiesState: ProjectEntitiesState,
         private readonly openedReviewRequestState: OpenedReviewRequestState
     ) {}
