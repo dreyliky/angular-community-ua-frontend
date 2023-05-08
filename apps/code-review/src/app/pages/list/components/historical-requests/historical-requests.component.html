@@ -2,7 +2,7 @@
     <ng-container *ngIf="reviewRequests.length; else emptyDataTemplate">
         <acua-review-request-card
             *ngFor="let reviewRequest of reviewRequests"
-            [data]="reviewRequest"></acua-review-request-card>
+            [data]="reviewRequest" />
     </ng-container>
 </ng-container>
 
