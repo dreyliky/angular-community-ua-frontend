@@ -5,11 +5,13 @@
 </h2>
 
 <mat-dialog-content
-    *acuaLet="openedReviewRequest$ | async as openedReviewRequest">
+    *acuaLet="openedReviewRequest$ | async as openedReviewRequest"
+    class="content">
     <div class="info">
         <acua-user-avatar
             class="user-avatar"
             [avatarUrl]="openedReviewRequest!.user.photoUrl" />
+
         <div class="info-request">
             <p class="user-name">{{ openedReviewRequest!.user.username }}</p>
             <p class="date">{{ openedReviewRequest!.date | date }}</p>
@@ -17,7 +19,7 @@
     </div>
 
     <div>
-        <p>{{ openedReviewRequest!.description }}</p>
+        <acua-markdown-previewer [data]="openedReviewRequest!.description" />
     </div>
 </mat-dialog-content>
 

@@ -2,6 +2,7 @@ import {
     AbsentDataModule,
     ActionButtonModule,
     AuthModule,
+    MarkdownEditorModule,
     ScreenModule,
     UserAvatarModule
 } from '@acua/shared';
@@ -45,6 +46,7 @@ import { LIST_ROUTES } from './list.routes';
         MatRippleModule,
         MatTooltipModule,
         MatIconModule,
+        MarkdownEditorModule,
         AbsentDataModule,
         ScreenModule,
         ActionButtonModule,

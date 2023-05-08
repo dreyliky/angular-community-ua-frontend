@@ -1,5 +1,13 @@
 :host {
     display: flex;
+
+    &::ng-deep .mat-expansion-panel-content {
+        line-height: inherit;
+        overflow-y: auto;
+        display: flex;
+        height: auto;
+        max-height: 500px;
+    }
 }
 
 .block-request {

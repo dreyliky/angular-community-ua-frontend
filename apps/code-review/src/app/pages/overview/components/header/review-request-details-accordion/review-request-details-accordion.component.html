@@ -15,7 +15,8 @@
         </mat-expansion-panel-header>
 
         <p class="description">
-            {{ openedReviewRequest!.description }}
+            <acua-markdown-previewer
+                [data]="openedReviewRequest!.description" />
         </p>
 
         <p>{{ openedReviewRequest!.date | date }}</p>
