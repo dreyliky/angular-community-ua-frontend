@@ -37,7 +37,7 @@ import { MarkdownInputState, MarkdownViewModeState } from './states';
         MatInputModule,
         MatButtonToggleModule
     ],
-    exports: [MarkdownEditorComponent],
+    exports: [MarkdownEditorComponent, MarkdownPreviewerComponent],
     providers: [MarkdownInputState, MarkdownViewModeState]
 })
 export class MarkdownEditorModule {}
