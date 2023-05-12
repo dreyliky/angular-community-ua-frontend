@@ -2,7 +2,6 @@ import { Directive, Inject, OnDestroy } from '@angular/core';
 import type { IDisposable, editor } from 'monaco-editor';
 import { Subscription } from 'rxjs';
 import { LINE_DECORATION_HAS_COMMENTS_CLASS_NAME as HAS_COMMENTS_CLASS } from '../constants';
-import { isTargetOverActualLineOfCode } from '../helpers';
 import { LineDecoration } from '../models';
 import { EditorCommentsState } from '../states';
 import { MONACO_EDITOR } from '../tokens';
@@ -12,7 +11,6 @@ import { MONACO_EDITOR } from '../tokens';
     standalone: true
 })
 export class LineHighlighterDirective implements OnDestroy {
-    private mouseDownListener: IDisposable | undefined;
     private editorModelListener: IDisposable | undefined;
     private commentsObserver: Subscription | undefined;
 
@@ -29,7 +27,6 @@ export class LineHighlighterDirective implements OnDestroy {
     }
 
     public ngOnDestroy(): void {
-        this.mouseDownListener?.dispose();
         this.editorModelListener?.dispose();
         this.commentsObserver?.unsubscribe();
     }
@@ -37,7 +34,6 @@ export class LineHighlighterDirective implements OnDestroy {
     private initEditorModelContentInitListener(): void {
         this.editorModelListener = this.editor.onDidChangeModelContent(() => {
             this.initDecorationsToAllLines();
-            this.initEditorMouseDownListener();
 
             if (!this.commentsObserver) {
                 this.initEditorCommentsObserver();
@@ -50,17 +46,6 @@ export class LineHighlighterDirective implements OnDestroy {
 
         this.commentsObserver = commentsState$.subscribe(() => {
             this.updateDecorationClassNamesForLinesWithComments();
-        });
-    }
-
-    private initEditorMouseDownListener(): void {
-        this.mouseDownListener?.dispose();
-
-        this.mouseDownListener = this.editor.onMouseDown(({ target }) => {
-            if (isTargetOverActualLineOfCode(target)) {
-                // TODO: Replace to real logic
-                console.log('click on line', target.position!.lineNumber);
-            }
         });
     }
 

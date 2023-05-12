@@ -8,6 +8,7 @@ import type { editor } from 'monaco-editor';
 import { ReviewRequestCommentsState } from '../../states';
 import { MonacoApi } from '../../types';
 import {
+    LineCommentDirective,
     LineCommentsAmountDirective,
     LineHighlighterDirective,
     TextSelectionDisablerDirective
@@ -23,6 +24,7 @@ import { MONACO_API, MONACO_EDITOR } from './tokens';
     styleUrls: ['./code-editor.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     hostDirectives: [
+        LineCommentDirective,
         LineHighlighterDirective,
         LineCommentsAmountDirective,
         TextSelectionDisablerDirective
