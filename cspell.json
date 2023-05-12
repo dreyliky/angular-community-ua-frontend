@@ -4,6 +4,6 @@
     "dictionaryDefinitions": [],
     "dictionaries": [],
     "words": ["codicon", "stackblitz", "Демо", "Історія", "Ревью", "tommorow"],
-    "ignoreWords": ["nrwl", "acua", "onauth", "Parens"],
+    "ignoreWords": ["nrwl", "acua", "onauth", "Parens", "linkify"],
     "import": []
 }

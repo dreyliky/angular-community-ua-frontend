@@ -16,6 +16,10 @@
         class="monaco-tree-name">
         {{ data.name }}
     </div>
+
+    <div
+        *ngIf="isContainAnyFileWithComments$ | async"
+        class="comments-indicator"></div>
 </div>
 
 <acua-entity-nodes

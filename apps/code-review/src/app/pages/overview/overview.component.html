@@ -3,24 +3,22 @@
     [ngxAsyncLoading]="loaderTemplate">
     <acua-header
         class="header"
-        (hamburgerMenuButtonClick)="
-            onHeaderHamburgerMenuButtonClick()
-        "></acua-header>
+        (hamburgerMenuButtonClick)="onHeaderHamburgerMenuButtonClick()" />
 
     <mat-drawer-container class="container">
         <mat-drawer
             class="mat-drawer"
             [mode]="drawerMode()"
             [opened]="isSidenavOpened()">
-            <acua-sidebar></acua-sidebar>
+            <acua-sidebar />
         </mat-drawer>
 
         <mat-drawer-content>
-            <acua-code-editor class="code-editor"></acua-code-editor>
+            <acua-code-editor class="code-editor" />
         </mat-drawer-content>
     </mat-drawer-container>
 </ng-template>
 
 <ng-template #loaderTemplate>
-    <acua-loader [label]="'Завантаження проєкту...'"></acua-loader>
+    <acua-loader [label]="'Завантаження проєкту...'" />
 </ng-template>

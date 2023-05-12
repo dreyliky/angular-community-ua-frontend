@@ -9,6 +9,15 @@
     </ng-container>
 
     <ng-template #previewerTemplate>
-        <acua-markdown-previewer />
+        <acua-markdown-previewer
+            *ngIf="
+                previewData$ | async as previewData;
+                else nothingToPreviewTemplate
+            "
+            [data]="previewData" />
+
+        <ng-template #nothingToPreviewTemplate>
+            <p>Дані для перегляду відсутні</p>
+        </ng-template>
     </ng-template>
 </div>

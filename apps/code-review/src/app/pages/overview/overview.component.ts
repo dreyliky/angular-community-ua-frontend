@@ -11,13 +11,17 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
 import { Subscription, filter } from 'rxjs';
 import { CodeEditorComponent } from './components';
 import { DependenciesFacade } from './facades';
-import { MonacoThemeLoaderService } from './services';
+import { OPENED_REVIEW_REQUEST_ID_PROVIDER } from './providers';
+import {
+    MonacoThemeLoaderService,
+    ReviewRequestCommentAmountService
+} from './services';
 import {
     MonacoApiState,
     OpenedReviewRequestState,
     ProjectEntitiesState,
     ProjectFileSelectionState,
-    ReviewRequestCommentsState
+    ReviewRequestCommentAmountState
 } from './states';
 
 @Component({
@@ -26,10 +30,12 @@ import {
     styleUrls: ['./overview.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
+        OPENED_REVIEW_REQUEST_ID_PROVIDER,
         DependenciesFacade,
         MonacoApiState,
         MonacoThemeLoaderService,
-        ReviewRequestCommentsState,
+        ReviewRequestCommentAmountService,
+        ReviewRequestCommentAmountState,
         OpenedReviewRequestState,
         ProjectFileSelectionState,
         ProjectEntitiesState

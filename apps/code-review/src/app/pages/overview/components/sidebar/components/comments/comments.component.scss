@@ -1,0 +1,39 @@
+@import 'mixins';
+
+:host {
+    @include display-flex(column, center, center);
+
+    width: 100%;
+}
+
+.card {
+    width: 100%;
+    margin: 3px;
+
+    --acua-padding: 8px;
+
+    .header {
+        padding: var(--acua-padding);
+        padding-bottom: 0;
+        height: 38px;
+    }
+
+    .content {
+        padding: var(--acua-padding);
+        padding-top: 0;
+        font-size: 12px;
+    }
+
+    .user-avatar {
+        width: 30px;
+        height: 30px;
+    }
+
+    .title {
+        font-size: 14px;
+    }
+
+    .subtitle {
+        font-size: 11px;
+    }
+}

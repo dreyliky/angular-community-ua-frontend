@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { MarkdownButtonSyntax } from './components';
 import { MarkdownInputDirective } from './directives';
-import { MarkdownViewModeState } from './states';
+import { MarkdownInputState, MarkdownViewModeState } from './states';
 
 @Component({
     selector: 'acua-markdown-editor',
@@ -14,9 +14,11 @@ export class MarkdownEditorComponent {
     public readonly markdownEditorInputDirective!: MarkdownInputDirective;
 
     public readonly markdownViewMode$ = this.markdownViewModeState.data$;
+    public readonly previewData$ = this.markdownInputState.data$;
 
     constructor(
-        private readonly markdownViewModeState: MarkdownViewModeState
+        private readonly markdownViewModeState: MarkdownViewModeState,
+        private readonly markdownInputState: MarkdownInputState
     ) {}
 
     public onMarkdownButtonClick(button: MarkdownButtonSyntax): void {

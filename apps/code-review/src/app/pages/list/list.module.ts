@@ -46,12 +46,12 @@ import { LIST_ROUTES } from './list.routes';
         MatRippleModule,
         MatTooltipModule,
         MatIconModule,
+        MarkdownEditorModule,
         AbsentDataModule,
         ScreenModule,
         ActionButtonModule,
         UserAvatarModule,
         AuthModule,
-        MarkdownEditorModule,
         RouterModule.forChild(LIST_ROUTES)
     ]
 })

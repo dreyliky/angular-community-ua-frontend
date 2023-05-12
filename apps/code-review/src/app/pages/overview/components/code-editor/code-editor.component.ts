@@ -5,7 +5,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import type { editor } from 'monaco-editor';
-import { ReviewRequestCommentsState } from '../../states';
+import { ReviewRequestCommentAmountService } from '../../services';
 import { MonacoApi } from '../../types';
 import {
     LineCommentDirective,
@@ -44,7 +44,7 @@ export class CodeEditorComponent {
         @Inject(MONACO_API)
         private readonly monacoApi: MonacoApi,
         private readonly languageService: LanguageService,
-        private readonly reviewRequestCommentsState: ReviewRequestCommentsState,
+        private readonly commentAmountService: ReviewRequestCommentAmountService,
         private readonly editorCommentsState: EditorCommentsState
     ) {}
 
@@ -68,11 +68,11 @@ export class CodeEditorComponent {
     }
 
     private updateEditorComments(fileFullPath: string): void {
-        const fileComments =
-            this.reviewRequestCommentsState.getFileCommentsAmount(fileFullPath);
+        const filesComments =
+            this.commentAmountService.getForFileLines(fileFullPath);
 
-        if (fileComments) {
-            this.editorCommentsState.set(fileComments);
+        if (filesComments) {
+            this.editorCommentsState.set(filesComments);
         } else {
             this.editorCommentsState.clear();
         }

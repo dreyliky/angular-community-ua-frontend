@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Injectable, inject } from '@angular/core';
 import {
     ReviewRequestCommentAmountDictionary as CommentsAmountDictionary,
     ProjectEntity,
@@ -10,33 +9,27 @@ import {
 } from '@code-review/shared';
 import monacoLoader from '@monaco-editor/loader';
 import { Observable, forkJoin, from, switchMap, tap } from 'rxjs';
-import { OverviewParamEnum } from '../enums';
 import { MonacoThemeLoaderService } from '../services';
 import {
     MonacoApiState,
     OpenedReviewRequestState,
     ProjectEntitiesState,
-    ReviewRequestCommentsState
+    ReviewRequestCommentAmountState
 } from '../states';
+import { OPENED_REVIEW_REQUEST_ID } from '../tokens';
 import { MonacoApi } from '../types';
 
 @Injectable()
 export class DependenciesFacade {
-    private get openedReviewRequestId(): string {
-        return this.activatedRoute.snapshot.params[OverviewParamEnum.Id];
-    }
-
-    constructor(
-        private readonly activatedRoute: ActivatedRoute,
-        private readonly reviewRequestService: ReviewRequestService,
-        private readonly commentsService: ReviewRequestCommentsService,
-        private readonly sourceCodeService: ReviewRequestSourceCodeService,
-        private readonly monacoThemeLoaderService: MonacoThemeLoaderService,
-        private readonly monacoApiState: MonacoApiState,
-        private readonly commentsState: ReviewRequestCommentsState,
-        private readonly projectEntitiesState: ProjectEntitiesState,
-        private readonly openedReviewRequestState: OpenedReviewRequestState
-    ) {}
+    private readonly openedReviewRequestId = inject(OPENED_REVIEW_REQUEST_ID);
+    private readonly reviewRequestService = inject(ReviewRequestService);
+    private readonly commentsService = inject(ReviewRequestCommentsService);
+    private readonly sourceCodeService = inject(ReviewRequestSourceCodeService);
+    private readonly themeLoaderService = inject(MonacoThemeLoaderService);
+    private readonly monacoApiState = inject(MonacoApiState);
+    private readonly commentsState = inject(ReviewRequestCommentAmountState);
+    private readonly projectEntitiesState = inject(ProjectEntitiesState);
+    private readonly reviewRequestState = inject(OpenedReviewRequestState);
 
     public loadAll(): Observable<unknown> {
         return this.loadMonacoApi().pipe(
@@ -45,7 +38,7 @@ export class DependenciesFacade {
                     this.loadOpenedReviewRequestInfo(),
                     this.loadSourceCode(),
                     this.loadComments(),
-                    this.monacoThemeLoaderService.loadAndDefine()
+                    this.themeLoaderService.loadAndDefine()
                 ])
             )
         );
@@ -72,6 +65,6 @@ export class DependenciesFacade {
     private loadOpenedReviewRequestInfo(): Observable<ReviewRequestDto> {
         return this.reviewRequestService
             .get(this.openedReviewRequestId)
-            .pipe(tap((data) => this.openedReviewRequestState.set(data)));
+            .pipe(tap((data) => this.reviewRequestState.set(data)));
     }
 }

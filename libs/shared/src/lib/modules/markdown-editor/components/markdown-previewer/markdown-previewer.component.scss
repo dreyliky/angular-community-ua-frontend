@@ -1,6 +1,9 @@
-:host {
+.acua-markdown-previewer {
     display: inline-block;
     width: 100%;
     height: 100%;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.984);
+
+    p:only-of-type {
+        margin: 0;
+    }
 }

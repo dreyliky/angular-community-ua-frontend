@@ -1,18 +1,43 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    HostBinding,
+    Input,
+    ViewEncapsulation
+} from '@angular/core';
 import * as MarkdownIt from 'markdown-it';
-import { map } from 'rxjs';
-import { MarkdownInputState } from '../../states';
+
+type OptionalData = string | undefined | null;
 
 @Component({
     selector: 'acua-markdown-previewer',
-    templateUrl: './markdown-previewer.component.html',
+    template: '',
     styleUrls: ['./markdown-previewer.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    host: {
+        class: 'acua-markdown-previewer'
+    }
 })
 export class MarkdownPreviewerComponent {
-    public readonly data$ = this.markdownInputState.data$.pipe(
-        map((value) => new MarkdownIt().render(value!))
-    );
+    @Input({ required: true })
+    public set data(data: OptionalData) {
+        this.onNewData(data);
+    }
 
-    constructor(private readonly markdownInputState: MarkdownInputState) {}
+    private static readonly engine = new MarkdownIt({
+        linkify: true,
+        breaks: false
+    });
+
+    @HostBinding('innerHTML')
+    protected previewAsHtml: string = '';
+
+    private onNewData(data: OptionalData): void {
+        if (data) {
+            this.previewAsHtml = MarkdownPreviewerComponent.engine.render(data);
+        } else {
+            this.previewAsHtml = '';
+        }
+    }
 }

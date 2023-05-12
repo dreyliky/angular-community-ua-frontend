@@ -2,10 +2,10 @@
     <acua-file-node
         *ngIf="!node.children"
         [data]="node"
-        [depth]="depth"></acua-file-node>
+        [depth]="depth" />
 
     <acua-folder-node
         *ngIf="!!node.children"
         [data]="node"
-        [depth]="depth"></acua-folder-node>
+        [depth]="depth" />
 </ng-container>

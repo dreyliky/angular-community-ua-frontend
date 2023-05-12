@@ -5,7 +5,7 @@
         <acua-user-avatar
             mat-card-avatar
             class="user-avatar"
-            [avatarUrl]="data.user.photoUrl"></acua-user-avatar>
+            [avatarUrl]="data.user.photoUrl" />
 
         <mat-card-title>
             {{ data.user.firstName }} {{ data.user.lastName }}
@@ -15,6 +15,8 @@
     </mat-card-header>
 
     <mat-card-content>
-        {{ data.description }}
+        <acua-markdown-previewer
+            [data]="data.description"
+            class="markdown-previewer" />
     </mat-card-content>
 </mat-card>

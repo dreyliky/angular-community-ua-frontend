@@ -5,9 +5,7 @@
         <mat-expansion-panel-header>
             <mat-panel-title>
                 <acua-user-avatar
-                    [avatarUrl]="
-                        openedReviewRequest!.user.photoUrl
-                    "></acua-user-avatar>
+                    [avatarUrl]="openedReviewRequest!.user.photoUrl" />
 
                 <span class="title">
                     Запит на Код-Ревью від
@@ -17,7 +15,8 @@
         </mat-expansion-panel-header>
 
         <p class="description">
-            {{ openedReviewRequest!.description }}
+            <acua-markdown-previewer
+                [data]="openedReviewRequest!.description" />
         </p>
 
         <p>{{ openedReviewRequest!.date | date }}</p>

@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
 import { Subscription, defer, filter } from 'rxjs';
-import { ReviewRequestCommentsState } from '../../../../states';
+import { ReviewRequestCommentAmountService as CommentAmountService } from '../../../../services';
 import { EXTENSION_ICON_NAME_MAPPER, FILE_ICON_NAME_MAPPER } from '../../data';
 import { BaseNodeComponent } from '../base-node.component';
 
@@ -23,10 +23,10 @@ type ExtensionName = keyof typeof EXTENSION_ICON_NAME_MAPPER;
 export class FileNodeComponent extends BaseNodeComponent implements OnInit {
     public readonly isSelected = signal(false);
     public readonly commentAmount$ = defer(() =>
-        this.commentsState.getFileTotalCommentsAmount(this.data.fullPath)
+        this.commentAmountService.getForFile(this.data.fullPath)
     );
 
-    private readonly commentsState = inject(ReviewRequestCommentsState);
+    private readonly commentAmountService = inject(CommentAmountService);
 
     public ngOnInit(): void {
         this.initFileSelection();
