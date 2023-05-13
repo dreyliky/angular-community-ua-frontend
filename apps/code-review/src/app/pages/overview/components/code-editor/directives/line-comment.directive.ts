@@ -1,8 +1,5 @@
 import { Directive, Inject, Injector, OnDestroy } from '@angular/core';
-import { FileCommentAmountDictionary } from '@code-review/shared';
 import type { IDisposable, editor } from 'monaco-editor';
-import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
-import { Subscription } from 'rxjs';
 import { isTargetOverActualLineOfCode } from '../helpers';
 import { CommentZone } from '../models';
 import { EditorCommentsState } from '../states';
@@ -16,8 +13,6 @@ export class LineCommentDirective implements OnDestroy {
     private mouseDownListener: IDisposable | undefined;
     private editorModelListener: IDisposable | undefined;
 
-    private commentsData!: FileCommentAmountDictionary;
-
     private zoneIds = new Map<number, string>();
 
     constructor(
@@ -27,7 +22,6 @@ export class LineCommentDirective implements OnDestroy {
         private readonly injector: Injector
     ) {
         this.initEditorModelContentInitListener();
-        this.initEditorCommentsObserver();
     }
 
     public ngOnDestroy(): void {
@@ -41,13 +35,6 @@ export class LineCommentDirective implements OnDestroy {
         });
     }
 
-    @AutoUnsubscribe()
-    private initEditorCommentsObserver(): Subscription {
-        return this.editorCommentsState.actualData$
-            .subscribe((data) => this.commentsData = data);
-    }
-
-    // eslint-disable-next-line max-lines-per-function
     private initEditorMouseDownListener(): void {
         this.mouseDownListener?.dispose();
 
@@ -68,21 +55,16 @@ export class LineCommentDirective implements OnDestroy {
             return;
         }
 
-        const commentData = this.commentsData ? this.commentsData[lineNumber]! : null;
-
-        if (commentData) {
-            this.openCommentZone(lineNumber, commentData);
-        }
+        this.openCommentZone(lineNumber);
     }
 
-    private openCommentZone(afterLineNumber: number, commentData: any): void {
-        // commentData відповідно повинні бути дані о коментарі в подальшому
-        const commentZone = new CommentZone(afterLineNumber, commentData, this.injector);
+    private openCommentZone(lineNumber: number): void {
+        const commentZone = new CommentZone(lineNumber, this.injector);
 
         this.editor.changeViewZones((accessor: editor.IViewZoneChangeAccessor) => {
             const zoneId = accessor.addZone(commentZone);
 
-            this.zoneIds.set(afterLineNumber, zoneId);
+            this.zoneIds.set(lineNumber, zoneId);
 
             accessor.layoutZone(zoneId);
         });
