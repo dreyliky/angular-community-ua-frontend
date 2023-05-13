@@ -56,17 +56,23 @@ export class LineCommentDirective implements OnDestroy {
                 const lineNumber = target.position!.lineNumber;
                 const zoneId = this.getZoneIdIfExists(lineNumber);
 
-                if (zoneId) {
-                    this.closeCommentZone(lineNumber, zoneId);
-                } else {
-                    const commentData = this.commentsData ? this.commentsData[lineNumber]! : null;
-
-                    if (commentData) {
-                        this.openCommentZone(lineNumber, commentData);
-                    }
-                }
+                this.initZone(zoneId, lineNumber);
             }
         });
+    }
+
+    private initZone(zoneId: string | undefined, lineNumber: number): void {
+        if (zoneId) {
+            this.closeCommentZone(lineNumber, zoneId);
+
+            return;
+        }
+
+        const commentData = this.commentsData ? this.commentsData[lineNumber]! : null;
+
+        if (commentData) {
+            this.openCommentZone(lineNumber, commentData);
+        }
     }
 
     private openCommentZone(afterLineNumber: number, commentData: any): void {
