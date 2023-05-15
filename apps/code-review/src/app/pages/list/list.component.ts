@@ -1,6 +1,5 @@
 import { ScreenService } from '@acua/shared';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FormControl } from '@angular/forms';
 
 @Component({
     selector: 'acua-list',
@@ -12,6 +11,5 @@ import { FormControl } from '@angular/forms';
     }
 })
 export class ListComponent {
-    public readonly descriptionControl = new FormControl('123');
     protected readonly isMobile = inject(ScreenService).isMatch(['XSmall']);
 }
