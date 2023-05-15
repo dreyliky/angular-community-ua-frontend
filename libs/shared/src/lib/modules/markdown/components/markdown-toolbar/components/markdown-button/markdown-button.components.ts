@@ -20,9 +20,9 @@ const tooltipOptions: MatTooltipDefaultOptions = {
     ]
 })
 export class MarkdownButtonComponent {
-    @Input()
+    @Input({ required: true })
     public iconName!: string;
 
-    @Input()
+    @Input({ required: true })
     public tooltipInfo!: string;
 }

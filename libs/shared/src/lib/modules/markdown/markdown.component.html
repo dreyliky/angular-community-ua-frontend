@@ -4,8 +4,12 @@
     <ng-container *ngIf="markdownViewMode$ | async; else previewerTemplate">
         <textarea
             class="markdown-input"
+            #markdownInput
             markdownInput
-            matInput></textarea>
+            matInput
+            (input)="
+                onMarkdownInputValueChange(markdownInput.value)
+            "></textarea>
     </ng-container>
 
     <ng-template #previewerTemplate>

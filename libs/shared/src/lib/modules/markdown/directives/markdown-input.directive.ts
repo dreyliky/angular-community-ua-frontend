@@ -35,6 +35,9 @@ export class MarkdownInputDirective implements AfterViewInit {
             this.insertMarkdownWithSelection(markdownButton.syntaxSides);
         }
 
+        this.hostRef.nativeElement.dispatchEvent(
+            new Event('input', { bubbles: true })
+        );
         this.markdownInputState.set(this.hostRef.nativeElement.value);
     }
 
