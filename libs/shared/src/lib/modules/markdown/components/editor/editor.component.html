@@ -7,9 +7,8 @@
             #markdownInput
             markdownInput
             matInput
-            (input)="
-                onMarkdownInputValueChange(markdownInput.value)
-            "></textarea>
+            (blur)="onTouched?.()"
+            (input)="onChange?.(markdownInput.value)"></textarea>
     </ng-container>
 
     <ng-template #previewerTemplate>

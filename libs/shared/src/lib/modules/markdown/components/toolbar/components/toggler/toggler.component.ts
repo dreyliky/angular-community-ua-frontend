@@ -3,8 +3,8 @@ import { MarkdownViewModeState } from '../../../../states';
 
 @Component({
     selector: 'acua-markdown-toggler',
-    templateUrl: './markdown-toggler.component.html',
-    styleUrls: ['./markdown-toggler.component.scss'],
+    templateUrl: './toggler.component.html',
+    styleUrls: ['./toggler.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MarkdownTogglerComponent {

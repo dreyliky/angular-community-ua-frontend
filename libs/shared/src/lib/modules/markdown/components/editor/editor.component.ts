@@ -1,48 +1,43 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    ViewChild,
-    forwardRef
+    Optional,
+    Self,
+    ViewChild
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MarkdownButtonSyntax } from './components';
-import { MarkdownInputDirective } from './directives';
-import { MarkdownInputState, MarkdownViewModeState } from './states';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { MarkdownInputDirective } from '../../directives';
+import { MarkdownInputState, MarkdownViewModeState } from '../../states';
+import { MarkdownButtonSyntax } from '../toolbar';
 
 @Component({
-    selector: 'acua-markdown [formControl]',
-    templateUrl: './markdown.component.html',
-    styleUrls: ['./markdown.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => MarkdownComponent),
-            multi: true
-        }
-    ]
+    selector: 'acua-markdown-editor',
+    templateUrl: './editor.component.html',
+    styleUrls: ['./editor.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MarkdownComponent implements ControlValueAccessor {
+export class MarkdownEditorComponent implements ControlValueAccessor {
     @ViewChild(MarkdownInputDirective)
     public readonly markdownEditorInputDirective!: MarkdownInputDirective;
 
     public readonly markdownViewMode$ = this.markdownViewModeState.data$;
     public readonly previewData$ = this.markdownInputState.data$;
 
-    private onChange!: (value: string) => void;
-    private onTouched!: () => void;
+    public onChange?: (value: string) => void;
+    public onTouched?: () => void;
 
     constructor(
+        @Optional() @Self() private readonly ngControl: NgControl,
         private readonly markdownViewModeState: MarkdownViewModeState,
         private readonly markdownInputState: MarkdownInputState
-    ) {}
+    ) {
+        if (this.ngControl) {
+            this.ngControl.valueAccessor = this;
+        }
+    }
 
     public onMarkdownButtonClick(button: MarkdownButtonSyntax): void {
         this.markdownEditorInputDirective.insertMarkdownSyntax(button);
-    }
-
-    public onMarkdownInputValueChange(value: string): void {
-        this.onChange(value);
     }
 
     public writeValue(value: string): void {

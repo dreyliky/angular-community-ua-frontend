@@ -1,3 +1,3 @@
-export * from './components/markdown-previewer';
-export * from './markdown.component';
+export * from './components/editor';
+export * from './components/previewer';
 export * from './markdown.module';

@@ -16,13 +16,17 @@ interface InputSelectionRange {
     selector: '[markdownInput]'
 })
 export class MarkdownInputDirective implements AfterViewInit {
+    private get hostElement(): HTMLTextAreaElement {
+        return this.hostRef.nativeElement;
+    }
+
     constructor(
         private readonly hostRef: ElementRef<HTMLTextAreaElement>,
         private readonly markdownInputState: MarkdownInputState
     ) {}
 
     public ngAfterViewInit(): void {
-        this.hostRef.nativeElement.value = this.markdownInputState.data!;
+        this.hostElement.value = this.markdownInputState.data!;
     }
 
     public insertMarkdownSyntax(markdownButton: MarkdownButtonSyntax): void {
@@ -35,19 +39,18 @@ export class MarkdownInputDirective implements AfterViewInit {
             this.insertMarkdownWithSelection(markdownButton.syntaxSides);
         }
 
-        this.hostRef.nativeElement.dispatchEvent(
-            new Event('input', { bubbles: true })
-        );
-        this.markdownInputState.set(this.hostRef.nativeElement.value);
+        this.hostElement.dispatchEvent(new Event('input', { bubbles: true }));
+
+        this.markdownInputState.set(this.hostElement.value);
     }
 
     @HostListener('change')
     protected onMarkdownTextAreaChange(): void {
-        this.markdownInputState.set(this.hostRef.nativeElement.value);
+        this.markdownInputState.set(this.hostElement.value);
     }
 
     private insertMarkdownWithSelection(sides: MarkdownSyntaxSides): void {
-        const markdownTextArea = this.hostRef.nativeElement;
+        const markdownTextArea = this.hostElement;
         const { start, end } = this.getSelectedPositions();
         markdownTextArea.focus();
         markdownTextArea.value =
@@ -62,7 +65,7 @@ export class MarkdownInputDirective implements AfterViewInit {
         sides: MarkdownSyntaxSides,
         cursorPosition: number
     ): void {
-        const markdownTextArea = this.hostRef.nativeElement;
+        const markdownTextArea = this.hostElement;
         const { start } = this.getSelectedPositions();
 
         this.insertMarkdownWithSelection(sides);
@@ -80,7 +83,7 @@ export class MarkdownInputDirective implements AfterViewInit {
     }
 
     private getSelectedPositions(): InputSelectionRange {
-        const markdownTextArea = this.hostRef.nativeElement;
+        const markdownTextArea = this.hostElement;
 
         return {
             start: markdownTextArea.selectionStart,

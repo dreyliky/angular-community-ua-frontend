@@ -10,17 +10,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {
     MarkdownButtonComponent,
+    MarkdownEditorComponent,
     MarkdownPreviewerComponent,
     MarkdownTogglerComponent,
     MarkdownToolbarComponent
 } from './components';
 import { MarkdownInputDirective } from './directives';
-import { MarkdownComponent } from './markdown.component';
 import { MarkdownInputState, MarkdownViewModeState } from './states';
 
 @NgModule({
     declarations: [
-        MarkdownComponent,
+        MarkdownEditorComponent,
         MarkdownPreviewerComponent,
         MarkdownInputDirective,
         MarkdownButtonComponent,
@@ -39,7 +39,7 @@ import { MarkdownInputState, MarkdownViewModeState } from './states';
         MatButtonToggleModule,
         ReactiveFormsModule
     ],
-    exports: [MarkdownComponent, MarkdownPreviewerComponent],
+    exports: [MarkdownEditorComponent, MarkdownPreviewerComponent],
     providers: [MarkdownInputState, MarkdownViewModeState]
 })
 export class MarkdownModule {}

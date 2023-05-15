@@ -1,2 +1,3 @@
-export * from './markdown-previewer';
-export * from './markdown-toolbar';
+export * from './editor';
+export * from './previewer';
+export * from './toolbar';
