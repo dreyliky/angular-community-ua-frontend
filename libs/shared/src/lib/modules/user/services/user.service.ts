@@ -14,7 +14,10 @@ export class UserService {
         return this.userState.data;
     }
 
-    constructor(private readonly userApi: UserApi, private readonly userState: UserState) {}
+    constructor(
+        private readonly userApi: UserApi,
+        private readonly userState: UserState
+    ) {}
 
     public update(): Observable<User> {
         return this.userApi.get().pipe(tap((user) => this.userState.set(user)));

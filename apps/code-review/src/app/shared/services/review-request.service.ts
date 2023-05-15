@@ -2,7 +2,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ReviewRequestApi } from '../api';
 import { CodeReviewRequestStatusEnum } from '../enums';
-import { ResponseWithId, ReviewRequestCreationDto, ReviewRequestDto } from '../interfaces';
+import {
+    ResponseWithId,
+    ReviewRequestCreationDto,
+    ReviewRequestDto
+} from '../interfaces';
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +14,9 @@ import { ResponseWithId, ReviewRequestCreationDto, ReviewRequestDto } from '../i
 export class ReviewRequestService {
     constructor(private readonly reviewRequestsApi: ReviewRequestApi) {}
 
-    public getAllWithStatus(status: CodeReviewRequestStatusEnum): Observable<ReviewRequestDto[]> {
+    public getAllWithStatus(
+        status: CodeReviewRequestStatusEnum
+    ): Observable<ReviewRequestDto[]> {
         return this.reviewRequestsApi.getAllWithStatus(status);
     }
 

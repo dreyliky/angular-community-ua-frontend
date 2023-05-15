@@ -1,0 +1,11 @@
+<ng-container *ngFor="let node of tree; trackBy: trackByFn">
+    <acua-file-node
+        *ngIf="!node.children"
+        [data]="node"
+        [depth]="depth" />
+
+    <acua-folder-node
+        *ngIf="!!node.children"
+        [data]="node"
+        [depth]="depth" />
+</ng-container>

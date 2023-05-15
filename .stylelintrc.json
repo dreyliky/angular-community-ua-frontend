@@ -8,8 +8,6 @@
         "scss/at-import-partial-extension-blacklist": "off",
         "scss/at-extend-no-missing-placeholder": null,
         "selector-no-qualifying-type": null,
-        "order/properties-alphabetical-order": null,
-        "order/order": null,
         "property-no-vendor-prefix": [
             true,
             {

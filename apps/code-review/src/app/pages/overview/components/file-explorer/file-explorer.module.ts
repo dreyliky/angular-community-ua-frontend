@@ -1,10 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FileTreeNodeComponent } from './components';
+import {
+    EntityNodesComponent,
+    FileNodeComponent,
+    FolderNodeComponent
+} from './components';
 import { FileExplorerComponent } from './file-explorer.component';
 
 @NgModule({
-    declarations: [FileExplorerComponent, FileTreeNodeComponent],
+    declarations: [
+        FileExplorerComponent,
+        EntityNodesComponent,
+        FileNodeComponent,
+        FolderNodeComponent
+    ],
     imports: [CommonModule],
     exports: [FileExplorerComponent]
 })

@@ -1,6 +1,11 @@
-import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    Inject,
+    ViewEncapsulation
+} from '@angular/core';
 import type { editor } from 'monaco-editor';
-import { ReviewRequestCommentsState } from '../../states';
+import { ReviewRequestCommentAmountService } from '../../services';
 import { MonacoApi } from '../../types';
 import {
     LineCommentsAmountDirective,
@@ -22,7 +27,12 @@ import { MONACO_API, MONACO_EDITOR } from './tokens';
         LineCommentsAmountDirective,
         TextSelectionDisablerDirective
     ],
-    providers: [MONACO_EDITOR_PROVIDER, MONACO_API_PROVIDER, LanguageService, EditorCommentsState],
+    providers: [
+        MONACO_EDITOR_PROVIDER,
+        MONACO_API_PROVIDER,
+        LanguageService,
+        EditorCommentsState
+    ],
     encapsulation: ViewEncapsulation.None
 })
 export class CodeEditorComponent {
@@ -32,7 +42,7 @@ export class CodeEditorComponent {
         @Inject(MONACO_API)
         private readonly monacoApi: MonacoApi,
         private readonly languageService: LanguageService,
-        private readonly reviewRequestCommentsState: ReviewRequestCommentsState,
+        private readonly commentAmountService: ReviewRequestCommentAmountService,
         private readonly editorCommentsState: EditorCommentsState
     ) {}
 
@@ -49,16 +59,18 @@ export class CodeEditorComponent {
     }
 
     private updateEditorLanguage(fileFullPath: string): void {
-        const languageId = this.languageService.getLanguageIdByFileFullPath(fileFullPath);
+        const languageId =
+            this.languageService.getLanguageIdByFileFullPath(fileFullPath);
 
         this.changeLanguage(languageId);
     }
 
     private updateEditorComments(fileFullPath: string): void {
-        const fileComments = this.reviewRequestCommentsState.getFileCommentsAmount(fileFullPath);
+        const filesComments =
+            this.commentAmountService.getForFileLines(fileFullPath);
 
-        if (fileComments) {
-            this.editorCommentsState.set(fileComments);
+        if (filesComments) {
+            this.editorCommentsState.set(filesComments);
         } else {
             this.editorCommentsState.clear();
         }

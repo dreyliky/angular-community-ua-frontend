@@ -9,15 +9,13 @@
         "ecmaVersion": 12,
         "sourceType": "module"
     },
-    "plugins": ["@typescript-eslint", "max-params-no-constructor", "@nrwl/nx"],
+    "plugins": ["@typescript-eslint", "max-params-no-constructor", "@nx"],
     "overrides": [
         {
             "files": ["*.ts"],
             "extends": [
                 "eslint:recommended",
-                "plugin:@angular-eslint/recommended",
-                "plugin:@typescript-eslint/recommended",
-                "plugin:@angular-eslint/recommended--extra"
+                "plugin:@typescript-eslint/recommended"
             ],
             "rules": {
                 "max-len": [
@@ -80,10 +78,7 @@
                 "spaced-comment": ["error", "always"],
                 "space-before-blocks": "error",
                 "keyword-spacing": "error",
-                "max-params-no-constructor/max-params-no-constructor": [
-                    "error",
-                    3
-                ],
+                "max-params-no-constructor/max-params-no-constructor": ["error", 3],
                 "no-eq-null": "error",
                 "no-unreachable": "error",
                 "quotes": [

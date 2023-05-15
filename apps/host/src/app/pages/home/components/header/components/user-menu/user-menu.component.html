@@ -1,12 +1,20 @@
-<button class="user-button" [matMenuTriggerFor]="menu">
-    <acua-user-avatar *ngIf="user$ | async as user" class="user-avatar" [avatarUrl]="user.photoUrl">
-    </acua-user-avatar>
+<button
+    class="user-button"
+    [matMenuTriggerFor]="menu">
+    <acua-user-avatar
+        *ngIf="user$ | async as user"
+        class="user-avatar"
+        [avatarUrl]="user.photoUrl" />
 
-    <img src="assets/icons/down-arrow.svg" alt="down-arrow" />
+    <img
+        src="assets/icons/down-arrow.svg"
+        alt="down-arrow" />
 </button>
 
 <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="onLogoutButtonClick()">
+    <button
+        mat-menu-item
+        (click)="onLogoutButtonClick()">
         <mat-icon>logout</mat-icon>
 
         Вийти

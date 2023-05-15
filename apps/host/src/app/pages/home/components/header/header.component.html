@@ -1,10 +1,15 @@
-<a class="logo" [routerLink]="homePagePath">
-    <img class="logo-image" src="assets/images/angular_ua.png" alt="logo" />
+<a
+    class="logo"
+    [routerLink]="homePagePath">
+    <img
+        class="logo-image"
+        src="assets/images/angular_ua.png"
+        alt="logo" />
     <span class="logo-link__text">Спільнота</span>
 </a>
 
 <div class="left-side-menu">
-    <acua-user-menu *acuaForAuthorizedOnly></acua-user-menu>
+    <acua-user-menu *acuaForAuthorizedOnly />
 </div>
 
-<acua-login-button *acuaForUnauthorizedOnly></acua-login-button>
+<acua-login-button *acuaForUnauthorizedOnly />

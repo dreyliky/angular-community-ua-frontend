@@ -1,0 +1,28 @@
+.monaco-tree-row {
+    .monaco-tree-arrow {
+        margin-left: -18px;
+        width: 12px;
+        height: 22px;
+        line-height: 22px;
+        position: relative;
+        top: 2px;
+        transform: rotate(-90deg);
+        transition: all 0.2s;
+
+        &.open {
+            transform: rotate(0deg);
+            left: -2px;
+            top: 0;
+        }
+    }
+
+    .comments-indicator {
+        min-width: 8px;
+        height: 8px;
+        margin-left: auto;
+        margin-right: 3px;
+        background: #a49904;
+        border-radius: 50%;
+        opacity: 0.3;
+    }
+}

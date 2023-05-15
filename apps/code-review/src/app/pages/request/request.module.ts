@@ -14,7 +14,11 @@ import { RequestComponent } from './request.component';
 import { REQUEST_ROUTES } from './request.routes';
 
 @NgModule({
-    declarations: [RequestComponent, RequestFormComponent, CreationButtonComponent],
+    declarations: [
+        RequestComponent,
+        RequestFormComponent,
+        CreationButtonComponent
+    ],
     imports: [
         CommonModule,
         NgxAsyncModule,

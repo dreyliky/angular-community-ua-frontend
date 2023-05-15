@@ -1,0 +1,28 @@
+<div
+    class="monaco-tree-row"
+    (click)="onRowClick()">
+    <span [style.margin-left]="marginLeftStyleValue"></span>
+
+    <i
+        class="monaco-tree-arrow codicon codicon-chevron-down"
+        [class.open]="isOpened()"></i>
+
+    <img
+        [src]="iconUrl()"
+        class="icon" />
+
+    <div
+        [title]="data.fullPath"
+        class="monaco-tree-name">
+        {{ data.name }}
+    </div>
+
+    <div
+        *ngIf="isContainAnyFileWithComments$ | async"
+        class="comments-indicator"></div>
+</div>
+
+<acua-entity-nodes
+    *ngIf="isOpened()"
+    [tree]="data.children"
+    [depth]="incrementedDepth()" />

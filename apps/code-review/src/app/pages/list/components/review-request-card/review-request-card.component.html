@@ -1,14 +1,22 @@
-<mat-card [routerLink]="reviewPageLink" [relativeTo]="activatedRoute">
+<mat-card
+    [routerLink]="reviewPageLink"
+    [relativeTo]="activatedRoute">
     <mat-card-header>
-        <acua-user-avatar mat-card-avatar class="user-avatar" [avatarUrl]="data.user.photoUrl">
-        </acua-user-avatar>
+        <acua-user-avatar
+            mat-card-avatar
+            class="user-avatar"
+            [avatarUrl]="data.user.photoUrl" />
 
-        <mat-card-title>{{ data.user.firstName }} {{ data.user.lastName }}</mat-card-title>
+        <mat-card-title>
+            {{ data.user.firstName }} {{ data.user.lastName }}
+        </mat-card-title>
 
         <mat-card-subtitle>{{ data.date | date }}</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>
-        {{ data.description }}
+        <acua-markdown-previewer
+            [data]="data.description"
+            class="markdown-previewer" />
     </mat-card-content>
 </mat-card>

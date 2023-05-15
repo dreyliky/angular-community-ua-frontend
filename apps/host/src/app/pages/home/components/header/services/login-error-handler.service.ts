@@ -19,14 +19,23 @@ export class LoginErrorHandler {
     }
 
     private handleUnknownError(): void {
-        this.snackBar.open(`Невідома проблема. Будемо вдячні за сповіщення адміна про це.`, 'ОК');
+        this.snackBar.open(
+            `Невідома проблема. Будемо вдячні за сповіщення адміна про це.`,
+            'ОК'
+        );
     }
 
     private handleBadRequest(): void {
-        this.snackBar.open(`Не вдалося підтвердити справжність переданих даних.`, 'ОК');
+        this.snackBar.open(
+            `Не вдалося підтвердити справжність переданих даних.`,
+            'ОК'
+        );
     }
 
     private handleInternalServerError(): void {
-        this.snackBar.open(`Не вдалось Вас авторизувати. Вже шукаємо проблему.`, 'ОК');
+        this.snackBar.open(
+            `Не вдалось Вас авторизувати. Вже шукаємо проблему.`,
+            'ОК'
+        );
     }
 }

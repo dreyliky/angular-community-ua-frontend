@@ -1,4 +1,9 @@
-import { ScreenModule, UserAvatarModule, UtilsModule } from '@acua/shared';
+import {
+    MarkdownEditorModule,
+    ScreenModule,
+    UserAvatarModule,
+    UtilsModule
+} from '@acua/shared';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,10 +13,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { HeaderComponent } from './header.component';
+import { ReviewRequestDetailsAccordionComponent } from './review-request-details-accordion';
 import { ReviewRequestDetailsWindowComponent } from './review-request-details-window';
 
 @NgModule({
-    declarations: [HeaderComponent, ReviewRequestDetailsWindowComponent],
+    declarations: [
+        HeaderComponent,
+        ReviewRequestDetailsWindowComponent,
+        ReviewRequestDetailsAccordionComponent
+    ],
     imports: [
         CommonModule,
         MatIconModule,
@@ -20,6 +30,7 @@ import { ReviewRequestDetailsWindowComponent } from './review-request-details-wi
         MatSidenavModule,
         MatDialogModule,
         MatButtonModule,
+        MarkdownEditorModule,
         UserAvatarModule,
         UtilsModule,
         ScreenModule

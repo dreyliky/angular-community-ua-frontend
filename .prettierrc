@@ -2,10 +2,11 @@
     "singleQuote": true,
     "tabWidth": 4,
     "endOfLine": "auto",
-    "bracketSameLine": false,
-    "printWidth": 100,
-    "arrowParens": "always",
+    "bracketSameLine": true,
     "bracketSpacing": true,
+    "singleAttributePerLine": true,
+    "printWidth": 80,
+    "arrowParens": "always",
     "trailingComma": "none",
-    "htmlWhitespaceSensitivity": "css"
+    "htmlWhitespaceSensitivity": "ignore"
 }

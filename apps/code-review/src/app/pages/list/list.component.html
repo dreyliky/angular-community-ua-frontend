@@ -2,25 +2,29 @@
     <div class="header">
         <h1 class="title">Код-Ревью</h1>
 
-        <acua-review-request-creation-button></acua-review-request-creation-button>
+        <acua-review-request-creation-button />
     </div>
 
-    <mat-tab-group [animationDuration]="'0ms'" [mat-stretch-tabs]="isMobile$ | async">
+    <mat-tab-group
+        [animationDuration]="'0ms'"
+        [mat-stretch-tabs]="isMobile()">
         <mat-tab [label]="'Всі'">
             <ng-template matTabContent>
-                <acua-all-requests></acua-all-requests>
+                <acua-all-requests />
             </ng-template>
         </mat-tab>
 
-        <mat-tab *acuaForAuthorizedOnly [label]="'Мої'">
+        <mat-tab
+            *acuaForAuthorizedOnly
+            [label]="'Мої'">
             <ng-template matTabContent>
-                <acua-my-requests></acua-my-requests>
+                <acua-my-requests />
             </ng-template>
         </mat-tab>
 
         <mat-tab [label]="'Історія'">
             <ng-template matTabContent>
-                <acua-historical-requests></acua-historical-requests>
+                <acua-historical-requests />
             </ng-template>
         </mat-tab>
     </mat-tab-group>

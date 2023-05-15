@@ -1,0 +1,9 @@
+.acua-markdown-previewer {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+
+    p:only-of-type {
+        margin: 0;
+    }
+}

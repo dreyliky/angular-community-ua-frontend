@@ -11,5 +11,5 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
     }
 })
 export class ListComponent {
-    protected readonly isMobile$ = inject(ScreenService).isMatch$(['XSmall']);
+    protected readonly isMobile = inject(ScreenService).isMatch(['XSmall']);
 }
