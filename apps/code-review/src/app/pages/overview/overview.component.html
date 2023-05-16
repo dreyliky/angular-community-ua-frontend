@@ -14,7 +14,9 @@
         </mat-drawer>
 
         <mat-drawer-content>
-            <acua-code-editor class="code-editor" />
+            <acua-code-editor
+                (success)="setFileFromQuery()"
+                class="code-editor" />
         </mat-drawer-content>
     </mat-drawer-container>
 </ng-template>

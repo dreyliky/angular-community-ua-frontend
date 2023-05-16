@@ -20,7 +20,8 @@ import { MAIN_BACKEND_URL_PROVIDER } from './core';
         HttpClientModule,
         RouterModule.forRoot(APP_ROUTES, {
             preloadingStrategy: PreloadAllModules,
-            initialNavigation: 'enabledBlocking'
+            initialNavigation: 'enabledBlocking',
+            bindToComponentInputs: true
         }),
         AuthModule
     ],

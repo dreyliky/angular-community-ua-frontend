@@ -1,7 +1,10 @@
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    EventEmitter,
     Inject,
+    Output,
     ViewEncapsulation
 } from '@angular/core';
 import type { editor } from 'monaco-editor';
@@ -35,7 +38,9 @@ import { MONACO_API, MONACO_EDITOR } from './tokens';
     ],
     encapsulation: ViewEncapsulation.None
 })
-export class CodeEditorComponent {
+export class CodeEditorComponent implements AfterViewInit {
+    @Output() public success = new EventEmitter<void>();
+
     constructor(
         @Inject(MONACO_EDITOR)
         private readonly editor: editor.IStandaloneCodeEditor,
@@ -45,6 +50,10 @@ export class CodeEditorComponent {
         private readonly commentAmountService: ReviewRequestCommentAmountService,
         private readonly editorCommentsState: EditorCommentsState
     ) {}
+
+    public ngAfterViewInit(): void {
+        this.success.next();
+    }
 
     public openFile(fileFullPath: string, content: string): void {
         this.updateEditorLanguage(fileFullPath);
