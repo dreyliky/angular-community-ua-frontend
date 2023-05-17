@@ -7,6 +7,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CommentsAmountComponent {
-    @Input()
+    @Input({ required: true })
     public amount!: number;
 }

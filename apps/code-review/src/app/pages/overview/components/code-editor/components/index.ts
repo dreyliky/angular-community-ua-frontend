@@ -1,1 +1,1 @@
-export * from './comments-amount';
+export * from './comments';
