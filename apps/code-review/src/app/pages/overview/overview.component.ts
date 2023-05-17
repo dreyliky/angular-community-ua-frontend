@@ -2,26 +2,26 @@ import { ScreenService } from '@acua/shared';
 import {
     ChangeDetectionStrategy,
     Component,
-    Input,
     ViewChild,
     computed,
     signal
 } from '@angular/core';
 import { MatDrawerMode } from '@angular/material/sidenav';
-import { ProjectEntity, ProjectEntityTypeEnum } from '@code-review/shared';
+import { ActivatedRoute } from '@angular/router';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
 import { Subscription, filter } from 'rxjs';
 import { CodeEditorComponent } from './components';
-import { DependenciesFacade } from './facades';
+import { OverviewQueryParamEnum } from './enums';
+import { DependenciesFacade, InitialFoldersFacade } from './facades';
 import { OPENED_REVIEW_REQUEST_ID_PROVIDER } from './providers';
 import {
+    InitialFoldersOpenedService,
     MonacoThemeLoaderService,
-    OpenDirectoryService,
     ReviewRequestCommentAmountService
 } from './services';
 import {
+    InitialFoldersOpenedState,
     MonacoApiState,
-    OpenDirectoryState,
     OpenedReviewRequestState,
     ProjectEntitiesState,
     ProjectFileSelectionState,
@@ -36,20 +36,19 @@ import {
     providers: [
         OPENED_REVIEW_REQUEST_ID_PROVIDER,
         DependenciesFacade,
+        InitialFoldersFacade,
         MonacoApiState,
         MonacoThemeLoaderService,
         ReviewRequestCommentAmountService,
-        OpenDirectoryService,
+        InitialFoldersOpenedService,
         ReviewRequestCommentAmountState,
         OpenedReviewRequestState,
         ProjectFileSelectionState,
         ProjectEntitiesState,
-        OpenDirectoryState
+        InitialFoldersOpenedState
     ]
 })
 export class OverviewComponent {
-    @Input() public file!: string;
-
     public readonly dependencies$ = this.dependenciesFacade.loadAll();
     public readonly isMobile = this.screenService.isMatch(['XSmall']);
     public readonly isSidenavOpened = signal(!this.isMobile());
@@ -58,15 +57,27 @@ export class OverviewComponent {
         this.isMobile() ? 'over' : 'side'
     );
 
+    private _codeEditor!: CodeEditorComponent;
+
     @ViewChild(CodeEditorComponent)
-    private readonly codeEditor!: CodeEditorComponent;
+    private set codeEditor(value: CodeEditorComponent) {
+        if (value) {
+            this._codeEditor = value;
+            this.setFileFromQuery();
+        }
+    }
+
+    private get codeEditor(): CodeEditorComponent {
+        return this._codeEditor;
+    }
 
     constructor(
         private readonly screenService: ScreenService,
         private readonly fileSelectionState: ProjectFileSelectionState,
         private readonly projectEntitiesState: ProjectEntitiesState,
         private readonly dependenciesFacade: DependenciesFacade,
-        private readonly openDirectoryService: OpenDirectoryService
+        private readonly initialFoldersFacade: InitialFoldersFacade,
+        private readonly route: ActivatedRoute
     ) {
         this.initFileSelectionObserver();
     }
@@ -76,40 +87,16 @@ export class OverviewComponent {
     }
 
     public setFileFromQuery(): void {
-        setTimeout(() => {
-            if (this.file) {
-                const filePath = this.file.split('/');
-                const files = this.findFilesByPathArray(filePath);
+        const queryFile =
+            this.route.snapshot.queryParams[OverviewQueryParamEnum.File];
+        const projectEntities = this.projectEntitiesState.data;
 
-                for (let i = 0; i < files.length; i++) {
-                    if (files[i].type === ProjectEntityTypeEnum.Folder) {
-                        this.openDirectoryService.setOpenDirectoryState(
-                            files[i].fullPath,
-                            true
-                        );
-                    } else {
-                        this.fileSelectionState.set(files[i]);
-                    }
-                }
-            }
-        }, 0);
-    }
-
-    private findFilesByPathArray(pathArray: string[]): ProjectEntity[] {
-        const returnFiles: ProjectEntity[] = [];
-        let data = this.projectEntitiesState.data;
-
-        while (pathArray.length > 0) {
-            const path = pathArray.shift();
-            const findFile = data?.find((file) => file.name === path);
-
-            if (findFile) {
-                data = findFile.children ? findFile.children : [];
-                returnFiles.push(findFile);
-            }
+        if (queryFile && projectEntities) {
+            this.initialFoldersFacade.setFileFromQuery(
+                queryFile,
+                projectEntities
+            );
         }
-
-        return returnFiles;
     }
 
     @AutoUnsubscribe()

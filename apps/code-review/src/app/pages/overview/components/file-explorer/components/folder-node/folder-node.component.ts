@@ -5,10 +5,11 @@ import {
     inject,
     signal
 } from '@angular/core';
-import { Subscription, defer } from 'rxjs';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
+import { Subscription, defer, take } from 'rxjs';
 import {
     ReviewRequestCommentAmountService as CommentAmountService,
-    OpenDirectoryService
+    InitialFoldersOpenedService
 } from '../../../../services';
 import { FOLDERS_ICON_NAME_MAPPER } from '../../data';
 import { BaseNodeComponent } from '../base-node.component';
@@ -30,14 +31,15 @@ export class FolderNodeComponent extends BaseNodeComponent implements OnInit {
     );
 
     private readonly commentAmountService = inject(CommentAmountService);
-    private readonly openDirectoryService = inject(OpenDirectoryService);
+    private readonly openDirectoryService = inject(InitialFoldersOpenedService);
 
     public ngOnInit(): void {
-        this.initOpenDirectoryState();
+        this.initFolderOpenedState();
     }
 
     public onRowClick(): void {
         this.isOpened.update((value) => !value);
+        this.openDirectoryService.setState(this.data.fullPath, this.isOpened());
     }
 
     protected getIcon(): string {
@@ -55,15 +57,13 @@ export class FolderNodeComponent extends BaseNodeComponent implements OnInit {
         return folderName;
     }
 
-    private initOpenDirectoryState(): Subscription {
+    @AutoUnsubscribe()
+    private initFolderOpenedState(): Subscription {
         return this.openDirectoryService
-            .getOpenDirectoryState(this.data.fullPath)
+            .getState(this.data.fullPath)
+            .pipe(take(1))
             .subscribe((state) => {
                 this.isOpened.update(() => state);
-                this.openDirectoryService.setOpenDirectoryState(
-                    this.data.fullPath,
-                    false
-                );
             });
     }
 }

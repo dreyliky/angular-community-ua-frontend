@@ -19,8 +19,7 @@ import { MAIN_BACKEND_URL_PROVIDER } from './core';
         BrowserAnimationsModule,
         RouterModule.forRoot(APP_ROUTES, {
             preloadingStrategy: PreloadAllModules,
-            initialNavigation: 'enabledBlocking',
-            bindToComponentInputs: true
+            initialNavigation: 'enabledBlocking'
         }),
         AuthModule,
         HttpClientModule
