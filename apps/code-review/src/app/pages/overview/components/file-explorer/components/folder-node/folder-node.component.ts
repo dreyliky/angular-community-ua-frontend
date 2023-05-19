@@ -5,12 +5,9 @@ import {
     inject,
     signal
 } from '@angular/core';
-import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
-import { Subscription, defer, take } from 'rxjs';
-import {
-    ReviewRequestCommentAmountService as CommentAmountService,
-    InitialFoldersOpenedService
-} from '../../../../services';
+import { defer } from 'rxjs';
+import { ReviewRequestCommentAmountService as CommentAmountService } from '../../../../services';
+import { InitialFoldersOpenedState } from '../../../../states';
 import { FOLDERS_ICON_NAME_MAPPER } from '../../data';
 import { BaseNodeComponent } from '../base-node.component';
 
@@ -24,6 +21,7 @@ type FolderName = keyof typeof FOLDERS_ICON_NAME_MAPPER;
 })
 export class FolderNodeComponent extends BaseNodeComponent implements OnInit {
     public readonly isOpened = signal(false);
+
     public readonly isContainAnyFileWithComments$ = defer(() =>
         this.commentAmountService.isFolderContainAnyCommendedFile(
             this.data.fullPath
@@ -31,15 +29,16 @@ export class FolderNodeComponent extends BaseNodeComponent implements OnInit {
     );
 
     private readonly commentAmountService = inject(CommentAmountService);
-    private readonly openDirectoryService = inject(InitialFoldersOpenedService);
+    private readonly foldersOpenedState = inject(InitialFoldersOpenedState);
 
     public ngOnInit(): void {
-        this.initFolderOpenedState();
+        const isOpened = this.foldersOpenedState.data![this.data.fullPath];
+
+        this.isOpened.set(isOpened);
     }
 
     public onRowClick(): void {
         this.isOpened.update((value) => !value);
-        this.openDirectoryService.setState(this.data.fullPath, this.isOpened());
     }
 
     protected getIcon(): string {
@@ -55,15 +54,5 @@ export class FolderNodeComponent extends BaseNodeComponent implements OnInit {
         }
 
         return folderName;
-    }
-
-    @AutoUnsubscribe()
-    private initFolderOpenedState(): Subscription {
-        return this.openDirectoryService
-            .getState(this.data.fullPath)
-            .pipe(take(1))
-            .subscribe((state) => {
-                this.isOpened.update(() => state);
-            });
     }
 }

@@ -9,7 +9,10 @@ import {
 } from '@code-review/shared';
 import monacoLoader from '@monaco-editor/loader';
 import { Observable, forkJoin, from, switchMap, tap } from 'rxjs';
-import { MonacoThemeLoaderService } from '../services';
+import {
+    MonacoThemeLoaderService,
+    ProjectEntitiesInitializationService as ProjectEntitiesInitService
+} from '../services';
 import {
     MonacoApiState,
     OpenedReviewRequestState,
@@ -30,8 +33,9 @@ export class DependenciesFacade {
     private readonly commentsState = inject(ReviewRequestCommentAmountState);
     private readonly projectEntitiesState = inject(ProjectEntitiesState);
     private readonly reviewRequestState = inject(OpenedReviewRequestState);
+    private readonly projectEntitiesInit = inject(ProjectEntitiesInitService);
 
-    public loadAll(): Observable<unknown> {
+    public initAll(): Observable<unknown> {
         return this.loadMonacoApi().pipe(
             switchMap(() =>
                 forkJoin([
@@ -40,7 +44,8 @@ export class DependenciesFacade {
                     this.loadComments(),
                     this.themeLoaderService.loadAndDefine()
                 ])
-            )
+            ),
+            tap(() => this.projectEntitiesInit.initByUrlQueryParams())
         );
     }
 

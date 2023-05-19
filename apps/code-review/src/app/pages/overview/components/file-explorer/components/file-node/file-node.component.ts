@@ -29,7 +29,7 @@ export class FileNodeComponent extends BaseNodeComponent implements OnInit {
     private readonly commentAmountService = inject(CommentAmountService);
 
     public ngOnInit(): void {
-        this.initFileSelection();
+        this.initFileSelectionObserver();
     }
 
     public onRowClick(): void {
@@ -51,7 +51,7 @@ export class FileNodeComponent extends BaseNodeComponent implements OnInit {
     }
 
     @AutoUnsubscribe()
-    private initFileSelection(): Subscription {
+    private initFileSelectionObserver(): Subscription {
         return this.fileSelectionState.data$
             .pipe(filter(Boolean))
             .subscribe((node) => {
