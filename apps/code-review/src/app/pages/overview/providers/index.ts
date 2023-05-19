@@ -1,1 +1,1 @@
-export * from './opened-review-request.provider';
+export * from './page-providers.array';

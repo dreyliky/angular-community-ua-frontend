@@ -1,11 +1,13 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    OnInit,
     inject,
     signal
 } from '@angular/core';
 import { defer } from 'rxjs';
 import { ReviewRequestCommentAmountService as CommentAmountService } from '../../../../services';
+import { InitialFoldersOpenedState } from '../../../../states';
 import { FOLDERS_ICON_NAME_MAPPER } from '../../data';
 import { BaseNodeComponent } from '../base-node.component';
 
@@ -17,8 +19,9 @@ type FolderName = keyof typeof FOLDERS_ICON_NAME_MAPPER;
     styleUrls: ['./folder-node.component.scss', '../base-node.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FolderNodeComponent extends BaseNodeComponent {
+export class FolderNodeComponent extends BaseNodeComponent implements OnInit {
     public readonly isOpened = signal(false);
+
     public readonly isContainAnyFileWithComments$ = defer(() =>
         this.commentAmountService.isFolderContainAnyCommendedFile(
             this.data.fullPath
@@ -26,6 +29,13 @@ export class FolderNodeComponent extends BaseNodeComponent {
     );
 
     private readonly commentAmountService = inject(CommentAmountService);
+    private readonly foldersOpenedState = inject(InitialFoldersOpenedState);
+
+    public ngOnInit(): void {
+        const isOpened = this.foldersOpenedState.data![this.data.fullPath];
+
+        this.isOpened.set(isOpened);
+    }
 
     public onRowClick(): void {
         this.isOpened.update((value) => !value);

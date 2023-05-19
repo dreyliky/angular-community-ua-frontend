@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import type { editor } from 'monaco-editor';
-import { ObjectState } from 'ngx-base-state';
+import { NgxState, ObjectState } from 'ngx-base-state';
 
+/** ProvidedIn:Root for caching */
+@NgxState()
 @Injectable({
     providedIn: 'root'
 })
