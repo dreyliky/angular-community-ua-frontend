@@ -1,5 +1,6 @@
 export * from './absent-data';
 export * from './action-button';
+export * from './app-config';
 export * from './auth';
 export * from './loader';
 export * from './markdown';

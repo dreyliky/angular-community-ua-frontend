@@ -1,4 +1,5 @@
 import {
+    AppConfigModule,
     AuthModule,
     MATERIAL_ICON_DEFAULT_OPTIONS_PROVIDER
 } from '@acua/shared';
@@ -9,7 +10,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { APP_ROUTES } from './app.routes';
-import { APP_CONFIG_PROVIDER } from './config';
 import { MAIN_BACKEND_URL_PROVIDER } from './core';
 
 @NgModule({
@@ -22,10 +22,10 @@ import { MAIN_BACKEND_URL_PROVIDER } from './core';
             preloadingStrategy: PreloadAllModules,
             initialNavigation: 'enabledBlocking'
         }),
+        AppConfigModule,
         AuthModule
     ],
     providers: [
-        APP_CONFIG_PROVIDER,
         MAIN_BACKEND_URL_PROVIDER,
         MATERIAL_ICON_DEFAULT_OPTIONS_PROVIDER
     ],
