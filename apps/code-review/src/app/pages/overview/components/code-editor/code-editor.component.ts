@@ -18,6 +18,10 @@ import { EditorCommentsState } from './states';
     template: '',
     styleUrls: ['./code-editor.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    host: {
+        class: 'acua-code-editor'
+    },
     hostDirectives: [
         LineHighlighterDirective,
         LineCommentsAmountDirective,
@@ -30,7 +34,6 @@ import { EditorCommentsState } from './states';
         EditorService,
         LanguageService,
         EditorCommentsState
-    ],
-    encapsulation: ViewEncapsulation.None
+    ]
 })
 export class CodeEditorComponent {}
