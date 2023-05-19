@@ -1,5 +1,5 @@
 import {
-    MarkdownEditorModule,
+    MarkdownModule,
     ScreenModule,
     UserAvatarModule,
     UtilsModule
@@ -30,7 +30,7 @@ import { ReviewRequestDetailsWindowComponent } from './review-request-details-wi
         MatSidenavModule,
         MatDialogModule,
         MatButtonModule,
-        MarkdownEditorModule,
+        MarkdownModule,
         UserAvatarModule,
         UtilsModule,
         ScreenModule

@@ -10,8 +10,8 @@ import { MarkdownButtonSyntax } from './interfaces';
 
 @Component({
     selector: 'acua-markdown-toolbar',
-    templateUrl: './markdown-toolbar.component.html',
-    styleUrls: ['./markdown-toolbar.component.scss'],
+    templateUrl: './toolbar.component.html',
+    styleUrls: ['./toolbar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MarkdownToolbarComponent {

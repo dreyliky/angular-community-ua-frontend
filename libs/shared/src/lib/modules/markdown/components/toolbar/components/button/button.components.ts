@@ -12,17 +12,17 @@ const tooltipOptions: MatTooltipDefaultOptions = {
 
 @Component({
     selector: 'acua-markdown-button',
-    templateUrl: './markdown-button.component.html',
-    styleUrls: ['./markdown-button.component.scss'],
+    templateUrl: './button.component.html',
+    styleUrls: ['./button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: tooltipOptions }
     ]
 })
 export class MarkdownButtonComponent {
-    @Input()
+    @Input({ required: true })
     public iconName!: string;
 
-    @Input()
+    @Input({ required: true })
     public tooltipInfo!: string;
 }

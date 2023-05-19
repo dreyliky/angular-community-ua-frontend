@@ -4,8 +4,11 @@
     <ng-container *ngIf="markdownViewMode$ | async; else previewerTemplate">
         <textarea
             class="markdown-input"
+            #markdownInput
             markdownInput
-            matInput></textarea>
+            matInput
+            (blur)="onTouched?.()"
+            (input)="onChange?.(markdownInput.value)"></textarea>
     </ng-container>
 
     <ng-template #previewerTemplate>

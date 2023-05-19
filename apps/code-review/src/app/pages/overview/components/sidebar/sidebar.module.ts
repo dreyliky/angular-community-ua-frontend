@@ -1,4 +1,4 @@
-import { MarkdownEditorModule, UserAvatarModule } from '@acua/shared';
+import { MarkdownModule, UserAvatarModule } from '@acua/shared';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
@@ -13,7 +13,7 @@ import { SidebarComponent } from './sidebar.component';
     imports: [
         CommonModule,
         UserAvatarModule,
-        MarkdownEditorModule,
+        MarkdownModule,
         MatExpansionModule,
         FileExplorerModule,
         MatCardModule,
