@@ -45,7 +45,6 @@
                 "production": {
                     "buildOptimizer": true,
                     "optimization": true,
-                    "sourceMap": false,
                     "namedChunks": false,
                     "budgets": [
                         {
