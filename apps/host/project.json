@@ -9,6 +9,12 @@
             "executor": "@nx/angular:webpack-browser",
             "outputs": ["{options.outputPath}"],
             "options": {
+                "buildOptimizer": false,
+                "optimization": false,
+                "vendorChunk": true,
+                "extractLicenses": true,
+                "sourceMap": true,
+                "namedChunks": true,
                 "outputPath": "dist/apps/host",
                 "index": "apps/host/src/index.html",
                 "main": "apps/host/src/main.ts",
@@ -26,7 +32,10 @@
                         "output": "assets"
                     }
                 ],
-                "styles": ["apps/host/src/styles.scss", "libs/assets/src/lib/styles/index.scss"],
+                "styles": [
+                    "apps/host/src/styles.scss",
+                    "libs/assets/src/lib/styles/index.scss"
+                ],
                 "scripts": [],
                 "customWebpackConfig": {
                     "path": "apps/host/webpack.config.js"
@@ -38,6 +47,10 @@
             },
             "configurations": {
                 "production": {
+                    "buildOptimizer": true,
+                    "optimization": true,
+                    "sourceMap": false,
+                    "namedChunks": false,
                     "budgets": [
                         {
                             "type": "initial",
@@ -56,12 +69,6 @@
                     }
                 },
                 "development": {
-                    "buildOptimizer": false,
-                    "optimization": true,
-                    "vendorChunk": true,
-                    "extractLicenses": false,
-                    "sourceMap": true,
-                    "namedChunks": true,
                     "customWebpackConfig": {
                         "path": "apps/host/webpack.dev.config.js"
                     },
@@ -73,12 +80,6 @@
                     ]
                 },
                 "local": {
-                    "buildOptimizer": false,
-                    "optimization": true,
-                    "vendorChunk": true,
-                    "extractLicenses": false,
-                    "sourceMap": true,
-                    "namedChunks": true,
                     "customWebpackConfig": {
                         "path": "apps/host/webpack.config.js"
                     },
@@ -86,6 +87,17 @@
                         {
                             "replace": "apps/host/src/environments/environment.ts",
                             "with": "apps/host/src/environments/environment.local.ts"
+                        }
+                    ]
+                },
+                "local-with-dev-back": {
+                    "customWebpackConfig": {
+                        "path": "apps/host/webpack.config.js"
+                    },
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/host/src/environments/environment.ts",
+                            "with": "apps/host/src/environments/environment.development.ts"
                         }
                     ]
                 }
@@ -104,7 +116,7 @@
                     "browserTarget": "host:build:production"
                 },
                 "development": {
-                    "browserTarget": "host:build:development"
+                    "browserTarget": "host:build:local-with-dev-back"
                 },
                 "local": {
                     "browserTarget": "host:build:local"

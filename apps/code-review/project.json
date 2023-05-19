@@ -9,6 +9,12 @@
             "executor": "@nx/angular:webpack-browser",
             "outputs": ["{options.outputPath}"],
             "options": {
+                "buildOptimizer": false,
+                "optimization": false,
+                "vendorChunk": true,
+                "extractLicenses": true,
+                "sourceMap": true,
+                "namedChunks": true,
                 "outputPath": "dist/apps/code-review",
                 "index": "apps/code-review/src/index.html",
                 "main": "apps/code-review/src/main.ts",
@@ -37,6 +43,10 @@
             },
             "configurations": {
                 "production": {
+                    "buildOptimizer": true,
+                    "optimization": true,
+                    "sourceMap": false,
+                    "namedChunks": false,
                     "budgets": [
                         {
                             "type": "initial",
@@ -52,12 +62,6 @@
                     "outputHashing": "all"
                 },
                 "development": {
-                    "buildOptimizer": false,
-                    "optimization": true,
-                    "vendorChunk": true,
-                    "extractLicenses": false,
-                    "sourceMap": true,
-                    "namedChunks": true,
                     "fileReplacements": [
                         {
                             "replace": "apps/code-review/src/environments/environment.ts",
@@ -66,12 +70,6 @@
                     ]
                 },
                 "local": {
-                    "buildOptimizer": false,
-                    "optimization": true,
-                    "vendorChunk": true,
-                    "extractLicenses": false,
-                    "sourceMap": true,
-                    "namedChunks": true,
                     "fileReplacements": [
                         {
                             "replace": "apps/code-review/src/environments/environment.ts",
