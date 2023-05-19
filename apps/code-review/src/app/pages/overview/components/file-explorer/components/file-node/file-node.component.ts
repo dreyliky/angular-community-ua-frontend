@@ -33,7 +33,7 @@ export class FileNodeComponent extends BaseNodeComponent implements OnInit {
     }
 
     public onRowClick(): void {
-        this.fileSelectionState.set(this.data);
+        this.fileSelectionService.set(this.data);
     }
 
     protected getIcon(): string {
@@ -52,7 +52,7 @@ export class FileNodeComponent extends BaseNodeComponent implements OnInit {
 
     @AutoUnsubscribe()
     private initFileSelectionObserver(): Subscription {
-        return this.fileSelectionState.data$
+        return this.fileSelectionService.data$
             .pipe(filter(Boolean))
             .subscribe((node) => {
                 this.isSelected.set(node.fullPath === this.data.fullPath);

@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe-decorator';
 import { Subscription, filter } from 'rxjs';
-import { ProjectFileSelectionState } from '../../../states';
+import { FileSelectionService } from '../../../services';
 import { EditorService } from '../services';
 
 @Directive({
@@ -10,7 +10,7 @@ import { EditorService } from '../services';
 })
 export class FileOpenerDirective {
     constructor(
-        private readonly fileSelectionState: ProjectFileSelectionState,
+        private readonly fileSelectionService: FileSelectionService,
         private readonly editorService: EditorService
     ) {
         this.initFileSelectionObserver();
@@ -18,7 +18,7 @@ export class FileOpenerDirective {
 
     @AutoUnsubscribe()
     private initFileSelectionObserver(): Subscription {
-        return this.fileSelectionState.data$
+        return this.fileSelectionService.data$
             .pipe(filter(Boolean))
             .subscribe((file) => {
                 this.editorService.openFile(file.fullPath, file.content);

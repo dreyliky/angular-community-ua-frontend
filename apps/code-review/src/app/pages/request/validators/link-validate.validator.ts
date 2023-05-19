@@ -17,11 +17,6 @@ import {
 
 @Injectable()
 export class SourceUrlValidator {
-    private readonly stackblitzErrorPatterns = [
-        'public-status error',
-        'public-section__error'
-    ];
-
     constructor(
         private readonly projectSourceUrlService: ProjectSourceUrlService
     ) {}

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { OverviewParamEnum } from '../enums';
 import { DependenciesFacade } from '../facades';
 import {
+    FileSelectionService,
     MonacoThemeLoaderService,
     ProjectEntitiesInitializationService,
     ReviewRequestCommentAmountService
@@ -20,6 +21,7 @@ import { OPENED_REVIEW_REQUEST_ID } from '../tokens';
 export const PAGE_PROVIDERS: Provider[] = [
     DependenciesFacade,
     MonacoApiState,
+    FileSelectionService,
     ProjectEntitiesInitializationService,
     MonacoThemeLoaderService,
     ReviewRequestCommentAmountService,

@@ -1,6 +1,6 @@
 import { Directive, Input, computed, inject } from '@angular/core';
 import { ProjectEntity } from '@code-review/shared';
-import { ProjectFileSelectionState } from '../../../states';
+import { FileSelectionService } from '../../../services';
 
 @Directive()
 export abstract class BaseNodeComponent {
@@ -20,7 +20,7 @@ export abstract class BaseNodeComponent {
         () => `/assets/icons/file-explorer/${this.icon()}.svg`
     );
 
-    protected readonly fileSelectionState = inject(ProjectFileSelectionState);
+    protected readonly fileSelectionService = inject(FileSelectionService);
 
     protected readonly icon = computed(() => this.getIcon());
 
