@@ -87,9 +87,6 @@
                 "open": true
             },
             "configurations": {
-                "production": {
-                    "browserTarget": "code-review:build:production"
-                },
                 "development": {
                     "browserTarget": "code-review:build:development"
                 },

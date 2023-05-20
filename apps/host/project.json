@@ -111,9 +111,6 @@
                 "open": true
             },
             "configurations": {
-                "productions": {
-                    "browserTarget": "host:build:production"
-                },
                 "development": {
                     "browserTarget": "host:build:local-with-dev-back"
                 },
