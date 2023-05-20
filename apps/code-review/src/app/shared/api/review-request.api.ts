@@ -20,7 +20,7 @@ export class ReviewRequestApi {
         status: CodeReviewRequestStatusEnum
     ): Observable<ReviewRequestDto[]> {
         return this.http.get<ReviewRequestDto[]>(
-            `${this.apiUrl}/review-requests/status/${status}`
+            `${this.apiUrl}/review-requests/filter?status=${status}`
         );
     }
 
