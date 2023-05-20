@@ -1,13 +1,13 @@
+@import 'mixins';
+
 :host {
-    display: block;
-    min-width: 20px;
-    margin-left: 5px;
-    margin-top: 1px;
-    padding: 0 5px;
-    background: #a19600;
-    border-radius: 6px;
-    color: #000;
-    font-weight: bold;
+    @include display-flex(row, center, flex-start);
+
+    display: flex !important;
+    margin-left: 20px;
+    margin-top: 2px;
     text-align: center;
     z-index: -1;
+    color: #a5a5a5;
+    font-size: 14px;
 }

@@ -16,15 +16,15 @@
 }
 
 .acua-editor-line-decoration {
+    z-index: 1;
     cursor: pointer;
 
     &.acua-has-comments {
-        background: #f8ef7309;
+        background: rgb(26, 26, 26);
+        z-index: -3;
     }
 
     &:hover {
-        background: #fded1031;
+        background: #a29d4f31;
     }
-
-    z-index: 1;
 }
