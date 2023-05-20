@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { defer } from 'rxjs';
 import { ReviewRequestCommentAmountService as CommentAmountService } from '../../../../services';
-import { InitialFoldersOpenedState } from '../../../../states';
+import { FoldersOpenedState } from '../../../../states';
 import { FOLDERS_ICON_NAME_MAPPER } from '../../data';
 import { BaseNodeComponent } from '../base-node.component';
 
@@ -29,7 +29,7 @@ export class FolderNodeComponent extends BaseNodeComponent implements OnInit {
     );
 
     private readonly commentAmountService = inject(CommentAmountService);
-    private readonly foldersOpenedState = inject(InitialFoldersOpenedState);
+    private readonly foldersOpenedState = inject(FoldersOpenedState);
 
     public ngOnInit(): void {
         const isOpened = this.foldersOpenedState.data![this.data.fullPath];
@@ -39,6 +39,7 @@ export class FolderNodeComponent extends BaseNodeComponent implements OnInit {
 
     public onRowClick(): void {
         this.isOpened.update((value) => !value);
+        this.foldersOpenedState.setItem(this.data.fullPath, this.isOpened());
     }
 
     protected getIcon(): string {

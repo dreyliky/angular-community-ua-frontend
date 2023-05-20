@@ -3,16 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { ProjectEntity, ProjectEntityTypeEnum } from '@code-review/shared';
 import { OverviewQueryParamEnum } from '../enums';
 import {
-    InitialFoldersOpenedState,
+    FoldersOpenedState,
     ProjectEntitiesState,
     ProjectFileSelectionState
 } from '../states';
 
 @Injectable()
 export class ProjectEntitiesInitializationService {
-    private readonly foldersOpenedStatusService = inject(
-        InitialFoldersOpenedState
-    );
+    private readonly foldersOpenedStatusService = inject(FoldersOpenedState);
 
     private readonly fileSelectionState = inject(ProjectFileSelectionState);
     private readonly projectEntitiesState = inject(ProjectEntitiesState);

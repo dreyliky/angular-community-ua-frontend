@@ -9,7 +9,7 @@ import {
     ReviewRequestCommentAmountService
 } from '../services';
 import {
-    InitialFoldersOpenedState,
+    FoldersOpenedState,
     MonacoApiState,
     OpenedReviewRequestState,
     ProjectEntitiesState,
@@ -29,7 +29,7 @@ export const PAGE_PROVIDERS: Provider[] = [
     OpenedReviewRequestState,
     ProjectFileSelectionState,
     ProjectEntitiesState,
-    InitialFoldersOpenedState,
+    FoldersOpenedState,
     {
         provide: OPENED_REVIEW_REQUEST_ID,
         useFactory: () => {
