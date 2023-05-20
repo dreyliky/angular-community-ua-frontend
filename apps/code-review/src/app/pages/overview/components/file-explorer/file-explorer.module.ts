@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import {
     EntityNodesComponent,
     FileNodeComponent,
@@ -14,7 +15,7 @@ import { FileExplorerComponent } from './file-explorer.component';
         FileNodeComponent,
         FolderNodeComponent
     ],
-    imports: [CommonModule],
+    imports: [CommonModule, MatTooltipModule],
     exports: [FileExplorerComponent]
 })
 export class FileExplorerModule {}

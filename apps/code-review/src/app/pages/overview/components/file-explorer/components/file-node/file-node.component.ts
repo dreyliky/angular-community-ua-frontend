@@ -36,6 +36,10 @@ export class FileNodeComponent extends BaseNodeComponent implements OnInit {
         this.fileSelectionService.set(this.data);
     }
 
+    protected getCommentsTooltipLabel(commentAmount: number): string {
+        return `Кількість коментарів: ${commentAmount}`;
+    }
+
     protected getIcon(): string {
         if (FILE_ICON_NAME_MAPPER[this.data.name as FileName]) {
             return FILE_ICON_NAME_MAPPER[this.data.name as FileName];

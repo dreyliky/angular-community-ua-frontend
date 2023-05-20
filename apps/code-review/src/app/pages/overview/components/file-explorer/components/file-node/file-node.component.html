@@ -16,7 +16,9 @@
 
     <div
         *ngIf="commentAmount$ | async as commentAmount"
-        class="comment-amount">
+        class="comment-amount"
+        [matTooltip]="getCommentsTooltipLabel(commentAmount)"
+        [matTooltipPosition]="'right'">
         {{ commentAmount }}
     </div>
 </div>
