@@ -1,16 +1,16 @@
 :host {
     display: flex;
     flex-direction: column;
-    max-width: 800px;
-    width: 800px;
+    width: 100%;
 
     .view-container {
         width: 100%;
         height: 120px;
 
         .markdown-input {
-            width: -webkit-fill-available;
+            width: 100%;
             height: 100%;
+            padding: 0;
             border-bottom-left-radius: 5px;
             border-bottom-right-radius: 5px;
             resize: vertical;
