@@ -71,7 +71,7 @@
         "monaco-editor": "^0.38.0",
         "ngx-async-directive": "^1.0.1",
         "ngx-auto-unsubscribe-decorator": "^1.1.0",
-        "ngx-base-state": "^1.0.2",
+        "ngx-base-state": "^1.0.4",
         "ngx-local-injector": "^1.0.2",
         "rxjs": "7.8.1",
         "tslib": "^2.3.0",
