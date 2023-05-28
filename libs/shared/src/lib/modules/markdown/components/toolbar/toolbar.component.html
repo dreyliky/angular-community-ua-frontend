@@ -1,11 +1,32 @@
 <acua-markdown-toggler />
 
 <ng-container *ngIf="markdownViewMode$ | async">
-    <div class="markdown-buttons">
-        <acua-markdown-button
-            *ngFor="let button of markdownButtonArray"
-            [iconName]="button.matIconName"
-            [tooltipInfo]="button.tooltipInfo"
-            (click)="markdownButtonClick.emit(button)" />
-    </div>
+    <ng-container *ngIf="isMobile(); else notMobileTemplate">
+        <button
+            mat-button
+            [matMenuTriggerFor]="menu">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button
+                *ngFor="let button of markdownButtonArray"
+                mat-menu-item
+                (click)="markdownButtonClick.emit(button)">
+                <mat-icon>
+                    {{ button.matIconName }}
+                </mat-icon>
+                {{ button.tooltipInfo }}
+            </button>
+        </mat-menu>
+    </ng-container>
+
+    <ng-template #notMobileTemplate>
+        <div class="markdown-buttons">
+            <acua-markdown-button
+                *ngFor="let button of markdownButtonArray"
+                [iconName]="button.matIconName"
+                [tooltipInfo]="button.tooltipInfo"
+                (click)="markdownButtonClick.emit(button)" />
+        </div>
+    </ng-template>
 </ng-container>
