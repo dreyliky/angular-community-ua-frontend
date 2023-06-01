@@ -1,4 +1,9 @@
-import { ActionButtonModule, LoaderModule, PipesModule } from '@acua/shared';
+import {
+    ActionButtonModule,
+    LoaderModule,
+    MarkdownModule,
+    PipesModule
+} from '@acua/shared';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -28,6 +33,7 @@ import { REQUEST_ROUTES } from './request.routes';
         MatInputModule,
         MatFormFieldModule,
         MatButtonModule,
+        MarkdownModule,
         RouterModule.forChild(REQUEST_ROUTES),
         ReactiveFormsModule,
         LoaderModule,

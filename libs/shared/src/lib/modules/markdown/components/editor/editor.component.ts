@@ -27,7 +27,7 @@ export class MarkdownEditorComponent implements ControlValueAccessor {
     public onTouched?: () => void;
 
     constructor(
-        @Optional() @Self() private readonly ngControl: NgControl,
+        @Optional() @Self() public readonly ngControl: NgControl,
         private readonly markdownViewModeState: MarkdownViewModeState,
         private readonly markdownInputState: MarkdownInputState
     ) {

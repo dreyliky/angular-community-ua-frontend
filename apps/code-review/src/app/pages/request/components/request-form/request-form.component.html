@@ -21,19 +21,11 @@
         </mat-error>
     </mat-form-field>
 
-    <mat-form-field
-        class="form-field"
-        [appearance]="'outline'">
-        <mat-label>Опис</mat-label>
+    <acua-markdown-editor [formControl]="formGroup.controls.description" />
 
-        <textarea
-            matInput
-            [formControl]="formGroup.controls.description"></textarea>
-
-        <mat-error *ngIf="formGroup.controls.sourceUrl.hasError('required')">
-            Уточніть, що саме ви хотіли б почути від спільноти.
-        </mat-error>
-    </mat-form-field>
+    <mat-error *ngIf="formGroup.controls.description.hasError('required')">
+        Посилання на проєкт є обов'язковим.
+    </mat-error>
 
     <ng-container
         *ngIf="iframeLink$ | async as iframeLink; else noPreviewTemplate">
