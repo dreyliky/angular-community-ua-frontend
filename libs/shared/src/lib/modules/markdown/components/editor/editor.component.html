@@ -2,15 +2,31 @@
 
 <div class="view-container">
     <ng-container *ngIf="markdownViewMode$ | async; else previewerTemplate">
-        <textarea
-            class="markdown-input"
-            #markdownInput
-            markdownInput
-            matInput
-            (blur)="onTouched?.()"
-            (input)="onChange?.(markdownInput.value)"></textarea>
-    </ng-container>
+        <ng-container *ngIf="ngControl; else notControl">
+            <mat-form-field
+                class="form-field"
+                [appearance]="'outline'">
+                <mat-label>Опис</mat-label>
+                <textarea
+                    class="markdown-input"
+                    matInput
+                    #markdownInput
+                    markdownInput
+                    (blur)="onTouched?.()"
+                    (input)="onChange?.(markdownInput.value)"></textarea>
+            </mat-form-field>
+        </ng-container>
 
+        <ng-template #notControl>
+            <textarea
+                class="markdown-input"
+                matInput
+                #markdownInput
+                markdownInput
+                (blur)="onTouched?.()"
+                (input)="onChange?.(markdownInput.value)"></textarea>
+        </ng-template>
+    </ng-container>
     <ng-template #previewerTemplate>
         <acua-markdown-previewer
             *ngIf="

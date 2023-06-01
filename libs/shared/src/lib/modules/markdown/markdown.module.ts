@@ -37,6 +37,8 @@ import { MarkdownInputState, MarkdownViewModeState } from './states';
         MatButtonModule,
         MatMenuModule,
         MatTooltipModule,
+        MatFormFieldModule,
+        MatInputModule,
         MatInputModule,
         MatButtonToggleModule,
         ReactiveFormsModule
